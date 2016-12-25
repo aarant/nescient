@@ -3,7 +3,7 @@ from distutils.core import setup
 from distutils.extension import Extension
 
 setup(name='Nescient',
-      version='0.1',
+      version='0.1.0',
       description='Encrypt and decrypt single files to/from secure containers',
       long_description='Python program for (un)packing encrypted, salted, and authenticated single-file containers',
       author='Ariel A',
