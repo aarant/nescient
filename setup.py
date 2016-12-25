@@ -10,5 +10,6 @@ setup(name='Nescient',
       author_email='arielan@mit.edu',
       packages=['nescient', 'nescient.aes'],
       ext_modules=[Extension('nescient.aes.aes', ['nescient/aes/aes.c'])],
-      scripts=['bin/nescient']
+      scripts=['bin/nescient'],
+      license='MIT'
       )
