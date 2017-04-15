@@ -1,0 +1,3 @@
+[console_scripts]
+nescient = nescient.__main__:main
+

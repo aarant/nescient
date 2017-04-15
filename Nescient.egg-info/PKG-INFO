@@ -1,0 +1,10 @@
+Metadata-Version: 1.0
+Name: Nescient
+Version: 0.3.0
+Summary: Encrypt and decrypt single files to/from secure containers
+Home-page: UNKNOWN
+Author: Andrew Antonitis
+Author-email: andrewan@mit.edu
+License: MIT
+Description: Python program for (un)packing encrypted, salted, and authenticated single-file containers
+Platform: UNKNOWN

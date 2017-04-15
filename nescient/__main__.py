@@ -8,12 +8,12 @@ A program for packing and unpacking encrypted, salted, and authenticated single-
 Script for running from the command line
 """
 import argparse  # Parse arguments passed to the script
-import curses  # For blocking terminal echo
+import getpass # For getting passwords without terminal echo
 import glob  # For expanding path wildcards
 
-from nescient.packer import *
+from .packer import *
 
-if __name__ == '__main__':
+def main():
     """ Argument parser, for use from the command line """
     parser = argparse.ArgumentParser(formatter_class=argparse.RawDescriptionHelpFormatter,
                                      description='Nescient Encryption Suite 0.3\n'
@@ -34,24 +34,16 @@ if __name__ == '__main__':
     # If using normal password input
     if args.kf is None:
         try:
-            stdscr = curses.initscr()
-            curses.noecho()
-            stdscr.addstr('Please specify password: ')
-            password = stdscr.getstr().decode('utf-8')
+            password = getpass.getpass('Please specify password: ')
             if args.n is False:
-                stdscr.addstr('Please verify password:  ')
-                password2 = stdscr.getstr().decode('utf-8')
+                password2 = getpass.getpass('Please verify password:  ')
             else: password2 = password
-            curses.echo()
-            curses.endwin()
             if password != password2:
                 print('Passwords do not match!')
                 quit()
             else:
                 print('Got password from input')
         except KeyboardInterrupt:
-            curses.echo()
-            curses.endwin()
             quit()
     # If using a keyfile
     else:
@@ -104,3 +96,6 @@ if __name__ == '__main__':
                         print(e.message + '\nEither this file has been tampered with, or you entered the key wrong')
                         quit()
     quit()
+    
+if __name__ == '__main__':
+    main()
