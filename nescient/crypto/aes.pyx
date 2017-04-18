@@ -6,7 +6,7 @@ Computes sboxes and lookup tables on-the-fly
 """
 import os  # For random IV's
 
-from .galois import GaloisField  # Finite field implementation
+from nescient.crypto.galois import GaloisField  # Finite field implementation
 
 
 class AesCrypter:

@@ -1,5 +1,5 @@
 """
-Nescient Encryption Suite 0.3
+Nescient Encryption Suite 0.3.1
 
 nescient, n. -- from Latin 'unknowing'
 A program for packing and unpacking encrypted, salted, and authenticated single-file containers
@@ -9,7 +9,7 @@ import hmac  # Generating authentication tags with SHA-2
 from hashlib import pbkdf2_hmac  # PBKDF2 Key derivation
 
 # Algorithm imports
-from .crypto import aes  # AES
+import nescient.crypto.aes as aes  # AES
 
 class NescientError(Exception):
     """ Generic Nescient error """

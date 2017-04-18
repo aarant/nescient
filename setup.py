@@ -5,7 +5,7 @@ from setuptools import setup
 from setuptools.extension import Extension
 
 setup(name='Nescient',
-      version='0.3.0',
+      version='0.3.1',
       description='Encrypt and decrypt single files to/from secure containers',
       long_description='Python program for (un)packing encrypted, salted, and authenticated single-file containers',
       author='Andrew Antonitis',

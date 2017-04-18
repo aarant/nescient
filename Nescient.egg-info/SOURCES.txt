@@ -6,6 +6,7 @@ Nescient.egg-info/entry_points.txt
 Nescient.egg-info/top_level.txt
 nescient/__init__.py
 nescient/__main__.py
+nescient/app.py
 nescient/packer.py
 nescient/crypto/__init__.py
 nescient/crypto/aes.c
