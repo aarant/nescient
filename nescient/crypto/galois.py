@@ -1,4 +1,5 @@
 """
+Copyright (c) 2016-2017 Andrew Antonitis <andrewan@mit.edu>
 Classes for creating and interacting with Galois Fields (otherwise known as finite fields)
 
 A galois field of order q exists iff q is a prime power.
@@ -206,7 +207,7 @@ class GaloisField:
         if self.haveTables:  # Use lookup tables if possible
             # Technically speaking, 0 has no multiplicative inverse, so just define it as itself
             return 0 if x == 0 else self.expTable[self.q - 1 - self.logTable[x]]
-        else:  # Otherwise, well, fuck (might do this later, believe there's an easy way for prime fields)
+        else:  # TODO Otherwise, well, give up (might do this later, believe there's an easy way for prime fields)
             raise NotImplementedError
 
     # Raise an element in the field to a power

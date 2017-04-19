@@ -1,6 +1,8 @@
 """
-PyAES 1.0
-Pure-Python standalone implementation of the AES (Advanced Encryption Standard)
+PyAES
+Copyright (c) 2016-2017 Andrew Antonitis <andrewan@mit.edu>
+
+Python implementation of the AES (Advanced Encryption Standard)
 Supports 128, 192, and 256 bit keys in CBC (Cipher-Block-Chaining) mode
 Computes sboxes and lookup tables on-the-fly
 """

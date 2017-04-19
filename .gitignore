@@ -1,5 +1,8 @@
+.*
+!/.gitignore
 __pycache__/
-MANIFEST
-wip/
 .idea/
 .directory
+wip/
+MANIFEST
+build.sh

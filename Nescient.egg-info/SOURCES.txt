@@ -10,4 +10,5 @@ nescient/app.py
 nescient/packer.py
 nescient/crypto/__init__.py
 nescient/crypto/aes.c
+nescient/crypto/aes.pyx
 nescient/crypto/galois.py

@@ -1,14 +1,17 @@
 """
-Nescient Encryption Suite 0.3.1
+Nescient v0.3.2
+Copyright (c) 2016-2017 Andrew Antonitis <andrewan@mit.edu>
 
-nescient, n. -- from Latin 'unknowing'
-A program for packing and unpacking encrypted, salted, and authenticated single-file containers
+nescient, n. - from Latin 'unknowing', 'hidden'
+Python program for packing/unpacking encrypted, salted, and authenticated singlefile containers
+
+Packer/Unpacker classes, as well as program specific exceptions
 """
 import os
 import hmac  # Generating authentication tags with SHA-2
 from hashlib import pbkdf2_hmac  # PBKDF2 Key derivation
 
-# Algorithm imports
+# Cryptographic imports
 import nescient.crypto.aes as aes  # AES
 
 class NescientError(Exception):

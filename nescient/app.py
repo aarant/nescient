@@ -1,10 +1,11 @@
 """
-Nescient Encryption Suite 0.3.1
+Nescient v0.3.2
+Copyright (c) 2016-2017 Andrew Antonitis <andrewan@mit.edu>
 
-nescient, n. -- from Latin 'unknowing'
-A program for packing and unpacking encrypted, salted, and authenticated single-file containers
+nescient, n. - from Latin 'unknowing', 'hidden'
+Python program for packing/unpacking encrypted, salted, and authenticated singlefile containers
 
-Script for running from the command line
+Main entry point of program
 """
 import argparse  # Parse arguments passed to the script
 import getpass # For getting passwords without terminal echo
@@ -16,8 +17,8 @@ def main():
     """ Argument parser, for use from the command line """
     parser = argparse.ArgumentParser(formatter_class=argparse.RawDescriptionHelpFormatter,
                                      prog='nescient',
-                                     description='Nescient Encryption Suite 0.3\n'
-                                                 'A program for packing and unpacking '
+                                     description='Nescient v0.3.2\n'
+                                                 'Python program for packing/unpacking '
                                                  'encrypted, salted, and authenticated single file containers', prefix_chars='-+')
     parser.add_argument('patterns', metavar='file', nargs='+', type=str, help='A file (pattern) to be packed/unpacked')
     parser.add_argument('-m', type=str, help='Packing method',
