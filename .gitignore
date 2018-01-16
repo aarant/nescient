@@ -2,7 +2,12 @@
 !/.gitignore
 __pycache__/
 .idea/
-.directory
+*.egg-info/
 wip/
+build/
+.directory
 MANIFEST
-build.sh
+update.sh
+TODO
+changelog
+cmd.bat

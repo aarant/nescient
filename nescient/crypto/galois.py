@@ -1,17 +1,19 @@
-"""
-Copyright (c) 2016-2017 Andrew Antonitis <andrewan@mit.edu>
-Classes for creating and interacting with Galois Fields (otherwise known as finite fields)
+# Nescient: A Python program for packing/unpacking encrypted, salted, and authenticated file containers.
+# Copyright (C) 2018 Andrew Antonitis. Licensed under the MIT license.
+#
+# nescient/crypto/galois.py
+""" Classes for creating and interacting with Galois fields (otherwise known as finite fields)
 
 A galois field of order q exists iff q is a prime power.
 Elements in fields are represented as integers in the range 0...q-1, or alternatively, polynomials of the form:
 x_0*p^0+x_1*p^1+...+x_(n-1)*p^(n-1)
 """
+# TODO: Make better class docstrings
 import math
 
 
 class GaloisField:
-    """
-    Defines a finite field of order q=p**n, with optional generator g and irreducible polynomial r
+    """ Defines a finite field of order q=p**n, with optional generator g and irreducible polynomial r
 
     Elements are consider to be normal integers in the range 0...q-1 (inclusive)
     Can perform the standard operations (add, mult, exponentiation, inversion), optionally using lookup tables
@@ -207,7 +209,7 @@ class GaloisField:
         if self.haveTables:  # Use lookup tables if possible
             # Technically speaking, 0 has no multiplicative inverse, so just define it as itself
             return 0 if x == 0 else self.expTable[self.q - 1 - self.logTable[x]]
-        else:  # TODO Otherwise, well, give up (might do this later, believe there's an easy way for prime fields)
+        else:  # TODO Otherwise, well, give up (might do this later, there's an easy way for prime fields)
             raise NotImplementedError
 
     # Raise an element in the field to a power
@@ -235,8 +237,8 @@ class GaloisField:
 
 
 class GfElement:
-    """
-    Object representation of a GaloisField element.
+    """ Object representation of a GaloisField element.
+
     Allows one to perform intuitive operations on the elements and get the correct results
     """
     def __init__(self, val, f):
