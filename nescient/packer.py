@@ -14,6 +14,7 @@ from nescient import __version__, version_to_tuple, newer_version, NescientError
 from nescient.timing import load_benchmarks, write_benchmarks
 from nescient.crypto.tools import get_random_bytes
 from nescient.crypto.aes import AesCrypter
+from nescient.crypto.chacha import ChaChaCrypter
 
 
 class PackingError(NescientError):
@@ -30,8 +31,9 @@ class AuthError(PackingError):
     pass
 
 
-# A mapping between supported algorithms, their crypter classes and key sizes
-SUPPORTED_ALGS = {'aes128': (AesCrypter, 16), 'aes192': (AesCrypter, 24), 'aes256': (AesCrypter, 32)}
+# A mapping between supported algorithms, their crypter classes and key sizes in bytes
+SUPPORTED_ALGS = {'aes128': (AesCrypter, 16), 'aes192': (AesCrypter, 24), 'aes256': (AesCrypter, 32),
+                  'chacha': (ChaChaCrypter, 32)}
 
 
 class NescientPacker:
@@ -47,7 +49,7 @@ class NescientPacker:
         times: Either a dictionary with file sizes as keys and a list of benchmarked packing times as values, or,
             if no benchmarking data is available for the packer's settings, `None`.
     """
-    def __init__(self, password, alg='aes256', mode='cbc', auth='sha'):
+    def __init__(self, password, alg='chacha', mode='stm', auth='sha'):
         # password must be a bytes object in order to work with the key generation, so convert it
         if type(password) is str:
             self.password = bytes(password, 'utf-8')
@@ -106,14 +108,23 @@ class NescientPacker:
             key = self._key_gen(salt)
         # Build a new crypter object
         crypter = self.CrypterClass(key)
-        # Encrypt the data with the specified mode
-        getattr(crypter, self.mode + '_encrypt')(data)
+        if isinstance(crypter, ChaChaCrypter):
+            # Use the first 12 bytes of the salt as the nonce
+            nonce = int.from_bytes(salt[:12], byteorder='little')
+            crypter.chacha_encrypt(data, nonce)
+        elif isinstance(crypter, AesCrypter):
+            getattr(crypter, self.mode + '_encrypt')(data)
         return key, salt
 
     # Decrypts data, using the specified key
-    def _decrypt(self, data, key):
+    def _decrypt(self, data, key, salt):
         crypter = self.CrypterClass(key)
-        crypter.cbc_decrypt(data)
+        if isinstance(crypter, ChaChaCrypter):
+            # Use the first 12 bytes of the salt as the nonce
+            nonce = int.from_bytes(salt[:12], byteorder='little')
+            crypter.chacha_encrypt(data, nonce)
+        elif isinstance(crypter, AesCrypter):
+            getattr(crypter, self.mode + '_decrypt')(data)
 
     def pack(self, data):
         """ Pack data into an in-memory Nescient container in place.
@@ -183,7 +194,7 @@ class NescientPacker:
             if not hmac.compare_digest(auth_tag, new_auth_tag):
                 raise AuthError('Authentication tags not equal! The file is corrupt, tampered with, '
                                 'or the password is incorrect.')
-            temp_unpacker._decrypt(data, key)
+            temp_unpacker._decrypt(data, key, salt)
 
     def benchmark(self):
         """ Generate and write new benchmarks for the packer's settings. """
@@ -208,4 +219,5 @@ class NescientPacker:
             self.times[size].append(timer() - checkpoint)
             # Calculate total rate
             self.times[size].append(timer() - start)
+            print(size, self.times[size])  # TODO: Debug
         write_benchmarks(self.alg + self.mode + self.auth, self.times)

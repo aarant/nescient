@@ -58,18 +58,10 @@ def target_func(queue, settings, in_path, out_path, packing_choice, overwrite=Tr
 # Start a packing process to run alongside the main one
 def start_packer_process(packer, in_path, out_path, packing_choice, overwrite=True):
     queue = Queue()
-    p = Process(target=target_func, daemon=True, args=(queue, (packer.password, packer.alg, packer.mode, packer.auth), in_path, out_path, packing_choice, overwrite))
+    p = Process(target=target_func, daemon=True, args=(queue, (packer.password, packer.alg, packer.mode, packer.auth),
+                                                       in_path, out_path, packing_choice, overwrite))
     p.start()
     return p, queue
-
-##def paths_from_patterns(patterns, recursive=False):
-##    paths = []
-##    for pattern in patterns:
-##        directory, basename = os.path.split(pattern)
-##        for path in glob.glob(pattern):
-##            if os.path.isfile(path):
-##                paths.append(path)
-##            elif os.path.isdir(path) 
 
 
 # Main program entrypoint
@@ -86,7 +78,7 @@ def main():
                              'Must be a directory if multiple files are specified.\n'
                              'If only one file is specified, this argument may be a filename, in which case\n'
                              'the processed file will be written directly to that path.')
-    parser.add_argument('-m', choices=get_packing_modes(), default='aes256-cbc-sha', dest='mode',
+    parser.add_argument('-m', choices=get_packing_modes(), default='chacha-stm-sha', dest='mode',
                         help='The algorithm, cipher mode, and authentication mode to use when packing.')
     parser.add_argument('-nr', '-norecursive', dest='recursive', action='store_false', default=True,
                         help='If wildcards are used as input paths, prevents recursively checking subdirectories.')
@@ -99,8 +91,17 @@ def main():
     # Retrieve packer mode information
     alg, mode, auth = args.mode.split('-', 2)
     packing_choice, patterns, out_path = args.packing_choice, args.patterns, args.out_path
+    # Build paths and ensure they are valid
+    paths = [path for pattern in patterns for path in glob.glob(pattern, recursive=recursive) if os.path.isfile(path)]
+    if len(paths) == 0:
+        print('No file(s) found with the path(s) specified.')
+        sys.exit(1)
+    if len(paths) > 1 and out_path is not None and not os.path.isdir(out_path):
+        print('Output path must be a directory when specifying multiple input files.')
+        sys.exit(1)
     # Create Nescient header
     print('== Nescient v' + __version__ + ' ==\n')
+    print('Packing mode:', args.mode + '\n')
     # Prompt for password
     if sys.stdin.isatty():  # If reading from a terminal, prompt for the password
         password = getpass('Insert password: ')
@@ -115,18 +116,13 @@ def main():
     # Build the packer, and if packing, check for benchmarks
     packer = NescientPacker(password, alg, mode, auth)
     if packing_choice == 'pack' and packer.times is None:  # Ask to generate benchmarks if there are none
-        if ask_yesno('No current benchmarks. Generate some?', noprompt=noprompt):
+        if ask_yesno('No current benchmarks for these settings. Generate some?', noprompt=noprompt):
             print('Generating benchmarks...')
             packer.benchmark()
             print()
-    # Build paths and process them
-    paths = [path for pattern in patterns for path in glob.glob(pattern, recursive=recursive)]
-    if len(paths) > 1 and out_path is not None and not os.path.isdir(out_path):
-        print('Output path must be a directory when specifying multiple input files.')
-        sys.exit(1)
     prompt_each = ask_yesno('Confirm each file?', default=False, newline=True, noprompt=noprompt)
     print('Packing:' if packing_choice == 'pack' else 'Unpacking:')
-    for file_path in filter(lambda f: os.path.isfile(f), paths):
+    for file_path in paths:
         file_out_path = NescientPacker.fix_out_path(file_path, out_path, packing_choice)
         display_text = file_path + ' > ' + file_out_path
         print(display_text, end='')

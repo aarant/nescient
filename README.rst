@@ -40,6 +40,8 @@ Nescient supports the following packing modes:
 
 * The AES block cipher for encryption, with either 128, 192, or 256 bit keys, in CBC mode, and SHA-256 for generating authentication tags.
 
+* The ChaCha20 stream cipher with 256 bit keys and SHA-256 for generating authentication tags.
+
 Installation
 ============
 Prerequisites
@@ -93,7 +95,7 @@ Nescient versioning functions on a ``MAJOR.MINOR.PATCH.[DEVELOP]`` model. Only s
 
 Planned features include:
 
-* New cipher modes for existing algorithms, like the GCM authenticated mode, and additional algorithms like Salsa20/ChaCha.
+* New cipher modes for existing algorithms, like the GCM authenticated mode, and additional encryption algorithms.
 
 * Integrated compression when packing files.
 
