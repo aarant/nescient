@@ -5,6 +5,7 @@
 """ Graphical User Interface (GUI) for Nescient. """
 # TODO: Options, documentation, better path awareness, working directory changes, non-blocking benchmarking, About
 import os
+import sys
 import glob
 import webbrowser
 from tkinter import Tk, Label, PhotoImage, OptionMenu, StringVar, Frame, Text, Scrollbar, RIGHT, Y, WORD, DISABLED, \
@@ -210,7 +211,7 @@ class AboutWindow(Toplevel):
 
 # The main UI
 class NescientUI(Tk):
-    def __init__(self):
+    def __init__(self, paths=None):
         Tk.__init__(self)
         self.title('Nescient ' + __version__)
         try:
@@ -239,6 +240,8 @@ class NescientUI(Tk):
         self.grid_columnconfigure(1, weight=1)
         # Set up initial variables
         self.paths = []
+        if paths:
+            self.add_files('auto', paths)
         self.state = 'ready'
         self.open_dir = os.getcwd()
 
@@ -278,12 +281,13 @@ class NescientUI(Tk):
         self.state = 'ready'
         return return_value
 
-    def add_files(self, choice):
+    def add_files(self, choice, paths=None):
         self.status.config(text='Adding files...')
+        self.global_widget_state(DISABLED)
         if choice == 'glob':
             pattern = self.path_select.entry.get()
             paths = [path for path in glob.glob(pattern, recursive=True) if os.path.isfile(path)]
-        else:  # choice == 'dialog':
+        elif choice == 'dialog':
             paths = list(filedialog.askopenfilenames(initialdir=self.open_dir, parent=self, title='Add files'))
             if paths:
                 self.open_dir = os.path.dirname(paths[0])
@@ -291,9 +295,10 @@ class NescientUI(Tk):
             if not self.paths:
                 self.text.clear()
             if path not in self.paths:
-                self.text.insert(path + '\n', path.replace(' ', '?'))
+                self.text.insert(path + '\n', 'path%s' % len(self.paths))
                 self.paths.append(path)
         self.status.config(text='Ready.')
+        self.global_widget_state(NORMAL)
 
     def clear_paths(self):
         self.status.config(text='Clearing paths...')
@@ -323,10 +328,10 @@ class NescientUI(Tk):
         
     def packing_loop(self, choice, packer):
         self.title('Nescient %s - %s' % (__version__, 'Packing' if choice == 'pack' else 'Unpacking'))
-        for path in self.paths:
+        for path_num, path in enumerate(self.paths):
             try:
                 # Color and scroll to the tag
-                tag = path.replace(' ', '?')
+                tag = 'path%s' % path_num
                 self.text.text.see('%s.first' % tag)
                 self.text.tag_config(tag, background='#369a9d')
                 # Fix the out path and set up display text
@@ -389,8 +394,12 @@ class NescientUI(Tk):
         self.mode_select.display_rate_info()
         self.status.config(text='Ready')
         self.title('Nescient ' + __version__)
+
+def main():
+    paths = sys.argv[1:] if len(sys.argv) > 1 else None
+    gui = NescientUI(paths)
+    gui.mainloop()
                                 
 
 if __name__ == '__main__':
-    gui = NescientUI()
-    gui.mainloop()
+    main()

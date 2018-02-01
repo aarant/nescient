@@ -14,7 +14,7 @@ from nescient import __version__, __doc__ as description
 from nescient.packer import PACKING_MODES, DEFAULT_PACKING_MODE, NescientPacker, PackingError
 from nescient.timing import estimate_time, EstimatedTimer, load_benchmarks, benchmark_mode
 from nescient.process import start_packer_process
-from nescient.gui import NescientUI
+from nescient.gui import main as start_gui
 
 
 # Prompt the user with a yes-no question
@@ -40,8 +40,7 @@ def ask_yesno(prompt, default=True, newline=False, noprompt=False):
 def main():
     # If run with no arguments, start the GUI
     if len(sys.argv) == 1:
-        gui = NescientUI()
-        gui.mainloop()
+        start_gui()
         sys.exit(0)
     parser = ArgumentParser(prog='nescient', description=description, formatter_class=RawTextHelpFormatter)
     parser.add_argument('packing_choice', choices=['pack', 'unpack'], metavar='pack|unpack',

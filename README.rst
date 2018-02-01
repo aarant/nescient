@@ -89,7 +89,7 @@ Unless otherwise specified via command line flags, Nescient packs and unpacks fi
 
 Command line help can be viewed with ``nescient -h``.
 
-Nescient also has a GUI mode, which can be run by simply running ``nescient``.
+Nescient also has a GUI mode, which can be run by simply running ``nescient-ui``.
 
 Development
 ===========
