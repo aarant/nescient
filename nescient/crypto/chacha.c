@@ -2538,7 +2538,7 @@ static PyObject *__pyx_pf_8nescient_6crypto_6chacha_13ChaChaCrypter_2chacha_encr
  *             for j in range(64):
  *                 buffer[j] ^= key_stream[j]             # <<<<<<<<<<<<<<
  *             buffer += 64
- *         i += 1
+ *         i = n_blocks
  */
       __pyx_t_12 = __pyx_v_j;
       (__pyx_v_buffer[__pyx_t_12]) = ((__pyx_v_buffer[__pyx_t_12]) ^ (__pyx_v_key_stream[__pyx_v_j]));
@@ -2548,7 +2548,7 @@ static PyObject *__pyx_pf_8nescient_6crypto_6chacha_13ChaChaCrypter_2chacha_encr
  *             for j in range(64):
  *                 buffer[j] ^= key_stream[j]
  *             buffer += 64             # <<<<<<<<<<<<<<
- *         i += 1
+ *         i = n_blocks
  *         if len(data) % 64 != 0:
  */
     __pyx_v_buffer = (__pyx_v_buffer + 64);
@@ -2557,15 +2557,15 @@ static PyObject *__pyx_pf_8nescient_6crypto_6chacha_13ChaChaCrypter_2chacha_encr
   /* "nescient/crypto/chacha.pyx":121
  *                 buffer[j] ^= key_stream[j]
  *             buffer += 64
- *         i += 1             # <<<<<<<<<<<<<<
+ *         i = n_blocks             # <<<<<<<<<<<<<<
  *         if len(data) % 64 != 0:
  *             key_stream = chacha20(key_w, nonce_w, counter+i)
  */
-  __pyx_v_i = (__pyx_v_i + 1);
+  __pyx_v_i = __pyx_v_n_blocks;
 
   /* "nescient/crypto/chacha.pyx":122
  *             buffer += 64
- *         i += 1
+ *         i = n_blocks
  *         if len(data) % 64 != 0:             # <<<<<<<<<<<<<<
  *             key_stream = chacha20(key_w, nonce_w, counter+i)
  *             for j in range(len(data) % 64):
@@ -2575,7 +2575,7 @@ static PyObject *__pyx_pf_8nescient_6crypto_6chacha_13ChaChaCrypter_2chacha_encr
   if (__pyx_t_2) {
 
     /* "nescient/crypto/chacha.pyx":123
- *         i += 1
+ *         i = n_blocks
  *         if len(data) % 64 != 0:
  *             key_stream = chacha20(key_w, nonce_w, counter+i)             # <<<<<<<<<<<<<<
  *             for j in range(len(data) % 64):
@@ -2608,7 +2608,7 @@ static PyObject *__pyx_pf_8nescient_6crypto_6chacha_13ChaChaCrypter_2chacha_encr
 
     /* "nescient/crypto/chacha.pyx":122
  *             buffer += 64
- *         i += 1
+ *         i = n_blocks
  *         if len(data) % 64 != 0:             # <<<<<<<<<<<<<<
  *             key_stream = chacha20(key_w, nonce_w, counter+i)
  *             for j in range(len(data) % 64):
@@ -3314,7 +3314,7 @@ static int __pyx_pymod_exec_chacha(PyObject *__pyx_pyinit_module)
 
   /* "nescient/crypto/chacha.pyx":1
  * # Nescient: A Python program for packing/unpacking encrypted, salted, and authenticated file containers.             # <<<<<<<<<<<<<<
- * # Copyright (C) 2018 Andrew Antonitis. Licensed under the MIT license.
+ * # Copyright (C) 2018 Ariel Antonitis. Licensed under the MIT license.
  * #
  */
   __pyx_t_2 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 1, __pyx_L1_error)

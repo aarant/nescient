@@ -6258,7 +6258,7 @@ static int __pyx_pymod_exec_aes(PyObject *__pyx_pyinit_module)
 
   /* "nescient/crypto/aes.pyx":1
  * # Nescient: A Python program for packing/unpacking encrypted, salted, and authenticated file containers.             # <<<<<<<<<<<<<<
- * # Copyright (C) 2018 Andrew Antonitis. Licensed under the MIT license.
+ * # Copyright (C) 2018 Ariel Antonitis. Licensed under the MIT license.
  * #
  */
   __pyx_t_2 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 1, __pyx_L1_error)

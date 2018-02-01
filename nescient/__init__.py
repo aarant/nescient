@@ -1,5 +1,5 @@
 # Nescient: A Python program for packing/unpacking encrypted, salted, and authenticated file containers.
-# Copyright (C) 2018 Andrew Antonitis. Licensed under the MIT License.
+# Copyright (C) 2018 Ariel Antonitis. Licensed under the MIT License.
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -20,17 +20,18 @@
 # SOFTWARE.
 #
 # nescient/__init__.py
-"""Nescient v0.5.0
+"""Nescient v0.6.0
 
 A Python program for packing/unpacking encrypted, salted, and authenticated file containers.
 
-Copyright (C) 2018 Andrew Antonitis. Licensed under the MIT License.
+Copyright (C) 2018 Ariel Antonitis. Licensed under the MIT License.
 """
 from string import digits
 
 # Versions will always take the form major.minor.patch[.develop]. The develop increment is optional.
 # A valid version will have the string form *.*.*[.dev*], where any integer may take the place of a *.
-__version__ = '0.5.0'
+__version__ = '0.6.0'
+url = 'https://github.com/arantonitis/nescient'
 
 
 def version_to_tuple(version):

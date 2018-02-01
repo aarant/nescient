@@ -1,5 +1,5 @@
 # Nescient: A Python program for packing/unpacking encrypted, salted, and authenticated file containers.
-# Copyright (C) 2018 Andrew Antonitis. Licensed under the MIT license.
+# Copyright (C) 2018 Ariel Antonitis. Licensed under the MIT license.
 #
 # nescient/__main__.py
 """ Allows use of Nescient from the command line. """
@@ -8,12 +8,13 @@ import os
 import sys
 import glob
 from getpass import getpass
-from multiprocessing import Process, Queue
 from argparse import ArgumentParser, RawTextHelpFormatter
 
 from nescient import __version__, __doc__ as description
-from nescient.packer import SUPPORTED_ALGS, NescientPacker
-from nescient.timing import estimate_time, EstimatedTimer
+from nescient.packer import PACKING_MODES, DEFAULT_PACKING_MODE, NescientPacker, PackingError
+from nescient.timing import estimate_time, EstimatedTimer, load_benchmarks, benchmark_mode
+from nescient.process import start_packer_process
+from nescient.gui import NescientUI
 
 
 # Prompt the user with a yes-no question
@@ -35,37 +36,13 @@ def ask_yesno(prompt, default=True, newline=False, noprompt=False):
         return result in ['Y', 'y']
 
 
-# Fetch all the available packing modes
-def get_packing_modes():
-    choices = []
-    for alg, (CrypterClass, _) in SUPPORTED_ALGS.items():
-        for mode in CrypterClass.modes:
-            for auth in CrypterClass.auth:
-                choices.append(alg + '-' + mode + '-' + auth)
-    return choices
-
-
-def target_func(queue, settings, in_path, out_path, packing_choice, overwrite=True):
-    password, alg, mode, auth = settings
-    try:
-        packer = NescientPacker(password, alg, mode, auth)
-        packer.pack_or_unpack_file(in_path, out_path, packing_choice, overwrite)
-    except Exception as e:
-        queue.put(e)
-        sys.exit(1)
-
-
-# Start a packing process to run alongside the main one
-def start_packer_process(packer, in_path, out_path, packing_choice, overwrite=True):
-    queue = Queue()
-    p = Process(target=target_func, daemon=True, args=(queue, (packer.password, packer.alg, packer.mode, packer.auth),
-                                                       in_path, out_path, packing_choice, overwrite))
-    p.start()
-    return p, queue
-
-
 # Main program entrypoint
 def main():
+    # If run with no arguments, start the GUI
+    if len(sys.argv) == 1:
+        gui = NescientUI()
+        gui.mainloop()
+        sys.exit(0)
     parser = ArgumentParser(prog='nescient', description=description, formatter_class=RawTextHelpFormatter)
     parser.add_argument('packing_choice', choices=['pack', 'unpack'], metavar='pack|unpack',
                         help='Whether to pack or unpack the specified files.')
@@ -78,7 +55,7 @@ def main():
                              'Must be a directory if multiple files are specified.\n'
                              'If only one file is specified, this argument may be a filename, in which case\n'
                              'the processed file will be written directly to that path.')
-    parser.add_argument('-m', choices=get_packing_modes(), default='chacha-stm-sha', dest='mode',
+    parser.add_argument('-m', choices=PACKING_MODES, default=DEFAULT_PACKING_MODE, dest='mode',
                         help='The algorithm, cipher mode, and authentication mode to use when packing.')
     parser.add_argument('-nr', '-norecursive', dest='recursive', action='store_false', default=True,
                         help='If wildcards are used as input paths, prevents recursively checking subdirectories.')
@@ -113,34 +90,46 @@ def main():
     else:  # Otherwise read from STDIN and do not prompt
         password = input('')
         noprompt = True
-    # Build the packer, and if packing, check for benchmarks
+    # Build the packer, and check for benchmarks
     packer = NescientPacker(password, alg, mode, auth)
-    if packing_choice == 'pack' and packer.times is None:  # Ask to generate benchmarks if there are none
+    benchmarks = load_benchmarks()
+    if benchmarks is None or benchmarks.get(args.mode) is None:  # Ask to generate benchmarks if there are none
         if ask_yesno('No current benchmarks for these settings. Generate some?', noprompt=noprompt):
             print('Generating benchmarks...')
-            packer.benchmark()
+            benchmark_mode(args.mode)
             print()
     prompt_each = ask_yesno('Confirm each file?', default=False, newline=True, noprompt=noprompt)
     print('Packing:' if packing_choice == 'pack' else 'Unpacking:')
     for file_path in paths:
-        file_out_path = NescientPacker.fix_out_path(file_path, out_path, packing_choice)
-        display_text = file_path + ' > ' + file_out_path
-        print(display_text, end='')
-        if prompt_each:
-            process_file = ask_yesno('')
-            if not process_file:
-                continue
-        display_text = os.path.split(file_path)[1] + ' > ' + os.path.split(file_out_path)[1]
-        est_time = None if packer.times is None else estimate_time(os.path.getsize(file_path), packer.times)
-        timer = EstimatedTimer(display_text, est_time)
-        p, queue = start_packer_process(packer, file_path, file_out_path, packing_choice, overwrite=overwrite)
-        timer.start()
-        p.join()
-        if queue.empty():
-            timer.stop()
-        else:
-            e = queue.get()
-            timer.stop(error=True)
+        try:
+            # Fix the out path and set up display text
+            file_out_path = NescientPacker.fix_out_path(file_path, out_path, packing_choice)
+            display_text = file_path + ' > ' + file_out_path
+            print(display_text, end='')
+            if prompt_each:
+                process_file = ask_yesno('')
+                if not process_file:
+                    continue
+            display_text = os.path.split(file_path)[1] + ' > ' + os.path.split(file_out_path)[1]
+            # Determine estimated time
+            if packing_choice == 'pack':
+                packing_mode = packer.alg + '-' + packer.mode + '-' + packer.auth
+            else:
+                parsed = NescientPacker.parse_nescient_header(file_path)
+                packing_mode = parsed['alg'] + '-' + parsed['mode'] + '-' + parsed['auth']
+            est_time = estimate_time(os.path.getsize(file_path), packing_mode)
+            # Set up the timer and packing process
+            timer = EstimatedTimer(display_text, est_time)
+            p, queue = start_packer_process(packer, file_path, file_out_path, packing_choice, overwrite=overwrite)
+            timer.start()
+            p.join()
+            if queue.empty():
+                timer.stop()
+            else:
+                timer.stop(error=True)
+                e = queue.get()
+                print(e.__class__.__name__ + ':', e)
+        except PackingError as e:
             print(e.__class__.__name__ + ':', e)
 
 

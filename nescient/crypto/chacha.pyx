@@ -1,12 +1,12 @@
 # Nescient: A Python program for packing/unpacking encrypted, salted, and authenticated file containers.
-# Copyright (C) 2018 Andrew Antonitis. Licensed under the MIT license.
+# Copyright (C) 2018 Ariel Antonitis. Licensed under the MIT license.
 #
 # nescient/crypto/chacha.pyx
 """ Classes and (Cython) functions for working with the ChaCha20 stream cipher.
 
 See RFC 7539 for the cipher specification.
 """
-# TODO: Hardcore quarter rounds, implement poly1305 auth tags, Documentation
+# TODO: Hardcode quarter rounds, implement poly1305 auth tags, Documentation
 from cpython.mem cimport PyMem_Malloc, PyMem_Free
 
 from nescient.crypto.tools import get_random_bytes
@@ -118,7 +118,7 @@ class ChaChaCrypter:
             for j in range(64):
                 buffer[j] ^= key_stream[j]
             buffer += 64
-        i += 1
+        i = n_blocks
         if len(data) % 64 != 0:
             key_stream = chacha20(key_w, nonce_w, counter+i)
             for j in range(len(data) % 64):

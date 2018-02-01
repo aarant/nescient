@@ -1,5 +1,5 @@
 # Nescient: A Python program for packing/unpacking encrypted, salted, and authenticated file containers.
-# Copyright (C) 2018 Andrew Antonitis. Licensed under the MIT license.
+# Copyright (C) 2018 Ariel Antonitis. Licensed under the MIT license.
 #
 # nescient/timing.py
 """ Classes and functions to read/write timing benchmarks, and estimate the time needed to pack/unpack a file. """
@@ -11,6 +11,9 @@ from time import sleep
 from threading import Thread
 from timeit import default_timer as timer
 from pkg_resources import Requirement, resource_filename
+
+from nescient.packer import NescientPacker
+from nescient.crypto.tools import get_random_bytes
 
 
 # The path to the pickled benchmark file
@@ -34,7 +37,11 @@ def write_benchmarks(mode, times):
         pickle.dump(benchmarks, f_out)
 
 
-def estimate_time(size, times):
+def estimate_time(size, packing_mode):
+    benchmarks = load_benchmarks()
+    if benchmarks is None or benchmarks.get(packing_mode) is None:
+        return None
+    times = benchmarks[packing_mode]
     # Find the benchmarked size that is closest to the requested size
     diff = [(abs(size-benchmarked_size), benchmarked_size) for benchmarked_size in times]
     _, closest = min(diff, key=lambda t: t[0])
@@ -43,6 +50,31 @@ def estimate_time(size, times):
     min_time = min(times.values(), key=lambda l: l[-1])[-1]
     # It is extremely unlikely that the estimated time can be less than the minimum benchmarked time, so take the max
     return max(estimated, min_time)
+
+def benchmark_mode(packing_mode):
+    alg, mode, auth = packing_mode.split('-', 2)
+    packer = NescientPacker(get_random_bytes(16), alg, mode, auth)
+    times = {}
+    for size in [2**x for x in range(10, 35, 5)]:
+        times[size] = []
+        data = bytearray(size)
+        # Calculate key generation rate
+        start = timer()
+        checkpoint = timer()
+        salt = get_random_bytes(16)
+        key = packer._key_gen(salt)
+        times[size].append(timer() - checkpoint)
+        # Calculate encryption rate
+        checkpoint = timer()
+        packer._encrypt(data, key, salt)
+        times[size].append(timer() - checkpoint)
+        # Calculate authentication rate
+        checkpoint = timer()
+        packer._gen_auth_tag(key, bytearray(24) + salt, data)
+        times[size].append(timer() - checkpoint)
+        # Calculate total rate
+        times[size].append(timer() - start)
+    write_benchmarks(packing_mode, times)
 
 
 class EstimatedProgressBar:
@@ -90,8 +122,8 @@ class EstimatedProgressBar:
 
 
 class EstimatedTimer:
-    def __init__(self, text, est_time):
-        self.text, self.est_time = text, est_time
+    def __init__(self, text, est_time, display_func=None):
+        self.text, self.est_time, self.display_func = text, est_time, display_func
         if len(self.text) > 66:  # TODO: Terminal width
             self.text = self.text[:59] + '(cont.)'
         self.error, self.finished = False, False
@@ -124,7 +156,10 @@ class EstimatedTimer:
             m, s = divmod(remaining, 60)
             h, m = divmod(m, 60)
             display_string += '%02d:%02d:%02d ' % (h, m, s) + self.frames[self.frame]
-        print('\r' + display_string, end='' if not self.finished else '\n', flush=True)
+        if self.display_func:
+            self.display_func(display_string)
+        else:
+            print('\r' + display_string, end='' if not self.finished else '\n', flush=True)
 
     def start(self):
         t = Thread(target=self.run_progress, daemon=True)
@@ -134,3 +169,23 @@ class EstimatedTimer:
         self.error = error
         self.finished = True
         self.display()
+
+
+class TkTimer(EstimatedTimer):
+    def __init__(self, root, text, est_time, display_func):
+        EstimatedTimer.__init__(self, text, est_time, display_func)
+        self.root = root
+
+    def run_progress(self):
+        if not self.finished:
+            self.display()
+            self.frame = (self.frame + 1) % 4
+            self.elapsed = timer() - self.start_time
+            self.root.after(500, self.run_progress)
+
+    def start(self):
+        self.start_time = timer()
+        self.elapsed = 0
+        self.run_progress()
+        
+        

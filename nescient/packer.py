@@ -1,5 +1,5 @@
 # Nescient: A Python program for packing/unpacking encrypted, salted, and authenticated file containers.
-# Copyright (C) 2018 Andrew Antonitis. Licensed under the MIT license.
+# Copyright (C) 2018 Ariel Antonitis. Licensed under the MIT license.
 #
 # nescient/packer.py
 """ The Packer class, used to pack and unpack Nescient containers, as well as packer-specific exceptions. """
@@ -8,10 +8,8 @@ import os
 import hmac  # Generating authentication tags with SHA-2 # TODO: Re-implement this in Cython
 from contextlib import ExitStack
 from hashlib import pbkdf2_hmac  # PBKDF2 Key derivation # TODO: Re-implement this in Cython
-from timeit import default_timer as timer
 
 from nescient import __version__, version_to_tuple, newer_version, NescientError
-from nescient.timing import load_benchmarks, write_benchmarks
 from nescient.crypto.tools import get_random_bytes
 from nescient.crypto.aes import AesCrypter
 from nescient.crypto.chacha import ChaChaCrypter
@@ -35,6 +33,11 @@ class AuthError(PackingError):
 SUPPORTED_ALGS = {'aes128': (AesCrypter, 16), 'aes192': (AesCrypter, 24), 'aes256': (AesCrypter, 32),
                   'chacha': (ChaChaCrypter, 32)}
 
+# All available packing modes, and the default mode
+PACKING_MODES = [alg + '-' + mode + '-' + auth for alg, (CrypterClass, _) in SUPPORTED_ALGS.items()
+                 for mode in CrypterClass.modes for auth in CrypterClass.auth]
+DEFAULT_PACKING_MODE = 'chacha-stm-sha'
+
 
 class NescientPacker:
     """ Packer/Unpacker for Nescient containers
@@ -42,7 +45,7 @@ class NescientPacker:
     Args:
         password: The password to encrypt/decrypt with. Must be a `str` or `bytes` object
         alg (str): A 6 character string specifying the algorithm to use for packing. Must exist in `SUPPORTED_ALGS`.
-        mode (str): A 3 character string specifying the cipher mode of operation. Currently only `'cbc'` is supported.
+        mode (str): A 3 character string specifying the cipher mode of operation.
         auth (str): A 3 character string specifying the cipher mode of operation. Currently only `'sha'` is supported.
 
     Attributes:
@@ -56,23 +59,21 @@ class NescientPacker:
         elif type(password is bytes):
             self.password = password
         else:
-            raise ParamError('Password is not of proper type (string or bytes)')
+            raise ParamError('Password is not of proper type (string or bytes).')
         # Ensure the algorithm selected is supported
         if alg not in SUPPORTED_ALGS:
-            raise ParamError('Unsupported algorithm: %s' % alg)
+            raise ParamError('Unsupported algorithm: %s.' % alg)
         self.CrypterClass, self.key_len = SUPPORTED_ALGS[alg]
         # Ensure the algorithm supports the cipher and auth modes
         if mode not in self.CrypterClass.modes:
-            raise ParamError('Cipher mode %s is unsupported by algorithm' % mode)
+            raise ParamError('Cipher mode %s is unsupported by algorithm.' % mode)
         if auth not in self.CrypterClass.auth:
-            raise ParamError('Authentication mode %s is unspported by algorithm' % auth)
+            raise ParamError('Authentication mode %s is unspported by algorithm.' % auth)
         self.alg, self.mode, self.auth = alg, mode, auth
         # Supported authenticated encryption protocols. TODO: Only SHA-256 is supported right now
         if auth == 'sha':
             self._gen_auth_tag = lambda key, auth_data, enc_data: hmac.new(key, auth_data + enc_data,
                                                                            digestmod='sha256').digest()
-        # Attempt to load benchmark data for the specified settings
-        self.times = load_benchmarks().get(self.alg + self.mode + self.auth)
 
     # Fix out paths depending on the packing choice and the output path
     @staticmethod
@@ -96,6 +97,44 @@ class NescientPacker:
                 return os.path.join(out_path, basename)
             else:  # Directly unpack to the requested path
                 return out_path
+
+    @staticmethod
+    def parse_nescient_header(data_or_path):
+        if type(data_or_path) is str:
+            with open(data_or_path, 'rb') as f:
+                data = bytearray(
+                    min(os.path.getsize(data_or_path), 72))  # 24 header bytes, 16 salt bytes, 32 auth bytes
+                f.readinto(data)
+        else:
+            data = data_or_path
+        # Check for a valid header
+        if len(data) < 24:
+            raise PackingError('Not a valid Nescient container.')
+        header = data[:24]
+        if header[0:4] != b'NESC':
+            raise PackingError('Not a valid Nescient container.')
+        # packed_version = str(header[4:12], 'utf-8')
+        # if newer_version(__version__, packed_version) == 2:  # If the packed version is newer, warn the user
+        #     warn('Packed version', packed_version, 'is newer than current; may be unable to unpack.')
+        alg, mode, auth = str(header[12:18], 'utf-8'), str(header[18:21], 'utf-8'), str(header[21:24], 'utf-8')
+        # Ensure the algorithm selected is supported
+        if alg not in SUPPORTED_ALGS:
+            raise ParamError('Unsupported algorithm: %s.' % alg)
+        CrypterClass, _ = SUPPORTED_ALGS[alg]
+        # Ensure the algorithm supports the cipher and auth modes
+        if mode not in CrypterClass.modes:
+            raise ParamError('Cipher mode %s is unsupported by algorithm.' % mode)
+        if auth not in CrypterClass.auth:
+            raise ParamError('Authentication mode %s is unspported by algorithm.' % auth)
+        # Ensure the salt exists
+        if len(data) < 40:
+            raise PackingError('Container missing salt.')
+        salt = data[24:40]
+        # Ensure the authentication tag exists
+        if len(data) < 72:
+            raise PackingError('Container missing auth tag.')
+        auth_tag = data[40:72]
+        return {'header': header, 'alg': alg, 'mode': mode, 'auth': auth, 'salt': salt, 'auth_tag': auth_tag}
 
     # Performs PBKDF2 key derivation with a specified salt
     def _key_gen(self, salt):
@@ -143,6 +182,26 @@ class NescientPacker:
         # Prepend the header, salt, and auth_tag to the data
         data[:] = header + salt + auth_tag + data
 
+    def unpack(self, data):
+        """ Unpack an in-memory Nescient container in place.
+
+        Args:
+            data: The bytearray representing the Nescient container.
+        """
+        # Parse the nescient header of the data
+        parsed = NescientPacker.parse_nescient_header(data)
+        header, alg, mode, auth, salt, auth_tag = [parsed[name] for name in ['header', 'alg', 'mode', 'auth', 'salt', 'auth_tag']]
+        # Initialize a packer with these settings
+        temp_unpacker = NescientPacker(self.password, alg, mode, auth)
+        auth_tag = data[40:72]
+        data[:] = data[72:]  # 24 header bytes, 16 salt bytes and 32 auth_tag bytes == 72
+        key = temp_unpacker._key_gen(salt)
+        new_auth_tag = temp_unpacker._gen_auth_tag(key, header + salt, data)
+        if not hmac.compare_digest(auth_tag, new_auth_tag):
+            raise AuthError('Authentication tags not equal! The file is corrupt, tampered with, '
+                            'or the password is incorrect.')
+        temp_unpacker._decrypt(data, key, salt)
+
     def pack_or_unpack_file(self, in_path, out_path, packing_choice, overwrite=True):
         with ExitStack() as stack:
             f_in = stack.enter_context(open(in_path, 'rb'))
@@ -162,62 +221,3 @@ class NescientPacker:
             else:
                 f_out = stack.enter_context(open(out_path, 'wb'))
                 f_out.write(data)
-
-    def unpack(self, data):
-        """ Unpack an in-memory Nescient container in place.
-
-        Args:
-            data: The bytearray representing the Nescient container.
-        """
-        if len(data) < 24:  # Must have at least 24 header bytes
-            raise PackingError('Not a valid Nescient container')
-        header = data[:24]
-        if header[0:4] != b'NESC':  # Check for a valid header
-            raise PackingError('Invalid Nescient header')
-        # packed_version = str(header[4:12], 'utf-8')
-        # if newer_version(__version__, packed_version) == 2:  # If the packed version is newer, warn the user
-        #     warn('Packed version', packed_version, 'is newer than current; may be unable to unpack.')
-        alg, mode, auth = str(header[12:18], 'utf-8'), str(header[18:21], 'utf-8'), str(header[21:24], 'utf-8')
-        # Initialize a temporary unpacker with file settings
-        temp_unpacker = NescientPacker(self.password, alg, mode, auth)
-        # Grab the salt and authenticate the data
-        if len(data) < 40:  # Must have at least 16 salt bytes
-            raise PackingError('Container is missing salt')
-        salt = data[24:40]
-        if auth == 'sha':
-            if len(data) < 72:  # Must have at least 32 auth_tag bytes
-                raise PackingError('Container is missing auth tag')
-            auth_tag = data[40:72]
-            data[:] = data[72:]  # 24 header bytes, 16 salt bytes and 32 auth_tag bytes == 72
-            key = temp_unpacker._key_gen(salt)
-            new_auth_tag = temp_unpacker._gen_auth_tag(key, header + salt, data)
-            if not hmac.compare_digest(auth_tag, new_auth_tag):
-                raise AuthError('Authentication tags not equal! The file is corrupt, tampered with, '
-                                'or the password is incorrect.')
-            temp_unpacker._decrypt(data, key, salt)
-
-    def benchmark(self):
-        """ Generate and write new benchmarks for the packer's settings. """
-        if self.times is None:
-            self.times = {}
-        for size in [2**x for x in range(10, 35, 5)]:
-            self.times[size] = []
-            data = bytearray(size)
-            # Calculate key generation rate
-            start = timer()
-            checkpoint = timer()
-            salt = get_random_bytes(16)
-            key = self._key_gen(salt)
-            self.times[size].append(timer() - checkpoint)
-            # Calculate encryption rate
-            checkpoint = timer()
-            self._encrypt(data, key, salt)
-            self.times[size].append(timer() - checkpoint)
-            # Calculate authentication rate
-            checkpoint = timer()
-            self._gen_auth_tag(key, bytearray(24) + salt, data)
-            self.times[size].append(timer() - checkpoint)
-            # Calculate total rate
-            self.times[size].append(timer() - start)
-            print(size, self.times[size])  # TODO: Debug
-        write_benchmarks(self.alg + self.mode + self.auth, self.times)

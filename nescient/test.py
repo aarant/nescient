@@ -1,5 +1,5 @@
 # Nescient: A Python program for packing/unpacking encrypted, salted, and authenticated file containers.
-# Copyright (C) 2018 Andrew Antonitis. Licensed under the MIT license.
+# Copyright (C) 2018 Ariel Antonitis. Licensed under the MIT license.
 #
 # nescient/test.py
 """ Test cases for the various cryptographic algorithms implemented in Nescient. """
@@ -100,7 +100,7 @@ class ChaChaTest(unittest.TestCase):
         c = ChaChaCrypter(key)
         c.chacha_encrypt(data, nonce, counter)
         self.assertEqual(expected1, data)
-        c.chacha20_decrypt(data, nonce, counter)
+        c.chacha_decrypt(data, nonce, counter)
         self.assertEqual(expected2, data)
 
     def test_vector_2(self):
@@ -164,6 +164,19 @@ class ChaChaTest(unittest.TestCase):
         self.assertEqual(expected1, data)
         c.chacha_decrypt(data, nonce, counter)
         self.assertEqual(expected2, data)
+
+    # Test vector on data smaller than one block
+    def test_vector_4(self):
+        key = bytes([153, 5, 91, 169, 17, 217, 190, 176, 31, 234, 240, 251, 223, 248, 116, 134, 11,
+                     195, 121, 110, 161, 200, 135, 212, 37, 114, 119, 23, 166, 59, 3, 63])
+        nonce = 51494954499285655988572118223
+        counter = 1
+        data = bytearray([102, 111, 111, 98, 97, 114])
+        expected = data[:]
+        c = ChaChaCrypter(key)
+        c.chacha_encrypt(data, nonce, counter)
+        c.chacha_decrypt(data, nonce, counter)
+        self.assertEqual(expected, data)
 
 
 class PackerTest(unittest.TestCase):

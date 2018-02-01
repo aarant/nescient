@@ -1,11 +1,11 @@
 # Nescient: A Python program for packing/unpacking encrypted, salted, and authenticated file containers.
-# Copyright (C) 2018 Andrew Antonitis. Licensed under the MIT license.
+# Copyright (C) 2018 Ariel Antonitis. Licensed under the MIT license.
 #
 # setup.py
 from setuptools import setup
 from setuptools.extension import Extension
 
-from nescient import __version__
+from nescient import __version__, url
 
 with open('README.rst', 'r') as f:
     long_description = f.read()
@@ -23,11 +23,11 @@ setup(name='Nescient',
       version=__version__,
       description='A Python program for packing/unpacking encrypted, salted, and authenticated file containers.',
       long_description=long_description,
-      author='Andrew Antonitis',
+      author='Ariel Antonitis',
       author_email='arant@mit.edu',
-      url='https://github.com/arantonitis/nescient',
-      packages=['nescient', 'nescient.crypto'],
-      package_data={'nescient': ['*.png'], 'nescient.crypto': ['*.pyx']},
+      url=url,
+      packages=['nescient', 'nescient.crypto', 'nescient.resources'],
+      package_data={'nescient': ['*.png'], 'nescient.crypto': ['*.pyx'], 'nescient.resources': ['*gif']},
       ext_modules=extensions,
       entry_points={'console_scripts': ['nescient = nescient.__main__:main']},
       license='MIT',

@@ -89,6 +89,8 @@ Unless otherwise specified via command line flags, Nescient packs and unpacks fi
 
 Command line help can be viewed with ``nescient -h``.
 
+Nescient also has a GUI mode, which can be run by simply running ``nescient``.
+
 Development
 ===========
 Nescient versioning functions on a ``MAJOR.MINOR.PATCH.[DEVELOP]`` model. Only stable, non development releases will be published to PyPI. Because Nescient is still a beta project, the ``MAJOR`` increment will be 0. Minor increments represent new features. Patch increments represent problems fixed with existing features.
@@ -99,6 +101,6 @@ Planned features include:
 
 * Integrated compression when packing files.
 
-* A GUI mode for ease of use.
+* GUI mode enhancements.
 
 * Documentation.
