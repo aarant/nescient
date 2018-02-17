@@ -9,7 +9,7 @@ import sys
 import glob
 import webbrowser
 from tkinter import Tk, Label, PhotoImage, OptionMenu, StringVar, Frame, Text, Scrollbar, RIGHT, Y, WORD, DISABLED, \
-    Entry, Button, NORMAL, END, Menu, filedialog, Toplevel, messagebox, BooleanVar
+    Entry, Button, NORMAL, END, Menu, filedialog, Toplevel, messagebox, BooleanVar, Message, LEFT
 from pkg_resources import Requirement, resource_filename
 from threading import Thread, main_thread, current_thread
 
@@ -17,9 +17,12 @@ from nescient import __version__, url
 from nescient.timing import load_benchmarks, estimate_time, TkTimer, benchmark_mode
 from nescient.packer import DEFAULT_PACKING_MODE, PACKING_MODES, NescientPacker, PackingError
 from nescient.process import start_packer_process
+from nescient.resources.banner import BANNER_DATA
+from nescient.resources.nessie import LOGO_DATA
+from nescient.resources.nessie_lock import LOCK_DATA
 
-BANNER_PATH = resource_filename(Requirement.parse('Nescient'), os.path.join('nescient', 'resources', 'banner.gif'))
-LOGO_PATH = resource_filename(Requirement.parse('Nescient'), os.path.join('nescient', 'resources', 'nessie.gif'))
+#BANNER_PATH = resource_filename(Requirement.parse('Nescient'), os.path.join('nescient', 'resources', 'banner.gif'))
+#LOGO_PATH = resource_filename(Requirement.parse('Nescient'), os.path.join('nescient', 'resources', 'nessie.gif'))
 MAIN_THREAD = main_thread()
 
 
@@ -61,7 +64,7 @@ class ModeSelectFrame(Frame):
 class PathSelectFrame:
     def __init__(self, master):
         self.label = Label(master, text='Path:')
-        self.entry = Entry(master)
+        self.entry = Entry(master, bg='white', fg='white')
         self.button = Button(master, text='Add path(s)', command=lambda: master.add_files('glob'))
         self.label.grid(column=0, row=2, padx=5, pady=5, sticky='W')
         self.entry.grid(column=1, row=2, padx=5, pady=5, sticky='WE')
@@ -137,8 +140,14 @@ class NescientMenu(Menu):
 class PasswordWindow(Toplevel):
     def __init__(self, master, success, failure):
         Toplevel.__init__(self, master)
-        self.title('Password request')
+        self.title('Nescient password request:')
+        self.lock_image = PhotoImage(data=LOCK_DATA)
+        try:
+            self.tk.call('wm', 'iconphoto', self._w, self.lock_image)
+        except Exception:
+            pass
         self.resizable(False, False)
+        self.geometry('+%d+%d' % (master.winfo_x(), master.winfo_y()))
         self.success = success
         self.failure = failure
         self.grab_set()
@@ -146,18 +155,24 @@ class PasswordWindow(Toplevel):
         self.protocol('WM_DELETE_WINDOW', self.close)
         self.bind('<Return>', self.test_submit)
         self.grid()
+        self.lock = Label(self, image=self.lock_image)
+        self.lock_text = Message(self, text='Please enter the password with which to pack/unpack files:',
+                                 width=256)
         self.label1 = Label(self, text='Insert password:')
-        self.password = Entry(self, width=32, show='*')
+        self.password = Entry(self, width=32, show='*', bg='white', fg='black')
         self.password.focus_set()
         self.label2 = Label(self, text='Verify password:')
         vcmd = self.register(self.can_submit)
-        self.password2 = Entry(self, width=32, show='*', validate='key', validatecommand=(vcmd, '%P'))
+        self.password2 = Entry(self, width=32, show='*', validate='key', validatecommand=(vcmd, '%P'), bg='white',
+                               fg='black')
         self.button = Button(self, text='Submit', state=DISABLED, command=lambda: self.close(self.password.get()))
-        self.label1.grid(column=0, row=0, padx=5, pady=2)
-        self.password.grid(column=1, row=0, padx=2, pady=2)
-        self.label2.grid(column=0, row=1, padx=5, pady=2)
-        self.password2.grid(column=1, row=1, padx=2, pady=2)
-        self.button.grid(column=0, row=2, columnspan=2)
+        self.lock.grid(column=0, row=0)
+        self.lock_text.grid(column=1, row=0)
+        self.label1.grid(column=0, row=1, padx=5, pady=5)
+        self.password.grid(column=1, row=1, padx=2, pady=5)
+        self.label2.grid(column=0, row=2, padx=5, pady=5)
+        self.password2.grid(column=1, row=2, padx=2, pady=5)
+        self.button.grid(column=0, row=3, columnspan=2)
 
     def test_submit(self, *args):
         if self.button.cget('state') == NORMAL:
@@ -188,10 +203,11 @@ class AboutWindow(Toplevel):
         Toplevel.__init__(self, master)
         self.title('About Nescient')
         self.resizable(False, False)
+        self.geometry('+%d+%d' % (master.winfo_x(), master.winfo_y()))
         self.grab_set()
         self.focus_set()
         self.protocol('WM_DELETE_WINDOW', self.close)
-        self.logo_image = PhotoImage(file=LOGO_PATH)
+        self.logo_image = PhotoImage(data=LOGO_DATA)
         self.logo = Label(self, image=self.logo_image)
         self.label = Label(self, text='Copyright (c) 2018 Ariel Antonitis')
         self.url = Label(self, text=url, fg='#369a9d')
@@ -215,7 +231,7 @@ class NescientUI(Tk):
         Tk.__init__(self)
         self.title('Nescient ' + __version__)
         try:
-            self.tk.call('wm', 'iconphoto', self._w, PhotoImage(file=LOGO_PATH))
+            self.tk.call('wm', 'iconphoto', self._w, PhotoImage(data=LOGO_DATA))
         except Exception:
             pass
         self.protocol('WM_DELETE_WINDOW', self.close)
@@ -223,7 +239,7 @@ class NescientUI(Tk):
         self.grid()
         self.menu = NescientMenu(self)
         self.configure(menu=self.menu)
-        self.banner_image = PhotoImage(file=BANNER_PATH)
+        self.banner_image = PhotoImage(data=BANNER_DATA)
         self.banner = Label(self, image=self.banner_image)
         self.mode_select = ModeSelectFrame(self, DEFAULT_PACKING_MODE, PACKING_MODES)
         self.path_select = PathSelectFrame(self)

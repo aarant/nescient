@@ -14,9 +14,9 @@
 
 *nescient, n. (nesh-int) - from Latin 'unknowing', 'hidden'*  
 
-A Python program for packing/unpacking encrypted, salted, and authenticated file containers.
+Store, encrypt and decrypt files to and from encrypted, authenticated containers.
 
-Nescient provides an easy-to-use, secure, and efficient means of file-level encryption.
+Nescient provides an easy-to-use, secure, and efficient means of file or memory level encryption.
 
 Several use cases include:
 
@@ -26,6 +26,8 @@ Several use cases include:
 
 * Sharing files with others securely, by transferring a Nescient container through an insecure channel and providing a password through a separate secure channel.
 
+* Using Nescient's cryptographic classes to efficiently implement secure protocols.
+
 Nescient is:
 
 * **open source**: It is licensed under the permissive MIT license.
@@ -34,7 +36,7 @@ Nescient is:
 
 * **transparent**: The means with which Nescient encrypts and packs files is documented, and the algorithms used are tested both against official test vectors and arbitrary data to ensure correctness.
 
-* **fast**: All core crypto code is written in Cython and compiled to C extensions, making it fast enough to be practically usable for large files.
+* **fast**: All core crypto code is written in Cython and compiled to C extensions, making it fast enough to be practically usable for large files. The fastest cipher modes achieve speeds of 10 cycles/byte.
 
 Nescient supports the following packing modes:
 
@@ -44,15 +46,18 @@ Nescient supports the following packing modes:
 
 Installation
 ============
-Prerequisites
--------------
-Nescient requires Python 3.3 or later.
 
-Windows users are **strongly suggested** to have a 64-bit Python installation on their machines. Otherwise, installation may require installing the Microsoft C++ Visual Build Tools to compile Nescient's C extensions.
+Windows
+-------
+Nescient is available as a pre-packaged, standalone Windows executable, downloadable from the `github releases`_. The executable can be used in GUI-mode, by double-clicking, or can be run with command line arguments.
 
 From PyPI
 ---------
-Nescient can be installed from the Python Package Index (PyPI) by running ``pip install nescient``.
+Nescient requires Python 3.3 or later.
+
+Windows users installing Nescient as a Python package are **strongly suggested** to have a 64-bit Python installation on their machines. Otherwise, installation may require installing the Microsoft C++ Visual Build Tools to compile Nescient's C extensions.
+
+Install Nescient from the Python Package Index (PyPI) by running ``pip install nescient``.
 
 .. note::
 
@@ -79,6 +84,8 @@ Installing from source may require installing compilation tools.
 
 Usage
 =====
+Nescient has a GUI mode, which can be run by simply running ``nescient-ui``, or ``nescient`` with no arguments.
+
 Nescient can pack or unpack files into/from ``.nesc`` containers. Some typical usage might be:
 
 ``nescient pack file1 file2``
@@ -88,8 +95,6 @@ Nescient can pack or unpack files into/from ``.nesc`` containers. Some typical u
 Unless otherwise specified via command line flags, Nescient packs and unpacks files in place, overwriting their data.
 
 Command line help can be viewed with ``nescient -h``.
-
-Nescient also has a GUI mode, which can be run by simply running ``nescient-ui``.
 
 Development
 ===========

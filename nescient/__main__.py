@@ -9,6 +9,7 @@ import sys
 import glob
 from getpass import getpass
 from argparse import ArgumentParser, RawTextHelpFormatter
+from multiprocessing import freeze_support
 
 from nescient import __version__, __doc__ as description
 from nescient.packer import PACKING_MODES, DEFAULT_PACKING_MODE, NescientPacker, PackingError
@@ -133,4 +134,7 @@ def main():
 
 
 if __name__ == '__main__':
+    # Call multiprocessing freeze support when bundled
+    if getattr(sys, 'frozen', False):
+        freeze_support()
     main()

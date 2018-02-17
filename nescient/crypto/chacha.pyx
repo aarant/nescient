@@ -37,16 +37,13 @@ def display_hex(data):
     for i in range(0, len(data), 16):
         print(' '.join('%02x' % x for x in data[i:i+16]))
 
-# A single ChaCha20 round operating on a state and 4 indices
-cdef quarter_round(unsigned int * x, unsigned char i, unsigned char j, unsigned char k, unsigned char l):
-    x[i] = x[i] + x[j]; x[l] = x[l] ^ x[i]
-    x[l] = (x[l] << 16) | (x[l] >> 16)
-    x[k] = x[k] + x[l]; x[j] = x[j] ^ x[k]
-    x[j] = (x[j] << 12) | (x[j] >> 20)
-    x[i] = x[i] + x[j]; x[l] = x[l] ^ x[i]
-    x[l] = (x[l] << 8) | (x[l] >> 24)
-    x[k] = x[k] + x[l]; x[j] = x[j] ^ x[k]
-    x[j] = (x[j] << 7) | (x[j] >> 25)
+# The quarter rounds are currently hard-coded, so this function is not needed.
+# # A single ChaCha20 round operating on a state and 4 indices
+# cdef quarter_round(unsigned int * x, unsigned char i, unsigned char j, unsigned char k, unsigned char l):
+#     x[i] = x[i] + x[j]; x[l] = x[l] ^ x[i]; x[l] = (x[l] << 16) | (x[l] >> 16)
+#     x[k] = x[k] + x[l]; x[j] = x[j] ^ x[k]; x[j] = (x[j] << 12) | (x[j] >> 20)
+#     x[i] = x[i] + x[j]; x[l] = x[l] ^ x[i]; x[l] = (x[l] << 8) | (x[l] >> 24)
+#     x[k] = x[k] + x[l]; x[j] = x[j] ^ x[k]; x[j] = (x[j] << 7) | (x[j] >> 25)
 
 # Generates 64 keystream bytes from a 256-bit key, a 96-bit nonce, and a 32-bit counter
 cdef unsigned char * chacha20(unsigned int * key, unsigned int * nonce, unsigned int count):
@@ -65,14 +62,46 @@ cdef unsigned char * chacha20(unsigned int * key, unsigned int * nonce, unsigned
     start_state[:] = state
     # Perform the ChaCha20 rounds
     for i in range(10):
-        quarter_round(state, 0, 4, 8, 12)
-        quarter_round(state, 1, 5, 9, 13)
-        quarter_round(state, 2, 6, 10, 14)
-        quarter_round(state, 3, 7, 11, 15)
-        quarter_round(state, 0, 5, 10, 15)
-        quarter_round(state, 1, 6, 11, 12)
-        quarter_round(state, 2, 7, 8, 13)
-        quarter_round(state, 3, 4, 9, 14)
+        # Quarter round 0, 4, 8, 12
+        state[0] = state[0] + state[4]; state[12] = state[12] ^ state[0]; state[12] = (state[12] << 16) | (state[12] >> 16)
+        state[8] = state[8] + state[12]; state[4] = state[4] ^ state[8]; state[4] = (state[4] << 12) | (state[4] >> 20)
+        state[0] = state[0] + state[4]; state[12] = state[12] ^ state[0]; state[12] = (state[12] << 8) | (state[12] >> 24)
+        state[8] = state[8] + state[12]; state[4] = state[4] ^ state[8]; state[4] = (state[4] << 7) | (state[4] >> 25)
+        # Quarter round 1, 5, 9, 13
+        state[1] = state[1] + state[5]; state[13] = state[13] ^ state[1]; state[13] = (state[13] << 16) | (state[13] >> 16)
+        state[9] = state[9] + state[13]; state[5] = state[5] ^ state[9]; state[5] = (state[5] << 12) | (state[5] >> 20)
+        state[1] = state[1] + state[5]; state[13] = state[13] ^ state[1]; state[13] = (state[13] << 8) | (state[13] >> 24)
+        state[9] = state[9] + state[13]; state[5] = state[5] ^ state[9]; state[5] = (state[5] << 7) | (state[5] >> 25)
+        # Quarter round 2, 6, 10, 14
+        state[2] = state[2] + state[6]; state[14] = state[14] ^ state[2]; state[14] = (state[14] << 16) | (state[14] >> 16)
+        state[10] = state[10] + state[14]; state[6] = state[6] ^ state[10]; state[6] = (state[6] << 12) | (state[6] >> 20)
+        state[2] = state[2] + state[6]; state[14] = state[14] ^ state[2]; state[14] = (state[14] << 8) | (state[14] >> 24)
+        state[10] = state[10] + state[14]; state[6] = state[6] ^ state[10]; state[6] = (state[6] << 7) | (state[6] >> 25)
+        # Quarter round 3, 7, 11, 15
+        state[3] = state[3] + state[7]; state[15] = state[15] ^ state[3]; state[15] = (state[15] << 16) | (state[15] >> 16)
+        state[11] = state[11] + state[15]; state[7] = state[7] ^ state[11]; state[7] = (state[7] << 12) | (state[7] >> 20)
+        state[3] = state[3] + state[7]; state[15] = state[15] ^ state[3]; state[15] = (state[15] << 8) | (state[15] >> 24)
+        state[11] = state[11] + state[15]; state[7] = state[7] ^ state[11]; state[7] = (state[7] << 7) | (state[7] >> 25)
+        # Quarter round 0, 5, 10, 15
+        state[0] = state[0] + state[5]; state[15] = state[15] ^ state[0]; state[15] = (state[15] << 16) | (state[15] >> 16)
+        state[10] = state[10] + state[15]; state[5] = state[5] ^ state[10]; state[5] = (state[5] << 12) | (state[5] >> 20)
+        state[0] = state[0] + state[5]; state[15] = state[15] ^ state[0]; state[15] = (state[15] << 8) | (state[15] >> 24)
+        state[10] = state[10] + state[15]; state[5] = state[5] ^ state[10]; state[5] = (state[5] << 7) | (state[5] >> 25)
+        # Quarter round 1, 6, 11, 12
+        state[1] = state[1] + state[6]; state[12] = state[12] ^ state[1]; state[12] = (state[12] << 16) | (state[12] >> 16)
+        state[11] = state[11] + state[12]; state[6] = state[6] ^ state[11]; state[6] = (state[6] << 12) | (state[6] >> 20)
+        state[1] = state[1] + state[6]; state[12] = state[12] ^ state[1]; state[12] = (state[12] << 8) | (state[12] >> 24)
+        state[11] = state[11] + state[12]; state[6] = state[6] ^ state[11]; state[6] = (state[6] << 7) | (state[6] >> 25)
+        # Quarter round 2, 7, 8, 13
+        state[2] = state[2] + state[7]; state[13] = state[13] ^ state[2]; state[13] = (state[13] << 16) | (state[13] >> 16)
+        state[8] = state[8] + state[13]; state[7] = state[7] ^ state[8]; state[7] = (state[7] << 12) | (state[7] >> 20)
+        state[2] = state[2] + state[7]; state[13] = state[13] ^ state[2]; state[13] = (state[13] << 8) | (state[13] >> 24)
+        state[8] = state[8] + state[13]; state[7] = state[7] ^ state[8]; state[7] = (state[7] << 7) | (state[7] >> 25)
+        # Quarter round 3, 4, 9, 14
+        state[3] = state[3] + state[4]; state[14] = state[14] ^ state[3]; state[14] = (state[14] << 16) | (state[14] >> 16)
+        state[9] = state[9] + state[14]; state[4] = state[4] ^ state[9]; state[4] = (state[4] << 12) | (state[4] >> 20)
+        state[3] = state[3] + state[4]; state[14] = state[14] ^ state[3]; state[14] = (state[14] << 8) | (state[14] >> 24)
+        state[9] = state[9] + state[14]; state[4] = state[4] ^ state[9]; state[4] = (state[4] << 7) | (state[4] >> 25)
     # Add the original state with the result
     for i in range(16):
         state[i] += start_state[i]

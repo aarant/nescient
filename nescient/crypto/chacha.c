@@ -887,47 +887,6 @@ static CYTHON_INLINE PyObject* __Pyx_PyBytes_Join(PyObject* sep, PyObject* value
 /* IncludeStringH.proto */
 #include <string.h>
 
-/* PyThreadStateGet.proto */
-#if CYTHON_FAST_THREAD_STATE
-#define __Pyx_PyThreadState_declare  PyThreadState *__pyx_tstate;
-#define __Pyx_PyThreadState_assign  __pyx_tstate = __Pyx_PyThreadState_Current;
-#define __Pyx_PyErr_Occurred()  __pyx_tstate->curexc_type
-#else
-#define __Pyx_PyThreadState_declare
-#define __Pyx_PyThreadState_assign
-#define __Pyx_PyErr_Occurred()  PyErr_Occurred()
-#endif
-
-/* PyErrFetchRestore.proto */
-#if CYTHON_FAST_THREAD_STATE
-#define __Pyx_PyErr_Clear() __Pyx_ErrRestore(NULL, NULL, NULL)
-#define __Pyx_ErrRestoreWithState(type, value, tb)  __Pyx_ErrRestoreInState(PyThreadState_GET(), type, value, tb)
-#define __Pyx_ErrFetchWithState(type, value, tb)    __Pyx_ErrFetchInState(PyThreadState_GET(), type, value, tb)
-#define __Pyx_ErrRestore(type, value, tb)  __Pyx_ErrRestoreInState(__pyx_tstate, type, value, tb)
-#define __Pyx_ErrFetch(type, value, tb)    __Pyx_ErrFetchInState(__pyx_tstate, type, value, tb)
-static CYTHON_INLINE void __Pyx_ErrRestoreInState(PyThreadState *tstate, PyObject *type, PyObject *value, PyObject *tb);
-static CYTHON_INLINE void __Pyx_ErrFetchInState(PyThreadState *tstate, PyObject **type, PyObject **value, PyObject **tb);
-#if CYTHON_COMPILING_IN_CPYTHON
-#define __Pyx_PyErr_SetNone(exc) (Py_INCREF(exc), __Pyx_ErrRestore((exc), NULL, NULL))
-#else
-#define __Pyx_PyErr_SetNone(exc) PyErr_SetNone(exc)
-#endif
-#else
-#define __Pyx_PyErr_Clear() PyErr_Clear()
-#define __Pyx_PyErr_SetNone(exc) PyErr_SetNone(exc)
-#define __Pyx_ErrRestoreWithState(type, value, tb)  PyErr_Restore(type, value, tb)
-#define __Pyx_ErrFetchWithState(type, value, tb)  PyErr_Fetch(type, value, tb)
-#define __Pyx_ErrRestoreInState(tstate, type, value, tb)  PyErr_Restore(type, value, tb)
-#define __Pyx_ErrFetchInState(tstate, type, value, tb)  PyErr_Fetch(type, value, tb)
-#define __Pyx_ErrRestore(type, value, tb)  PyErr_Restore(type, value, tb)
-#define __Pyx_ErrFetch(type, value, tb)  PyErr_Fetch(type, value, tb)
-#endif
-
-/* WriteUnraisableException.proto */
-static void __Pyx_WriteUnraisable(const char *name, int clineno,
-                                  int lineno, const char *filename,
-                                  int full_traceback, int nogil);
-
 /* RaiseArgTupleInvalid.proto */
 static void __Pyx_RaiseArgtupleInvalid(const char* func_name, int exact,
     Py_ssize_t num_min, Py_ssize_t num_max, Py_ssize_t num_found);
@@ -1045,6 +1004,42 @@ static PyObject *__Pyx_Py3MetaclassPrepare(PyObject *metaclass, PyObject *bases,
                                            PyObject *mkw, PyObject *modname, PyObject *doc);
 static PyObject *__Pyx_Py3ClassCreate(PyObject *metaclass, PyObject *name, PyObject *bases, PyObject *dict,
                                       PyObject *mkw, int calculate_metaclass, int allow_py2_metaclass);
+
+/* PyThreadStateGet.proto */
+#if CYTHON_FAST_THREAD_STATE
+#define __Pyx_PyThreadState_declare  PyThreadState *__pyx_tstate;
+#define __Pyx_PyThreadState_assign  __pyx_tstate = __Pyx_PyThreadState_Current;
+#define __Pyx_PyErr_Occurred()  __pyx_tstate->curexc_type
+#else
+#define __Pyx_PyThreadState_declare
+#define __Pyx_PyThreadState_assign
+#define __Pyx_PyErr_Occurred()  PyErr_Occurred()
+#endif
+
+/* PyErrFetchRestore.proto */
+#if CYTHON_FAST_THREAD_STATE
+#define __Pyx_PyErr_Clear() __Pyx_ErrRestore(NULL, NULL, NULL)
+#define __Pyx_ErrRestoreWithState(type, value, tb)  __Pyx_ErrRestoreInState(PyThreadState_GET(), type, value, tb)
+#define __Pyx_ErrFetchWithState(type, value, tb)    __Pyx_ErrFetchInState(PyThreadState_GET(), type, value, tb)
+#define __Pyx_ErrRestore(type, value, tb)  __Pyx_ErrRestoreInState(__pyx_tstate, type, value, tb)
+#define __Pyx_ErrFetch(type, value, tb)    __Pyx_ErrFetchInState(__pyx_tstate, type, value, tb)
+static CYTHON_INLINE void __Pyx_ErrRestoreInState(PyThreadState *tstate, PyObject *type, PyObject *value, PyObject *tb);
+static CYTHON_INLINE void __Pyx_ErrFetchInState(PyThreadState *tstate, PyObject **type, PyObject **value, PyObject **tb);
+#if CYTHON_COMPILING_IN_CPYTHON
+#define __Pyx_PyErr_SetNone(exc) (Py_INCREF(exc), __Pyx_ErrRestore((exc), NULL, NULL))
+#else
+#define __Pyx_PyErr_SetNone(exc) PyErr_SetNone(exc)
+#endif
+#else
+#define __Pyx_PyErr_Clear() PyErr_Clear()
+#define __Pyx_PyErr_SetNone(exc) PyErr_SetNone(exc)
+#define __Pyx_ErrRestoreWithState(type, value, tb)  PyErr_Restore(type, value, tb)
+#define __Pyx_ErrFetchWithState(type, value, tb)  PyErr_Fetch(type, value, tb)
+#define __Pyx_ErrRestoreInState(tstate, type, value, tb)  PyErr_Restore(type, value, tb)
+#define __Pyx_ErrFetchInState(tstate, type, value, tb)  PyErr_Fetch(type, value, tb)
+#define __Pyx_ErrRestore(type, value, tb)  PyErr_Restore(type, value, tb)
+#define __Pyx_ErrFetch(type, value, tb)  PyErr_Fetch(type, value, tb)
+#endif
 
 /* CLineInTraceback.proto */
 #ifdef CYTHON_CLINE_IN_TRACEBACK
@@ -1245,7 +1240,6 @@ static PyTypeObject *__pyx_ptype_8nescient_6crypto_6chacha___pyx_scope_struct__d
 static PyTypeObject *__pyx_ptype_8nescient_6crypto_6chacha___pyx_scope_struct_1_genexpr = 0;
 static unsigned int *__pyx_f_8nescient_6crypto_6chacha_bytes_to_words(unsigned char *, unsigned long); /*proto*/
 static unsigned char *__pyx_f_8nescient_6crypto_6chacha_words_to_bytes(unsigned int *, unsigned long); /*proto*/
-static PyObject *__pyx_f_8nescient_6crypto_6chacha_quarter_round(unsigned int *, unsigned char, unsigned char, unsigned char, unsigned char); /*proto*/
 static unsigned char *__pyx_f_8nescient_6crypto_6chacha_chacha20(unsigned int *, unsigned int *, unsigned int); /*proto*/
 #define __Pyx_MODULE_NAME "nescient.crypto.chacha"
 extern int __pyx_module_is_main_nescient__crypto__chacha;
@@ -1809,8 +1803,8 @@ static PyObject *__pyx_pf_8nescient_6crypto_6chacha_display_hex(CYTHON_UNUSED Py
  * 
  * # A single ChaCha20 round operating on a state and 4 indices
  * cdef quarter_round(unsigned int * x, unsigned char i, unsigned char j, unsigned char k, unsigned char l):             # <<<<<<<<<<<<<<
- *     x[i] = x[i] + x[j]; x[l] = x[l] ^ x[i]
- *     x[l] = (x[l] << 16) | (x[l] >> 16)
+ *     x[i] = x[i] + x[j]; x[l] = x[l] ^ x[i]; x[l] = (x[l] << 16) | (x[l] >> 16)
+ *     x[k] = x[k] + x[l]; x[j] = x[j] ^ x[k]; x[j] = (x[j] << 12) | (x[j] >> 20)
  */
 
 static PyObject *__pyx_f_8nescient_6crypto_6chacha_quarter_round(unsigned int *__pyx_v_x, unsigned char __pyx_v_i, unsigned char __pyx_v_j, unsigned char __pyx_v_k, unsigned char __pyx_v_l) {
@@ -1821,85 +1815,53 @@ static PyObject *__pyx_f_8nescient_6crypto_6chacha_quarter_round(unsigned int *_
   /* "nescient/crypto/chacha.pyx":42
  * # A single ChaCha20 round operating on a state and 4 indices
  * cdef quarter_round(unsigned int * x, unsigned char i, unsigned char j, unsigned char k, unsigned char l):
- *     x[i] = x[i] + x[j]; x[l] = x[l] ^ x[i]             # <<<<<<<<<<<<<<
- *     x[l] = (x[l] << 16) | (x[l] >> 16)
- *     x[k] = x[k] + x[l]; x[j] = x[j] ^ x[k]
+ *     x[i] = x[i] + x[j]; x[l] = x[l] ^ x[i]; x[l] = (x[l] << 16) | (x[l] >> 16)             # <<<<<<<<<<<<<<
+ *     x[k] = x[k] + x[l]; x[j] = x[j] ^ x[k]; x[j] = (x[j] << 12) | (x[j] >> 20)
+ *     x[i] = x[i] + x[j]; x[l] = x[l] ^ x[i]; x[l] = (x[l] << 8) | (x[l] >> 24)
  */
   (__pyx_v_x[__pyx_v_i]) = ((__pyx_v_x[__pyx_v_i]) + (__pyx_v_x[__pyx_v_j]));
   (__pyx_v_x[__pyx_v_l]) = ((__pyx_v_x[__pyx_v_l]) ^ (__pyx_v_x[__pyx_v_i]));
+  (__pyx_v_x[__pyx_v_l]) = (((__pyx_v_x[__pyx_v_l]) << 16) | ((__pyx_v_x[__pyx_v_l]) >> 16));
 
   /* "nescient/crypto/chacha.pyx":43
  * cdef quarter_round(unsigned int * x, unsigned char i, unsigned char j, unsigned char k, unsigned char l):
- *     x[i] = x[i] + x[j]; x[l] = x[l] ^ x[i]
- *     x[l] = (x[l] << 16) | (x[l] >> 16)             # <<<<<<<<<<<<<<
- *     x[k] = x[k] + x[l]; x[j] = x[j] ^ x[k]
- *     x[j] = (x[j] << 12) | (x[j] >> 20)
- */
-  (__pyx_v_x[__pyx_v_l]) = (((__pyx_v_x[__pyx_v_l]) << 16) | ((__pyx_v_x[__pyx_v_l]) >> 16));
-
-  /* "nescient/crypto/chacha.pyx":44
- *     x[i] = x[i] + x[j]; x[l] = x[l] ^ x[i]
- *     x[l] = (x[l] << 16) | (x[l] >> 16)
- *     x[k] = x[k] + x[l]; x[j] = x[j] ^ x[k]             # <<<<<<<<<<<<<<
- *     x[j] = (x[j] << 12) | (x[j] >> 20)
- *     x[i] = x[i] + x[j]; x[l] = x[l] ^ x[i]
+ *     x[i] = x[i] + x[j]; x[l] = x[l] ^ x[i]; x[l] = (x[l] << 16) | (x[l] >> 16)
+ *     x[k] = x[k] + x[l]; x[j] = x[j] ^ x[k]; x[j] = (x[j] << 12) | (x[j] >> 20)             # <<<<<<<<<<<<<<
+ *     x[i] = x[i] + x[j]; x[l] = x[l] ^ x[i]; x[l] = (x[l] << 8) | (x[l] >> 24)
+ *     x[k] = x[k] + x[l]; x[j] = x[j] ^ x[k]; x[j] = (x[j] << 7) | (x[j] >> 25)
  */
   (__pyx_v_x[__pyx_v_k]) = ((__pyx_v_x[__pyx_v_k]) + (__pyx_v_x[__pyx_v_l]));
   (__pyx_v_x[__pyx_v_j]) = ((__pyx_v_x[__pyx_v_j]) ^ (__pyx_v_x[__pyx_v_k]));
-
-  /* "nescient/crypto/chacha.pyx":45
- *     x[l] = (x[l] << 16) | (x[l] >> 16)
- *     x[k] = x[k] + x[l]; x[j] = x[j] ^ x[k]
- *     x[j] = (x[j] << 12) | (x[j] >> 20)             # <<<<<<<<<<<<<<
- *     x[i] = x[i] + x[j]; x[l] = x[l] ^ x[i]
- *     x[l] = (x[l] << 8) | (x[l] >> 24)
- */
   (__pyx_v_x[__pyx_v_j]) = (((__pyx_v_x[__pyx_v_j]) << 12) | ((__pyx_v_x[__pyx_v_j]) >> 20));
 
-  /* "nescient/crypto/chacha.pyx":46
- *     x[k] = x[k] + x[l]; x[j] = x[j] ^ x[k]
- *     x[j] = (x[j] << 12) | (x[j] >> 20)
- *     x[i] = x[i] + x[j]; x[l] = x[l] ^ x[i]             # <<<<<<<<<<<<<<
- *     x[l] = (x[l] << 8) | (x[l] >> 24)
- *     x[k] = x[k] + x[l]; x[j] = x[j] ^ x[k]
+  /* "nescient/crypto/chacha.pyx":44
+ *     x[i] = x[i] + x[j]; x[l] = x[l] ^ x[i]; x[l] = (x[l] << 16) | (x[l] >> 16)
+ *     x[k] = x[k] + x[l]; x[j] = x[j] ^ x[k]; x[j] = (x[j] << 12) | (x[j] >> 20)
+ *     x[i] = x[i] + x[j]; x[l] = x[l] ^ x[i]; x[l] = (x[l] << 8) | (x[l] >> 24)             # <<<<<<<<<<<<<<
+ *     x[k] = x[k] + x[l]; x[j] = x[j] ^ x[k]; x[j] = (x[j] << 7) | (x[j] >> 25)
+ * 
  */
   (__pyx_v_x[__pyx_v_i]) = ((__pyx_v_x[__pyx_v_i]) + (__pyx_v_x[__pyx_v_j]));
   (__pyx_v_x[__pyx_v_l]) = ((__pyx_v_x[__pyx_v_l]) ^ (__pyx_v_x[__pyx_v_i]));
-
-  /* "nescient/crypto/chacha.pyx":47
- *     x[j] = (x[j] << 12) | (x[j] >> 20)
- *     x[i] = x[i] + x[j]; x[l] = x[l] ^ x[i]
- *     x[l] = (x[l] << 8) | (x[l] >> 24)             # <<<<<<<<<<<<<<
- *     x[k] = x[k] + x[l]; x[j] = x[j] ^ x[k]
- *     x[j] = (x[j] << 7) | (x[j] >> 25)
- */
   (__pyx_v_x[__pyx_v_l]) = (((__pyx_v_x[__pyx_v_l]) << 8) | ((__pyx_v_x[__pyx_v_l]) >> 24));
 
-  /* "nescient/crypto/chacha.pyx":48
- *     x[i] = x[i] + x[j]; x[l] = x[l] ^ x[i]
- *     x[l] = (x[l] << 8) | (x[l] >> 24)
- *     x[k] = x[k] + x[l]; x[j] = x[j] ^ x[k]             # <<<<<<<<<<<<<<
- *     x[j] = (x[j] << 7) | (x[j] >> 25)
- * 
- */
-  (__pyx_v_x[__pyx_v_k]) = ((__pyx_v_x[__pyx_v_k]) + (__pyx_v_x[__pyx_v_l]));
-  (__pyx_v_x[__pyx_v_j]) = ((__pyx_v_x[__pyx_v_j]) ^ (__pyx_v_x[__pyx_v_k]));
-
-  /* "nescient/crypto/chacha.pyx":49
- *     x[l] = (x[l] << 8) | (x[l] >> 24)
- *     x[k] = x[k] + x[l]; x[j] = x[j] ^ x[k]
- *     x[j] = (x[j] << 7) | (x[j] >> 25)             # <<<<<<<<<<<<<<
+  /* "nescient/crypto/chacha.pyx":45
+ *     x[k] = x[k] + x[l]; x[j] = x[j] ^ x[k]; x[j] = (x[j] << 12) | (x[j] >> 20)
+ *     x[i] = x[i] + x[j]; x[l] = x[l] ^ x[i]; x[l] = (x[l] << 8) | (x[l] >> 24)
+ *     x[k] = x[k] + x[l]; x[j] = x[j] ^ x[k]; x[j] = (x[j] << 7) | (x[j] >> 25)             # <<<<<<<<<<<<<<
  * 
  * # Generates 64 keystream bytes from a 256-bit key, a 96-bit nonce, and a 32-bit counter
  */
+  (__pyx_v_x[__pyx_v_k]) = ((__pyx_v_x[__pyx_v_k]) + (__pyx_v_x[__pyx_v_l]));
+  (__pyx_v_x[__pyx_v_j]) = ((__pyx_v_x[__pyx_v_j]) ^ (__pyx_v_x[__pyx_v_k]));
   (__pyx_v_x[__pyx_v_j]) = (((__pyx_v_x[__pyx_v_j]) << 7) | ((__pyx_v_x[__pyx_v_j]) >> 25));
 
   /* "nescient/crypto/chacha.pyx":41
  * 
  * # A single ChaCha20 round operating on a state and 4 indices
  * cdef quarter_round(unsigned int * x, unsigned char i, unsigned char j, unsigned char k, unsigned char l):             # <<<<<<<<<<<<<<
- *     x[i] = x[i] + x[j]; x[l] = x[l] ^ x[i]
- *     x[l] = (x[l] << 16) | (x[l] >> 16)
+ *     x[i] = x[i] + x[j]; x[l] = x[l] ^ x[i]; x[l] = (x[l] << 16) | (x[l] >> 16)
+ *     x[k] = x[k] + x[l]; x[j] = x[j] ^ x[k]; x[j] = (x[j] << 12) | (x[j] >> 20)
  */
 
   /* function exit code */
@@ -1909,7 +1871,7 @@ static PyObject *__pyx_f_8nescient_6crypto_6chacha_quarter_round(unsigned int *_
   return __pyx_r;
 }
 
-/* "nescient/crypto/chacha.pyx":52
+/* "nescient/crypto/chacha.pyx":48
  * 
  * # Generates 64 keystream bytes from a 256-bit key, a 96-bit nonce, and a 32-bit counter
  * cdef unsigned char * chacha20(unsigned int * key, unsigned int * nonce, unsigned int count):             # <<<<<<<<<<<<<<
@@ -1925,11 +1887,10 @@ static unsigned char *__pyx_f_8nescient_6crypto_6chacha_chacha20(unsigned int *_
   __Pyx_RefNannyDeclarations
   unsigned int __pyx_t_1[4];
   unsigned char __pyx_t_2;
-  PyObject *__pyx_t_3 = NULL;
-  unsigned char __pyx_t_4;
+  unsigned char __pyx_t_3;
   __Pyx_RefNannySetupContext("chacha20", 0);
 
-  /* "nescient/crypto/chacha.pyx":57
+  /* "nescient/crypto/chacha.pyx":53
  *     cdef unsigned char i
  *     # First four words are constants
  *     state[:4] = [0x61707865, 0x3320646e, 0x79622d32, 0x6b206574]             # <<<<<<<<<<<<<<
@@ -1942,7 +1903,7 @@ static unsigned char *__pyx_f_8nescient_6crypto_6chacha_chacha20(unsigned int *_
   __pyx_t_1[3] = 0x6b206574;
   memcpy(&(__pyx_v_state[0]), __pyx_t_1, sizeof(__pyx_v_state[0]) * (4));
 
-  /* "nescient/crypto/chacha.pyx":59
+  /* "nescient/crypto/chacha.pyx":55
  *     state[:4] = [0x61707865, 0x3320646e, 0x79622d32, 0x6b206574]
  *     # Words 4-11 are the key
  *     state[4:12] = key             # <<<<<<<<<<<<<<
@@ -1951,7 +1912,7 @@ static unsigned char *__pyx_f_8nescient_6crypto_6chacha_chacha20(unsigned int *_
  */
   memcpy(&(__pyx_v_state[4]), __pyx_v_key, sizeof(__pyx_v_state[0]) * (12 - 4));
 
-  /* "nescient/crypto/chacha.pyx":61
+  /* "nescient/crypto/chacha.pyx":57
  *     state[4:12] = key
  *     # Word 12 is the count
  *     state[12] = count             # <<<<<<<<<<<<<<
@@ -1960,7 +1921,7 @@ static unsigned char *__pyx_f_8nescient_6crypto_6chacha_chacha20(unsigned int *_
  */
   (__pyx_v_state[12]) = __pyx_v_count;
 
-  /* "nescient/crypto/chacha.pyx":63
+  /* "nescient/crypto/chacha.pyx":59
  *     state[12] = count
  *     # Words 13-15 are the nonce
  *     state[13:16] = nonce             # <<<<<<<<<<<<<<
@@ -1969,7 +1930,7 @@ static unsigned char *__pyx_f_8nescient_6crypto_6chacha_chacha20(unsigned int *_
  */
   memcpy(&(__pyx_v_state[13]), __pyx_v_nonce, sizeof(__pyx_v_state[0]) * (16 - 13));
 
-  /* "nescient/crypto/chacha.pyx":65
+  /* "nescient/crypto/chacha.pyx":61
  *     state[13:16] = nonce
  *     # Copy the state into the start state for later
  *     start_state[:] = state             # <<<<<<<<<<<<<<
@@ -1978,107 +1939,371 @@ static unsigned char *__pyx_f_8nescient_6crypto_6chacha_chacha20(unsigned int *_
  */
   memcpy(&(__pyx_v_start_state[0]), __pyx_v_state, sizeof(__pyx_v_start_state[0]) * (16));
 
-  /* "nescient/crypto/chacha.pyx":67
+  /* "nescient/crypto/chacha.pyx":63
  *     start_state[:] = state
  *     # Perform the ChaCha20 rounds
  *     for i in range(10):             # <<<<<<<<<<<<<<
- *         quarter_round(state, 0, 4, 8, 12)
- *         quarter_round(state, 1, 5, 9, 13)
+ *         # Quarter round 0, 4, 8, 12
+ *         state[0] = state[0] + state[4]; state[12] = state[12] ^ state[0]; state[12] = (state[12] << 16) | (state[12] >> 16)
  */
   for (__pyx_t_2 = 0; __pyx_t_2 < 10; __pyx_t_2+=1) {
     __pyx_v_i = __pyx_t_2;
 
-    /* "nescient/crypto/chacha.pyx":68
- *     # Perform the ChaCha20 rounds
+    /* "nescient/crypto/chacha.pyx":65
  *     for i in range(10):
- *         quarter_round(state, 0, 4, 8, 12)             # <<<<<<<<<<<<<<
- *         quarter_round(state, 1, 5, 9, 13)
- *         quarter_round(state, 2, 6, 10, 14)
+ *         # Quarter round 0, 4, 8, 12
+ *         state[0] = state[0] + state[4]; state[12] = state[12] ^ state[0]; state[12] = (state[12] << 16) | (state[12] >> 16)             # <<<<<<<<<<<<<<
+ *         state[8] = state[8] + state[12]; state[4] = state[4] ^ state[8]; state[4] = (state[4] << 12) | (state[4] >> 20)
+ *         state[0] = state[0] + state[4]; state[12] = state[12] ^ state[0]; state[12] = (state[12] << 8) | (state[12] >> 24)
  */
-    __pyx_t_3 = __pyx_f_8nescient_6crypto_6chacha_quarter_round(__pyx_v_state, 0, 4, 8, 12); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 68, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    (__pyx_v_state[0]) = ((__pyx_v_state[0]) + (__pyx_v_state[4]));
+    (__pyx_v_state[12]) = ((__pyx_v_state[12]) ^ (__pyx_v_state[0]));
+    (__pyx_v_state[12]) = (((__pyx_v_state[12]) << 16) | ((__pyx_v_state[12]) >> 16));
 
-    /* "nescient/crypto/chacha.pyx":69
- *     for i in range(10):
- *         quarter_round(state, 0, 4, 8, 12)
- *         quarter_round(state, 1, 5, 9, 13)             # <<<<<<<<<<<<<<
- *         quarter_round(state, 2, 6, 10, 14)
- *         quarter_round(state, 3, 7, 11, 15)
+    /* "nescient/crypto/chacha.pyx":66
+ *         # Quarter round 0, 4, 8, 12
+ *         state[0] = state[0] + state[4]; state[12] = state[12] ^ state[0]; state[12] = (state[12] << 16) | (state[12] >> 16)
+ *         state[8] = state[8] + state[12]; state[4] = state[4] ^ state[8]; state[4] = (state[4] << 12) | (state[4] >> 20)             # <<<<<<<<<<<<<<
+ *         state[0] = state[0] + state[4]; state[12] = state[12] ^ state[0]; state[12] = (state[12] << 8) | (state[12] >> 24)
+ *         state[8] = state[8] + state[12]; state[4] = state[4] ^ state[8]; state[4] = (state[4] << 7) | (state[4] >> 25)
  */
-    __pyx_t_3 = __pyx_f_8nescient_6crypto_6chacha_quarter_round(__pyx_v_state, 1, 5, 9, 13); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 69, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    (__pyx_v_state[8]) = ((__pyx_v_state[8]) + (__pyx_v_state[12]));
+    (__pyx_v_state[4]) = ((__pyx_v_state[4]) ^ (__pyx_v_state[8]));
+    (__pyx_v_state[4]) = (((__pyx_v_state[4]) << 12) | ((__pyx_v_state[4]) >> 20));
+
+    /* "nescient/crypto/chacha.pyx":67
+ *         state[0] = state[0] + state[4]; state[12] = state[12] ^ state[0]; state[12] = (state[12] << 16) | (state[12] >> 16)
+ *         state[8] = state[8] + state[12]; state[4] = state[4] ^ state[8]; state[4] = (state[4] << 12) | (state[4] >> 20)
+ *         state[0] = state[0] + state[4]; state[12] = state[12] ^ state[0]; state[12] = (state[12] << 8) | (state[12] >> 24)             # <<<<<<<<<<<<<<
+ *         state[8] = state[8] + state[12]; state[4] = state[4] ^ state[8]; state[4] = (state[4] << 7) | (state[4] >> 25)
+ *         # Quarter round 1, 5, 9, 13
+ */
+    (__pyx_v_state[0]) = ((__pyx_v_state[0]) + (__pyx_v_state[4]));
+    (__pyx_v_state[12]) = ((__pyx_v_state[12]) ^ (__pyx_v_state[0]));
+    (__pyx_v_state[12]) = (((__pyx_v_state[12]) << 8) | ((__pyx_v_state[12]) >> 24));
+
+    /* "nescient/crypto/chacha.pyx":68
+ *         state[8] = state[8] + state[12]; state[4] = state[4] ^ state[8]; state[4] = (state[4] << 12) | (state[4] >> 20)
+ *         state[0] = state[0] + state[4]; state[12] = state[12] ^ state[0]; state[12] = (state[12] << 8) | (state[12] >> 24)
+ *         state[8] = state[8] + state[12]; state[4] = state[4] ^ state[8]; state[4] = (state[4] << 7) | (state[4] >> 25)             # <<<<<<<<<<<<<<
+ *         # Quarter round 1, 5, 9, 13
+ *         state[1] = state[1] + state[5]; state[13] = state[13] ^ state[1]; state[13] = (state[13] << 16) | (state[13] >> 16)
+ */
+    (__pyx_v_state[8]) = ((__pyx_v_state[8]) + (__pyx_v_state[12]));
+    (__pyx_v_state[4]) = ((__pyx_v_state[4]) ^ (__pyx_v_state[8]));
+    (__pyx_v_state[4]) = (((__pyx_v_state[4]) << 7) | ((__pyx_v_state[4]) >> 25));
 
     /* "nescient/crypto/chacha.pyx":70
- *         quarter_round(state, 0, 4, 8, 12)
- *         quarter_round(state, 1, 5, 9, 13)
- *         quarter_round(state, 2, 6, 10, 14)             # <<<<<<<<<<<<<<
- *         quarter_round(state, 3, 7, 11, 15)
- *         quarter_round(state, 0, 5, 10, 15)
+ *         state[8] = state[8] + state[12]; state[4] = state[4] ^ state[8]; state[4] = (state[4] << 7) | (state[4] >> 25)
+ *         # Quarter round 1, 5, 9, 13
+ *         state[1] = state[1] + state[5]; state[13] = state[13] ^ state[1]; state[13] = (state[13] << 16) | (state[13] >> 16)             # <<<<<<<<<<<<<<
+ *         state[9] = state[9] + state[13]; state[5] = state[5] ^ state[9]; state[5] = (state[5] << 12) | (state[5] >> 20)
+ *         state[1] = state[1] + state[5]; state[13] = state[13] ^ state[1]; state[13] = (state[13] << 8) | (state[13] >> 24)
  */
-    __pyx_t_3 = __pyx_f_8nescient_6crypto_6chacha_quarter_round(__pyx_v_state, 2, 6, 10, 14); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 70, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    (__pyx_v_state[1]) = ((__pyx_v_state[1]) + (__pyx_v_state[5]));
+    (__pyx_v_state[13]) = ((__pyx_v_state[13]) ^ (__pyx_v_state[1]));
+    (__pyx_v_state[13]) = (((__pyx_v_state[13]) << 16) | ((__pyx_v_state[13]) >> 16));
 
     /* "nescient/crypto/chacha.pyx":71
- *         quarter_round(state, 1, 5, 9, 13)
- *         quarter_round(state, 2, 6, 10, 14)
- *         quarter_round(state, 3, 7, 11, 15)             # <<<<<<<<<<<<<<
- *         quarter_round(state, 0, 5, 10, 15)
- *         quarter_round(state, 1, 6, 11, 12)
+ *         # Quarter round 1, 5, 9, 13
+ *         state[1] = state[1] + state[5]; state[13] = state[13] ^ state[1]; state[13] = (state[13] << 16) | (state[13] >> 16)
+ *         state[9] = state[9] + state[13]; state[5] = state[5] ^ state[9]; state[5] = (state[5] << 12) | (state[5] >> 20)             # <<<<<<<<<<<<<<
+ *         state[1] = state[1] + state[5]; state[13] = state[13] ^ state[1]; state[13] = (state[13] << 8) | (state[13] >> 24)
+ *         state[9] = state[9] + state[13]; state[5] = state[5] ^ state[9]; state[5] = (state[5] << 7) | (state[5] >> 25)
  */
-    __pyx_t_3 = __pyx_f_8nescient_6crypto_6chacha_quarter_round(__pyx_v_state, 3, 7, 11, 15); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 71, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    (__pyx_v_state[9]) = ((__pyx_v_state[9]) + (__pyx_v_state[13]));
+    (__pyx_v_state[5]) = ((__pyx_v_state[5]) ^ (__pyx_v_state[9]));
+    (__pyx_v_state[5]) = (((__pyx_v_state[5]) << 12) | ((__pyx_v_state[5]) >> 20));
 
     /* "nescient/crypto/chacha.pyx":72
- *         quarter_round(state, 2, 6, 10, 14)
- *         quarter_round(state, 3, 7, 11, 15)
- *         quarter_round(state, 0, 5, 10, 15)             # <<<<<<<<<<<<<<
- *         quarter_round(state, 1, 6, 11, 12)
- *         quarter_round(state, 2, 7, 8, 13)
+ *         state[1] = state[1] + state[5]; state[13] = state[13] ^ state[1]; state[13] = (state[13] << 16) | (state[13] >> 16)
+ *         state[9] = state[9] + state[13]; state[5] = state[5] ^ state[9]; state[5] = (state[5] << 12) | (state[5] >> 20)
+ *         state[1] = state[1] + state[5]; state[13] = state[13] ^ state[1]; state[13] = (state[13] << 8) | (state[13] >> 24)             # <<<<<<<<<<<<<<
+ *         state[9] = state[9] + state[13]; state[5] = state[5] ^ state[9]; state[5] = (state[5] << 7) | (state[5] >> 25)
+ *         # Quarter round 2, 6, 10, 14
  */
-    __pyx_t_3 = __pyx_f_8nescient_6crypto_6chacha_quarter_round(__pyx_v_state, 0, 5, 10, 15); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 72, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    (__pyx_v_state[1]) = ((__pyx_v_state[1]) + (__pyx_v_state[5]));
+    (__pyx_v_state[13]) = ((__pyx_v_state[13]) ^ (__pyx_v_state[1]));
+    (__pyx_v_state[13]) = (((__pyx_v_state[13]) << 8) | ((__pyx_v_state[13]) >> 24));
 
     /* "nescient/crypto/chacha.pyx":73
- *         quarter_round(state, 3, 7, 11, 15)
- *         quarter_round(state, 0, 5, 10, 15)
- *         quarter_round(state, 1, 6, 11, 12)             # <<<<<<<<<<<<<<
- *         quarter_round(state, 2, 7, 8, 13)
- *         quarter_round(state, 3, 4, 9, 14)
+ *         state[9] = state[9] + state[13]; state[5] = state[5] ^ state[9]; state[5] = (state[5] << 12) | (state[5] >> 20)
+ *         state[1] = state[1] + state[5]; state[13] = state[13] ^ state[1]; state[13] = (state[13] << 8) | (state[13] >> 24)
+ *         state[9] = state[9] + state[13]; state[5] = state[5] ^ state[9]; state[5] = (state[5] << 7) | (state[5] >> 25)             # <<<<<<<<<<<<<<
+ *         # Quarter round 2, 6, 10, 14
+ *         state[2] = state[2] + state[6]; state[14] = state[14] ^ state[2]; state[14] = (state[14] << 16) | (state[14] >> 16)
  */
-    __pyx_t_3 = __pyx_f_8nescient_6crypto_6chacha_quarter_round(__pyx_v_state, 1, 6, 11, 12); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 73, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-
-    /* "nescient/crypto/chacha.pyx":74
- *         quarter_round(state, 0, 5, 10, 15)
- *         quarter_round(state, 1, 6, 11, 12)
- *         quarter_round(state, 2, 7, 8, 13)             # <<<<<<<<<<<<<<
- *         quarter_round(state, 3, 4, 9, 14)
- *     # Add the original state with the result
- */
-    __pyx_t_3 = __pyx_f_8nescient_6crypto_6chacha_quarter_round(__pyx_v_state, 2, 7, 8, 13); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 74, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    (__pyx_v_state[9]) = ((__pyx_v_state[9]) + (__pyx_v_state[13]));
+    (__pyx_v_state[5]) = ((__pyx_v_state[5]) ^ (__pyx_v_state[9]));
+    (__pyx_v_state[5]) = (((__pyx_v_state[5]) << 7) | ((__pyx_v_state[5]) >> 25));
 
     /* "nescient/crypto/chacha.pyx":75
- *         quarter_round(state, 1, 6, 11, 12)
- *         quarter_round(state, 2, 7, 8, 13)
- *         quarter_round(state, 3, 4, 9, 14)             # <<<<<<<<<<<<<<
+ *         state[9] = state[9] + state[13]; state[5] = state[5] ^ state[9]; state[5] = (state[5] << 7) | (state[5] >> 25)
+ *         # Quarter round 2, 6, 10, 14
+ *         state[2] = state[2] + state[6]; state[14] = state[14] ^ state[2]; state[14] = (state[14] << 16) | (state[14] >> 16)             # <<<<<<<<<<<<<<
+ *         state[10] = state[10] + state[14]; state[6] = state[6] ^ state[10]; state[6] = (state[6] << 12) | (state[6] >> 20)
+ *         state[2] = state[2] + state[6]; state[14] = state[14] ^ state[2]; state[14] = (state[14] << 8) | (state[14] >> 24)
+ */
+    (__pyx_v_state[2]) = ((__pyx_v_state[2]) + (__pyx_v_state[6]));
+    (__pyx_v_state[14]) = ((__pyx_v_state[14]) ^ (__pyx_v_state[2]));
+    (__pyx_v_state[14]) = (((__pyx_v_state[14]) << 16) | ((__pyx_v_state[14]) >> 16));
+
+    /* "nescient/crypto/chacha.pyx":76
+ *         # Quarter round 2, 6, 10, 14
+ *         state[2] = state[2] + state[6]; state[14] = state[14] ^ state[2]; state[14] = (state[14] << 16) | (state[14] >> 16)
+ *         state[10] = state[10] + state[14]; state[6] = state[6] ^ state[10]; state[6] = (state[6] << 12) | (state[6] >> 20)             # <<<<<<<<<<<<<<
+ *         state[2] = state[2] + state[6]; state[14] = state[14] ^ state[2]; state[14] = (state[14] << 8) | (state[14] >> 24)
+ *         state[10] = state[10] + state[14]; state[6] = state[6] ^ state[10]; state[6] = (state[6] << 7) | (state[6] >> 25)
+ */
+    (__pyx_v_state[10]) = ((__pyx_v_state[10]) + (__pyx_v_state[14]));
+    (__pyx_v_state[6]) = ((__pyx_v_state[6]) ^ (__pyx_v_state[10]));
+    (__pyx_v_state[6]) = (((__pyx_v_state[6]) << 12) | ((__pyx_v_state[6]) >> 20));
+
+    /* "nescient/crypto/chacha.pyx":77
+ *         state[2] = state[2] + state[6]; state[14] = state[14] ^ state[2]; state[14] = (state[14] << 16) | (state[14] >> 16)
+ *         state[10] = state[10] + state[14]; state[6] = state[6] ^ state[10]; state[6] = (state[6] << 12) | (state[6] >> 20)
+ *         state[2] = state[2] + state[6]; state[14] = state[14] ^ state[2]; state[14] = (state[14] << 8) | (state[14] >> 24)             # <<<<<<<<<<<<<<
+ *         state[10] = state[10] + state[14]; state[6] = state[6] ^ state[10]; state[6] = (state[6] << 7) | (state[6] >> 25)
+ *         # Quarter round 3, 7, 11, 15
+ */
+    (__pyx_v_state[2]) = ((__pyx_v_state[2]) + (__pyx_v_state[6]));
+    (__pyx_v_state[14]) = ((__pyx_v_state[14]) ^ (__pyx_v_state[2]));
+    (__pyx_v_state[14]) = (((__pyx_v_state[14]) << 8) | ((__pyx_v_state[14]) >> 24));
+
+    /* "nescient/crypto/chacha.pyx":78
+ *         state[10] = state[10] + state[14]; state[6] = state[6] ^ state[10]; state[6] = (state[6] << 12) | (state[6] >> 20)
+ *         state[2] = state[2] + state[6]; state[14] = state[14] ^ state[2]; state[14] = (state[14] << 8) | (state[14] >> 24)
+ *         state[10] = state[10] + state[14]; state[6] = state[6] ^ state[10]; state[6] = (state[6] << 7) | (state[6] >> 25)             # <<<<<<<<<<<<<<
+ *         # Quarter round 3, 7, 11, 15
+ *         state[3] = state[3] + state[7]; state[15] = state[15] ^ state[3]; state[15] = (state[15] << 16) | (state[15] >> 16)
+ */
+    (__pyx_v_state[10]) = ((__pyx_v_state[10]) + (__pyx_v_state[14]));
+    (__pyx_v_state[6]) = ((__pyx_v_state[6]) ^ (__pyx_v_state[10]));
+    (__pyx_v_state[6]) = (((__pyx_v_state[6]) << 7) | ((__pyx_v_state[6]) >> 25));
+
+    /* "nescient/crypto/chacha.pyx":80
+ *         state[10] = state[10] + state[14]; state[6] = state[6] ^ state[10]; state[6] = (state[6] << 7) | (state[6] >> 25)
+ *         # Quarter round 3, 7, 11, 15
+ *         state[3] = state[3] + state[7]; state[15] = state[15] ^ state[3]; state[15] = (state[15] << 16) | (state[15] >> 16)             # <<<<<<<<<<<<<<
+ *         state[11] = state[11] + state[15]; state[7] = state[7] ^ state[11]; state[7] = (state[7] << 12) | (state[7] >> 20)
+ *         state[3] = state[3] + state[7]; state[15] = state[15] ^ state[3]; state[15] = (state[15] << 8) | (state[15] >> 24)
+ */
+    (__pyx_v_state[3]) = ((__pyx_v_state[3]) + (__pyx_v_state[7]));
+    (__pyx_v_state[15]) = ((__pyx_v_state[15]) ^ (__pyx_v_state[3]));
+    (__pyx_v_state[15]) = (((__pyx_v_state[15]) << 16) | ((__pyx_v_state[15]) >> 16));
+
+    /* "nescient/crypto/chacha.pyx":81
+ *         # Quarter round 3, 7, 11, 15
+ *         state[3] = state[3] + state[7]; state[15] = state[15] ^ state[3]; state[15] = (state[15] << 16) | (state[15] >> 16)
+ *         state[11] = state[11] + state[15]; state[7] = state[7] ^ state[11]; state[7] = (state[7] << 12) | (state[7] >> 20)             # <<<<<<<<<<<<<<
+ *         state[3] = state[3] + state[7]; state[15] = state[15] ^ state[3]; state[15] = (state[15] << 8) | (state[15] >> 24)
+ *         state[11] = state[11] + state[15]; state[7] = state[7] ^ state[11]; state[7] = (state[7] << 7) | (state[7] >> 25)
+ */
+    (__pyx_v_state[11]) = ((__pyx_v_state[11]) + (__pyx_v_state[15]));
+    (__pyx_v_state[7]) = ((__pyx_v_state[7]) ^ (__pyx_v_state[11]));
+    (__pyx_v_state[7]) = (((__pyx_v_state[7]) << 12) | ((__pyx_v_state[7]) >> 20));
+
+    /* "nescient/crypto/chacha.pyx":82
+ *         state[3] = state[3] + state[7]; state[15] = state[15] ^ state[3]; state[15] = (state[15] << 16) | (state[15] >> 16)
+ *         state[11] = state[11] + state[15]; state[7] = state[7] ^ state[11]; state[7] = (state[7] << 12) | (state[7] >> 20)
+ *         state[3] = state[3] + state[7]; state[15] = state[15] ^ state[3]; state[15] = (state[15] << 8) | (state[15] >> 24)             # <<<<<<<<<<<<<<
+ *         state[11] = state[11] + state[15]; state[7] = state[7] ^ state[11]; state[7] = (state[7] << 7) | (state[7] >> 25)
+ *         # Quarter round 0, 5, 10, 15
+ */
+    (__pyx_v_state[3]) = ((__pyx_v_state[3]) + (__pyx_v_state[7]));
+    (__pyx_v_state[15]) = ((__pyx_v_state[15]) ^ (__pyx_v_state[3]));
+    (__pyx_v_state[15]) = (((__pyx_v_state[15]) << 8) | ((__pyx_v_state[15]) >> 24));
+
+    /* "nescient/crypto/chacha.pyx":83
+ *         state[11] = state[11] + state[15]; state[7] = state[7] ^ state[11]; state[7] = (state[7] << 12) | (state[7] >> 20)
+ *         state[3] = state[3] + state[7]; state[15] = state[15] ^ state[3]; state[15] = (state[15] << 8) | (state[15] >> 24)
+ *         state[11] = state[11] + state[15]; state[7] = state[7] ^ state[11]; state[7] = (state[7] << 7) | (state[7] >> 25)             # <<<<<<<<<<<<<<
+ *         # Quarter round 0, 5, 10, 15
+ *         state[0] = state[0] + state[5]; state[15] = state[15] ^ state[0]; state[15] = (state[15] << 16) | (state[15] >> 16)
+ */
+    (__pyx_v_state[11]) = ((__pyx_v_state[11]) + (__pyx_v_state[15]));
+    (__pyx_v_state[7]) = ((__pyx_v_state[7]) ^ (__pyx_v_state[11]));
+    (__pyx_v_state[7]) = (((__pyx_v_state[7]) << 7) | ((__pyx_v_state[7]) >> 25));
+
+    /* "nescient/crypto/chacha.pyx":85
+ *         state[11] = state[11] + state[15]; state[7] = state[7] ^ state[11]; state[7] = (state[7] << 7) | (state[7] >> 25)
+ *         # Quarter round 0, 5, 10, 15
+ *         state[0] = state[0] + state[5]; state[15] = state[15] ^ state[0]; state[15] = (state[15] << 16) | (state[15] >> 16)             # <<<<<<<<<<<<<<
+ *         state[10] = state[10] + state[15]; state[5] = state[5] ^ state[10]; state[5] = (state[5] << 12) | (state[5] >> 20)
+ *         state[0] = state[0] + state[5]; state[15] = state[15] ^ state[0]; state[15] = (state[15] << 8) | (state[15] >> 24)
+ */
+    (__pyx_v_state[0]) = ((__pyx_v_state[0]) + (__pyx_v_state[5]));
+    (__pyx_v_state[15]) = ((__pyx_v_state[15]) ^ (__pyx_v_state[0]));
+    (__pyx_v_state[15]) = (((__pyx_v_state[15]) << 16) | ((__pyx_v_state[15]) >> 16));
+
+    /* "nescient/crypto/chacha.pyx":86
+ *         # Quarter round 0, 5, 10, 15
+ *         state[0] = state[0] + state[5]; state[15] = state[15] ^ state[0]; state[15] = (state[15] << 16) | (state[15] >> 16)
+ *         state[10] = state[10] + state[15]; state[5] = state[5] ^ state[10]; state[5] = (state[5] << 12) | (state[5] >> 20)             # <<<<<<<<<<<<<<
+ *         state[0] = state[0] + state[5]; state[15] = state[15] ^ state[0]; state[15] = (state[15] << 8) | (state[15] >> 24)
+ *         state[10] = state[10] + state[15]; state[5] = state[5] ^ state[10]; state[5] = (state[5] << 7) | (state[5] >> 25)
+ */
+    (__pyx_v_state[10]) = ((__pyx_v_state[10]) + (__pyx_v_state[15]));
+    (__pyx_v_state[5]) = ((__pyx_v_state[5]) ^ (__pyx_v_state[10]));
+    (__pyx_v_state[5]) = (((__pyx_v_state[5]) << 12) | ((__pyx_v_state[5]) >> 20));
+
+    /* "nescient/crypto/chacha.pyx":87
+ *         state[0] = state[0] + state[5]; state[15] = state[15] ^ state[0]; state[15] = (state[15] << 16) | (state[15] >> 16)
+ *         state[10] = state[10] + state[15]; state[5] = state[5] ^ state[10]; state[5] = (state[5] << 12) | (state[5] >> 20)
+ *         state[0] = state[0] + state[5]; state[15] = state[15] ^ state[0]; state[15] = (state[15] << 8) | (state[15] >> 24)             # <<<<<<<<<<<<<<
+ *         state[10] = state[10] + state[15]; state[5] = state[5] ^ state[10]; state[5] = (state[5] << 7) | (state[5] >> 25)
+ *         # Quarter round 1, 6, 11, 12
+ */
+    (__pyx_v_state[0]) = ((__pyx_v_state[0]) + (__pyx_v_state[5]));
+    (__pyx_v_state[15]) = ((__pyx_v_state[15]) ^ (__pyx_v_state[0]));
+    (__pyx_v_state[15]) = (((__pyx_v_state[15]) << 8) | ((__pyx_v_state[15]) >> 24));
+
+    /* "nescient/crypto/chacha.pyx":88
+ *         state[10] = state[10] + state[15]; state[5] = state[5] ^ state[10]; state[5] = (state[5] << 12) | (state[5] >> 20)
+ *         state[0] = state[0] + state[5]; state[15] = state[15] ^ state[0]; state[15] = (state[15] << 8) | (state[15] >> 24)
+ *         state[10] = state[10] + state[15]; state[5] = state[5] ^ state[10]; state[5] = (state[5] << 7) | (state[5] >> 25)             # <<<<<<<<<<<<<<
+ *         # Quarter round 1, 6, 11, 12
+ *         state[1] = state[1] + state[6]; state[12] = state[12] ^ state[1]; state[12] = (state[12] << 16) | (state[12] >> 16)
+ */
+    (__pyx_v_state[10]) = ((__pyx_v_state[10]) + (__pyx_v_state[15]));
+    (__pyx_v_state[5]) = ((__pyx_v_state[5]) ^ (__pyx_v_state[10]));
+    (__pyx_v_state[5]) = (((__pyx_v_state[5]) << 7) | ((__pyx_v_state[5]) >> 25));
+
+    /* "nescient/crypto/chacha.pyx":90
+ *         state[10] = state[10] + state[15]; state[5] = state[5] ^ state[10]; state[5] = (state[5] << 7) | (state[5] >> 25)
+ *         # Quarter round 1, 6, 11, 12
+ *         state[1] = state[1] + state[6]; state[12] = state[12] ^ state[1]; state[12] = (state[12] << 16) | (state[12] >> 16)             # <<<<<<<<<<<<<<
+ *         state[11] = state[11] + state[12]; state[6] = state[6] ^ state[11]; state[6] = (state[6] << 12) | (state[6] >> 20)
+ *         state[1] = state[1] + state[6]; state[12] = state[12] ^ state[1]; state[12] = (state[12] << 8) | (state[12] >> 24)
+ */
+    (__pyx_v_state[1]) = ((__pyx_v_state[1]) + (__pyx_v_state[6]));
+    (__pyx_v_state[12]) = ((__pyx_v_state[12]) ^ (__pyx_v_state[1]));
+    (__pyx_v_state[12]) = (((__pyx_v_state[12]) << 16) | ((__pyx_v_state[12]) >> 16));
+
+    /* "nescient/crypto/chacha.pyx":91
+ *         # Quarter round 1, 6, 11, 12
+ *         state[1] = state[1] + state[6]; state[12] = state[12] ^ state[1]; state[12] = (state[12] << 16) | (state[12] >> 16)
+ *         state[11] = state[11] + state[12]; state[6] = state[6] ^ state[11]; state[6] = (state[6] << 12) | (state[6] >> 20)             # <<<<<<<<<<<<<<
+ *         state[1] = state[1] + state[6]; state[12] = state[12] ^ state[1]; state[12] = (state[12] << 8) | (state[12] >> 24)
+ *         state[11] = state[11] + state[12]; state[6] = state[6] ^ state[11]; state[6] = (state[6] << 7) | (state[6] >> 25)
+ */
+    (__pyx_v_state[11]) = ((__pyx_v_state[11]) + (__pyx_v_state[12]));
+    (__pyx_v_state[6]) = ((__pyx_v_state[6]) ^ (__pyx_v_state[11]));
+    (__pyx_v_state[6]) = (((__pyx_v_state[6]) << 12) | ((__pyx_v_state[6]) >> 20));
+
+    /* "nescient/crypto/chacha.pyx":92
+ *         state[1] = state[1] + state[6]; state[12] = state[12] ^ state[1]; state[12] = (state[12] << 16) | (state[12] >> 16)
+ *         state[11] = state[11] + state[12]; state[6] = state[6] ^ state[11]; state[6] = (state[6] << 12) | (state[6] >> 20)
+ *         state[1] = state[1] + state[6]; state[12] = state[12] ^ state[1]; state[12] = (state[12] << 8) | (state[12] >> 24)             # <<<<<<<<<<<<<<
+ *         state[11] = state[11] + state[12]; state[6] = state[6] ^ state[11]; state[6] = (state[6] << 7) | (state[6] >> 25)
+ *         # Quarter round 2, 7, 8, 13
+ */
+    (__pyx_v_state[1]) = ((__pyx_v_state[1]) + (__pyx_v_state[6]));
+    (__pyx_v_state[12]) = ((__pyx_v_state[12]) ^ (__pyx_v_state[1]));
+    (__pyx_v_state[12]) = (((__pyx_v_state[12]) << 8) | ((__pyx_v_state[12]) >> 24));
+
+    /* "nescient/crypto/chacha.pyx":93
+ *         state[11] = state[11] + state[12]; state[6] = state[6] ^ state[11]; state[6] = (state[6] << 12) | (state[6] >> 20)
+ *         state[1] = state[1] + state[6]; state[12] = state[12] ^ state[1]; state[12] = (state[12] << 8) | (state[12] >> 24)
+ *         state[11] = state[11] + state[12]; state[6] = state[6] ^ state[11]; state[6] = (state[6] << 7) | (state[6] >> 25)             # <<<<<<<<<<<<<<
+ *         # Quarter round 2, 7, 8, 13
+ *         state[2] = state[2] + state[7]; state[13] = state[13] ^ state[2]; state[13] = (state[13] << 16) | (state[13] >> 16)
+ */
+    (__pyx_v_state[11]) = ((__pyx_v_state[11]) + (__pyx_v_state[12]));
+    (__pyx_v_state[6]) = ((__pyx_v_state[6]) ^ (__pyx_v_state[11]));
+    (__pyx_v_state[6]) = (((__pyx_v_state[6]) << 7) | ((__pyx_v_state[6]) >> 25));
+
+    /* "nescient/crypto/chacha.pyx":95
+ *         state[11] = state[11] + state[12]; state[6] = state[6] ^ state[11]; state[6] = (state[6] << 7) | (state[6] >> 25)
+ *         # Quarter round 2, 7, 8, 13
+ *         state[2] = state[2] + state[7]; state[13] = state[13] ^ state[2]; state[13] = (state[13] << 16) | (state[13] >> 16)             # <<<<<<<<<<<<<<
+ *         state[8] = state[8] + state[13]; state[7] = state[7] ^ state[8]; state[7] = (state[7] << 12) | (state[7] >> 20)
+ *         state[2] = state[2] + state[7]; state[13] = state[13] ^ state[2]; state[13] = (state[13] << 8) | (state[13] >> 24)
+ */
+    (__pyx_v_state[2]) = ((__pyx_v_state[2]) + (__pyx_v_state[7]));
+    (__pyx_v_state[13]) = ((__pyx_v_state[13]) ^ (__pyx_v_state[2]));
+    (__pyx_v_state[13]) = (((__pyx_v_state[13]) << 16) | ((__pyx_v_state[13]) >> 16));
+
+    /* "nescient/crypto/chacha.pyx":96
+ *         # Quarter round 2, 7, 8, 13
+ *         state[2] = state[2] + state[7]; state[13] = state[13] ^ state[2]; state[13] = (state[13] << 16) | (state[13] >> 16)
+ *         state[8] = state[8] + state[13]; state[7] = state[7] ^ state[8]; state[7] = (state[7] << 12) | (state[7] >> 20)             # <<<<<<<<<<<<<<
+ *         state[2] = state[2] + state[7]; state[13] = state[13] ^ state[2]; state[13] = (state[13] << 8) | (state[13] >> 24)
+ *         state[8] = state[8] + state[13]; state[7] = state[7] ^ state[8]; state[7] = (state[7] << 7) | (state[7] >> 25)
+ */
+    (__pyx_v_state[8]) = ((__pyx_v_state[8]) + (__pyx_v_state[13]));
+    (__pyx_v_state[7]) = ((__pyx_v_state[7]) ^ (__pyx_v_state[8]));
+    (__pyx_v_state[7]) = (((__pyx_v_state[7]) << 12) | ((__pyx_v_state[7]) >> 20));
+
+    /* "nescient/crypto/chacha.pyx":97
+ *         state[2] = state[2] + state[7]; state[13] = state[13] ^ state[2]; state[13] = (state[13] << 16) | (state[13] >> 16)
+ *         state[8] = state[8] + state[13]; state[7] = state[7] ^ state[8]; state[7] = (state[7] << 12) | (state[7] >> 20)
+ *         state[2] = state[2] + state[7]; state[13] = state[13] ^ state[2]; state[13] = (state[13] << 8) | (state[13] >> 24)             # <<<<<<<<<<<<<<
+ *         state[8] = state[8] + state[13]; state[7] = state[7] ^ state[8]; state[7] = (state[7] << 7) | (state[7] >> 25)
+ *         # Quarter round 3, 4, 9, 14
+ */
+    (__pyx_v_state[2]) = ((__pyx_v_state[2]) + (__pyx_v_state[7]));
+    (__pyx_v_state[13]) = ((__pyx_v_state[13]) ^ (__pyx_v_state[2]));
+    (__pyx_v_state[13]) = (((__pyx_v_state[13]) << 8) | ((__pyx_v_state[13]) >> 24));
+
+    /* "nescient/crypto/chacha.pyx":98
+ *         state[8] = state[8] + state[13]; state[7] = state[7] ^ state[8]; state[7] = (state[7] << 12) | (state[7] >> 20)
+ *         state[2] = state[2] + state[7]; state[13] = state[13] ^ state[2]; state[13] = (state[13] << 8) | (state[13] >> 24)
+ *         state[8] = state[8] + state[13]; state[7] = state[7] ^ state[8]; state[7] = (state[7] << 7) | (state[7] >> 25)             # <<<<<<<<<<<<<<
+ *         # Quarter round 3, 4, 9, 14
+ *         state[3] = state[3] + state[4]; state[14] = state[14] ^ state[3]; state[14] = (state[14] << 16) | (state[14] >> 16)
+ */
+    (__pyx_v_state[8]) = ((__pyx_v_state[8]) + (__pyx_v_state[13]));
+    (__pyx_v_state[7]) = ((__pyx_v_state[7]) ^ (__pyx_v_state[8]));
+    (__pyx_v_state[7]) = (((__pyx_v_state[7]) << 7) | ((__pyx_v_state[7]) >> 25));
+
+    /* "nescient/crypto/chacha.pyx":100
+ *         state[8] = state[8] + state[13]; state[7] = state[7] ^ state[8]; state[7] = (state[7] << 7) | (state[7] >> 25)
+ *         # Quarter round 3, 4, 9, 14
+ *         state[3] = state[3] + state[4]; state[14] = state[14] ^ state[3]; state[14] = (state[14] << 16) | (state[14] >> 16)             # <<<<<<<<<<<<<<
+ *         state[9] = state[9] + state[14]; state[4] = state[4] ^ state[9]; state[4] = (state[4] << 12) | (state[4] >> 20)
+ *         state[3] = state[3] + state[4]; state[14] = state[14] ^ state[3]; state[14] = (state[14] << 8) | (state[14] >> 24)
+ */
+    (__pyx_v_state[3]) = ((__pyx_v_state[3]) + (__pyx_v_state[4]));
+    (__pyx_v_state[14]) = ((__pyx_v_state[14]) ^ (__pyx_v_state[3]));
+    (__pyx_v_state[14]) = (((__pyx_v_state[14]) << 16) | ((__pyx_v_state[14]) >> 16));
+
+    /* "nescient/crypto/chacha.pyx":101
+ *         # Quarter round 3, 4, 9, 14
+ *         state[3] = state[3] + state[4]; state[14] = state[14] ^ state[3]; state[14] = (state[14] << 16) | (state[14] >> 16)
+ *         state[9] = state[9] + state[14]; state[4] = state[4] ^ state[9]; state[4] = (state[4] << 12) | (state[4] >> 20)             # <<<<<<<<<<<<<<
+ *         state[3] = state[3] + state[4]; state[14] = state[14] ^ state[3]; state[14] = (state[14] << 8) | (state[14] >> 24)
+ *         state[9] = state[9] + state[14]; state[4] = state[4] ^ state[9]; state[4] = (state[4] << 7) | (state[4] >> 25)
+ */
+    (__pyx_v_state[9]) = ((__pyx_v_state[9]) + (__pyx_v_state[14]));
+    (__pyx_v_state[4]) = ((__pyx_v_state[4]) ^ (__pyx_v_state[9]));
+    (__pyx_v_state[4]) = (((__pyx_v_state[4]) << 12) | ((__pyx_v_state[4]) >> 20));
+
+    /* "nescient/crypto/chacha.pyx":102
+ *         state[3] = state[3] + state[4]; state[14] = state[14] ^ state[3]; state[14] = (state[14] << 16) | (state[14] >> 16)
+ *         state[9] = state[9] + state[14]; state[4] = state[4] ^ state[9]; state[4] = (state[4] << 12) | (state[4] >> 20)
+ *         state[3] = state[3] + state[4]; state[14] = state[14] ^ state[3]; state[14] = (state[14] << 8) | (state[14] >> 24)             # <<<<<<<<<<<<<<
+ *         state[9] = state[9] + state[14]; state[4] = state[4] ^ state[9]; state[4] = (state[4] << 7) | (state[4] >> 25)
+ *     # Add the original state with the result
+ */
+    (__pyx_v_state[3]) = ((__pyx_v_state[3]) + (__pyx_v_state[4]));
+    (__pyx_v_state[14]) = ((__pyx_v_state[14]) ^ (__pyx_v_state[3]));
+    (__pyx_v_state[14]) = (((__pyx_v_state[14]) << 8) | ((__pyx_v_state[14]) >> 24));
+
+    /* "nescient/crypto/chacha.pyx":103
+ *         state[9] = state[9] + state[14]; state[4] = state[4] ^ state[9]; state[4] = (state[4] << 12) | (state[4] >> 20)
+ *         state[3] = state[3] + state[4]; state[14] = state[14] ^ state[3]; state[14] = (state[14] << 8) | (state[14] >> 24)
+ *         state[9] = state[9] + state[14]; state[4] = state[4] ^ state[9]; state[4] = (state[4] << 7) | (state[4] >> 25)             # <<<<<<<<<<<<<<
  *     # Add the original state with the result
  *     for i in range(16):
  */
-    __pyx_t_3 = __pyx_f_8nescient_6crypto_6chacha_quarter_round(__pyx_v_state, 3, 4, 9, 14); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 75, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    (__pyx_v_state[9]) = ((__pyx_v_state[9]) + (__pyx_v_state[14]));
+    (__pyx_v_state[4]) = ((__pyx_v_state[4]) ^ (__pyx_v_state[9]));
+    (__pyx_v_state[4]) = (((__pyx_v_state[4]) << 7) | ((__pyx_v_state[4]) >> 25));
   }
 
-  /* "nescient/crypto/chacha.pyx":77
- *         quarter_round(state, 3, 4, 9, 14)
+  /* "nescient/crypto/chacha.pyx":105
+ *         state[9] = state[9] + state[14]; state[4] = state[4] ^ state[9]; state[4] = (state[4] << 7) | (state[4] >> 25)
  *     # Add the original state with the result
  *     for i in range(16):             # <<<<<<<<<<<<<<
  *         state[i] += start_state[i]
@@ -2087,18 +2312,18 @@ static unsigned char *__pyx_f_8nescient_6crypto_6chacha_chacha20(unsigned int *_
   for (__pyx_t_2 = 0; __pyx_t_2 < 16; __pyx_t_2+=1) {
     __pyx_v_i = __pyx_t_2;
 
-    /* "nescient/crypto/chacha.pyx":78
+    /* "nescient/crypto/chacha.pyx":106
  *     # Add the original state with the result
  *     for i in range(16):
  *         state[i] += start_state[i]             # <<<<<<<<<<<<<<
  *     # Serialize into bytes
  *     return words_to_bytes(state, 16)
  */
-    __pyx_t_4 = __pyx_v_i;
-    (__pyx_v_state[__pyx_t_4]) = ((__pyx_v_state[__pyx_t_4]) + (__pyx_v_start_state[__pyx_v_i]));
+    __pyx_t_3 = __pyx_v_i;
+    (__pyx_v_state[__pyx_t_3]) = ((__pyx_v_state[__pyx_t_3]) + (__pyx_v_start_state[__pyx_v_i]));
   }
 
-  /* "nescient/crypto/chacha.pyx":80
+  /* "nescient/crypto/chacha.pyx":108
  *         state[i] += start_state[i]
  *     # Serialize into bytes
  *     return words_to_bytes(state, 16)             # <<<<<<<<<<<<<<
@@ -2108,7 +2333,7 @@ static unsigned char *__pyx_f_8nescient_6crypto_6chacha_chacha20(unsigned int *_
   __pyx_r = __pyx_f_8nescient_6crypto_6chacha_words_to_bytes(__pyx_v_state, 16);
   goto __pyx_L0;
 
-  /* "nescient/crypto/chacha.pyx":52
+  /* "nescient/crypto/chacha.pyx":48
  * 
  * # Generates 64 keystream bytes from a 256-bit key, a 96-bit nonce, and a 32-bit counter
  * cdef unsigned char * chacha20(unsigned int * key, unsigned int * nonce, unsigned int count):             # <<<<<<<<<<<<<<
@@ -2117,16 +2342,12 @@ static unsigned char *__pyx_f_8nescient_6crypto_6chacha_chacha20(unsigned int *_
  */
 
   /* function exit code */
-  __pyx_L1_error:;
-  __Pyx_XDECREF(__pyx_t_3);
-  __Pyx_WriteUnraisable("nescient.crypto.chacha.chacha20", __pyx_clineno, __pyx_lineno, __pyx_filename, 1, 0);
-  __pyx_r = 0;
   __pyx_L0:;
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-/* "nescient/crypto/chacha.pyx":95
+/* "nescient/crypto/chacha.pyx":123
  *     auth = ['sha']
  * 
  *     def __init__(self, key):             # <<<<<<<<<<<<<<
@@ -2166,11 +2387,11 @@ static PyObject *__pyx_pw_8nescient_6crypto_6chacha_13ChaChaCrypter_1__init__(Py
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_key)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__init__", 1, 2, 2, 1); __PYX_ERR(0, 95, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__init__", 1, 2, 2, 1); __PYX_ERR(0, 123, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(0, 95, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(0, 123, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -2183,7 +2404,7 @@ static PyObject *__pyx_pw_8nescient_6crypto_6chacha_13ChaChaCrypter_1__init__(Py
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__init__", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 95, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__init__", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 123, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("nescient.crypto.chacha.ChaChaCrypter.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -2203,7 +2424,7 @@ static PyObject *__pyx_pf_8nescient_6crypto_6chacha_13ChaChaCrypter___init__(CYT
   PyObject *__pyx_t_2 = NULL;
   __Pyx_RefNannySetupContext("__init__", 0);
 
-  /* "nescient/crypto/chacha.pyx":96
+  /* "nescient/crypto/chacha.pyx":124
  * 
  *     def __init__(self, key):
  *         assert len(key) == 32             # <<<<<<<<<<<<<<
@@ -2212,39 +2433,39 @@ static PyObject *__pyx_pf_8nescient_6crypto_6chacha_13ChaChaCrypter___init__(CYT
  */
   #ifndef CYTHON_WITHOUT_ASSERTIONS
   if (unlikely(!Py_OptimizeFlag)) {
-    __pyx_t_1 = PyObject_Length(__pyx_v_key); if (unlikely(__pyx_t_1 == ((Py_ssize_t)-1))) __PYX_ERR(0, 96, __pyx_L1_error)
+    __pyx_t_1 = PyObject_Length(__pyx_v_key); if (unlikely(__pyx_t_1 == ((Py_ssize_t)-1))) __PYX_ERR(0, 124, __pyx_L1_error)
     if (unlikely(!((__pyx_t_1 == 32) != 0))) {
       PyErr_SetNone(PyExc_AssertionError);
-      __PYX_ERR(0, 96, __pyx_L1_error)
+      __PYX_ERR(0, 124, __pyx_L1_error)
     }
   }
   #endif
 
-  /* "nescient/crypto/chacha.pyx":97
+  /* "nescient/crypto/chacha.pyx":125
  *     def __init__(self, key):
  *         assert len(key) == 32
  *         self.key = key[:]             # <<<<<<<<<<<<<<
  *         self.chacha_decrypt = self.chacha_encrypt
  * 
  */
-  __pyx_t_2 = __Pyx_PyObject_GetSlice(__pyx_v_key, 0, 0, NULL, NULL, &__pyx_slice__2, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 97, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetSlice(__pyx_v_key, 0, 0, NULL, NULL, &__pyx_slice__2, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 125, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_key, __pyx_t_2) < 0) __PYX_ERR(0, 97, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_key, __pyx_t_2) < 0) __PYX_ERR(0, 125, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "nescient/crypto/chacha.pyx":98
+  /* "nescient/crypto/chacha.pyx":126
  *         assert len(key) == 32
  *         self.key = key[:]
  *         self.chacha_decrypt = self.chacha_encrypt             # <<<<<<<<<<<<<<
  * 
  *     # Encrypt or decrypt arbitrary data with the given key and nonce. Returns the nonce used.
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_chacha_encrypt); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 98, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_chacha_encrypt); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 126, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_chacha_decrypt, __pyx_t_2) < 0) __PYX_ERR(0, 98, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_chacha_decrypt, __pyx_t_2) < 0) __PYX_ERR(0, 126, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "nescient/crypto/chacha.pyx":95
+  /* "nescient/crypto/chacha.pyx":123
  *     auth = ['sha']
  * 
  *     def __init__(self, key):             # <<<<<<<<<<<<<<
@@ -2265,7 +2486,7 @@ static PyObject *__pyx_pf_8nescient_6crypto_6chacha_13ChaChaCrypter___init__(CYT
   return __pyx_r;
 }
 
-/* "nescient/crypto/chacha.pyx":102
+/* "nescient/crypto/chacha.pyx":130
  *     # Encrypt or decrypt arbitrary data with the given key and nonce. Returns the nonce used.
  *     # Because this is a stream cipher, the encrypt and decrypt functions are the same.
  *     def chacha_encrypt(self, data, nonce=None, count=1):             # <<<<<<<<<<<<<<
@@ -2313,7 +2534,7 @@ static PyObject *__pyx_pw_8nescient_6crypto_6chacha_13ChaChaCrypter_3chacha_encr
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_data)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("chacha_encrypt", 0, 2, 4, 1); __PYX_ERR(0, 102, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("chacha_encrypt", 0, 2, 4, 1); __PYX_ERR(0, 130, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
@@ -2329,7 +2550,7 @@ static PyObject *__pyx_pw_8nescient_6crypto_6chacha_13ChaChaCrypter_3chacha_encr
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "chacha_encrypt") < 0)) __PYX_ERR(0, 102, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "chacha_encrypt") < 0)) __PYX_ERR(0, 130, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -2350,7 +2571,7 @@ static PyObject *__pyx_pw_8nescient_6crypto_6chacha_13ChaChaCrypter_3chacha_encr
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("chacha_encrypt", 0, 2, 4, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 102, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("chacha_encrypt", 0, 2, 4, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 130, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("nescient.crypto.chacha.ChaChaCrypter.chacha_encrypt", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -2390,7 +2611,7 @@ static PyObject *__pyx_pf_8nescient_6crypto_6chacha_13ChaChaCrypter_2chacha_encr
   __Pyx_RefNannySetupContext("chacha_encrypt", 0);
   __Pyx_INCREF(__pyx_v_nonce);
 
-  /* "nescient/crypto/chacha.pyx":103
+  /* "nescient/crypto/chacha.pyx":131
  *     # Because this is a stream cipher, the encrypt and decrypt functions are the same.
  *     def chacha_encrypt(self, data, nonce=None, count=1):
  *         if nonce is None:  # Generate random nonce if unspecified             # <<<<<<<<<<<<<<
@@ -2401,29 +2622,29 @@ static PyObject *__pyx_pf_8nescient_6crypto_6chacha_13ChaChaCrypter_2chacha_encr
   __pyx_t_2 = (__pyx_t_1 != 0);
   if (__pyx_t_2) {
 
-    /* "nescient/crypto/chacha.pyx":104
+    /* "nescient/crypto/chacha.pyx":132
  *     def chacha_encrypt(self, data, nonce=None, count=1):
  *         if nonce is None:  # Generate random nonce if unspecified
  *             nonce = int.from_bytes(get_random_bytes(12), byteorder='little')             # <<<<<<<<<<<<<<
  *         # Convert key from bytes to little-endian words
  *         cdef unsigned int * key_w = bytes_to_words(self.key, 32)
  */
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(((PyObject *)(&PyInt_Type)), __pyx_n_s_from_bytes); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 104, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(((PyObject *)(&PyInt_Type)), __pyx_n_s_from_bytes); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 132, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_get_random_bytes); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 104, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_get_random_bytes); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 132, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_tuple__3, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 104, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_tuple__3, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 132, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 104, __pyx_L1_error)
+    __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 132, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_GIVEREF(__pyx_t_5);
     PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_5);
     __pyx_t_5 = 0;
-    __pyx_t_5 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 104, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 132, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_byteorder, __pyx_n_s_little) < 0) __PYX_ERR(0, 104, __pyx_L1_error)
-    __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_4, __pyx_t_5); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 104, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_byteorder, __pyx_n_s_little) < 0) __PYX_ERR(0, 132, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_4, __pyx_t_5); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 132, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
@@ -2431,7 +2652,7 @@ static PyObject *__pyx_pf_8nescient_6crypto_6chacha_13ChaChaCrypter_2chacha_encr
     __Pyx_DECREF_SET(__pyx_v_nonce, __pyx_t_6);
     __pyx_t_6 = 0;
 
-    /* "nescient/crypto/chacha.pyx":103
+    /* "nescient/crypto/chacha.pyx":131
  *     # Because this is a stream cipher, the encrypt and decrypt functions are the same.
  *     def chacha_encrypt(self, data, nonce=None, count=1):
  *         if nonce is None:  # Generate random nonce if unspecified             # <<<<<<<<<<<<<<
@@ -2440,70 +2661,70 @@ static PyObject *__pyx_pf_8nescient_6crypto_6chacha_13ChaChaCrypter_2chacha_encr
  */
   }
 
-  /* "nescient/crypto/chacha.pyx":106
+  /* "nescient/crypto/chacha.pyx":134
  *             nonce = int.from_bytes(get_random_bytes(12), byteorder='little')
  *         # Convert key from bytes to little-endian words
  *         cdef unsigned int * key_w = bytes_to_words(self.key, 32)             # <<<<<<<<<<<<<<
  *         # Convert the nonce into an array of 32-bit words
  *         cdef unsigned int * nonce_w = bytes_to_words(nonce.to_bytes(12, byteorder='little'), 12)
  */
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_key); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 106, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_key); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 134, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_7 = __Pyx_PyObject_AsWritableUString(__pyx_t_6); if (unlikely((!__pyx_t_7) && PyErr_Occurred())) __PYX_ERR(0, 106, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_AsWritableUString(__pyx_t_6); if (unlikely((!__pyx_t_7) && PyErr_Occurred())) __PYX_ERR(0, 134, __pyx_L1_error)
   __pyx_v_key_w = __pyx_f_8nescient_6crypto_6chacha_bytes_to_words(__pyx_t_7, 32);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-  /* "nescient/crypto/chacha.pyx":108
+  /* "nescient/crypto/chacha.pyx":136
  *         cdef unsigned int * key_w = bytes_to_words(self.key, 32)
  *         # Convert the nonce into an array of 32-bit words
  *         cdef unsigned int * nonce_w = bytes_to_words(nonce.to_bytes(12, byteorder='little'), 12)             # <<<<<<<<<<<<<<
  *         # Initialize counter and working variables
  *         cdef unsigned int counter = count
  */
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_nonce, __pyx_n_s_to_bytes); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 108, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_nonce, __pyx_n_s_to_bytes); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 136, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_5 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 108, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 136, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_byteorder, __pyx_n_s_little) < 0) __PYX_ERR(0, 108, __pyx_L1_error)
-  __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__4, __pyx_t_5); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 108, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_byteorder, __pyx_n_s_little) < 0) __PYX_ERR(0, 136, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__4, __pyx_t_5); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 136, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_7 = __Pyx_PyObject_AsWritableUString(__pyx_t_4); if (unlikely((!__pyx_t_7) && PyErr_Occurred())) __PYX_ERR(0, 108, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_AsWritableUString(__pyx_t_4); if (unlikely((!__pyx_t_7) && PyErr_Occurred())) __PYX_ERR(0, 136, __pyx_L1_error)
   __pyx_v_nonce_w = __pyx_f_8nescient_6crypto_6chacha_bytes_to_words(__pyx_t_7, 12);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "nescient/crypto/chacha.pyx":110
+  /* "nescient/crypto/chacha.pyx":138
  *         cdef unsigned int * nonce_w = bytes_to_words(nonce.to_bytes(12, byteorder='little'), 12)
  *         # Initialize counter and working variables
  *         cdef unsigned int counter = count             # <<<<<<<<<<<<<<
  *         cdef unsigned int n_blocks = <unsigned int>len(data)//64
  *         cdef unsigned char * key_stream
  */
-  __pyx_t_8 = __Pyx_PyInt_As_unsigned_int(__pyx_v_count); if (unlikely((__pyx_t_8 == (unsigned int)-1) && PyErr_Occurred())) __PYX_ERR(0, 110, __pyx_L1_error)
+  __pyx_t_8 = __Pyx_PyInt_As_unsigned_int(__pyx_v_count); if (unlikely((__pyx_t_8 == (unsigned int)-1) && PyErr_Occurred())) __PYX_ERR(0, 138, __pyx_L1_error)
   __pyx_v_counter = __pyx_t_8;
 
-  /* "nescient/crypto/chacha.pyx":111
+  /* "nescient/crypto/chacha.pyx":139
  *         # Initialize counter and working variables
  *         cdef unsigned int counter = count
  *         cdef unsigned int n_blocks = <unsigned int>len(data)//64             # <<<<<<<<<<<<<<
  *         cdef unsigned char * key_stream
  *         cdef unsigned char * buffer = data
  */
-  __pyx_t_9 = PyObject_Length(__pyx_v_data); if (unlikely(__pyx_t_9 == ((Py_ssize_t)-1))) __PYX_ERR(0, 111, __pyx_L1_error)
+  __pyx_t_9 = PyObject_Length(__pyx_v_data); if (unlikely(__pyx_t_9 == ((Py_ssize_t)-1))) __PYX_ERR(0, 139, __pyx_L1_error)
   __pyx_v_n_blocks = __Pyx_div_long(((unsigned int)__pyx_t_9), 64);
 
-  /* "nescient/crypto/chacha.pyx":113
+  /* "nescient/crypto/chacha.pyx":141
  *         cdef unsigned int n_blocks = <unsigned int>len(data)//64
  *         cdef unsigned char * key_stream
  *         cdef unsigned char * buffer = data             # <<<<<<<<<<<<<<
  *         cdef unsigned int i
  *         cdef unsigned char j
  */
-  __pyx_t_7 = __Pyx_PyObject_AsWritableUString(__pyx_v_data); if (unlikely((!__pyx_t_7) && PyErr_Occurred())) __PYX_ERR(0, 113, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_AsWritableUString(__pyx_v_data); if (unlikely((!__pyx_t_7) && PyErr_Occurred())) __PYX_ERR(0, 141, __pyx_L1_error)
   __pyx_v_buffer = __pyx_t_7;
 
-  /* "nescient/crypto/chacha.pyx":116
+  /* "nescient/crypto/chacha.pyx":144
  *         cdef unsigned int i
  *         cdef unsigned char j
  *         for i in range(n_blocks):             # <<<<<<<<<<<<<<
@@ -2514,7 +2735,7 @@ static PyObject *__pyx_pf_8nescient_6crypto_6chacha_13ChaChaCrypter_2chacha_encr
   for (__pyx_t_10 = 0; __pyx_t_10 < __pyx_t_8; __pyx_t_10+=1) {
     __pyx_v_i = __pyx_t_10;
 
-    /* "nescient/crypto/chacha.pyx":117
+    /* "nescient/crypto/chacha.pyx":145
  *         cdef unsigned char j
  *         for i in range(n_blocks):
  *             key_stream = chacha20(key_w, nonce_w, counter+i)             # <<<<<<<<<<<<<<
@@ -2523,7 +2744,7 @@ static PyObject *__pyx_pf_8nescient_6crypto_6chacha_13ChaChaCrypter_2chacha_encr
  */
     __pyx_v_key_stream = __pyx_f_8nescient_6crypto_6chacha_chacha20(__pyx_v_key_w, __pyx_v_nonce_w, (__pyx_v_counter + __pyx_v_i));
 
-    /* "nescient/crypto/chacha.pyx":118
+    /* "nescient/crypto/chacha.pyx":146
  *         for i in range(n_blocks):
  *             key_stream = chacha20(key_w, nonce_w, counter+i)
  *             for j in range(64):             # <<<<<<<<<<<<<<
@@ -2533,7 +2754,7 @@ static PyObject *__pyx_pf_8nescient_6crypto_6chacha_13ChaChaCrypter_2chacha_encr
     for (__pyx_t_11 = 0; __pyx_t_11 < 64; __pyx_t_11+=1) {
       __pyx_v_j = __pyx_t_11;
 
-      /* "nescient/crypto/chacha.pyx":119
+      /* "nescient/crypto/chacha.pyx":147
  *             key_stream = chacha20(key_w, nonce_w, counter+i)
  *             for j in range(64):
  *                 buffer[j] ^= key_stream[j]             # <<<<<<<<<<<<<<
@@ -2544,7 +2765,7 @@ static PyObject *__pyx_pf_8nescient_6crypto_6chacha_13ChaChaCrypter_2chacha_encr
       (__pyx_v_buffer[__pyx_t_12]) = ((__pyx_v_buffer[__pyx_t_12]) ^ (__pyx_v_key_stream[__pyx_v_j]));
     }
 
-    /* "nescient/crypto/chacha.pyx":120
+    /* "nescient/crypto/chacha.pyx":148
  *             for j in range(64):
  *                 buffer[j] ^= key_stream[j]
  *             buffer += 64             # <<<<<<<<<<<<<<
@@ -2554,7 +2775,7 @@ static PyObject *__pyx_pf_8nescient_6crypto_6chacha_13ChaChaCrypter_2chacha_encr
     __pyx_v_buffer = (__pyx_v_buffer + 64);
   }
 
-  /* "nescient/crypto/chacha.pyx":121
+  /* "nescient/crypto/chacha.pyx":149
  *                 buffer[j] ^= key_stream[j]
  *             buffer += 64
  *         i = n_blocks             # <<<<<<<<<<<<<<
@@ -2563,18 +2784,18 @@ static PyObject *__pyx_pf_8nescient_6crypto_6chacha_13ChaChaCrypter_2chacha_encr
  */
   __pyx_v_i = __pyx_v_n_blocks;
 
-  /* "nescient/crypto/chacha.pyx":122
+  /* "nescient/crypto/chacha.pyx":150
  *             buffer += 64
  *         i = n_blocks
  *         if len(data) % 64 != 0:             # <<<<<<<<<<<<<<
  *             key_stream = chacha20(key_w, nonce_w, counter+i)
  *             for j in range(len(data) % 64):
  */
-  __pyx_t_9 = PyObject_Length(__pyx_v_data); if (unlikely(__pyx_t_9 == ((Py_ssize_t)-1))) __PYX_ERR(0, 122, __pyx_L1_error)
+  __pyx_t_9 = PyObject_Length(__pyx_v_data); if (unlikely(__pyx_t_9 == ((Py_ssize_t)-1))) __PYX_ERR(0, 150, __pyx_L1_error)
   __pyx_t_2 = ((__Pyx_mod_Py_ssize_t(__pyx_t_9, 64) != 0) != 0);
   if (__pyx_t_2) {
 
-    /* "nescient/crypto/chacha.pyx":123
+    /* "nescient/crypto/chacha.pyx":151
  *         i = n_blocks
  *         if len(data) % 64 != 0:
  *             key_stream = chacha20(key_w, nonce_w, counter+i)             # <<<<<<<<<<<<<<
@@ -2583,19 +2804,19 @@ static PyObject *__pyx_pf_8nescient_6crypto_6chacha_13ChaChaCrypter_2chacha_encr
  */
     __pyx_v_key_stream = __pyx_f_8nescient_6crypto_6chacha_chacha20(__pyx_v_key_w, __pyx_v_nonce_w, (__pyx_v_counter + __pyx_v_i));
 
-    /* "nescient/crypto/chacha.pyx":124
+    /* "nescient/crypto/chacha.pyx":152
  *         if len(data) % 64 != 0:
  *             key_stream = chacha20(key_w, nonce_w, counter+i)
  *             for j in range(len(data) % 64):             # <<<<<<<<<<<<<<
  *                 buffer[j] ^= key_stream[j]
  *         return nonce
  */
-    __pyx_t_9 = PyObject_Length(__pyx_v_data); if (unlikely(__pyx_t_9 == ((Py_ssize_t)-1))) __PYX_ERR(0, 124, __pyx_L1_error)
+    __pyx_t_9 = PyObject_Length(__pyx_v_data); if (unlikely(__pyx_t_9 == ((Py_ssize_t)-1))) __PYX_ERR(0, 152, __pyx_L1_error)
     __pyx_t_13 = __Pyx_mod_Py_ssize_t(__pyx_t_9, 64);
     for (__pyx_t_11 = 0; __pyx_t_11 < __pyx_t_13; __pyx_t_11+=1) {
       __pyx_v_j = __pyx_t_11;
 
-      /* "nescient/crypto/chacha.pyx":125
+      /* "nescient/crypto/chacha.pyx":153
  *             key_stream = chacha20(key_w, nonce_w, counter+i)
  *             for j in range(len(data) % 64):
  *                 buffer[j] ^= key_stream[j]             # <<<<<<<<<<<<<<
@@ -2606,7 +2827,7 @@ static PyObject *__pyx_pf_8nescient_6crypto_6chacha_13ChaChaCrypter_2chacha_encr
       (__pyx_v_buffer[__pyx_t_12]) = ((__pyx_v_buffer[__pyx_t_12]) ^ (__pyx_v_key_stream[__pyx_v_j]));
     }
 
-    /* "nescient/crypto/chacha.pyx":122
+    /* "nescient/crypto/chacha.pyx":150
  *             buffer += 64
  *         i = n_blocks
  *         if len(data) % 64 != 0:             # <<<<<<<<<<<<<<
@@ -2615,7 +2836,7 @@ static PyObject *__pyx_pf_8nescient_6crypto_6chacha_13ChaChaCrypter_2chacha_encr
  */
   }
 
-  /* "nescient/crypto/chacha.pyx":126
+  /* "nescient/crypto/chacha.pyx":154
  *             for j in range(len(data) % 64):
  *                 buffer[j] ^= key_stream[j]
  *         return nonce             # <<<<<<<<<<<<<<
@@ -2627,7 +2848,7 @@ static PyObject *__pyx_pf_8nescient_6crypto_6chacha_13ChaChaCrypter_2chacha_encr
   __pyx_r = __pyx_v_nonce;
   goto __pyx_L0;
 
-  /* "nescient/crypto/chacha.pyx":102
+  /* "nescient/crypto/chacha.pyx":130
  *     # Encrypt or decrypt arbitrary data with the given key and nonce. Returns the nonce used.
  *     # Because this is a stream cipher, the encrypt and decrypt functions are the same.
  *     def chacha_encrypt(self, data, nonce=None, count=1):             # <<<<<<<<<<<<<<
@@ -2962,36 +3183,36 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "nescient/crypto/chacha.pyx":97
+  /* "nescient/crypto/chacha.pyx":125
  *     def __init__(self, key):
  *         assert len(key) == 32
  *         self.key = key[:]             # <<<<<<<<<<<<<<
  *         self.chacha_decrypt = self.chacha_encrypt
  * 
  */
-  __pyx_slice__2 = PySlice_New(Py_None, Py_None, Py_None); if (unlikely(!__pyx_slice__2)) __PYX_ERR(0, 97, __pyx_L1_error)
+  __pyx_slice__2 = PySlice_New(Py_None, Py_None, Py_None); if (unlikely(!__pyx_slice__2)) __PYX_ERR(0, 125, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_slice__2);
   __Pyx_GIVEREF(__pyx_slice__2);
 
-  /* "nescient/crypto/chacha.pyx":104
+  /* "nescient/crypto/chacha.pyx":132
  *     def chacha_encrypt(self, data, nonce=None, count=1):
  *         if nonce is None:  # Generate random nonce if unspecified
  *             nonce = int.from_bytes(get_random_bytes(12), byteorder='little')             # <<<<<<<<<<<<<<
  *         # Convert key from bytes to little-endian words
  *         cdef unsigned int * key_w = bytes_to_words(self.key, 32)
  */
-  __pyx_tuple__3 = PyTuple_Pack(1, __pyx_int_12); if (unlikely(!__pyx_tuple__3)) __PYX_ERR(0, 104, __pyx_L1_error)
+  __pyx_tuple__3 = PyTuple_Pack(1, __pyx_int_12); if (unlikely(!__pyx_tuple__3)) __PYX_ERR(0, 132, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__3);
   __Pyx_GIVEREF(__pyx_tuple__3);
 
-  /* "nescient/crypto/chacha.pyx":108
+  /* "nescient/crypto/chacha.pyx":136
  *         cdef unsigned int * key_w = bytes_to_words(self.key, 32)
  *         # Convert the nonce into an array of 32-bit words
  *         cdef unsigned int * nonce_w = bytes_to_words(nonce.to_bytes(12, byteorder='little'), 12)             # <<<<<<<<<<<<<<
  *         # Initialize counter and working variables
  *         cdef unsigned int counter = count
  */
-  __pyx_tuple__4 = PyTuple_Pack(1, __pyx_int_12); if (unlikely(!__pyx_tuple__4)) __PYX_ERR(0, 108, __pyx_L1_error)
+  __pyx_tuple__4 = PyTuple_Pack(1, __pyx_int_12); if (unlikely(!__pyx_tuple__4)) __PYX_ERR(0, 136, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__4);
   __Pyx_GIVEREF(__pyx_tuple__4);
 
@@ -3007,30 +3228,30 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GIVEREF(__pyx_tuple__5);
   __pyx_codeobj__6 = (PyObject*)__Pyx_PyCode_New(1, 0, 4, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__5, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_nescient_crypto_chacha_pyx, __pyx_n_s_display_hex, 36, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__6)) __PYX_ERR(0, 36, __pyx_L1_error)
 
-  /* "nescient/crypto/chacha.pyx":95
+  /* "nescient/crypto/chacha.pyx":123
  *     auth = ['sha']
  * 
  *     def __init__(self, key):             # <<<<<<<<<<<<<<
  *         assert len(key) == 32
  *         self.key = key[:]
  */
-  __pyx_tuple__7 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_key); if (unlikely(!__pyx_tuple__7)) __PYX_ERR(0, 95, __pyx_L1_error)
+  __pyx_tuple__7 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_key); if (unlikely(!__pyx_tuple__7)) __PYX_ERR(0, 123, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__7);
   __Pyx_GIVEREF(__pyx_tuple__7);
-  __pyx_codeobj__8 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__7, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_nescient_crypto_chacha_pyx, __pyx_n_s_init, 95, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__8)) __PYX_ERR(0, 95, __pyx_L1_error)
+  __pyx_codeobj__8 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__7, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_nescient_crypto_chacha_pyx, __pyx_n_s_init, 123, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__8)) __PYX_ERR(0, 123, __pyx_L1_error)
 
-  /* "nescient/crypto/chacha.pyx":102
+  /* "nescient/crypto/chacha.pyx":130
  *     # Encrypt or decrypt arbitrary data with the given key and nonce. Returns the nonce used.
  *     # Because this is a stream cipher, the encrypt and decrypt functions are the same.
  *     def chacha_encrypt(self, data, nonce=None, count=1):             # <<<<<<<<<<<<<<
  *         if nonce is None:  # Generate random nonce if unspecified
  *             nonce = int.from_bytes(get_random_bytes(12), byteorder='little')
  */
-  __pyx_tuple__9 = PyTuple_Pack(12, __pyx_n_s_self, __pyx_n_s_data, __pyx_n_s_nonce, __pyx_n_s_count, __pyx_n_s_key_w, __pyx_n_s_nonce_w, __pyx_n_s_counter, __pyx_n_s_n_blocks, __pyx_n_s_key_stream, __pyx_n_s_buffer, __pyx_n_s_i, __pyx_n_s_j); if (unlikely(!__pyx_tuple__9)) __PYX_ERR(0, 102, __pyx_L1_error)
+  __pyx_tuple__9 = PyTuple_Pack(12, __pyx_n_s_self, __pyx_n_s_data, __pyx_n_s_nonce, __pyx_n_s_count, __pyx_n_s_key_w, __pyx_n_s_nonce_w, __pyx_n_s_counter, __pyx_n_s_n_blocks, __pyx_n_s_key_stream, __pyx_n_s_buffer, __pyx_n_s_i, __pyx_n_s_j); if (unlikely(!__pyx_tuple__9)) __PYX_ERR(0, 130, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__9);
   __Pyx_GIVEREF(__pyx_tuple__9);
-  __pyx_codeobj__10 = (PyObject*)__Pyx_PyCode_New(4, 0, 12, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__9, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_nescient_crypto_chacha_pyx, __pyx_n_s_chacha_encrypt, 102, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__10)) __PYX_ERR(0, 102, __pyx_L1_error)
-  __pyx_tuple__11 = PyTuple_Pack(2, ((PyObject *)Py_None), ((PyObject *)__pyx_int_1)); if (unlikely(!__pyx_tuple__11)) __PYX_ERR(0, 102, __pyx_L1_error)
+  __pyx_codeobj__10 = (PyObject*)__Pyx_PyCode_New(4, 0, 12, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__9, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_nescient_crypto_chacha_pyx, __pyx_n_s_chacha_encrypt, 130, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__10)) __PYX_ERR(0, 130, __pyx_L1_error)
+  __pyx_tuple__11 = PyTuple_Pack(2, ((PyObject *)Py_None), ((PyObject *)__pyx_int_1)); if (unlikely(!__pyx_tuple__11)) __PYX_ERR(0, 130, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__11);
   __Pyx_GIVEREF(__pyx_tuple__11);
   __Pyx_RefNannyFinishContext();
@@ -3234,81 +3455,81 @@ static int __pyx_pymod_exec_chacha(PyObject *__pyx_pyinit_module)
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_display_hex, __pyx_t_2) < 0) __PYX_ERR(0, 36, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "nescient/crypto/chacha.pyx":82
+  /* "nescient/crypto/chacha.pyx":110
  *     return words_to_bytes(state, 16)
  * 
  * class ChaChaCrypter:             # <<<<<<<<<<<<<<
  *     """ A Crypter object used for encrypting or decrypting arbitrary data using the ChaCha stream cipher.
  * 
  */
-  __pyx_t_2 = __Pyx_Py3MetaclassPrepare((PyObject *) NULL, __pyx_empty_tuple, __pyx_n_s_ChaChaCrypter, __pyx_n_s_ChaChaCrypter, (PyObject *) NULL, __pyx_n_s_nescient_crypto_chacha, __pyx_kp_s_A_Crypter_object_used_for_encry); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 82, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_Py3MetaclassPrepare((PyObject *) NULL, __pyx_empty_tuple, __pyx_n_s_ChaChaCrypter, __pyx_n_s_ChaChaCrypter, (PyObject *) NULL, __pyx_n_s_nescient_crypto_chacha, __pyx_kp_s_A_Crypter_object_used_for_encry); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 110, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
 
-  /* "nescient/crypto/chacha.pyx":92
+  /* "nescient/crypto/chacha.pyx":120
  *         key (bytes): The 256 bit key used to encrypt/decrypt data.
  *     """
  *     modes = ['stm']  # Represents stream cipher mode             # <<<<<<<<<<<<<<
  *     auth = ['sha']
  * 
  */
-  __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 92, __pyx_L1_error)
+  __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 120, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(__pyx_n_s_stm);
   __Pyx_GIVEREF(__pyx_n_s_stm);
   PyList_SET_ITEM(__pyx_t_1, 0, __pyx_n_s_stm);
-  if (PyObject_SetItem(__pyx_t_2, __pyx_n_s_modes, __pyx_t_1) < 0) __PYX_ERR(0, 92, __pyx_L1_error)
+  if (PyObject_SetItem(__pyx_t_2, __pyx_n_s_modes, __pyx_t_1) < 0) __PYX_ERR(0, 120, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "nescient/crypto/chacha.pyx":93
+  /* "nescient/crypto/chacha.pyx":121
  *     """
  *     modes = ['stm']  # Represents stream cipher mode
  *     auth = ['sha']             # <<<<<<<<<<<<<<
  * 
  *     def __init__(self, key):
  */
-  __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 93, __pyx_L1_error)
+  __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 121, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(__pyx_n_s_sha);
   __Pyx_GIVEREF(__pyx_n_s_sha);
   PyList_SET_ITEM(__pyx_t_1, 0, __pyx_n_s_sha);
-  if (PyObject_SetItem(__pyx_t_2, __pyx_n_s_auth, __pyx_t_1) < 0) __PYX_ERR(0, 93, __pyx_L1_error)
+  if (PyObject_SetItem(__pyx_t_2, __pyx_n_s_auth, __pyx_t_1) < 0) __PYX_ERR(0, 121, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "nescient/crypto/chacha.pyx":95
+  /* "nescient/crypto/chacha.pyx":123
  *     auth = ['sha']
  * 
  *     def __init__(self, key):             # <<<<<<<<<<<<<<
  *         assert len(key) == 32
  *         self.key = key[:]
  */
-  __pyx_t_1 = __Pyx_CyFunction_NewEx(&__pyx_mdef_8nescient_6crypto_6chacha_13ChaChaCrypter_1__init__, 0, __pyx_n_s_ChaChaCrypter___init, NULL, __pyx_n_s_nescient_crypto_chacha, __pyx_d, ((PyObject *)__pyx_codeobj__8)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 95, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_CyFunction_NewEx(&__pyx_mdef_8nescient_6crypto_6chacha_13ChaChaCrypter_1__init__, 0, __pyx_n_s_ChaChaCrypter___init, NULL, __pyx_n_s_nescient_crypto_chacha, __pyx_d, ((PyObject *)__pyx_codeobj__8)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 123, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyObject_SetItem(__pyx_t_2, __pyx_n_s_init, __pyx_t_1) < 0) __PYX_ERR(0, 95, __pyx_L1_error)
+  if (PyObject_SetItem(__pyx_t_2, __pyx_n_s_init, __pyx_t_1) < 0) __PYX_ERR(0, 123, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "nescient/crypto/chacha.pyx":102
+  /* "nescient/crypto/chacha.pyx":130
  *     # Encrypt or decrypt arbitrary data with the given key and nonce. Returns the nonce used.
  *     # Because this is a stream cipher, the encrypt and decrypt functions are the same.
  *     def chacha_encrypt(self, data, nonce=None, count=1):             # <<<<<<<<<<<<<<
  *         if nonce is None:  # Generate random nonce if unspecified
  *             nonce = int.from_bytes(get_random_bytes(12), byteorder='little')
  */
-  __pyx_t_1 = __Pyx_CyFunction_NewEx(&__pyx_mdef_8nescient_6crypto_6chacha_13ChaChaCrypter_3chacha_encrypt, 0, __pyx_n_s_ChaChaCrypter_chacha_encrypt, NULL, __pyx_n_s_nescient_crypto_chacha, __pyx_d, ((PyObject *)__pyx_codeobj__10)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 102, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_CyFunction_NewEx(&__pyx_mdef_8nescient_6crypto_6chacha_13ChaChaCrypter_3chacha_encrypt, 0, __pyx_n_s_ChaChaCrypter_chacha_encrypt, NULL, __pyx_n_s_nescient_crypto_chacha, __pyx_d, ((PyObject *)__pyx_codeobj__10)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 130, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_1, __pyx_tuple__11);
-  if (PyObject_SetItem(__pyx_t_2, __pyx_n_s_chacha_encrypt, __pyx_t_1) < 0) __PYX_ERR(0, 102, __pyx_L1_error)
+  if (PyObject_SetItem(__pyx_t_2, __pyx_n_s_chacha_encrypt, __pyx_t_1) < 0) __PYX_ERR(0, 130, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "nescient/crypto/chacha.pyx":82
+  /* "nescient/crypto/chacha.pyx":110
  *     return words_to_bytes(state, 16)
  * 
  * class ChaChaCrypter:             # <<<<<<<<<<<<<<
  *     """ A Crypter object used for encrypting or decrypting arbitrary data using the ChaCha stream cipher.
  * 
  */
-  __pyx_t_1 = __Pyx_Py3ClassCreate(((PyObject*)&__Pyx_DefaultClassType), __pyx_n_s_ChaChaCrypter, __pyx_empty_tuple, __pyx_t_2, NULL, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 82, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_Py3ClassCreate(((PyObject*)&__Pyx_DefaultClassType), __pyx_n_s_ChaChaCrypter, __pyx_empty_tuple, __pyx_t_2, NULL, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 110, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_ChaChaCrypter, __pyx_t_1) < 0) __PYX_ERR(0, 82, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_ChaChaCrypter, __pyx_t_1) < 0) __PYX_ERR(0, 110, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
@@ -3487,72 +3708,6 @@ static CYTHON_INLINE PyObject* __Pyx_PyBytes_Join(PyObject* sep, PyObject* value
     return PyObject_CallMethodObjArgs(sep, __pyx_n_s_join, values, NULL);
 }
 #endif
-
-/* PyErrFetchRestore */
-#if CYTHON_FAST_THREAD_STATE
-static CYTHON_INLINE void __Pyx_ErrRestoreInState(PyThreadState *tstate, PyObject *type, PyObject *value, PyObject *tb) {
-    PyObject *tmp_type, *tmp_value, *tmp_tb;
-    tmp_type = tstate->curexc_type;
-    tmp_value = tstate->curexc_value;
-    tmp_tb = tstate->curexc_traceback;
-    tstate->curexc_type = type;
-    tstate->curexc_value = value;
-    tstate->curexc_traceback = tb;
-    Py_XDECREF(tmp_type);
-    Py_XDECREF(tmp_value);
-    Py_XDECREF(tmp_tb);
-}
-static CYTHON_INLINE void __Pyx_ErrFetchInState(PyThreadState *tstate, PyObject **type, PyObject **value, PyObject **tb) {
-    *type = tstate->curexc_type;
-    *value = tstate->curexc_value;
-    *tb = tstate->curexc_traceback;
-    tstate->curexc_type = 0;
-    tstate->curexc_value = 0;
-    tstate->curexc_traceback = 0;
-}
-#endif
-
-/* WriteUnraisableException */
-static void __Pyx_WriteUnraisable(const char *name, CYTHON_UNUSED int clineno,
-                                  CYTHON_UNUSED int lineno, CYTHON_UNUSED const char *filename,
-                                  int full_traceback, CYTHON_UNUSED int nogil) {
-    PyObject *old_exc, *old_val, *old_tb;
-    PyObject *ctx;
-    __Pyx_PyThreadState_declare
-#ifdef WITH_THREAD
-    PyGILState_STATE state;
-    if (nogil)
-        state = PyGILState_Ensure();
-#ifdef _MSC_VER
-    else state = (PyGILState_STATE)-1;
-#endif
-#endif
-    __Pyx_PyThreadState_assign
-    __Pyx_ErrFetch(&old_exc, &old_val, &old_tb);
-    if (full_traceback) {
-        Py_XINCREF(old_exc);
-        Py_XINCREF(old_val);
-        Py_XINCREF(old_tb);
-        __Pyx_ErrRestore(old_exc, old_val, old_tb);
-        PyErr_PrintEx(1);
-    }
-    #if PY_MAJOR_VERSION < 3
-    ctx = PyString_FromString(name);
-    #else
-    ctx = PyUnicode_FromString(name);
-    #endif
-    __Pyx_ErrRestore(old_exc, old_val, old_tb);
-    if (!ctx) {
-        PyErr_WriteUnraisable(Py_None);
-    } else {
-        PyErr_WriteUnraisable(ctx);
-        Py_DECREF(ctx);
-    }
-#ifdef WITH_THREAD
-    if (nogil)
-        PyGILState_Release(state);
-#endif
-}
 
 /* RaiseArgTupleInvalid */
 static void __Pyx_RaiseArgtupleInvalid(
@@ -4565,6 +4720,30 @@ static PyObject *__Pyx_Py3ClassCreate(PyObject *metaclass, PyObject *name, PyObj
     Py_XDECREF(owned_metaclass);
     return result;
 }
+
+/* PyErrFetchRestore */
+      #if CYTHON_FAST_THREAD_STATE
+static CYTHON_INLINE void __Pyx_ErrRestoreInState(PyThreadState *tstate, PyObject *type, PyObject *value, PyObject *tb) {
+    PyObject *tmp_type, *tmp_value, *tmp_tb;
+    tmp_type = tstate->curexc_type;
+    tmp_value = tstate->curexc_value;
+    tmp_tb = tstate->curexc_traceback;
+    tstate->curexc_type = type;
+    tstate->curexc_value = value;
+    tstate->curexc_traceback = tb;
+    Py_XDECREF(tmp_type);
+    Py_XDECREF(tmp_value);
+    Py_XDECREF(tmp_tb);
+}
+static CYTHON_INLINE void __Pyx_ErrFetchInState(PyThreadState *tstate, PyObject **type, PyObject **value, PyObject **tb) {
+    *type = tstate->curexc_type;
+    *value = tstate->curexc_value;
+    *tb = tstate->curexc_traceback;
+    tstate->curexc_type = 0;
+    tstate->curexc_value = 0;
+    tstate->curexc_traceback = 0;
+}
+#endif
 
 /* CLineInTraceback */
       #ifndef CYTHON_CLINE_IN_TRACEBACK

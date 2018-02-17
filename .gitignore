@@ -4,7 +4,7 @@ __pycache__/
 .idea/
 *.egg-info/
 wip/
-build/
+*build/
 .directory
 MANIFEST
 update.sh
@@ -12,3 +12,6 @@ TODO
 changelog
 cmd.bat
 *.xcf
+*.so
+*.pyd
+standalone_build.py

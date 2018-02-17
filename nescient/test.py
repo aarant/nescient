@@ -6,7 +6,7 @@
 import unittest
 from random import randint
 
-from nescient.packer import NescientPacker
+from nescient.packer import NescientPacker, PACKING_MODES
 from nescient.crypto.aes import AesCrypter
 from nescient.crypto.chacha import ChaChaCrypter
 from nescient.crypto.tools import get_random_bytes
@@ -181,15 +181,17 @@ class ChaChaTest(unittest.TestCase):
 
 class PackerTest(unittest.TestCase):
     def test_packer(self):
-        for _ in range(10):
-            password = get_random_bytes(randint(8, 16))
-            packer = NescientPacker(password)
-            data = bytearray(get_random_bytes(randint(15, 2**20)))
-            expected = data[:]
-            packer.pack(data)
-            self.assertNotEqual(data, expected)
-            packer.unpack(data)
-            self.assertEqual(data, expected)
+        for packing_mode in PACKING_MODES:
+            alg, mode, auth = packing_mode.split('-', 2)
+            for _ in range(10):
+                password = get_random_bytes(randint(8, 16))
+                packer = NescientPacker(password, alg, mode, auth)
+                data = bytearray(get_random_bytes(randint(15, 2**10)))
+                expected = data[:]
+                packer.pack(data)
+                self.assertNotEqual(data, expected)
+                packer.unpack(data)
+                self.assertEqual(data, expected)
 
 
 if __name__ == '__main__':

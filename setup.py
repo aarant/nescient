@@ -21,7 +21,7 @@ else:
 
 setup(name='Nescient',
       version=__version__,
-      description='A Python program for packing/unpacking encrypted, salted, and authenticated file containers.',
+      description='Store, encrypt and decrypt files to and from encrypted, authenticated containers.',
       long_description=long_description,
       author='Ariel Antonitis',
       author_email='arant@mit.edu',
@@ -32,6 +32,12 @@ setup(name='Nescient',
       entry_points={'console_scripts': ['nescient = nescient.__main__:main'],
                     'gui_scripts': ['nescient-ui = nescient.gui:main']},
       license='MIT',
-      classifiers=['License :: OSI Approved :: MIT License'],
+      classifiers=['License :: OSI Approved :: MIT License',
+                   'Development Status :: 4 - Beta',
+                   'Topic :: Security :: Cryptography',
+                   'Programming Language :: Python :: 3.3',
+                   'Programming Language :: Python :: 3.4',
+                   'Programming Language :: Python :: 3.5',
+                   'Programming Language :: Python :: 3.6'],
       python_requires='>=3.3'
       )
