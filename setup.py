@@ -11,13 +11,12 @@ with open('README.rst', 'r') as f:
     long_description = f.read()
 
 USE_CYTHON = False
+ext = 'pyx' if USE_CYTHON else 'c'
+extensions = [Extension('nescient.crypto.aes', ['nescient/crypto/aes.%s' % ext]),
+              Extension('nescient.crypto.chacha', ['nescient/crypto/chacha.%s' % ext])]
 if USE_CYTHON:
     from Cython.Build import cythonize
-    extensions = cythonize([Extension('nescient.crypto.aes', ['nescient/crypto/aes.pyx']),
-                            Extension('nescient.crypto.chacha', ['nescient/crypto/chacha.pyx'])])
-else:
-    extensions = [Extension('nescient.crypto.aes', ['nescient/crypto/aes.c']),
-                  Extension('nescient.crypto.chacha', ['nescient/crypto/chacha.c'])]
+    extensions = cythonize(extensions)
 
 setup(name='Nescient',
       version=__version__,

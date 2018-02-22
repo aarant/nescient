@@ -64,7 +64,7 @@ class ModeSelectFrame(Frame):
 class PathSelectFrame:
     def __init__(self, master):
         self.label = Label(master, text='Path:')
-        self.entry = Entry(master, bg='white', fg='white')
+        self.entry = Entry(master, bg='white', fg='black')
         self.button = Button(master, text='Add path(s)', command=lambda: master.add_files('glob'))
         self.label.grid(column=0, row=2, padx=5, pady=5, sticky='W')
         self.entry.grid(column=1, row=2, padx=5, pady=5, sticky='WE')
