@@ -1,5 +1,6 @@
 .*
 !/.gitignore
+!*.yml
 __pycache__/
 *.egg-info/
 wip/
@@ -13,4 +14,3 @@ TODO
 *.so
 *.pyd
 *.xcf
-standalone_build.py

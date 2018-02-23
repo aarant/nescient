@@ -1,0 +1,49 @@
+version: '{branch}-{build}'
+branches:
+  only:
+  - master
+clone_depth: 5
+# Build on 32-bit and 64-bit Pythons 3.4-3.6
+environment:
+  matrix:
+  - PYTHON: C:\Python34
+  - PYTHON: C:\Python34-x64
+    DISTUTILS_USE_SDK: 1
+  - PYTHON: C:\Python35
+  - PYTHON: C:\Python35-x64
+  - PYTHON: C:\Python36
+  - PYTHON: C:\Python36-x64
+  PYPI_PASS:
+    secure: ZIDMfSb4e2MNrQPv4jbGTAXjIpHUFHY6XEw9fD61N2A=
+matrix:
+  fast_finish: true
+# Install wheel for building and nose for tests
+install:
+- cmd: >-
+    %PYTHON%\\python.exe -m pip install wheel
+    
+    %PYTHON%\\python.exe -m pip install nose
+# Build wheels
+build_script:
+- cmd: appveyor\\py34_compat.cmd %PYTHON%\\python.exe setup.py bdist_wheel
+# Install the wheel & test it with nose
+test_script:
+- cmd: >-
+    cd dist\
+    
+    %PYTHON%\\python.exe -m pip install nescient --no-index -f .
+    
+    %PYTHON%\\python.exe -m nose nescient -v
+    
+    cd ..
+# Install twine for uploading and list wheels
+before_deploy:
+- cmd: >- 
+    %PYTHON%\\python.exe -m pip install twine
+    
+    dir dist\ /b /a-d
+# Deploy to PyPI
+deploy_script:
+- cmd: appveyor\\appveyor_deploy.cmd
+
+

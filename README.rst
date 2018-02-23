@@ -2,6 +2,10 @@
 .. _pypi: https://pypi.python.org/pypi/Nescient
 .. |license| image:: https://img.shields.io/github/license/arantonitis/nescient.svg
 .. _license: https://github.com/arantonitis/nescient/tree/master/LICENSE
+.. |travis| image:: https://travis-ci.org/arantonitis/nescient.svg?branch=master
+.. _travis: https://travis-ci.org/arantonitis/nescient/
+.. |appveyor| image:: https://ci.appveyor.com/api/projects/status/r5p0hg36srwi2k06?svg=true
+.. _appveyor: https://ci.appveyor.com/project/arantonitis/nescient
 .. |nessie| image:: https://raw.githubusercontent.com/arantonitis/nescient/master/nescient/nessie.png
    :height: 64px
    :width: 64px
@@ -10,7 +14,7 @@
 
 |nessie| Nescient
 *****************
-|pypi|_ |license|_
+|pypi|_ |license|_ |travis|_ |appveyor|_
 
 *nescient, n. (nesh-int) - from Latin 'unknowing', 'hidden'*  
 
@@ -53,7 +57,7 @@ Nescient is available as a pre-packaged, standalone Windows executable, download
 
 From PyPI
 ---------
-Nescient requires Python 3.3 or later.
+Nescient requires Python 3.4 or later.
 
 Windows users installing Nescient as a Python package are **strongly suggested** to have a 64-bit Python installation on their machines. Otherwise, installation may require installing the Microsoft C++ Visual Build Tools to compile Nescient's C extensions.
 
