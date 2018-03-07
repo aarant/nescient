@@ -22,7 +22,7 @@ def target_func(queue, settings, in_path, out_path, packing_choice, overwrite=Tr
 # Start a packing process to run alongside the main one
 def start_packer_process(packer, in_path, out_path, packing_choice, overwrite=True):
     queue = Queue()
-    p = Process(target=target_func, daemon=True, args=(queue, (packer.password, packer.alg, packer.mode, packer.auth),
-                                                       in_path, out_path, packing_choice, overwrite))
+    p = Process(target=target_func, args=(queue, (packer.password, packer.alg, packer.mode, packer.auth), in_path,
+                                          out_path, packing_choice, overwrite))
     p.start()
     return p, queue

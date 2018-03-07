@@ -10,7 +10,7 @@ from nescient import __version__, url
 with open('README.rst', 'r') as f:
     long_description = f.read()
 
-USE_CYTHON = False
+USE_CYTHON = True
 ext = 'pyx' if USE_CYTHON else 'c'
 extensions = [Extension('nescient.crypto.aes', ['nescient/crypto/aes.%s' % ext]),
               Extension('nescient.crypto.chacha', ['nescient/crypto/chacha.%s' % ext])]

@@ -10,9 +10,15 @@ except ImportError:
 
     def get_random_bytes(n):
         return bytes(os.urandom(n))
+
+    def randbits(k):
+        return int.from_bytes(get_random_bytes(k//8), byteorder='big')
 else:
     def get_random_bytes(n):
         return secrets.token_bytes(n)
+
+    def randbits(k):
+        return secrets.randbits(k)
 
 
 def pad(data, block_size):

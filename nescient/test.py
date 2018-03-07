@@ -9,7 +9,7 @@ from random import randint
 from nescient.packer import NescientPacker, PACKING_MODES
 from nescient.crypto.aes import AesCrypter
 from nescient.crypto.chacha import ChaChaCrypter
-from nescient.crypto.tools import get_random_bytes
+from nescient.crypto.tools import get_random_bytes, randbits
 
 
 class AesTest(unittest.TestCase):
@@ -177,6 +177,23 @@ class ChaChaTest(unittest.TestCase):
         c.chacha_encrypt(data, nonce, counter)
         c.chacha_decrypt(data, nonce, counter)
         self.assertEqual(expected, data)
+
+    # Test that chacha multiprocessing works correctly
+    def test_multiprocessing(self):
+        key = get_random_bytes(32)
+        nonce = randbits(96)
+        crypter = ChaChaCrypter(key)
+        for data_size in [2**8, 2**10, 2**10+1, 2**20, 2**20+1]:
+            data = bytearray(get_random_bytes(data_size))
+            original = data[:]
+            expected = data[:]
+            # Assert that multiprocessing encrypts the same as a single process
+            crypter.chacha_encrypt(data, nonce)
+            crypter.chacha_encrypt(expected, nonce, force_single_thread=True)
+            self.assertEqual(data, expected)
+            # Assert that multiprocessing decrypts to the original data
+            crypter.chacha_decrypt(data, nonce)
+            self.assertEqual(data, original)
 
 
 class PackerTest(unittest.TestCase):
