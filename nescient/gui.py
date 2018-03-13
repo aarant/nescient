@@ -141,6 +141,7 @@ class NescientMenu(Menu):
 class PasswordWindow(Toplevel):
     def __init__(self, master, success, failure):
         Toplevel.__init__(self, master)
+        self.geometry('+%d+%d' % (master.winfo_x(), master.winfo_y()))
         self.title('Nescient password request:')
         self.lock_image = PhotoImage(data=LOCK_DATA)
         try:
@@ -148,7 +149,6 @@ class PasswordWindow(Toplevel):
         except Exception:
             pass
         self.resizable(False, False)
-        self.geometry('+%d+%d' % (master.winfo_x(), master.winfo_y()))
         self.success = success
         self.failure = failure
         self.grab_set()
@@ -202,9 +202,9 @@ class PasswordWindow(Toplevel):
 class AboutWindow(Toplevel):
     def __init__(self, master):
         Toplevel.__init__(self, master)
+        self.geometry('+%d+%d' % (master.winfo_x(), master.winfo_y()))
         self.title('About Nescient')
         self.resizable(False, False)
-        self.geometry('+%d+%d' % (master.winfo_x(), master.winfo_y()))
         self.grab_set()
         self.focus_set()
         self.protocol('WM_DELETE_WINDOW', self.close)
@@ -290,13 +290,12 @@ class NescientUI(Tk):
         self.global_widget_state(DISABLED)
         self.state = 'working'
         try:
-            return_value = func(*args, **kwargs)
+            func(*args, **kwargs)
         except Exception as e:
             self.status.config(text=str(e))
-            return_value = e
         self.global_widget_state(NORMAL)
         self.state = 'ready'
-        return return_value
+        return
 
     def add_files(self, choice, paths=None):
         self.status.config(text='Adding files...')
@@ -395,6 +394,7 @@ class NescientUI(Tk):
         packing_mode = self.mode_select.selected.get()
         self.status.config(text='Benchmarking...')
         self.title('Nescient ' + __version__ + ' - Benchmarking')
+        self.update()
         benchmark_mode(packing_mode)
         self.mode_select.update_rate_info()
         self.mode_select.display_rate_info()
@@ -405,6 +405,7 @@ class NescientUI(Tk):
         self.title('Nescient ' + __version__ + ' - Benchmarking')
         for packing_mode in PACKING_MODES:
             self.status.config(text='Benchmarking ' + packing_mode + '...')
+            self.update()
             benchmark_mode(packing_mode)
         self.mode_select.update_rate_info()
         self.mode_select.display_rate_info()

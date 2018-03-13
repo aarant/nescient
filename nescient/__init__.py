@@ -20,7 +20,7 @@
 # SOFTWARE.
 #
 # nescient/__init__.py
-"""Nescient v0.8.0
+"""Nescient v0.8.1
 
 A Python program for packing/unpacking encrypted, salted, and authenticated file containers.
 
@@ -30,7 +30,7 @@ from string import digits
 
 # Versions will always take the form major.minor.patch[.develop]. The develop increment is optional.
 # A valid version will have the string form *.*.*[.dev*], where any integer may take the place of a *.
-__version__ = '0.8.0'
+__version__ = '0.8.1'
 url = 'https://github.com/arantonitis/nescient'
 
 

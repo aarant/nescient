@@ -5,7 +5,7 @@
 """ Classes and functions to read/write timing benchmarks, and estimate the time needed to pack/unpack a file. """
 # TODO: Documentation, better timer
 import os
-import sys
+import gc
 import pickle
 from time import sleep
 from threading import Thread
@@ -51,6 +51,7 @@ def estimate_time(size, packing_mode):
     # It is extremely unlikely that the estimated time can be less than the minimum benchmarked time, so take the max
     return max(estimated, min_time)
 
+
 def benchmark_mode(packing_mode):
     alg, mode, auth = packing_mode.split('-', 2)
     packer = NescientPacker(get_random_bytes(16), alg, mode, auth)
@@ -74,6 +75,8 @@ def benchmark_mode(packing_mode):
         times[size].append(timer() - checkpoint)
         # Calculate total rate
         times[size].append(timer() - start)
+        del data
+        gc.collect()
     write_benchmarks(packing_mode, times)
 
 
