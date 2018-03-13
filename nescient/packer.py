@@ -70,10 +70,6 @@ class NescientPacker:
         if auth not in self.CrypterClass.auth:
             raise ParamError('Authentication mode %s is unspported by algorithm.' % auth)
         self.alg, self.mode, self.auth = alg, mode, auth
-        # Supported authenticated encryption protocols. TODO: Only SHA-256 is supported right now
-        if auth == 'sha':
-            self._gen_auth_tag = lambda key, auth_data, enc_data: hmac.new(key, auth_data + enc_data,
-                                                                           digestmod='sha256').digest()
 
     # Fix out paths depending on the packing choice and the output path
     @staticmethod
@@ -139,6 +135,12 @@ class NescientPacker:
     # Performs PBKDF2 key derivation with a specified salt
     def _key_gen(self, salt):
         return pbkdf2_hmac('sha256', self.password, salt, 100000, self.key_len)
+
+    def _gen_auth_tag(self, key, auth_data, enc_data):
+        # Currently only SHA-256 authentication is available
+        # TODO: Add more authentication methods
+        if self.auth == 'sha':
+            return hmac.new(key, auth_data + enc_data, digestmod='sha256').digest()
 
     # Encrypts an arbitrary block of data, modifying it in place and returning the key and salt used
     def _encrypt(self, data, key=None, salt=None):

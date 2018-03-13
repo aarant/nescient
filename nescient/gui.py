@@ -12,11 +12,12 @@ from tkinter import Tk, Label, PhotoImage, OptionMenu, StringVar, Frame, Text, S
     Entry, Button, NORMAL, END, Menu, filedialog, Toplevel, messagebox, BooleanVar, Message, LEFT
 from pkg_resources import Requirement, resource_filename
 from threading import Thread, main_thread, current_thread
+from multiprocessing import freeze_support
 
 from nescient import __version__, url
 from nescient.timing import load_benchmarks, estimate_time, TkTimer, benchmark_mode
 from nescient.packer import DEFAULT_PACKING_MODE, PACKING_MODES, NescientPacker, PackingError
-from nescient.process import start_packer_process
+from nescient.process import process_sync_execute
 from nescient.resources.banner import BANNER_DATA
 from nescient.resources.nessie import LOGO_DATA
 from nescient.resources.nessie_lock import LOCK_DATA
@@ -362,21 +363,20 @@ class NescientUI(Tk):
                 est_time = estimate_time(os.path.getsize(path), packing_mode)
                 # Set up the timer and packing process
                 timer = TkTimer(self, display_text, est_time, lambda s: self.status.config(text=s))
-                p, queue = start_packer_process(packer, path, file_out_path, choice,
-                                                overwrite=self.menu.overwrite.get())
                 timer.start()
-                p.join()
-                if queue.empty():
-                    timer.stop()
-                    self.text.tag_config(tag, background='#34c96c')
-                    self.text.insert('...Completed!', tag, index='%s.last-1c' % tag)
-                else:
+                try:
+                    process_sync_execute(packer.pack_or_unpack_file, path, file_out_path, choice,
+                                         overwrite=self.menu.overwrite.get())
+                except Exception as e:
                     timer.stop(error=True)
-                    e = queue.get()
                     error_string = e.__class__.__name__ + ': ' + str(e)
                     self.status.config(text=error_string)
                     self.text.tag_config(tag, background='red')
                     self.text.insert(error_string + '\n', tag, index='%s.last' % tag)
+                else:
+                    timer.stop()
+                    self.text.tag_config(tag, background='#34c96c')
+                    self.text.insert('...Completed!', tag, index='%s.last-1c' % tag)
             except PackingError as e:
                 error_string = e.__class__.__name__ + ': ' + str(e)
                 self.status.config(text=error_string)
@@ -411,6 +411,7 @@ class NescientUI(Tk):
         self.status.config(text='Ready')
         self.title('Nescient ' + __version__)
 
+
 def main():
     paths = sys.argv[1:] if len(sys.argv) > 1 else None
     gui = NescientUI(paths)
@@ -418,4 +419,7 @@ def main():
                                 
 
 if __name__ == '__main__':
+    # Call multiprocessing freeze support when bundled
+    if getattr(sys, 'frozen', False):
+        freeze_support()
     main()

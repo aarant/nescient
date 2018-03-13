@@ -2,27 +2,36 @@
 # Copyright (C) 2018 Ariel Antonitis. Licensed under the MIT license.
 #
 # nescient/process.py
-""" Functions for starting a new process to pack files. """
+""" Functions for executing functions in a new process, synchronously. """
 import sys
 from multiprocessing import Process, Queue
 
-from nescient.packer import NescientPacker
 
-
-def target_func(queue, settings, in_path, out_path, packing_choice, overwrite=True):
-    password, alg, mode, auth = settings
+def _target_func(func, queue, *args, **kwargs):
     try:
-        packer = NescientPacker(password, alg, mode, auth)
-        packer.pack_or_unpack_file(in_path, out_path, packing_choice, overwrite)
+        rtn = func(*args, **kwargs)
     except Exception as e:
         queue.put(e)
         sys.exit(1)
+    else:
+        queue.put(rtn)
+        sys.exit(0)
 
 
-# Start a packing process to run alongside the main one
-def start_packer_process(packer, in_path, out_path, packing_choice, overwrite=True):
+def process_sync_execute(func, *args, **kwargs):
     queue = Queue()
-    p = Process(target=target_func, args=(queue, (packer.password, packer.alg, packer.mode, packer.auth), in_path,
-                                          out_path, packing_choice, overwrite))
+    p = Process(target=_target_func, args=(func, queue) + args, kwargs=kwargs)
     p.start()
-    return p, queue
+    p.join()
+    if queue.empty():
+        raise Exception('Process exited improperly or prematurely.')
+    rtn = queue.get()
+    if isinstance(rtn, Exception):
+        raise rtn
+    return rtn
+
+
+def process_sync_wrapper(func):
+    def wrapped_func(*args, **kwargs):
+        return process_sync_execute(func, *args, **kwargs)
+    return wrapped_func

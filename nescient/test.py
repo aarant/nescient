@@ -3,10 +3,14 @@
 #
 # nescient/test.py
 """ Test cases for the various cryptographic algorithms implemented in Nescient. """
+import os
 import unittest
+import pickle
+from unittest import mock
 from random import randint
 
 from nescient.packer import NescientPacker, PACKING_MODES
+from nescient.process import process_sync_wrapper
 from nescient.crypto.aes import AesCrypter
 from nescient.crypto.chacha import ChaChaCrypter
 from nescient.crypto.tools import get_random_bytes, randbits
@@ -197,7 +201,7 @@ class ChaChaTest(unittest.TestCase):
 
 
 class PackerTest(unittest.TestCase):
-    def test_packer(self):
+    def test_packing(self):
         for packing_mode in PACKING_MODES:
             alg, mode, auth = packing_mode.split('-', 2)
             for _ in range(10):
@@ -209,6 +213,52 @@ class PackerTest(unittest.TestCase):
                 self.assertNotEqual(data, expected)
                 packer.unpack(data)
                 self.assertEqual(data, expected)
+
+
+def _add(x, y):
+    return x + y
+
+
+class _DummyException(Exception):
+    pass
+
+
+def _except():
+    raise _DummyException
+
+
+class MultiprocessingTest(unittest.TestCase):
+    def test_toplevel_pickling(self):
+        pickle.dumps(_add)
+
+    def test_local_pickling(self):
+        foo = lambda: None
+        self.assertRaises(Exception, pickle.dumps, foo)
+
+    def test_process_returns(self):
+        pickle.dumps(_add)
+        self.assertEqual(process_sync_wrapper(_add)(2, 3), _add(2, 3))
+
+    def test_process_exceptions(self):
+        self.assertRaises(_DummyException, process_sync_wrapper(_except))
+
+    def test_packer_pickling(self):
+        packer = NescientPacker('')
+        pickle.dumps(packer)
+        pickle.dumps(packer.pack_or_unpack_file)
+
+    def test_process_packing(self):
+        with open('.nescient-packer-test', 'w') as f:
+            f.write('Hello world')
+        packer = NescientPacker('')
+        process_sync_wrapper(packer.pack_or_unpack_file)('.nescient-packer-test', '.nescient-packer-test.nesc',
+                                                         'pack', True)
+        os.remove('.nescient-packer-test.nesc')
+        # with mock.patch('builtins.open', mock.mock_open(read_data='Hello world')):
+        #     with mock.patch('os.path.getsize', return_value=len('Hello world')):
+        #         with mock.patch('os.replace'):
+        #             packer = NescientPacker('', alg='aes256', mode='cbc')
+        #             process_sync_wrapper(packer.pack_or_unpack_file)('fake_path', 'fake_path', 'pack', True)
 
 
 if __name__ == '__main__':

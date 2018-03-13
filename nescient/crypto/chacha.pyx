@@ -189,7 +189,7 @@ class ChaChaCrypter:
         if force_single_thread or n_threads == 1 or len(data) < 2**29 or blocks_per_chunk == 0:
             self._chacha_task(data, nonce, count)
             return nonce
-        # Build the shared arrays to dispatch to worker
+        # Build the shared arrays to dispatch to workers
         arrays = []
         for i in range(n_threads):
             # The last chunk may be slightly longer if the data is not aligned on chunk boundaries

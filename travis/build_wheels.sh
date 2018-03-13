@@ -18,4 +18,7 @@ for PYBIN in "${pybins[@]}"; do
     "/opt/python/${PYBIN}/bin/pip" install nose
     "/opt/python/${PYBIN}/bin/pip" install nescient --no-index -f /io/dist/
     (cd /io/dist/; "/opt/python/${PYBIN}/bin/nosetests" nescient -v)
+    if [ $? -ne 0 ]; then
+        exit $?
+    fi
 done

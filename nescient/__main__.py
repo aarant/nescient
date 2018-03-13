@@ -14,7 +14,7 @@ from multiprocessing import freeze_support
 from nescient import __version__, __doc__ as description
 from nescient.packer import PACKING_MODES, DEFAULT_PACKING_MODE, NescientPacker, PackingError
 from nescient.timing import estimate_time, EstimatedTimer, load_benchmarks, benchmark_mode
-from nescient.process import start_packer_process
+from nescient.process import process_sync_execute
 from nescient.gui import main as start_gui
 
 
@@ -120,15 +120,15 @@ def main():
             est_time = estimate_time(os.path.getsize(file_path), packing_mode)
             # Set up the timer and packing process
             timer = EstimatedTimer(display_text, est_time)
-            p, queue = start_packer_process(packer, file_path, file_out_path, packing_choice, overwrite=overwrite)
             timer.start()
-            p.join()
-            if queue.empty():
-                timer.stop()
-            else:
+            try:
+                process_sync_execute(packer.pack_or_unpack_file, file_path, file_out_path, packing_choice,
+                                     overwrite=overwrite)
+            except Exception as e:
                 timer.stop(error=True)
-                e = queue.get()
                 print(e.__class__.__name__ + ':', e)
+            else:
+                timer.stop()
         except PackingError as e:
             print(e.__class__.__name__ + ':', e)
 
