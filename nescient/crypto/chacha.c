@@ -1772,7 +1772,6 @@ static const char __pyx_k_cast[] = "cast";
 static const char __pyx_k_data[] = "data";
 static const char __pyx_k_dict[] = "__dict__";
 static const char __pyx_k_init[] = "__init__";
-static const char __pyx_k_join[] = "join";
 static const char __pyx_k_main[] = "__main__";
 static const char __pyx_k_mode[] = "mode";
 static const char __pyx_k_name[] = "name";
@@ -1783,8 +1782,10 @@ static const char __pyx_k_size[] = "size";
 static const char __pyx_k_step[] = "step";
 static const char __pyx_k_stop[] = "stop";
 static const char __pyx_k_test[] = "__test__";
+static const char __pyx_k_time[] = "time";
 static const char __pyx_k_view[] = "view";
 static const char __pyx_k_ASCII[] = "ASCII";
+static const char __pyx_k_alive[] = "alive";
 static const char __pyx_k_class[] = "__class__";
 static const char __pyx_k_count[] = "count";
 static const char __pyx_k_error[] = "error";
@@ -1794,6 +1795,7 @@ static const char __pyx_k_modes[] = "modes";
 static const char __pyx_k_nonce[] = "nonce";
 static const char __pyx_k_range[] = "range";
 static const char __pyx_k_shape[] = "shape";
+static const char __pyx_k_sleep[] = "sleep";
 static const char __pyx_k_start[] = "start";
 static const char __pyx_k_arrays[] = "arrays";
 static const char __pyx_k_buffer[] = "buffer";
@@ -1854,6 +1856,7 @@ static const char __pyx_k_reduce_cython[] = "__reduce_cython__";
 static const char __pyx_k_chacha_decrypt[] = "chacha_decrypt";
 static const char __pyx_k_chacha_encrypt[] = "chacha_encrypt";
 static const char __pyx_k_View_MemoryView[] = "View.MemoryView";
+static const char __pyx_k_active_children[] = "active_children";
 static const char __pyx_k_allocate_buffer[] = "allocate_buffer";
 static const char __pyx_k_dtype_is_object[] = "dtype_is_object";
 static const char __pyx_k_multiprocessing[] = "multiprocessing";
@@ -1923,6 +1926,8 @@ static PyObject *__pyx_n_s_TypeError;
 static PyObject *__pyx_kp_s_Unable_to_convert_item_to_object;
 static PyObject *__pyx_n_s_ValueError;
 static PyObject *__pyx_n_s_View_MemoryView;
+static PyObject *__pyx_n_s_active_children;
+static PyObject *__pyx_n_s_alive;
 static PyObject *__pyx_n_s_allocate_buffer;
 static PyObject *__pyx_n_s_args;
 static PyObject *__pyx_n_s_arrays;
@@ -1969,7 +1974,6 @@ static PyObject *__pyx_n_s_init;
 static PyObject *__pyx_n_s_itemsize;
 static PyObject *__pyx_kp_s_itemsize_0_for_cython_array;
 static PyObject *__pyx_n_s_j;
-static PyObject *__pyx_n_s_join;
 static PyObject *__pyx_n_s_key;
 static PyObject *__pyx_n_s_key_stream;
 static PyObject *__pyx_n_s_key_w;
@@ -2021,6 +2025,7 @@ static PyObject *__pyx_n_s_setstate_cython;
 static PyObject *__pyx_n_s_sha;
 static PyObject *__pyx_n_s_shape;
 static PyObject *__pyx_n_s_size;
+static PyObject *__pyx_n_s_sleep;
 static PyObject *__pyx_n_s_start;
 static PyObject *__pyx_n_s_step;
 static PyObject *__pyx_n_s_stm;
@@ -2032,6 +2037,7 @@ static PyObject *__pyx_kp_s_stringsource;
 static PyObject *__pyx_n_s_struct;
 static PyObject *__pyx_n_s_target;
 static PyObject *__pyx_n_s_test;
+static PyObject *__pyx_n_s_time;
 static PyObject *__pyx_n_s_to_bytes;
 static PyObject *__pyx_kp_s_unable_to_allocate_array_data;
 static PyObject *__pyx_kp_s_unable_to_allocate_shape_and_str;
@@ -2098,18 +2104,18 @@ static PyObject *__pyx_int_neg_1;
 static PyObject *__pyx_slice_;
 static PyObject *__pyx_slice__5;
 static PyObject *__pyx_slice__7;
-static PyObject *__pyx_slice__9;
 static PyObject *__pyx_tuple__2;
 static PyObject *__pyx_tuple__3;
 static PyObject *__pyx_tuple__4;
 static PyObject *__pyx_tuple__6;
 static PyObject *__pyx_tuple__8;
-static PyObject *__pyx_slice__11;
-static PyObject *__pyx_slice__25;
+static PyObject *__pyx_tuple__9;
+static PyObject *__pyx_slice__10;
+static PyObject *__pyx_slice__12;
 static PyObject *__pyx_slice__26;
 static PyObject *__pyx_slice__27;
-static PyObject *__pyx_tuple__10;
-static PyObject *__pyx_tuple__12;
+static PyObject *__pyx_slice__28;
+static PyObject *__pyx_tuple__11;
 static PyObject *__pyx_tuple__13;
 static PyObject *__pyx_tuple__14;
 static PyObject *__pyx_tuple__15;
@@ -2122,26 +2128,27 @@ static PyObject *__pyx_tuple__21;
 static PyObject *__pyx_tuple__22;
 static PyObject *__pyx_tuple__23;
 static PyObject *__pyx_tuple__24;
-static PyObject *__pyx_tuple__28;
+static PyObject *__pyx_tuple__25;
 static PyObject *__pyx_tuple__29;
 static PyObject *__pyx_tuple__30;
 static PyObject *__pyx_tuple__31;
-static PyObject *__pyx_tuple__33;
-static PyObject *__pyx_tuple__35;
+static PyObject *__pyx_tuple__32;
+static PyObject *__pyx_tuple__34;
 static PyObject *__pyx_tuple__36;
-static PyObject *__pyx_tuple__38;
+static PyObject *__pyx_tuple__37;
 static PyObject *__pyx_tuple__39;
 static PyObject *__pyx_tuple__40;
 static PyObject *__pyx_tuple__41;
 static PyObject *__pyx_tuple__42;
 static PyObject *__pyx_tuple__43;
 static PyObject *__pyx_tuple__44;
-static PyObject *__pyx_codeobj__32;
-static PyObject *__pyx_codeobj__34;
-static PyObject *__pyx_codeobj__37;
-static PyObject *__pyx_codeobj__45;
+static PyObject *__pyx_tuple__45;
+static PyObject *__pyx_codeobj__33;
+static PyObject *__pyx_codeobj__35;
+static PyObject *__pyx_codeobj__38;
+static PyObject *__pyx_codeobj__46;
 
-/* "nescient/crypto/chacha.pyx":20
+/* "nescient/crypto/chacha.pyx":21
  * 
  * # Little endian bytes to 32-bit words conversion
  * cdef unsigned int * bytes_to_words(unsigned char * b, unsigned long l):             # <<<<<<<<<<<<<<
@@ -2158,7 +2165,7 @@ static unsigned int *__pyx_f_8nescient_6crypto_6chacha_bytes_to_words(unsigned c
   unsigned long __pyx_t_2;
   __Pyx_RefNannySetupContext("bytes_to_words", 0);
 
-  /* "nescient/crypto/chacha.pyx":21
+  /* "nescient/crypto/chacha.pyx":22
  * # Little endian bytes to 32-bit words conversion
  * cdef unsigned int * bytes_to_words(unsigned char * b, unsigned long l):
  *     cdef unsigned int * w = <unsigned int *>PyMem_Malloc(l)             # <<<<<<<<<<<<<<
@@ -2167,7 +2174,7 @@ static unsigned int *__pyx_f_8nescient_6crypto_6chacha_bytes_to_words(unsigned c
  */
   __pyx_v_w = ((unsigned int *)PyMem_Malloc(__pyx_v_l));
 
-  /* "nescient/crypto/chacha.pyx":23
+  /* "nescient/crypto/chacha.pyx":24
  *     cdef unsigned int * w = <unsigned int *>PyMem_Malloc(l)
  *     cdef unsigned long i
  *     for i in range(0, l, 4):             # <<<<<<<<<<<<<<
@@ -2178,7 +2185,7 @@ static unsigned int *__pyx_f_8nescient_6crypto_6chacha_bytes_to_words(unsigned c
   for (__pyx_t_2 = 0; __pyx_t_2 < __pyx_t_1; __pyx_t_2+=4) {
     __pyx_v_i = __pyx_t_2;
 
-    /* "nescient/crypto/chacha.pyx":24
+    /* "nescient/crypto/chacha.pyx":25
  *     cdef unsigned long i
  *     for i in range(0, l, 4):
  *         w[i>>2] = b[i] | (b[i+1] << 8) | (b[i+2] << 16) | (b[i+3] << 24)             # <<<<<<<<<<<<<<
@@ -2188,7 +2195,7 @@ static unsigned int *__pyx_f_8nescient_6crypto_6chacha_bytes_to_words(unsigned c
     (__pyx_v_w[(__pyx_v_i >> 2)]) = ((((__pyx_v_b[__pyx_v_i]) | ((__pyx_v_b[(__pyx_v_i + 1)]) << 8)) | ((__pyx_v_b[(__pyx_v_i + 2)]) << 16)) | ((__pyx_v_b[(__pyx_v_i + 3)]) << 24));
   }
 
-  /* "nescient/crypto/chacha.pyx":25
+  /* "nescient/crypto/chacha.pyx":26
  *     for i in range(0, l, 4):
  *         w[i>>2] = b[i] | (b[i+1] << 8) | (b[i+2] << 16) | (b[i+3] << 24)
  *     return w             # <<<<<<<<<<<<<<
@@ -2198,7 +2205,7 @@ static unsigned int *__pyx_f_8nescient_6crypto_6chacha_bytes_to_words(unsigned c
   __pyx_r = __pyx_v_w;
   goto __pyx_L0;
 
-  /* "nescient/crypto/chacha.pyx":20
+  /* "nescient/crypto/chacha.pyx":21
  * 
  * # Little endian bytes to 32-bit words conversion
  * cdef unsigned int * bytes_to_words(unsigned char * b, unsigned long l):             # <<<<<<<<<<<<<<
@@ -2212,7 +2219,7 @@ static unsigned int *__pyx_f_8nescient_6crypto_6chacha_bytes_to_words(unsigned c
   return __pyx_r;
 }
 
-/* "nescient/crypto/chacha.pyx":28
+/* "nescient/crypto/chacha.pyx":29
  * 
  * # Little endian 32-bit words to bytes conversion
  * cdef unsigned char * words_to_bytes(unsigned int * w, unsigned long l):             # <<<<<<<<<<<<<<
@@ -2229,7 +2236,7 @@ static unsigned char *__pyx_f_8nescient_6crypto_6chacha_words_to_bytes(unsigned 
   unsigned long __pyx_t_2;
   __Pyx_RefNannySetupContext("words_to_bytes", 0);
 
-  /* "nescient/crypto/chacha.pyx":29
+  /* "nescient/crypto/chacha.pyx":30
  * # Little endian 32-bit words to bytes conversion
  * cdef unsigned char * words_to_bytes(unsigned int * w, unsigned long l):
  *     cdef unsigned char * b = <unsigned char *>PyMem_Malloc(4*l)             # <<<<<<<<<<<<<<
@@ -2238,7 +2245,7 @@ static unsigned char *__pyx_f_8nescient_6crypto_6chacha_words_to_bytes(unsigned 
  */
   __pyx_v_b = ((unsigned char *)PyMem_Malloc((4 * __pyx_v_l)));
 
-  /* "nescient/crypto/chacha.pyx":31
+  /* "nescient/crypto/chacha.pyx":32
  *     cdef unsigned char * b = <unsigned char *>PyMem_Malloc(4*l)
  *     cdef unsigned long i
  *     for i in range(l):             # <<<<<<<<<<<<<<
@@ -2249,7 +2256,7 @@ static unsigned char *__pyx_f_8nescient_6crypto_6chacha_words_to_bytes(unsigned 
   for (__pyx_t_2 = 0; __pyx_t_2 < __pyx_t_1; __pyx_t_2+=1) {
     __pyx_v_i = __pyx_t_2;
 
-    /* "nescient/crypto/chacha.pyx":32
+    /* "nescient/crypto/chacha.pyx":33
  *     cdef unsigned long i
  *     for i in range(l):
  *         b[4*i] = w[i] & 0xff             # <<<<<<<<<<<<<<
@@ -2258,7 +2265,7 @@ static unsigned char *__pyx_f_8nescient_6crypto_6chacha_words_to_bytes(unsigned 
  */
     (__pyx_v_b[(4 * __pyx_v_i)]) = ((__pyx_v_w[__pyx_v_i]) & 0xff);
 
-    /* "nescient/crypto/chacha.pyx":33
+    /* "nescient/crypto/chacha.pyx":34
  *     for i in range(l):
  *         b[4*i] = w[i] & 0xff
  *         b[4*i+1] = (w[i] >> 8) & 0xff             # <<<<<<<<<<<<<<
@@ -2267,7 +2274,7 @@ static unsigned char *__pyx_f_8nescient_6crypto_6chacha_words_to_bytes(unsigned 
  */
     (__pyx_v_b[((4 * __pyx_v_i) + 1)]) = (((__pyx_v_w[__pyx_v_i]) >> 8) & 0xff);
 
-    /* "nescient/crypto/chacha.pyx":34
+    /* "nescient/crypto/chacha.pyx":35
  *         b[4*i] = w[i] & 0xff
  *         b[4*i+1] = (w[i] >> 8) & 0xff
  *         b[4*i+2] = (w[i] >> 16) & 0xff             # <<<<<<<<<<<<<<
@@ -2276,7 +2283,7 @@ static unsigned char *__pyx_f_8nescient_6crypto_6chacha_words_to_bytes(unsigned 
  */
     (__pyx_v_b[((4 * __pyx_v_i) + 2)]) = (((__pyx_v_w[__pyx_v_i]) >> 16) & 0xff);
 
-    /* "nescient/crypto/chacha.pyx":35
+    /* "nescient/crypto/chacha.pyx":36
  *         b[4*i+1] = (w[i] >> 8) & 0xff
  *         b[4*i+2] = (w[i] >> 16) & 0xff
  *         b[4*i+3] = (w[i] >> 24) & 0xff             # <<<<<<<<<<<<<<
@@ -2286,7 +2293,7 @@ static unsigned char *__pyx_f_8nescient_6crypto_6chacha_words_to_bytes(unsigned 
     (__pyx_v_b[((4 * __pyx_v_i) + 3)]) = (((__pyx_v_w[__pyx_v_i]) >> 24) & 0xff);
   }
 
-  /* "nescient/crypto/chacha.pyx":36
+  /* "nescient/crypto/chacha.pyx":37
  *         b[4*i+2] = (w[i] >> 16) & 0xff
  *         b[4*i+3] = (w[i] >> 24) & 0xff
  *     return b             # <<<<<<<<<<<<<<
@@ -2296,7 +2303,7 @@ static unsigned char *__pyx_f_8nescient_6crypto_6chacha_words_to_bytes(unsigned 
   __pyx_r = __pyx_v_b;
   goto __pyx_L0;
 
-  /* "nescient/crypto/chacha.pyx":28
+  /* "nescient/crypto/chacha.pyx":29
  * 
  * # Little endian 32-bit words to bytes conversion
  * cdef unsigned char * words_to_bytes(unsigned int * w, unsigned long l):             # <<<<<<<<<<<<<<
@@ -2310,7 +2317,7 @@ static unsigned char *__pyx_f_8nescient_6crypto_6chacha_words_to_bytes(unsigned 
   return __pyx_r;
 }
 
-/* "nescient/crypto/chacha.pyx":52
+/* "nescient/crypto/chacha.pyx":53
  * 
  * # Generates 64 keystream bytes from a 256-bit key, a 96-bit nonce, and a 32-bit counter
  * cdef unsigned char * chacha20(unsigned int * key, unsigned int * nonce, unsigned int count):             # <<<<<<<<<<<<<<
@@ -2329,7 +2336,7 @@ static unsigned char *__pyx_f_8nescient_6crypto_6chacha_chacha20(unsigned int *_
   unsigned char __pyx_t_3;
   __Pyx_RefNannySetupContext("chacha20", 0);
 
-  /* "nescient/crypto/chacha.pyx":57
+  /* "nescient/crypto/chacha.pyx":58
  *     cdef unsigned char i
  *     # First four words are constants
  *     state[:4] = [0x61707865, 0x3320646e, 0x79622d32, 0x6b206574]             # <<<<<<<<<<<<<<
@@ -2342,7 +2349,7 @@ static unsigned char *__pyx_f_8nescient_6crypto_6chacha_chacha20(unsigned int *_
   __pyx_t_1[3] = 0x6b206574;
   memcpy(&(__pyx_v_state[0]), __pyx_t_1, sizeof(__pyx_v_state[0]) * (4));
 
-  /* "nescient/crypto/chacha.pyx":59
+  /* "nescient/crypto/chacha.pyx":60
  *     state[:4] = [0x61707865, 0x3320646e, 0x79622d32, 0x6b206574]
  *     # Words 4-11 are the key
  *     state[4:12] = key             # <<<<<<<<<<<<<<
@@ -2351,7 +2358,7 @@ static unsigned char *__pyx_f_8nescient_6crypto_6chacha_chacha20(unsigned int *_
  */
   memcpy(&(__pyx_v_state[4]), __pyx_v_key, sizeof(__pyx_v_state[0]) * (12 - 4));
 
-  /* "nescient/crypto/chacha.pyx":61
+  /* "nescient/crypto/chacha.pyx":62
  *     state[4:12] = key
  *     # Word 12 is the count
  *     state[12] = count             # <<<<<<<<<<<<<<
@@ -2360,7 +2367,7 @@ static unsigned char *__pyx_f_8nescient_6crypto_6chacha_chacha20(unsigned int *_
  */
   (__pyx_v_state[12]) = __pyx_v_count;
 
-  /* "nescient/crypto/chacha.pyx":63
+  /* "nescient/crypto/chacha.pyx":64
  *     state[12] = count
  *     # Words 13-15 are the nonce
  *     state[13:16] = nonce             # <<<<<<<<<<<<<<
@@ -2369,7 +2376,7 @@ static unsigned char *__pyx_f_8nescient_6crypto_6chacha_chacha20(unsigned int *_
  */
   memcpy(&(__pyx_v_state[13]), __pyx_v_nonce, sizeof(__pyx_v_state[0]) * (16 - 13));
 
-  /* "nescient/crypto/chacha.pyx":65
+  /* "nescient/crypto/chacha.pyx":66
  *     state[13:16] = nonce
  *     # Copy the state into the start state for later
  *     start_state[:] = state             # <<<<<<<<<<<<<<
@@ -2378,7 +2385,7 @@ static unsigned char *__pyx_f_8nescient_6crypto_6chacha_chacha20(unsigned int *_
  */
   memcpy(&(__pyx_v_start_state[0]), __pyx_v_state, sizeof(__pyx_v_start_state[0]) * (16));
 
-  /* "nescient/crypto/chacha.pyx":67
+  /* "nescient/crypto/chacha.pyx":68
  *     start_state[:] = state
  *     # Perform the ChaCha20 rounds
  *     for i in range(10):             # <<<<<<<<<<<<<<
@@ -2388,7 +2395,7 @@ static unsigned char *__pyx_f_8nescient_6crypto_6chacha_chacha20(unsigned int *_
   for (__pyx_t_2 = 0; __pyx_t_2 < 10; __pyx_t_2+=1) {
     __pyx_v_i = __pyx_t_2;
 
-    /* "nescient/crypto/chacha.pyx":69
+    /* "nescient/crypto/chacha.pyx":70
  *     for i in range(10):
  *         # Quarter round 0, 4, 8, 12
  *         state[0] = state[0] + state[4]; state[12] = state[12] ^ state[0]; state[12] = (state[12] << 16) | (state[12] >> 16)             # <<<<<<<<<<<<<<
@@ -2399,7 +2406,7 @@ static unsigned char *__pyx_f_8nescient_6crypto_6chacha_chacha20(unsigned int *_
     (__pyx_v_state[12]) = ((__pyx_v_state[12]) ^ (__pyx_v_state[0]));
     (__pyx_v_state[12]) = (((__pyx_v_state[12]) << 16) | ((__pyx_v_state[12]) >> 16));
 
-    /* "nescient/crypto/chacha.pyx":70
+    /* "nescient/crypto/chacha.pyx":71
  *         # Quarter round 0, 4, 8, 12
  *         state[0] = state[0] + state[4]; state[12] = state[12] ^ state[0]; state[12] = (state[12] << 16) | (state[12] >> 16)
  *         state[8] = state[8] + state[12]; state[4] = state[4] ^ state[8]; state[4] = (state[4] << 12) | (state[4] >> 20)             # <<<<<<<<<<<<<<
@@ -2410,7 +2417,7 @@ static unsigned char *__pyx_f_8nescient_6crypto_6chacha_chacha20(unsigned int *_
     (__pyx_v_state[4]) = ((__pyx_v_state[4]) ^ (__pyx_v_state[8]));
     (__pyx_v_state[4]) = (((__pyx_v_state[4]) << 12) | ((__pyx_v_state[4]) >> 20));
 
-    /* "nescient/crypto/chacha.pyx":71
+    /* "nescient/crypto/chacha.pyx":72
  *         state[0] = state[0] + state[4]; state[12] = state[12] ^ state[0]; state[12] = (state[12] << 16) | (state[12] >> 16)
  *         state[8] = state[8] + state[12]; state[4] = state[4] ^ state[8]; state[4] = (state[4] << 12) | (state[4] >> 20)
  *         state[0] = state[0] + state[4]; state[12] = state[12] ^ state[0]; state[12] = (state[12] << 8) | (state[12] >> 24)             # <<<<<<<<<<<<<<
@@ -2421,7 +2428,7 @@ static unsigned char *__pyx_f_8nescient_6crypto_6chacha_chacha20(unsigned int *_
     (__pyx_v_state[12]) = ((__pyx_v_state[12]) ^ (__pyx_v_state[0]));
     (__pyx_v_state[12]) = (((__pyx_v_state[12]) << 8) | ((__pyx_v_state[12]) >> 24));
 
-    /* "nescient/crypto/chacha.pyx":72
+    /* "nescient/crypto/chacha.pyx":73
  *         state[8] = state[8] + state[12]; state[4] = state[4] ^ state[8]; state[4] = (state[4] << 12) | (state[4] >> 20)
  *         state[0] = state[0] + state[4]; state[12] = state[12] ^ state[0]; state[12] = (state[12] << 8) | (state[12] >> 24)
  *         state[8] = state[8] + state[12]; state[4] = state[4] ^ state[8]; state[4] = (state[4] << 7) | (state[4] >> 25)             # <<<<<<<<<<<<<<
@@ -2432,7 +2439,7 @@ static unsigned char *__pyx_f_8nescient_6crypto_6chacha_chacha20(unsigned int *_
     (__pyx_v_state[4]) = ((__pyx_v_state[4]) ^ (__pyx_v_state[8]));
     (__pyx_v_state[4]) = (((__pyx_v_state[4]) << 7) | ((__pyx_v_state[4]) >> 25));
 
-    /* "nescient/crypto/chacha.pyx":74
+    /* "nescient/crypto/chacha.pyx":75
  *         state[8] = state[8] + state[12]; state[4] = state[4] ^ state[8]; state[4] = (state[4] << 7) | (state[4] >> 25)
  *         # Quarter round 1, 5, 9, 13
  *         state[1] = state[1] + state[5]; state[13] = state[13] ^ state[1]; state[13] = (state[13] << 16) | (state[13] >> 16)             # <<<<<<<<<<<<<<
@@ -2443,7 +2450,7 @@ static unsigned char *__pyx_f_8nescient_6crypto_6chacha_chacha20(unsigned int *_
     (__pyx_v_state[13]) = ((__pyx_v_state[13]) ^ (__pyx_v_state[1]));
     (__pyx_v_state[13]) = (((__pyx_v_state[13]) << 16) | ((__pyx_v_state[13]) >> 16));
 
-    /* "nescient/crypto/chacha.pyx":75
+    /* "nescient/crypto/chacha.pyx":76
  *         # Quarter round 1, 5, 9, 13
  *         state[1] = state[1] + state[5]; state[13] = state[13] ^ state[1]; state[13] = (state[13] << 16) | (state[13] >> 16)
  *         state[9] = state[9] + state[13]; state[5] = state[5] ^ state[9]; state[5] = (state[5] << 12) | (state[5] >> 20)             # <<<<<<<<<<<<<<
@@ -2454,7 +2461,7 @@ static unsigned char *__pyx_f_8nescient_6crypto_6chacha_chacha20(unsigned int *_
     (__pyx_v_state[5]) = ((__pyx_v_state[5]) ^ (__pyx_v_state[9]));
     (__pyx_v_state[5]) = (((__pyx_v_state[5]) << 12) | ((__pyx_v_state[5]) >> 20));
 
-    /* "nescient/crypto/chacha.pyx":76
+    /* "nescient/crypto/chacha.pyx":77
  *         state[1] = state[1] + state[5]; state[13] = state[13] ^ state[1]; state[13] = (state[13] << 16) | (state[13] >> 16)
  *         state[9] = state[9] + state[13]; state[5] = state[5] ^ state[9]; state[5] = (state[5] << 12) | (state[5] >> 20)
  *         state[1] = state[1] + state[5]; state[13] = state[13] ^ state[1]; state[13] = (state[13] << 8) | (state[13] >> 24)             # <<<<<<<<<<<<<<
@@ -2465,7 +2472,7 @@ static unsigned char *__pyx_f_8nescient_6crypto_6chacha_chacha20(unsigned int *_
     (__pyx_v_state[13]) = ((__pyx_v_state[13]) ^ (__pyx_v_state[1]));
     (__pyx_v_state[13]) = (((__pyx_v_state[13]) << 8) | ((__pyx_v_state[13]) >> 24));
 
-    /* "nescient/crypto/chacha.pyx":77
+    /* "nescient/crypto/chacha.pyx":78
  *         state[9] = state[9] + state[13]; state[5] = state[5] ^ state[9]; state[5] = (state[5] << 12) | (state[5] >> 20)
  *         state[1] = state[1] + state[5]; state[13] = state[13] ^ state[1]; state[13] = (state[13] << 8) | (state[13] >> 24)
  *         state[9] = state[9] + state[13]; state[5] = state[5] ^ state[9]; state[5] = (state[5] << 7) | (state[5] >> 25)             # <<<<<<<<<<<<<<
@@ -2476,7 +2483,7 @@ static unsigned char *__pyx_f_8nescient_6crypto_6chacha_chacha20(unsigned int *_
     (__pyx_v_state[5]) = ((__pyx_v_state[5]) ^ (__pyx_v_state[9]));
     (__pyx_v_state[5]) = (((__pyx_v_state[5]) << 7) | ((__pyx_v_state[5]) >> 25));
 
-    /* "nescient/crypto/chacha.pyx":79
+    /* "nescient/crypto/chacha.pyx":80
  *         state[9] = state[9] + state[13]; state[5] = state[5] ^ state[9]; state[5] = (state[5] << 7) | (state[5] >> 25)
  *         # Quarter round 2, 6, 10, 14
  *         state[2] = state[2] + state[6]; state[14] = state[14] ^ state[2]; state[14] = (state[14] << 16) | (state[14] >> 16)             # <<<<<<<<<<<<<<
@@ -2487,7 +2494,7 @@ static unsigned char *__pyx_f_8nescient_6crypto_6chacha_chacha20(unsigned int *_
     (__pyx_v_state[14]) = ((__pyx_v_state[14]) ^ (__pyx_v_state[2]));
     (__pyx_v_state[14]) = (((__pyx_v_state[14]) << 16) | ((__pyx_v_state[14]) >> 16));
 
-    /* "nescient/crypto/chacha.pyx":80
+    /* "nescient/crypto/chacha.pyx":81
  *         # Quarter round 2, 6, 10, 14
  *         state[2] = state[2] + state[6]; state[14] = state[14] ^ state[2]; state[14] = (state[14] << 16) | (state[14] >> 16)
  *         state[10] = state[10] + state[14]; state[6] = state[6] ^ state[10]; state[6] = (state[6] << 12) | (state[6] >> 20)             # <<<<<<<<<<<<<<
@@ -2498,7 +2505,7 @@ static unsigned char *__pyx_f_8nescient_6crypto_6chacha_chacha20(unsigned int *_
     (__pyx_v_state[6]) = ((__pyx_v_state[6]) ^ (__pyx_v_state[10]));
     (__pyx_v_state[6]) = (((__pyx_v_state[6]) << 12) | ((__pyx_v_state[6]) >> 20));
 
-    /* "nescient/crypto/chacha.pyx":81
+    /* "nescient/crypto/chacha.pyx":82
  *         state[2] = state[2] + state[6]; state[14] = state[14] ^ state[2]; state[14] = (state[14] << 16) | (state[14] >> 16)
  *         state[10] = state[10] + state[14]; state[6] = state[6] ^ state[10]; state[6] = (state[6] << 12) | (state[6] >> 20)
  *         state[2] = state[2] + state[6]; state[14] = state[14] ^ state[2]; state[14] = (state[14] << 8) | (state[14] >> 24)             # <<<<<<<<<<<<<<
@@ -2509,7 +2516,7 @@ static unsigned char *__pyx_f_8nescient_6crypto_6chacha_chacha20(unsigned int *_
     (__pyx_v_state[14]) = ((__pyx_v_state[14]) ^ (__pyx_v_state[2]));
     (__pyx_v_state[14]) = (((__pyx_v_state[14]) << 8) | ((__pyx_v_state[14]) >> 24));
 
-    /* "nescient/crypto/chacha.pyx":82
+    /* "nescient/crypto/chacha.pyx":83
  *         state[10] = state[10] + state[14]; state[6] = state[6] ^ state[10]; state[6] = (state[6] << 12) | (state[6] >> 20)
  *         state[2] = state[2] + state[6]; state[14] = state[14] ^ state[2]; state[14] = (state[14] << 8) | (state[14] >> 24)
  *         state[10] = state[10] + state[14]; state[6] = state[6] ^ state[10]; state[6] = (state[6] << 7) | (state[6] >> 25)             # <<<<<<<<<<<<<<
@@ -2520,7 +2527,7 @@ static unsigned char *__pyx_f_8nescient_6crypto_6chacha_chacha20(unsigned int *_
     (__pyx_v_state[6]) = ((__pyx_v_state[6]) ^ (__pyx_v_state[10]));
     (__pyx_v_state[6]) = (((__pyx_v_state[6]) << 7) | ((__pyx_v_state[6]) >> 25));
 
-    /* "nescient/crypto/chacha.pyx":84
+    /* "nescient/crypto/chacha.pyx":85
  *         state[10] = state[10] + state[14]; state[6] = state[6] ^ state[10]; state[6] = (state[6] << 7) | (state[6] >> 25)
  *         # Quarter round 3, 7, 11, 15
  *         state[3] = state[3] + state[7]; state[15] = state[15] ^ state[3]; state[15] = (state[15] << 16) | (state[15] >> 16)             # <<<<<<<<<<<<<<
@@ -2531,7 +2538,7 @@ static unsigned char *__pyx_f_8nescient_6crypto_6chacha_chacha20(unsigned int *_
     (__pyx_v_state[15]) = ((__pyx_v_state[15]) ^ (__pyx_v_state[3]));
     (__pyx_v_state[15]) = (((__pyx_v_state[15]) << 16) | ((__pyx_v_state[15]) >> 16));
 
-    /* "nescient/crypto/chacha.pyx":85
+    /* "nescient/crypto/chacha.pyx":86
  *         # Quarter round 3, 7, 11, 15
  *         state[3] = state[3] + state[7]; state[15] = state[15] ^ state[3]; state[15] = (state[15] << 16) | (state[15] >> 16)
  *         state[11] = state[11] + state[15]; state[7] = state[7] ^ state[11]; state[7] = (state[7] << 12) | (state[7] >> 20)             # <<<<<<<<<<<<<<
@@ -2542,7 +2549,7 @@ static unsigned char *__pyx_f_8nescient_6crypto_6chacha_chacha20(unsigned int *_
     (__pyx_v_state[7]) = ((__pyx_v_state[7]) ^ (__pyx_v_state[11]));
     (__pyx_v_state[7]) = (((__pyx_v_state[7]) << 12) | ((__pyx_v_state[7]) >> 20));
 
-    /* "nescient/crypto/chacha.pyx":86
+    /* "nescient/crypto/chacha.pyx":87
  *         state[3] = state[3] + state[7]; state[15] = state[15] ^ state[3]; state[15] = (state[15] << 16) | (state[15] >> 16)
  *         state[11] = state[11] + state[15]; state[7] = state[7] ^ state[11]; state[7] = (state[7] << 12) | (state[7] >> 20)
  *         state[3] = state[3] + state[7]; state[15] = state[15] ^ state[3]; state[15] = (state[15] << 8) | (state[15] >> 24)             # <<<<<<<<<<<<<<
@@ -2553,7 +2560,7 @@ static unsigned char *__pyx_f_8nescient_6crypto_6chacha_chacha20(unsigned int *_
     (__pyx_v_state[15]) = ((__pyx_v_state[15]) ^ (__pyx_v_state[3]));
     (__pyx_v_state[15]) = (((__pyx_v_state[15]) << 8) | ((__pyx_v_state[15]) >> 24));
 
-    /* "nescient/crypto/chacha.pyx":87
+    /* "nescient/crypto/chacha.pyx":88
  *         state[11] = state[11] + state[15]; state[7] = state[7] ^ state[11]; state[7] = (state[7] << 12) | (state[7] >> 20)
  *         state[3] = state[3] + state[7]; state[15] = state[15] ^ state[3]; state[15] = (state[15] << 8) | (state[15] >> 24)
  *         state[11] = state[11] + state[15]; state[7] = state[7] ^ state[11]; state[7] = (state[7] << 7) | (state[7] >> 25)             # <<<<<<<<<<<<<<
@@ -2564,7 +2571,7 @@ static unsigned char *__pyx_f_8nescient_6crypto_6chacha_chacha20(unsigned int *_
     (__pyx_v_state[7]) = ((__pyx_v_state[7]) ^ (__pyx_v_state[11]));
     (__pyx_v_state[7]) = (((__pyx_v_state[7]) << 7) | ((__pyx_v_state[7]) >> 25));
 
-    /* "nescient/crypto/chacha.pyx":89
+    /* "nescient/crypto/chacha.pyx":90
  *         state[11] = state[11] + state[15]; state[7] = state[7] ^ state[11]; state[7] = (state[7] << 7) | (state[7] >> 25)
  *         # Quarter round 0, 5, 10, 15
  *         state[0] = state[0] + state[5]; state[15] = state[15] ^ state[0]; state[15] = (state[15] << 16) | (state[15] >> 16)             # <<<<<<<<<<<<<<
@@ -2575,7 +2582,7 @@ static unsigned char *__pyx_f_8nescient_6crypto_6chacha_chacha20(unsigned int *_
     (__pyx_v_state[15]) = ((__pyx_v_state[15]) ^ (__pyx_v_state[0]));
     (__pyx_v_state[15]) = (((__pyx_v_state[15]) << 16) | ((__pyx_v_state[15]) >> 16));
 
-    /* "nescient/crypto/chacha.pyx":90
+    /* "nescient/crypto/chacha.pyx":91
  *         # Quarter round 0, 5, 10, 15
  *         state[0] = state[0] + state[5]; state[15] = state[15] ^ state[0]; state[15] = (state[15] << 16) | (state[15] >> 16)
  *         state[10] = state[10] + state[15]; state[5] = state[5] ^ state[10]; state[5] = (state[5] << 12) | (state[5] >> 20)             # <<<<<<<<<<<<<<
@@ -2586,7 +2593,7 @@ static unsigned char *__pyx_f_8nescient_6crypto_6chacha_chacha20(unsigned int *_
     (__pyx_v_state[5]) = ((__pyx_v_state[5]) ^ (__pyx_v_state[10]));
     (__pyx_v_state[5]) = (((__pyx_v_state[5]) << 12) | ((__pyx_v_state[5]) >> 20));
 
-    /* "nescient/crypto/chacha.pyx":91
+    /* "nescient/crypto/chacha.pyx":92
  *         state[0] = state[0] + state[5]; state[15] = state[15] ^ state[0]; state[15] = (state[15] << 16) | (state[15] >> 16)
  *         state[10] = state[10] + state[15]; state[5] = state[5] ^ state[10]; state[5] = (state[5] << 12) | (state[5] >> 20)
  *         state[0] = state[0] + state[5]; state[15] = state[15] ^ state[0]; state[15] = (state[15] << 8) | (state[15] >> 24)             # <<<<<<<<<<<<<<
@@ -2597,7 +2604,7 @@ static unsigned char *__pyx_f_8nescient_6crypto_6chacha_chacha20(unsigned int *_
     (__pyx_v_state[15]) = ((__pyx_v_state[15]) ^ (__pyx_v_state[0]));
     (__pyx_v_state[15]) = (((__pyx_v_state[15]) << 8) | ((__pyx_v_state[15]) >> 24));
 
-    /* "nescient/crypto/chacha.pyx":92
+    /* "nescient/crypto/chacha.pyx":93
  *         state[10] = state[10] + state[15]; state[5] = state[5] ^ state[10]; state[5] = (state[5] << 12) | (state[5] >> 20)
  *         state[0] = state[0] + state[5]; state[15] = state[15] ^ state[0]; state[15] = (state[15] << 8) | (state[15] >> 24)
  *         state[10] = state[10] + state[15]; state[5] = state[5] ^ state[10]; state[5] = (state[5] << 7) | (state[5] >> 25)             # <<<<<<<<<<<<<<
@@ -2608,7 +2615,7 @@ static unsigned char *__pyx_f_8nescient_6crypto_6chacha_chacha20(unsigned int *_
     (__pyx_v_state[5]) = ((__pyx_v_state[5]) ^ (__pyx_v_state[10]));
     (__pyx_v_state[5]) = (((__pyx_v_state[5]) << 7) | ((__pyx_v_state[5]) >> 25));
 
-    /* "nescient/crypto/chacha.pyx":94
+    /* "nescient/crypto/chacha.pyx":95
  *         state[10] = state[10] + state[15]; state[5] = state[5] ^ state[10]; state[5] = (state[5] << 7) | (state[5] >> 25)
  *         # Quarter round 1, 6, 11, 12
  *         state[1] = state[1] + state[6]; state[12] = state[12] ^ state[1]; state[12] = (state[12] << 16) | (state[12] >> 16)             # <<<<<<<<<<<<<<
@@ -2619,7 +2626,7 @@ static unsigned char *__pyx_f_8nescient_6crypto_6chacha_chacha20(unsigned int *_
     (__pyx_v_state[12]) = ((__pyx_v_state[12]) ^ (__pyx_v_state[1]));
     (__pyx_v_state[12]) = (((__pyx_v_state[12]) << 16) | ((__pyx_v_state[12]) >> 16));
 
-    /* "nescient/crypto/chacha.pyx":95
+    /* "nescient/crypto/chacha.pyx":96
  *         # Quarter round 1, 6, 11, 12
  *         state[1] = state[1] + state[6]; state[12] = state[12] ^ state[1]; state[12] = (state[12] << 16) | (state[12] >> 16)
  *         state[11] = state[11] + state[12]; state[6] = state[6] ^ state[11]; state[6] = (state[6] << 12) | (state[6] >> 20)             # <<<<<<<<<<<<<<
@@ -2630,7 +2637,7 @@ static unsigned char *__pyx_f_8nescient_6crypto_6chacha_chacha20(unsigned int *_
     (__pyx_v_state[6]) = ((__pyx_v_state[6]) ^ (__pyx_v_state[11]));
     (__pyx_v_state[6]) = (((__pyx_v_state[6]) << 12) | ((__pyx_v_state[6]) >> 20));
 
-    /* "nescient/crypto/chacha.pyx":96
+    /* "nescient/crypto/chacha.pyx":97
  *         state[1] = state[1] + state[6]; state[12] = state[12] ^ state[1]; state[12] = (state[12] << 16) | (state[12] >> 16)
  *         state[11] = state[11] + state[12]; state[6] = state[6] ^ state[11]; state[6] = (state[6] << 12) | (state[6] >> 20)
  *         state[1] = state[1] + state[6]; state[12] = state[12] ^ state[1]; state[12] = (state[12] << 8) | (state[12] >> 24)             # <<<<<<<<<<<<<<
@@ -2641,7 +2648,7 @@ static unsigned char *__pyx_f_8nescient_6crypto_6chacha_chacha20(unsigned int *_
     (__pyx_v_state[12]) = ((__pyx_v_state[12]) ^ (__pyx_v_state[1]));
     (__pyx_v_state[12]) = (((__pyx_v_state[12]) << 8) | ((__pyx_v_state[12]) >> 24));
 
-    /* "nescient/crypto/chacha.pyx":97
+    /* "nescient/crypto/chacha.pyx":98
  *         state[11] = state[11] + state[12]; state[6] = state[6] ^ state[11]; state[6] = (state[6] << 12) | (state[6] >> 20)
  *         state[1] = state[1] + state[6]; state[12] = state[12] ^ state[1]; state[12] = (state[12] << 8) | (state[12] >> 24)
  *         state[11] = state[11] + state[12]; state[6] = state[6] ^ state[11]; state[6] = (state[6] << 7) | (state[6] >> 25)             # <<<<<<<<<<<<<<
@@ -2652,7 +2659,7 @@ static unsigned char *__pyx_f_8nescient_6crypto_6chacha_chacha20(unsigned int *_
     (__pyx_v_state[6]) = ((__pyx_v_state[6]) ^ (__pyx_v_state[11]));
     (__pyx_v_state[6]) = (((__pyx_v_state[6]) << 7) | ((__pyx_v_state[6]) >> 25));
 
-    /* "nescient/crypto/chacha.pyx":99
+    /* "nescient/crypto/chacha.pyx":100
  *         state[11] = state[11] + state[12]; state[6] = state[6] ^ state[11]; state[6] = (state[6] << 7) | (state[6] >> 25)
  *         # Quarter round 2, 7, 8, 13
  *         state[2] = state[2] + state[7]; state[13] = state[13] ^ state[2]; state[13] = (state[13] << 16) | (state[13] >> 16)             # <<<<<<<<<<<<<<
@@ -2663,7 +2670,7 @@ static unsigned char *__pyx_f_8nescient_6crypto_6chacha_chacha20(unsigned int *_
     (__pyx_v_state[13]) = ((__pyx_v_state[13]) ^ (__pyx_v_state[2]));
     (__pyx_v_state[13]) = (((__pyx_v_state[13]) << 16) | ((__pyx_v_state[13]) >> 16));
 
-    /* "nescient/crypto/chacha.pyx":100
+    /* "nescient/crypto/chacha.pyx":101
  *         # Quarter round 2, 7, 8, 13
  *         state[2] = state[2] + state[7]; state[13] = state[13] ^ state[2]; state[13] = (state[13] << 16) | (state[13] >> 16)
  *         state[8] = state[8] + state[13]; state[7] = state[7] ^ state[8]; state[7] = (state[7] << 12) | (state[7] >> 20)             # <<<<<<<<<<<<<<
@@ -2674,7 +2681,7 @@ static unsigned char *__pyx_f_8nescient_6crypto_6chacha_chacha20(unsigned int *_
     (__pyx_v_state[7]) = ((__pyx_v_state[7]) ^ (__pyx_v_state[8]));
     (__pyx_v_state[7]) = (((__pyx_v_state[7]) << 12) | ((__pyx_v_state[7]) >> 20));
 
-    /* "nescient/crypto/chacha.pyx":101
+    /* "nescient/crypto/chacha.pyx":102
  *         state[2] = state[2] + state[7]; state[13] = state[13] ^ state[2]; state[13] = (state[13] << 16) | (state[13] >> 16)
  *         state[8] = state[8] + state[13]; state[7] = state[7] ^ state[8]; state[7] = (state[7] << 12) | (state[7] >> 20)
  *         state[2] = state[2] + state[7]; state[13] = state[13] ^ state[2]; state[13] = (state[13] << 8) | (state[13] >> 24)             # <<<<<<<<<<<<<<
@@ -2685,7 +2692,7 @@ static unsigned char *__pyx_f_8nescient_6crypto_6chacha_chacha20(unsigned int *_
     (__pyx_v_state[13]) = ((__pyx_v_state[13]) ^ (__pyx_v_state[2]));
     (__pyx_v_state[13]) = (((__pyx_v_state[13]) << 8) | ((__pyx_v_state[13]) >> 24));
 
-    /* "nescient/crypto/chacha.pyx":102
+    /* "nescient/crypto/chacha.pyx":103
  *         state[8] = state[8] + state[13]; state[7] = state[7] ^ state[8]; state[7] = (state[7] << 12) | (state[7] >> 20)
  *         state[2] = state[2] + state[7]; state[13] = state[13] ^ state[2]; state[13] = (state[13] << 8) | (state[13] >> 24)
  *         state[8] = state[8] + state[13]; state[7] = state[7] ^ state[8]; state[7] = (state[7] << 7) | (state[7] >> 25)             # <<<<<<<<<<<<<<
@@ -2696,7 +2703,7 @@ static unsigned char *__pyx_f_8nescient_6crypto_6chacha_chacha20(unsigned int *_
     (__pyx_v_state[7]) = ((__pyx_v_state[7]) ^ (__pyx_v_state[8]));
     (__pyx_v_state[7]) = (((__pyx_v_state[7]) << 7) | ((__pyx_v_state[7]) >> 25));
 
-    /* "nescient/crypto/chacha.pyx":104
+    /* "nescient/crypto/chacha.pyx":105
  *         state[8] = state[8] + state[13]; state[7] = state[7] ^ state[8]; state[7] = (state[7] << 7) | (state[7] >> 25)
  *         # Quarter round 3, 4, 9, 14
  *         state[3] = state[3] + state[4]; state[14] = state[14] ^ state[3]; state[14] = (state[14] << 16) | (state[14] >> 16)             # <<<<<<<<<<<<<<
@@ -2707,7 +2714,7 @@ static unsigned char *__pyx_f_8nescient_6crypto_6chacha_chacha20(unsigned int *_
     (__pyx_v_state[14]) = ((__pyx_v_state[14]) ^ (__pyx_v_state[3]));
     (__pyx_v_state[14]) = (((__pyx_v_state[14]) << 16) | ((__pyx_v_state[14]) >> 16));
 
-    /* "nescient/crypto/chacha.pyx":105
+    /* "nescient/crypto/chacha.pyx":106
  *         # Quarter round 3, 4, 9, 14
  *         state[3] = state[3] + state[4]; state[14] = state[14] ^ state[3]; state[14] = (state[14] << 16) | (state[14] >> 16)
  *         state[9] = state[9] + state[14]; state[4] = state[4] ^ state[9]; state[4] = (state[4] << 12) | (state[4] >> 20)             # <<<<<<<<<<<<<<
@@ -2718,7 +2725,7 @@ static unsigned char *__pyx_f_8nescient_6crypto_6chacha_chacha20(unsigned int *_
     (__pyx_v_state[4]) = ((__pyx_v_state[4]) ^ (__pyx_v_state[9]));
     (__pyx_v_state[4]) = (((__pyx_v_state[4]) << 12) | ((__pyx_v_state[4]) >> 20));
 
-    /* "nescient/crypto/chacha.pyx":106
+    /* "nescient/crypto/chacha.pyx":107
  *         state[3] = state[3] + state[4]; state[14] = state[14] ^ state[3]; state[14] = (state[14] << 16) | (state[14] >> 16)
  *         state[9] = state[9] + state[14]; state[4] = state[4] ^ state[9]; state[4] = (state[4] << 12) | (state[4] >> 20)
  *         state[3] = state[3] + state[4]; state[14] = state[14] ^ state[3]; state[14] = (state[14] << 8) | (state[14] >> 24)             # <<<<<<<<<<<<<<
@@ -2729,7 +2736,7 @@ static unsigned char *__pyx_f_8nescient_6crypto_6chacha_chacha20(unsigned int *_
     (__pyx_v_state[14]) = ((__pyx_v_state[14]) ^ (__pyx_v_state[3]));
     (__pyx_v_state[14]) = (((__pyx_v_state[14]) << 8) | ((__pyx_v_state[14]) >> 24));
 
-    /* "nescient/crypto/chacha.pyx":107
+    /* "nescient/crypto/chacha.pyx":108
  *         state[9] = state[9] + state[14]; state[4] = state[4] ^ state[9]; state[4] = (state[4] << 12) | (state[4] >> 20)
  *         state[3] = state[3] + state[4]; state[14] = state[14] ^ state[3]; state[14] = (state[14] << 8) | (state[14] >> 24)
  *         state[9] = state[9] + state[14]; state[4] = state[4] ^ state[9]; state[4] = (state[4] << 7) | (state[4] >> 25)             # <<<<<<<<<<<<<<
@@ -2741,7 +2748,7 @@ static unsigned char *__pyx_f_8nescient_6crypto_6chacha_chacha20(unsigned int *_
     (__pyx_v_state[4]) = (((__pyx_v_state[4]) << 7) | ((__pyx_v_state[4]) >> 25));
   }
 
-  /* "nescient/crypto/chacha.pyx":109
+  /* "nescient/crypto/chacha.pyx":110
  *         state[9] = state[9] + state[14]; state[4] = state[4] ^ state[9]; state[4] = (state[4] << 7) | (state[4] >> 25)
  *     # Add the original state with the result
  *     for i in range(16):             # <<<<<<<<<<<<<<
@@ -2751,7 +2758,7 @@ static unsigned char *__pyx_f_8nescient_6crypto_6chacha_chacha20(unsigned int *_
   for (__pyx_t_2 = 0; __pyx_t_2 < 16; __pyx_t_2+=1) {
     __pyx_v_i = __pyx_t_2;
 
-    /* "nescient/crypto/chacha.pyx":110
+    /* "nescient/crypto/chacha.pyx":111
  *     # Add the original state with the result
  *     for i in range(16):
  *         state[i] += start_state[i]             # <<<<<<<<<<<<<<
@@ -2762,7 +2769,7 @@ static unsigned char *__pyx_f_8nescient_6crypto_6chacha_chacha20(unsigned int *_
     (__pyx_v_state[__pyx_t_3]) = ((__pyx_v_state[__pyx_t_3]) + (__pyx_v_start_state[__pyx_v_i]));
   }
 
-  /* "nescient/crypto/chacha.pyx":112
+  /* "nescient/crypto/chacha.pyx":113
  *         state[i] += start_state[i]
  *     # Serialize into bytes
  *     return words_to_bytes(state, 16)             # <<<<<<<<<<<<<<
@@ -2772,7 +2779,7 @@ static unsigned char *__pyx_f_8nescient_6crypto_6chacha_chacha20(unsigned int *_
   __pyx_r = __pyx_f_8nescient_6crypto_6chacha_words_to_bytes(__pyx_v_state, 16);
   goto __pyx_L0;
 
-  /* "nescient/crypto/chacha.pyx":52
+  /* "nescient/crypto/chacha.pyx":53
  * 
  * # Generates 64 keystream bytes from a 256-bit key, a 96-bit nonce, and a 32-bit counter
  * cdef unsigned char * chacha20(unsigned int * key, unsigned int * nonce, unsigned int count):             # <<<<<<<<<<<<<<
@@ -2786,7 +2793,7 @@ static unsigned char *__pyx_f_8nescient_6crypto_6chacha_chacha20(unsigned int *_
   return __pyx_r;
 }
 
-/* "nescient/crypto/chacha.pyx":127
+/* "nescient/crypto/chacha.pyx":128
  *     auth = ['sha']
  * 
  *     def __init__(self, key):             # <<<<<<<<<<<<<<
@@ -2826,11 +2833,11 @@ static PyObject *__pyx_pw_8nescient_6crypto_6chacha_13ChaChaCrypter_1__init__(Py
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_key)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__init__", 1, 2, 2, 1); __PYX_ERR(0, 127, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__init__", 1, 2, 2, 1); __PYX_ERR(0, 128, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(0, 127, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(0, 128, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -2843,7 +2850,7 @@ static PyObject *__pyx_pw_8nescient_6crypto_6chacha_13ChaChaCrypter_1__init__(Py
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__init__", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 127, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__init__", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 128, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("nescient.crypto.chacha.ChaChaCrypter.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -2863,7 +2870,7 @@ static PyObject *__pyx_pf_8nescient_6crypto_6chacha_13ChaChaCrypter___init__(CYT
   PyObject *__pyx_t_2 = NULL;
   __Pyx_RefNannySetupContext("__init__", 0);
 
-  /* "nescient/crypto/chacha.pyx":128
+  /* "nescient/crypto/chacha.pyx":129
  * 
  *     def __init__(self, key):
  *         assert len(key) == 32             # <<<<<<<<<<<<<<
@@ -2872,39 +2879,39 @@ static PyObject *__pyx_pf_8nescient_6crypto_6chacha_13ChaChaCrypter___init__(CYT
  */
   #ifndef CYTHON_WITHOUT_ASSERTIONS
   if (unlikely(!Py_OptimizeFlag)) {
-    __pyx_t_1 = PyObject_Length(__pyx_v_key); if (unlikely(__pyx_t_1 == ((Py_ssize_t)-1))) __PYX_ERR(0, 128, __pyx_L1_error)
+    __pyx_t_1 = PyObject_Length(__pyx_v_key); if (unlikely(__pyx_t_1 == ((Py_ssize_t)-1))) __PYX_ERR(0, 129, __pyx_L1_error)
     if (unlikely(!((__pyx_t_1 == 32) != 0))) {
       PyErr_SetNone(PyExc_AssertionError);
-      __PYX_ERR(0, 128, __pyx_L1_error)
+      __PYX_ERR(0, 129, __pyx_L1_error)
     }
   }
   #endif
 
-  /* "nescient/crypto/chacha.pyx":129
+  /* "nescient/crypto/chacha.pyx":130
  *     def __init__(self, key):
  *         assert len(key) == 32
  *         self.key = key[:]             # <<<<<<<<<<<<<<
  *         # Since this is a stream cipher encryption is the same as decryption
  *         self.chacha_decrypt = self.chacha_encrypt
  */
-  __pyx_t_2 = __Pyx_PyObject_GetSlice(__pyx_v_key, 0, 0, NULL, NULL, &__pyx_slice_, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 129, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetSlice(__pyx_v_key, 0, 0, NULL, NULL, &__pyx_slice_, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 130, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_key, __pyx_t_2) < 0) __PYX_ERR(0, 129, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_key, __pyx_t_2) < 0) __PYX_ERR(0, 130, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "nescient/crypto/chacha.pyx":131
+  /* "nescient/crypto/chacha.pyx":132
  *         self.key = key[:]
  *         # Since this is a stream cipher encryption is the same as decryption
  *         self.chacha_decrypt = self.chacha_encrypt             # <<<<<<<<<<<<<<
  * 
  *     # The function that actually performs ChaCha encryption/decryption
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_chacha_encrypt); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 131, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_chacha_encrypt); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 132, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_chacha_decrypt, __pyx_t_2) < 0) __PYX_ERR(0, 131, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_chacha_decrypt, __pyx_t_2) < 0) __PYX_ERR(0, 132, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "nescient/crypto/chacha.pyx":127
+  /* "nescient/crypto/chacha.pyx":128
  *     auth = ['sha']
  * 
  *     def __init__(self, key):             # <<<<<<<<<<<<<<
@@ -2925,7 +2932,7 @@ static PyObject *__pyx_pf_8nescient_6crypto_6chacha_13ChaChaCrypter___init__(CYT
   return __pyx_r;
 }
 
-/* "nescient/crypto/chacha.pyx":134
+/* "nescient/crypto/chacha.pyx":135
  * 
  *     # The function that actually performs ChaCha encryption/decryption
  *     def _chacha_task(self, data, nonce, count=1):             # <<<<<<<<<<<<<<
@@ -2972,13 +2979,13 @@ static PyObject *__pyx_pw_8nescient_6crypto_6chacha_13ChaChaCrypter_3_chacha_tas
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_data)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("_chacha_task", 0, 3, 4, 1); __PYX_ERR(0, 134, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("_chacha_task", 0, 3, 4, 1); __PYX_ERR(0, 135, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_nonce)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("_chacha_task", 0, 3, 4, 2); __PYX_ERR(0, 134, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("_chacha_task", 0, 3, 4, 2); __PYX_ERR(0, 135, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
@@ -2988,7 +2995,7 @@ static PyObject *__pyx_pw_8nescient_6crypto_6chacha_13ChaChaCrypter_3_chacha_tas
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "_chacha_task") < 0)) __PYX_ERR(0, 134, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "_chacha_task") < 0)) __PYX_ERR(0, 135, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -3008,7 +3015,7 @@ static PyObject *__pyx_pw_8nescient_6crypto_6chacha_13ChaChaCrypter_3_chacha_tas
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("_chacha_task", 0, 3, 4, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 134, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("_chacha_task", 0, 3, 4, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 135, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("nescient.crypto.chacha.ChaChaCrypter._chacha_task", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -3049,60 +3056,60 @@ static PyObject *__pyx_pf_8nescient_6crypto_6chacha_13ChaChaCrypter_2_chacha_tas
   Py_ssize_t __pyx_t_14;
   __Pyx_RefNannySetupContext("_chacha_task", 0);
 
-  /* "nescient/crypto/chacha.pyx":136
+  /* "nescient/crypto/chacha.pyx":137
  *     def _chacha_task(self, data, nonce, count=1):
  *         # Convert key from bytes to little-endian words
  *         cdef unsigned int * key_w = bytes_to_words(self.key, 32)             # <<<<<<<<<<<<<<
  *         # Convert the nonce into an array of 32-bit words
  *         cdef unsigned int * nonce_w = bytes_to_words(nonce.to_bytes(12, byteorder='little'), 12)
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_key); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 136, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_key); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 137, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_AsWritableUString(__pyx_t_1); if (unlikely((!__pyx_t_2) && PyErr_Occurred())) __PYX_ERR(0, 136, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_AsWritableUString(__pyx_t_1); if (unlikely((!__pyx_t_2) && PyErr_Occurred())) __PYX_ERR(0, 137, __pyx_L1_error)
   __pyx_v_key_w = __pyx_f_8nescient_6crypto_6chacha_bytes_to_words(__pyx_t_2, 32);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "nescient/crypto/chacha.pyx":138
+  /* "nescient/crypto/chacha.pyx":139
  *         cdef unsigned int * key_w = bytes_to_words(self.key, 32)
  *         # Convert the nonce into an array of 32-bit words
  *         cdef unsigned int * nonce_w = bytes_to_words(nonce.to_bytes(12, byteorder='little'), 12)             # <<<<<<<<<<<<<<
  *         # Initialize counter and working variables
  *         cdef unsigned int counter = count
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_nonce, __pyx_n_s_to_bytes); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 138, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_nonce, __pyx_n_s_to_bytes); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 139, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 138, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 139, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_byteorder, __pyx_n_s_little) < 0) __PYX_ERR(0, 138, __pyx_L1_error)
-  __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__2, __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 138, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_byteorder, __pyx_n_s_little) < 0) __PYX_ERR(0, 139, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__2, __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 139, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_2 = __Pyx_PyObject_AsWritableUString(__pyx_t_4); if (unlikely((!__pyx_t_2) && PyErr_Occurred())) __PYX_ERR(0, 138, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_AsWritableUString(__pyx_t_4); if (unlikely((!__pyx_t_2) && PyErr_Occurred())) __PYX_ERR(0, 139, __pyx_L1_error)
   __pyx_v_nonce_w = __pyx_f_8nescient_6crypto_6chacha_bytes_to_words(__pyx_t_2, 12);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "nescient/crypto/chacha.pyx":140
+  /* "nescient/crypto/chacha.pyx":141
  *         cdef unsigned int * nonce_w = bytes_to_words(nonce.to_bytes(12, byteorder='little'), 12)
  *         # Initialize counter and working variables
  *         cdef unsigned int counter = count             # <<<<<<<<<<<<<<
  *         cdef unsigned int n_blocks = <unsigned int>(len(data)//64)
  *         cdef unsigned char * key_stream
  */
-  __pyx_t_5 = __Pyx_PyInt_As_unsigned_int(__pyx_v_count); if (unlikely((__pyx_t_5 == (unsigned int)-1) && PyErr_Occurred())) __PYX_ERR(0, 140, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyInt_As_unsigned_int(__pyx_v_count); if (unlikely((__pyx_t_5 == (unsigned int)-1) && PyErr_Occurred())) __PYX_ERR(0, 141, __pyx_L1_error)
   __pyx_v_counter = __pyx_t_5;
 
-  /* "nescient/crypto/chacha.pyx":141
+  /* "nescient/crypto/chacha.pyx":142
  *         # Initialize counter and working variables
  *         cdef unsigned int counter = count
  *         cdef unsigned int n_blocks = <unsigned int>(len(data)//64)             # <<<<<<<<<<<<<<
  *         cdef unsigned char * key_stream
  *         cdef unsigned char[:] view = data
  */
-  __pyx_t_6 = PyObject_Length(__pyx_v_data); if (unlikely(__pyx_t_6 == ((Py_ssize_t)-1))) __PYX_ERR(0, 141, __pyx_L1_error)
+  __pyx_t_6 = PyObject_Length(__pyx_v_data); if (unlikely(__pyx_t_6 == ((Py_ssize_t)-1))) __PYX_ERR(0, 142, __pyx_L1_error)
   __pyx_v_n_blocks = ((unsigned int)__Pyx_div_Py_ssize_t(__pyx_t_6, 64));
 
-  /* "nescient/crypto/chacha.pyx":143
+  /* "nescient/crypto/chacha.pyx":144
  *         cdef unsigned int n_blocks = <unsigned int>(len(data)//64)
  *         cdef unsigned char * key_stream
  *         cdef unsigned char[:] view = data             # <<<<<<<<<<<<<<
@@ -3110,12 +3117,12 @@ static PyObject *__pyx_pf_8nescient_6crypto_6chacha_13ChaChaCrypter_2_chacha_tas
  *         cdef unsigned int i
  */
   __pyx_t_7 = __Pyx_PyObject_to_MemoryviewSlice_ds_unsigned_char(__pyx_v_data);
-  if (unlikely(!__pyx_t_7.memview)) __PYX_ERR(0, 143, __pyx_L1_error)
+  if (unlikely(!__pyx_t_7.memview)) __PYX_ERR(0, 144, __pyx_L1_error)
   __pyx_v_view = __pyx_t_7;
   __pyx_t_7.memview = NULL;
   __pyx_t_7.data = NULL;
 
-  /* "nescient/crypto/chacha.pyx":144
+  /* "nescient/crypto/chacha.pyx":145
  *         cdef unsigned char * key_stream
  *         cdef unsigned char[:] view = data
  *         cdef unsigned char * buffer = &view[0]             # <<<<<<<<<<<<<<
@@ -3130,11 +3137,11 @@ static PyObject *__pyx_pf_8nescient_6crypto_6chacha_13ChaChaCrypter_2_chacha_tas
   } else if (unlikely(__pyx_t_8 >= __pyx_v_view.shape[0])) __pyx_t_9 = 0;
   if (unlikely(__pyx_t_9 != -1)) {
     __Pyx_RaiseBufferIndexError(__pyx_t_9);
-    __PYX_ERR(0, 144, __pyx_L1_error)
+    __PYX_ERR(0, 145, __pyx_L1_error)
   }
   __pyx_v_buffer = (&(*((unsigned char *) ( /* dim=0 */ (__pyx_v_view.data + __pyx_t_8 * __pyx_v_view.strides[0]) ))));
 
-  /* "nescient/crypto/chacha.pyx":147
+  /* "nescient/crypto/chacha.pyx":148
  *         cdef unsigned int i
  *         cdef unsigned char j
  *         for i in range(n_blocks):             # <<<<<<<<<<<<<<
@@ -3145,7 +3152,7 @@ static PyObject *__pyx_pf_8nescient_6crypto_6chacha_13ChaChaCrypter_2_chacha_tas
   for (__pyx_t_10 = 0; __pyx_t_10 < __pyx_t_5; __pyx_t_10+=1) {
     __pyx_v_i = __pyx_t_10;
 
-    /* "nescient/crypto/chacha.pyx":148
+    /* "nescient/crypto/chacha.pyx":149
  *         cdef unsigned char j
  *         for i in range(n_blocks):
  *             key_stream = chacha20(key_w, nonce_w, counter+i)             # <<<<<<<<<<<<<<
@@ -3154,7 +3161,7 @@ static PyObject *__pyx_pf_8nescient_6crypto_6chacha_13ChaChaCrypter_2_chacha_tas
  */
     __pyx_v_key_stream = __pyx_f_8nescient_6crypto_6chacha_chacha20(__pyx_v_key_w, __pyx_v_nonce_w, (__pyx_v_counter + __pyx_v_i));
 
-    /* "nescient/crypto/chacha.pyx":149
+    /* "nescient/crypto/chacha.pyx":150
  *         for i in range(n_blocks):
  *             key_stream = chacha20(key_w, nonce_w, counter+i)
  *             for j in range(64):             # <<<<<<<<<<<<<<
@@ -3164,7 +3171,7 @@ static PyObject *__pyx_pf_8nescient_6crypto_6chacha_13ChaChaCrypter_2_chacha_tas
     for (__pyx_t_11 = 0; __pyx_t_11 < 64; __pyx_t_11+=1) {
       __pyx_v_j = __pyx_t_11;
 
-      /* "nescient/crypto/chacha.pyx":150
+      /* "nescient/crypto/chacha.pyx":151
  *             key_stream = chacha20(key_w, nonce_w, counter+i)
  *             for j in range(64):
  *                 buffer[j] ^= key_stream[j]             # <<<<<<<<<<<<<<
@@ -3175,7 +3182,7 @@ static PyObject *__pyx_pf_8nescient_6crypto_6chacha_13ChaChaCrypter_2_chacha_tas
       (__pyx_v_buffer[__pyx_t_12]) = ((__pyx_v_buffer[__pyx_t_12]) ^ (__pyx_v_key_stream[__pyx_v_j]));
     }
 
-    /* "nescient/crypto/chacha.pyx":151
+    /* "nescient/crypto/chacha.pyx":152
  *             for j in range(64):
  *                 buffer[j] ^= key_stream[j]
  *             buffer += 64             # <<<<<<<<<<<<<<
@@ -3185,7 +3192,7 @@ static PyObject *__pyx_pf_8nescient_6crypto_6chacha_13ChaChaCrypter_2_chacha_tas
     __pyx_v_buffer = (__pyx_v_buffer + 64);
   }
 
-  /* "nescient/crypto/chacha.pyx":152
+  /* "nescient/crypto/chacha.pyx":153
  *                 buffer[j] ^= key_stream[j]
  *             buffer += 64
  *         i = n_blocks             # <<<<<<<<<<<<<<
@@ -3194,18 +3201,18 @@ static PyObject *__pyx_pf_8nescient_6crypto_6chacha_13ChaChaCrypter_2_chacha_tas
  */
   __pyx_v_i = __pyx_v_n_blocks;
 
-  /* "nescient/crypto/chacha.pyx":153
+  /* "nescient/crypto/chacha.pyx":154
  *             buffer += 64
  *         i = n_blocks
  *         if len(data) % 64 != 0:             # <<<<<<<<<<<<<<
  *             key_stream = chacha20(key_w, nonce_w, counter+i)
  *             for j in range(len(data) % 64):
  */
-  __pyx_t_6 = PyObject_Length(__pyx_v_data); if (unlikely(__pyx_t_6 == ((Py_ssize_t)-1))) __PYX_ERR(0, 153, __pyx_L1_error)
+  __pyx_t_6 = PyObject_Length(__pyx_v_data); if (unlikely(__pyx_t_6 == ((Py_ssize_t)-1))) __PYX_ERR(0, 154, __pyx_L1_error)
   __pyx_t_13 = ((__Pyx_mod_Py_ssize_t(__pyx_t_6, 64) != 0) != 0);
   if (__pyx_t_13) {
 
-    /* "nescient/crypto/chacha.pyx":154
+    /* "nescient/crypto/chacha.pyx":155
  *         i = n_blocks
  *         if len(data) % 64 != 0:
  *             key_stream = chacha20(key_w, nonce_w, counter+i)             # <<<<<<<<<<<<<<
@@ -3214,19 +3221,19 @@ static PyObject *__pyx_pf_8nescient_6crypto_6chacha_13ChaChaCrypter_2_chacha_tas
  */
     __pyx_v_key_stream = __pyx_f_8nescient_6crypto_6chacha_chacha20(__pyx_v_key_w, __pyx_v_nonce_w, (__pyx_v_counter + __pyx_v_i));
 
-    /* "nescient/crypto/chacha.pyx":155
+    /* "nescient/crypto/chacha.pyx":156
  *         if len(data) % 64 != 0:
  *             key_stream = chacha20(key_w, nonce_w, counter+i)
  *             for j in range(len(data) % 64):             # <<<<<<<<<<<<<<
  *                 buffer[j] ^= key_stream[j]
  *         return
  */
-    __pyx_t_6 = PyObject_Length(__pyx_v_data); if (unlikely(__pyx_t_6 == ((Py_ssize_t)-1))) __PYX_ERR(0, 155, __pyx_L1_error)
+    __pyx_t_6 = PyObject_Length(__pyx_v_data); if (unlikely(__pyx_t_6 == ((Py_ssize_t)-1))) __PYX_ERR(0, 156, __pyx_L1_error)
     __pyx_t_14 = __Pyx_mod_Py_ssize_t(__pyx_t_6, 64);
     for (__pyx_t_11 = 0; __pyx_t_11 < __pyx_t_14; __pyx_t_11+=1) {
       __pyx_v_j = __pyx_t_11;
 
-      /* "nescient/crypto/chacha.pyx":156
+      /* "nescient/crypto/chacha.pyx":157
  *             key_stream = chacha20(key_w, nonce_w, counter+i)
  *             for j in range(len(data) % 64):
  *                 buffer[j] ^= key_stream[j]             # <<<<<<<<<<<<<<
@@ -3237,7 +3244,7 @@ static PyObject *__pyx_pf_8nescient_6crypto_6chacha_13ChaChaCrypter_2_chacha_tas
       (__pyx_v_buffer[__pyx_t_12]) = ((__pyx_v_buffer[__pyx_t_12]) ^ (__pyx_v_key_stream[__pyx_v_j]));
     }
 
-    /* "nescient/crypto/chacha.pyx":153
+    /* "nescient/crypto/chacha.pyx":154
  *             buffer += 64
  *         i = n_blocks
  *         if len(data) % 64 != 0:             # <<<<<<<<<<<<<<
@@ -3246,7 +3253,7 @@ static PyObject *__pyx_pf_8nescient_6crypto_6chacha_13ChaChaCrypter_2_chacha_tas
  */
   }
 
-  /* "nescient/crypto/chacha.pyx":157
+  /* "nescient/crypto/chacha.pyx":158
  *             for j in range(len(data) % 64):
  *                 buffer[j] ^= key_stream[j]
  *         return             # <<<<<<<<<<<<<<
@@ -3257,7 +3264,7 @@ static PyObject *__pyx_pf_8nescient_6crypto_6chacha_13ChaChaCrypter_2_chacha_tas
   __pyx_r = Py_None; __Pyx_INCREF(Py_None);
   goto __pyx_L0;
 
-  /* "nescient/crypto/chacha.pyx":134
+  /* "nescient/crypto/chacha.pyx":135
  * 
  *     # The function that actually performs ChaCha encryption/decryption
  *     def _chacha_task(self, data, nonce, count=1):             # <<<<<<<<<<<<<<
@@ -3280,7 +3287,7 @@ static PyObject *__pyx_pf_8nescient_6crypto_6chacha_13ChaChaCrypter_2_chacha_tas
   return __pyx_r;
 }
 
-/* "nescient/crypto/chacha.pyx":159
+/* "nescient/crypto/chacha.pyx":160
  *         return
  * 
  *     def chacha_encrypt(self, data, nonce=None, count=1, force_single_thread=False):             # <<<<<<<<<<<<<<
@@ -3333,7 +3340,7 @@ static PyObject *__pyx_pw_8nescient_6crypto_6chacha_13ChaChaCrypter_5chacha_encr
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_data)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("chacha_encrypt", 0, 2, 5, 1); __PYX_ERR(0, 159, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("chacha_encrypt", 0, 2, 5, 1); __PYX_ERR(0, 160, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
@@ -3355,7 +3362,7 @@ static PyObject *__pyx_pw_8nescient_6crypto_6chacha_13ChaChaCrypter_5chacha_encr
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "chacha_encrypt") < 0)) __PYX_ERR(0, 159, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "chacha_encrypt") < 0)) __PYX_ERR(0, 160, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -3379,7 +3386,7 @@ static PyObject *__pyx_pw_8nescient_6crypto_6chacha_13ChaChaCrypter_5chacha_encr
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("chacha_encrypt", 0, 2, 5, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 159, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("chacha_encrypt", 0, 2, 5, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 160, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("nescient.crypto.chacha.ChaChaCrypter.chacha_encrypt", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -3401,6 +3408,7 @@ static PyObject *__pyx_pf_8nescient_6crypto_6chacha_13ChaChaCrypter_4chacha_encr
   PyObject *__pyx_v_x = NULL;
   PyObject *__pyx_v_ps = NULL;
   PyObject *__pyx_v_p = NULL;
+  PyObject *__pyx_v_alive = NULL;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   int __pyx_t_1;
@@ -3420,7 +3428,7 @@ static PyObject *__pyx_pf_8nescient_6crypto_6chacha_13ChaChaCrypter_4chacha_encr
   __Pyx_RefNannySetupContext("chacha_encrypt", 0);
   __Pyx_INCREF(__pyx_v_nonce);
 
-  /* "nescient/crypto/chacha.pyx":179
+  /* "nescient/crypto/chacha.pyx":180
  *         """
  *         # Generate a random 96-bit nonce if unspecified
  *         if nonce is None:             # <<<<<<<<<<<<<<
@@ -3431,22 +3439,22 @@ static PyObject *__pyx_pf_8nescient_6crypto_6chacha_13ChaChaCrypter_4chacha_encr
   __pyx_t_2 = (__pyx_t_1 != 0);
   if (__pyx_t_2) {
 
-    /* "nescient/crypto/chacha.pyx":180
+    /* "nescient/crypto/chacha.pyx":181
  *         # Generate a random 96-bit nonce if unspecified
  *         if nonce is None:
  *             nonce = randbits(96)             # <<<<<<<<<<<<<<
  *         # Determine the number of threads to use based on CPU count
  *         n_threads = cpu_count()
  */
-    __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_randbits); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 180, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_randbits); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 181, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__3, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 180, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__3, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 181, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF_SET(__pyx_v_nonce, __pyx_t_4);
     __pyx_t_4 = 0;
 
-    /* "nescient/crypto/chacha.pyx":179
+    /* "nescient/crypto/chacha.pyx":180
  *         """
  *         # Generate a random 96-bit nonce if unspecified
  *         if nonce is None:             # <<<<<<<<<<<<<<
@@ -3455,14 +3463,14 @@ static PyObject *__pyx_pf_8nescient_6crypto_6chacha_13ChaChaCrypter_4chacha_encr
  */
   }
 
-  /* "nescient/crypto/chacha.pyx":182
+  /* "nescient/crypto/chacha.pyx":183
  *             nonce = randbits(96)
  *         # Determine the number of threads to use based on CPU count
  *         n_threads = cpu_count()             # <<<<<<<<<<<<<<
  *         # Determine the size of the chunks to use for each thread, and the number of ChaCha blocks per chunk
  *         chunk_size = len(data)//n_threads//64*64
  */
-  __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_cpu_count); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 182, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_cpu_count); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 183, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_5 = NULL;
   if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_3))) {
@@ -3475,95 +3483,95 @@ static PyObject *__pyx_pf_8nescient_6crypto_6chacha_13ChaChaCrypter_4chacha_encr
     }
   }
   if (__pyx_t_5) {
-    __pyx_t_4 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_5); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 182, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_5); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 183, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   } else {
-    __pyx_t_4 = __Pyx_PyObject_CallNoArg(__pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 182, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_CallNoArg(__pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 183, __pyx_L1_error)
   }
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_v_n_threads = __pyx_t_4;
   __pyx_t_4 = 0;
 
-  /* "nescient/crypto/chacha.pyx":184
+  /* "nescient/crypto/chacha.pyx":185
  *         n_threads = cpu_count()
  *         # Determine the size of the chunks to use for each thread, and the number of ChaCha blocks per chunk
  *         chunk_size = len(data)//n_threads//64*64             # <<<<<<<<<<<<<<
  *         blocks_per_chunk = chunk_size//64
  *         # If forced to use a single thread, or multiprocessing would be slower than a single process,
  */
-  __pyx_t_6 = PyObject_Length(__pyx_v_data); if (unlikely(__pyx_t_6 == ((Py_ssize_t)-1))) __PYX_ERR(0, 184, __pyx_L1_error)
-  __pyx_t_4 = PyInt_FromSsize_t(__pyx_t_6); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 184, __pyx_L1_error)
+  __pyx_t_6 = PyObject_Length(__pyx_v_data); if (unlikely(__pyx_t_6 == ((Py_ssize_t)-1))) __PYX_ERR(0, 185, __pyx_L1_error)
+  __pyx_t_4 = PyInt_FromSsize_t(__pyx_t_6); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 185, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_3 = PyNumber_FloorDivide(__pyx_t_4, __pyx_v_n_threads); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 184, __pyx_L1_error)
+  __pyx_t_3 = PyNumber_FloorDivide(__pyx_t_4, __pyx_v_n_threads); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 185, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = __Pyx_PyInt_FloorDivideObjC(__pyx_t_3, __pyx_int_64, 64, 0); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 184, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyInt_FloorDivideObjC(__pyx_t_3, __pyx_int_64, 64, 0); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 185, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = PyNumber_Multiply(__pyx_t_4, __pyx_int_64); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 184, __pyx_L1_error)
+  __pyx_t_3 = PyNumber_Multiply(__pyx_t_4, __pyx_int_64); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 185, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_v_chunk_size = __pyx_t_3;
   __pyx_t_3 = 0;
 
-  /* "nescient/crypto/chacha.pyx":185
+  /* "nescient/crypto/chacha.pyx":186
  *         # Determine the size of the chunks to use for each thread, and the number of ChaCha blocks per chunk
  *         chunk_size = len(data)//n_threads//64*64
  *         blocks_per_chunk = chunk_size//64             # <<<<<<<<<<<<<<
  *         # If forced to use a single thread, or multiprocessing would be slower than a single process,
  *         # run in a single process
  */
-  __pyx_t_3 = __Pyx_PyInt_FloorDivideObjC(__pyx_v_chunk_size, __pyx_int_64, 64, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 185, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_FloorDivideObjC(__pyx_v_chunk_size, __pyx_int_64, 64, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 186, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_v_blocks_per_chunk = __pyx_t_3;
   __pyx_t_3 = 0;
 
-  /* "nescient/crypto/chacha.pyx":189
+  /* "nescient/crypto/chacha.pyx":190
  *         # run in a single process
  *         # TODO: 2**29 bytes = 512 MiB is an artificially set breakpoint for performance; change this
  *         if force_single_thread or n_threads == 1 or len(data) < 2**29 or blocks_per_chunk == 0:             # <<<<<<<<<<<<<<
  *             self._chacha_task(data, nonce, count)
  *             return nonce
  */
-  __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_v_force_single_thread); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 189, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_v_force_single_thread); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 190, __pyx_L1_error)
   if (!__pyx_t_1) {
   } else {
     __pyx_t_2 = __pyx_t_1;
     goto __pyx_L5_bool_binop_done;
   }
-  __pyx_t_3 = __Pyx_PyInt_EqObjC(__pyx_v_n_threads, __pyx_int_1, 1, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 189, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_EqObjC(__pyx_v_n_threads, __pyx_int_1, 1, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 190, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 189, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 190, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   if (!__pyx_t_1) {
   } else {
     __pyx_t_2 = __pyx_t_1;
     goto __pyx_L5_bool_binop_done;
   }
-  __pyx_t_6 = PyObject_Length(__pyx_v_data); if (unlikely(__pyx_t_6 == ((Py_ssize_t)-1))) __PYX_ERR(0, 189, __pyx_L1_error)
+  __pyx_t_6 = PyObject_Length(__pyx_v_data); if (unlikely(__pyx_t_6 == ((Py_ssize_t)-1))) __PYX_ERR(0, 190, __pyx_L1_error)
   __pyx_t_1 = ((__pyx_t_6 < 0x20000000) != 0);
   if (!__pyx_t_1) {
   } else {
     __pyx_t_2 = __pyx_t_1;
     goto __pyx_L5_bool_binop_done;
   }
-  __pyx_t_3 = __Pyx_PyInt_EqObjC(__pyx_v_blocks_per_chunk, __pyx_int_0, 0, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 189, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_EqObjC(__pyx_v_blocks_per_chunk, __pyx_int_0, 0, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 190, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 189, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 190, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_t_2 = __pyx_t_1;
   __pyx_L5_bool_binop_done:;
   if (__pyx_t_2) {
 
-    /* "nescient/crypto/chacha.pyx":190
+    /* "nescient/crypto/chacha.pyx":191
  *         # TODO: 2**29 bytes = 512 MiB is an artificially set breakpoint for performance; change this
  *         if force_single_thread or n_threads == 1 or len(data) < 2**29 or blocks_per_chunk == 0:
  *             self._chacha_task(data, nonce, count)             # <<<<<<<<<<<<<<
  *             return nonce
- *         # Build the shared arrays to dispatch to worker
+ *         # Build the shared arrays to dispatch to workers
  */
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_chacha_task); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 190, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_chacha_task); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 191, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __pyx_t_5 = NULL;
     __pyx_t_7 = 0;
@@ -3580,7 +3588,7 @@ static PyObject *__pyx_pf_8nescient_6crypto_6chacha_13ChaChaCrypter_4chacha_encr
     #if CYTHON_FAST_PYCALL
     if (PyFunction_Check(__pyx_t_4)) {
       PyObject *__pyx_temp[4] = {__pyx_t_5, __pyx_v_data, __pyx_v_nonce, __pyx_v_count};
-      __pyx_t_3 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_7, 3+__pyx_t_7); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 190, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_7, 3+__pyx_t_7); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 191, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
       __Pyx_GOTREF(__pyx_t_3);
     } else
@@ -3588,13 +3596,13 @@ static PyObject *__pyx_pf_8nescient_6crypto_6chacha_13ChaChaCrypter_4chacha_encr
     #if CYTHON_FAST_PYCCALL
     if (__Pyx_PyFastCFunction_Check(__pyx_t_4)) {
       PyObject *__pyx_temp[4] = {__pyx_t_5, __pyx_v_data, __pyx_v_nonce, __pyx_v_count};
-      __pyx_t_3 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_7, 3+__pyx_t_7); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 190, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_7, 3+__pyx_t_7); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 191, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
       __Pyx_GOTREF(__pyx_t_3);
     } else
     #endif
     {
-      __pyx_t_8 = PyTuple_New(3+__pyx_t_7); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 190, __pyx_L1_error)
+      __pyx_t_8 = PyTuple_New(3+__pyx_t_7); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 191, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_8);
       if (__pyx_t_5) {
         __Pyx_GIVEREF(__pyx_t_5); PyTuple_SET_ITEM(__pyx_t_8, 0, __pyx_t_5); __pyx_t_5 = NULL;
@@ -3608,18 +3616,18 @@ static PyObject *__pyx_pf_8nescient_6crypto_6chacha_13ChaChaCrypter_4chacha_encr
       __Pyx_INCREF(__pyx_v_count);
       __Pyx_GIVEREF(__pyx_v_count);
       PyTuple_SET_ITEM(__pyx_t_8, 2+__pyx_t_7, __pyx_v_count);
-      __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_8, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 190, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_8, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 191, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
     }
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-    /* "nescient/crypto/chacha.pyx":191
+    /* "nescient/crypto/chacha.pyx":192
  *         if force_single_thread or n_threads == 1 or len(data) < 2**29 or blocks_per_chunk == 0:
  *             self._chacha_task(data, nonce, count)
  *             return nonce             # <<<<<<<<<<<<<<
- *         # Build the shared arrays to dispatch to worker
+ *         # Build the shared arrays to dispatch to workers
  *         arrays = []
  */
     __Pyx_XDECREF(__pyx_r);
@@ -3627,7 +3635,7 @@ static PyObject *__pyx_pf_8nescient_6crypto_6chacha_13ChaChaCrypter_4chacha_encr
     __pyx_r = __pyx_v_nonce;
     goto __pyx_L0;
 
-    /* "nescient/crypto/chacha.pyx":189
+    /* "nescient/crypto/chacha.pyx":190
  *         # run in a single process
  *         # TODO: 2**29 bytes = 512 MiB is an artificially set breakpoint for performance; change this
  *         if force_single_thread or n_threads == 1 or len(data) < 2**29 or blocks_per_chunk == 0:             # <<<<<<<<<<<<<<
@@ -3636,40 +3644,40 @@ static PyObject *__pyx_pf_8nescient_6crypto_6chacha_13ChaChaCrypter_4chacha_encr
  */
   }
 
-  /* "nescient/crypto/chacha.pyx":193
+  /* "nescient/crypto/chacha.pyx":194
  *             return nonce
- *         # Build the shared arrays to dispatch to worker
+ *         # Build the shared arrays to dispatch to workers
  *         arrays = []             # <<<<<<<<<<<<<<
  *         for i in range(n_threads):
  *             # The last chunk may be slightly longer if the data is not aligned on chunk boundaries
  */
-  __pyx_t_3 = PyList_New(0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 193, __pyx_L1_error)
+  __pyx_t_3 = PyList_New(0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 194, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_v_arrays = ((PyObject*)__pyx_t_3);
   __pyx_t_3 = 0;
 
-  /* "nescient/crypto/chacha.pyx":194
- *         # Build the shared arrays to dispatch to worker
+  /* "nescient/crypto/chacha.pyx":195
+ *         # Build the shared arrays to dispatch to workers
  *         arrays = []
  *         for i in range(n_threads):             # <<<<<<<<<<<<<<
  *             # The last chunk may be slightly longer if the data is not aligned on chunk boundaries
  *             if i == n_threads-1:
  */
-  __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 194, __pyx_L1_error)
+  __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 195, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_INCREF(__pyx_v_n_threads);
   __Pyx_GIVEREF(__pyx_v_n_threads);
   PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_v_n_threads);
-  __pyx_t_4 = __Pyx_PyObject_Call(__pyx_builtin_range, __pyx_t_3, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 194, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_Call(__pyx_builtin_range, __pyx_t_3, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 195, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   if (likely(PyList_CheckExact(__pyx_t_4)) || PyTuple_CheckExact(__pyx_t_4)) {
     __pyx_t_3 = __pyx_t_4; __Pyx_INCREF(__pyx_t_3); __pyx_t_6 = 0;
     __pyx_t_9 = NULL;
   } else {
-    __pyx_t_6 = -1; __pyx_t_3 = PyObject_GetIter(__pyx_t_4); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 194, __pyx_L1_error)
+    __pyx_t_6 = -1; __pyx_t_3 = PyObject_GetIter(__pyx_t_4); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 195, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_9 = Py_TYPE(__pyx_t_3)->tp_iternext; if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 194, __pyx_L1_error)
+    __pyx_t_9 = Py_TYPE(__pyx_t_3)->tp_iternext; if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 195, __pyx_L1_error)
   }
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   for (;;) {
@@ -3677,17 +3685,17 @@ static PyObject *__pyx_pf_8nescient_6crypto_6chacha_13ChaChaCrypter_4chacha_encr
       if (likely(PyList_CheckExact(__pyx_t_3))) {
         if (__pyx_t_6 >= PyList_GET_SIZE(__pyx_t_3)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_4 = PyList_GET_ITEM(__pyx_t_3, __pyx_t_6); __Pyx_INCREF(__pyx_t_4); __pyx_t_6++; if (unlikely(0 < 0)) __PYX_ERR(0, 194, __pyx_L1_error)
+        __pyx_t_4 = PyList_GET_ITEM(__pyx_t_3, __pyx_t_6); __Pyx_INCREF(__pyx_t_4); __pyx_t_6++; if (unlikely(0 < 0)) __PYX_ERR(0, 195, __pyx_L1_error)
         #else
-        __pyx_t_4 = PySequence_ITEM(__pyx_t_3, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 194, __pyx_L1_error)
+        __pyx_t_4 = PySequence_ITEM(__pyx_t_3, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 195, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_4);
         #endif
       } else {
         if (__pyx_t_6 >= PyTuple_GET_SIZE(__pyx_t_3)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_4 = PyTuple_GET_ITEM(__pyx_t_3, __pyx_t_6); __Pyx_INCREF(__pyx_t_4); __pyx_t_6++; if (unlikely(0 < 0)) __PYX_ERR(0, 194, __pyx_L1_error)
+        __pyx_t_4 = PyTuple_GET_ITEM(__pyx_t_3, __pyx_t_6); __Pyx_INCREF(__pyx_t_4); __pyx_t_6++; if (unlikely(0 < 0)) __PYX_ERR(0, 195, __pyx_L1_error)
         #else
-        __pyx_t_4 = PySequence_ITEM(__pyx_t_3, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 194, __pyx_L1_error)
+        __pyx_t_4 = PySequence_ITEM(__pyx_t_3, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 195, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_4);
         #endif
       }
@@ -3697,7 +3705,7 @@ static PyObject *__pyx_pf_8nescient_6crypto_6chacha_13ChaChaCrypter_4chacha_encr
         PyObject* exc_type = PyErr_Occurred();
         if (exc_type) {
           if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-          else __PYX_ERR(0, 194, __pyx_L1_error)
+          else __PYX_ERR(0, 195, __pyx_L1_error)
         }
         break;
       }
@@ -3706,41 +3714,41 @@ static PyObject *__pyx_pf_8nescient_6crypto_6chacha_13ChaChaCrypter_4chacha_encr
     __Pyx_XDECREF_SET(__pyx_v_i, __pyx_t_4);
     __pyx_t_4 = 0;
 
-    /* "nescient/crypto/chacha.pyx":196
+    /* "nescient/crypto/chacha.pyx":197
  *         for i in range(n_threads):
  *             # The last chunk may be slightly longer if the data is not aligned on chunk boundaries
  *             if i == n_threads-1:             # <<<<<<<<<<<<<<
  *                 x = RawArray(c_ubyte, len(data)-(n_threads-1)*chunk_size)
  *                 memoryview(x).cast('B')[:] = data[(n_threads-1)*chunk_size:]
  */
-    __pyx_t_4 = __Pyx_PyInt_SubtractObjC(__pyx_v_n_threads, __pyx_int_1, 1, 0); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 196, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyInt_SubtractObjC(__pyx_v_n_threads, __pyx_int_1, 1, 0); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 197, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_8 = PyObject_RichCompare(__pyx_v_i, __pyx_t_4, Py_EQ); __Pyx_XGOTREF(__pyx_t_8); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 196, __pyx_L1_error)
+    __pyx_t_8 = PyObject_RichCompare(__pyx_v_i, __pyx_t_4, Py_EQ); __Pyx_XGOTREF(__pyx_t_8); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 197, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_8); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 196, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_8); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 197, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
     if (__pyx_t_2) {
 
-      /* "nescient/crypto/chacha.pyx":197
+      /* "nescient/crypto/chacha.pyx":198
  *             # The last chunk may be slightly longer if the data is not aligned on chunk boundaries
  *             if i == n_threads-1:
  *                 x = RawArray(c_ubyte, len(data)-(n_threads-1)*chunk_size)             # <<<<<<<<<<<<<<
  *                 memoryview(x).cast('B')[:] = data[(n_threads-1)*chunk_size:]
  *             else:
  */
-      __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_RawArray); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 197, __pyx_L1_error)
+      __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_RawArray); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 198, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
-      __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_c_ubyte); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 197, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_c_ubyte); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 198, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
-      __pyx_t_10 = PyObject_Length(__pyx_v_data); if (unlikely(__pyx_t_10 == ((Py_ssize_t)-1))) __PYX_ERR(0, 197, __pyx_L1_error)
-      __pyx_t_11 = PyInt_FromSsize_t(__pyx_t_10); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 197, __pyx_L1_error)
+      __pyx_t_10 = PyObject_Length(__pyx_v_data); if (unlikely(__pyx_t_10 == ((Py_ssize_t)-1))) __PYX_ERR(0, 198, __pyx_L1_error)
+      __pyx_t_11 = PyInt_FromSsize_t(__pyx_t_10); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 198, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_11);
-      __pyx_t_12 = __Pyx_PyInt_SubtractObjC(__pyx_v_n_threads, __pyx_int_1, 1, 0); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 197, __pyx_L1_error)
+      __pyx_t_12 = __Pyx_PyInt_SubtractObjC(__pyx_v_n_threads, __pyx_int_1, 1, 0); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 198, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_12);
-      __pyx_t_13 = PyNumber_Multiply(__pyx_t_12, __pyx_v_chunk_size); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 197, __pyx_L1_error)
+      __pyx_t_13 = PyNumber_Multiply(__pyx_t_12, __pyx_v_chunk_size); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 198, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_13);
       __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-      __pyx_t_12 = PyNumber_Subtract(__pyx_t_11, __pyx_t_13); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 197, __pyx_L1_error)
+      __pyx_t_12 = PyNumber_Subtract(__pyx_t_11, __pyx_t_13); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 198, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_12);
       __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
       __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
@@ -3759,7 +3767,7 @@ static PyObject *__pyx_pf_8nescient_6crypto_6chacha_13ChaChaCrypter_4chacha_encr
       #if CYTHON_FAST_PYCALL
       if (PyFunction_Check(__pyx_t_4)) {
         PyObject *__pyx_temp[3] = {__pyx_t_13, __pyx_t_5, __pyx_t_12};
-        __pyx_t_8 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 197, __pyx_L1_error)
+        __pyx_t_8 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 198, __pyx_L1_error)
         __Pyx_XDECREF(__pyx_t_13); __pyx_t_13 = 0;
         __Pyx_GOTREF(__pyx_t_8);
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -3769,7 +3777,7 @@ static PyObject *__pyx_pf_8nescient_6crypto_6chacha_13ChaChaCrypter_4chacha_encr
       #if CYTHON_FAST_PYCCALL
       if (__Pyx_PyFastCFunction_Check(__pyx_t_4)) {
         PyObject *__pyx_temp[3] = {__pyx_t_13, __pyx_t_5, __pyx_t_12};
-        __pyx_t_8 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 197, __pyx_L1_error)
+        __pyx_t_8 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 198, __pyx_L1_error)
         __Pyx_XDECREF(__pyx_t_13); __pyx_t_13 = 0;
         __Pyx_GOTREF(__pyx_t_8);
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -3777,7 +3785,7 @@ static PyObject *__pyx_pf_8nescient_6crypto_6chacha_13ChaChaCrypter_4chacha_encr
       } else
       #endif
       {
-        __pyx_t_11 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 197, __pyx_L1_error)
+        __pyx_t_11 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 198, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_11);
         if (__pyx_t_13) {
           __Pyx_GIVEREF(__pyx_t_13); PyTuple_SET_ITEM(__pyx_t_11, 0, __pyx_t_13); __pyx_t_13 = NULL;
@@ -3788,7 +3796,7 @@ static PyObject *__pyx_pf_8nescient_6crypto_6chacha_13ChaChaCrypter_4chacha_encr
         PyTuple_SET_ITEM(__pyx_t_11, 1+__pyx_t_7, __pyx_t_12);
         __pyx_t_5 = 0;
         __pyx_t_12 = 0;
-        __pyx_t_8 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_11, NULL); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 197, __pyx_L1_error)
+        __pyx_t_8 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_11, NULL); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 198, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_8);
         __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
       }
@@ -3796,40 +3804,40 @@ static PyObject *__pyx_pf_8nescient_6crypto_6chacha_13ChaChaCrypter_4chacha_encr
       __Pyx_XDECREF_SET(__pyx_v_x, __pyx_t_8);
       __pyx_t_8 = 0;
 
-      /* "nescient/crypto/chacha.pyx":198
+      /* "nescient/crypto/chacha.pyx":199
  *             if i == n_threads-1:
  *                 x = RawArray(c_ubyte, len(data)-(n_threads-1)*chunk_size)
  *                 memoryview(x).cast('B')[:] = data[(n_threads-1)*chunk_size:]             # <<<<<<<<<<<<<<
  *             else:
  *                 x = RawArray(c_ubyte, chunk_size)
  */
-      __pyx_t_8 = __Pyx_PyInt_SubtractObjC(__pyx_v_n_threads, __pyx_int_1, 1, 0); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 198, __pyx_L1_error)
+      __pyx_t_8 = __Pyx_PyInt_SubtractObjC(__pyx_v_n_threads, __pyx_int_1, 1, 0); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 199, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_8);
-      __pyx_t_4 = PyNumber_Multiply(__pyx_t_8, __pyx_v_chunk_size); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 198, __pyx_L1_error)
+      __pyx_t_4 = PyNumber_Multiply(__pyx_t_8, __pyx_v_chunk_size); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 199, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-      __pyx_t_8 = __Pyx_PyObject_GetSlice(__pyx_v_data, 0, 0, &__pyx_t_4, NULL, NULL, 0, 0, 1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 198, __pyx_L1_error)
+      __pyx_t_8 = __Pyx_PyObject_GetSlice(__pyx_v_data, 0, 0, &__pyx_t_4, NULL, NULL, 0, 0, 1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 199, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_8);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-      __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 198, __pyx_L1_error)
+      __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 199, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
       __Pyx_INCREF(__pyx_v_x);
       __Pyx_GIVEREF(__pyx_v_x);
       PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_v_x);
-      __pyx_t_11 = __Pyx_PyObject_Call(__pyx_builtin_memoryview, __pyx_t_4, NULL); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 198, __pyx_L1_error)
+      __pyx_t_11 = __Pyx_PyObject_Call(__pyx_builtin_memoryview, __pyx_t_4, NULL); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 199, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_11);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-      __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_11, __pyx_n_s_cast); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 198, __pyx_L1_error)
+      __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_11, __pyx_n_s_cast); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 199, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
       __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-      __pyx_t_11 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_tuple__4, NULL); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 198, __pyx_L1_error)
+      __pyx_t_11 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_tuple__4, NULL); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 199, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_11);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-      if (__Pyx_PyObject_SetSlice(__pyx_t_11, __pyx_t_8, 0, 0, NULL, NULL, &__pyx_slice__5, 0, 0, 1) < 0) __PYX_ERR(0, 198, __pyx_L1_error)
+      if (__Pyx_PyObject_SetSlice(__pyx_t_11, __pyx_t_8, 0, 0, NULL, NULL, &__pyx_slice__5, 0, 0, 1) < 0) __PYX_ERR(0, 199, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
 
-      /* "nescient/crypto/chacha.pyx":196
+      /* "nescient/crypto/chacha.pyx":197
  *         for i in range(n_threads):
  *             # The last chunk may be slightly longer if the data is not aligned on chunk boundaries
  *             if i == n_threads-1:             # <<<<<<<<<<<<<<
@@ -3839,7 +3847,7 @@ static PyObject *__pyx_pf_8nescient_6crypto_6chacha_13ChaChaCrypter_4chacha_encr
       goto __pyx_L11;
     }
 
-    /* "nescient/crypto/chacha.pyx":200
+    /* "nescient/crypto/chacha.pyx":201
  *                 memoryview(x).cast('B')[:] = data[(n_threads-1)*chunk_size:]
  *             else:
  *                 x = RawArray(c_ubyte, chunk_size)             # <<<<<<<<<<<<<<
@@ -3847,9 +3855,9 @@ static PyObject *__pyx_pf_8nescient_6crypto_6chacha_13ChaChaCrypter_4chacha_encr
  *             arrays.append(x)
  */
     /*else*/ {
-      __pyx_t_11 = __Pyx_GetModuleGlobalName(__pyx_n_s_RawArray); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 200, __pyx_L1_error)
+      __pyx_t_11 = __Pyx_GetModuleGlobalName(__pyx_n_s_RawArray); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 201, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_11);
-      __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_c_ubyte); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 200, __pyx_L1_error)
+      __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_c_ubyte); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 201, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
       __pyx_t_12 = NULL;
       __pyx_t_7 = 0;
@@ -3866,7 +3874,7 @@ static PyObject *__pyx_pf_8nescient_6crypto_6chacha_13ChaChaCrypter_4chacha_encr
       #if CYTHON_FAST_PYCALL
       if (PyFunction_Check(__pyx_t_11)) {
         PyObject *__pyx_temp[3] = {__pyx_t_12, __pyx_t_4, __pyx_v_chunk_size};
-        __pyx_t_8 = __Pyx_PyFunction_FastCall(__pyx_t_11, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 200, __pyx_L1_error)
+        __pyx_t_8 = __Pyx_PyFunction_FastCall(__pyx_t_11, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 201, __pyx_L1_error)
         __Pyx_XDECREF(__pyx_t_12); __pyx_t_12 = 0;
         __Pyx_GOTREF(__pyx_t_8);
         __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
@@ -3875,14 +3883,14 @@ static PyObject *__pyx_pf_8nescient_6crypto_6chacha_13ChaChaCrypter_4chacha_encr
       #if CYTHON_FAST_PYCCALL
       if (__Pyx_PyFastCFunction_Check(__pyx_t_11)) {
         PyObject *__pyx_temp[3] = {__pyx_t_12, __pyx_t_4, __pyx_v_chunk_size};
-        __pyx_t_8 = __Pyx_PyCFunction_FastCall(__pyx_t_11, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 200, __pyx_L1_error)
+        __pyx_t_8 = __Pyx_PyCFunction_FastCall(__pyx_t_11, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 201, __pyx_L1_error)
         __Pyx_XDECREF(__pyx_t_12); __pyx_t_12 = 0;
         __Pyx_GOTREF(__pyx_t_8);
         __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
       } else
       #endif
       {
-        __pyx_t_5 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 200, __pyx_L1_error)
+        __pyx_t_5 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 201, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_5);
         if (__pyx_t_12) {
           __Pyx_GIVEREF(__pyx_t_12); PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_12); __pyx_t_12 = NULL;
@@ -3893,7 +3901,7 @@ static PyObject *__pyx_pf_8nescient_6crypto_6chacha_13ChaChaCrypter_4chacha_encr
         __Pyx_GIVEREF(__pyx_v_chunk_size);
         PyTuple_SET_ITEM(__pyx_t_5, 1+__pyx_t_7, __pyx_v_chunk_size);
         __pyx_t_4 = 0;
-        __pyx_t_8 = __Pyx_PyObject_Call(__pyx_t_11, __pyx_t_5, NULL); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 200, __pyx_L1_error)
+        __pyx_t_8 = __Pyx_PyObject_Call(__pyx_t_11, __pyx_t_5, NULL); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 201, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_8);
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
       }
@@ -3901,55 +3909,55 @@ static PyObject *__pyx_pf_8nescient_6crypto_6chacha_13ChaChaCrypter_4chacha_encr
       __Pyx_XDECREF_SET(__pyx_v_x, __pyx_t_8);
       __pyx_t_8 = 0;
 
-      /* "nescient/crypto/chacha.pyx":201
+      /* "nescient/crypto/chacha.pyx":202
  *             else:
  *                 x = RawArray(c_ubyte, chunk_size)
  *                 memoryview(x).cast('B')[:] = data[i*chunk_size:(i+1)*chunk_size]             # <<<<<<<<<<<<<<
  *             arrays.append(x)
  *         # Initialize each process with the correct array and count arguments
  */
-      __pyx_t_8 = PyNumber_Multiply(__pyx_v_i, __pyx_v_chunk_size); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 201, __pyx_L1_error)
+      __pyx_t_8 = PyNumber_Multiply(__pyx_v_i, __pyx_v_chunk_size); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 202, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_8);
-      __pyx_t_11 = __Pyx_PyInt_AddObjC(__pyx_v_i, __pyx_int_1, 1, 0); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 201, __pyx_L1_error)
+      __pyx_t_11 = __Pyx_PyInt_AddObjC(__pyx_v_i, __pyx_int_1, 1, 0); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 202, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_11);
-      __pyx_t_5 = PyNumber_Multiply(__pyx_t_11, __pyx_v_chunk_size); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 201, __pyx_L1_error)
+      __pyx_t_5 = PyNumber_Multiply(__pyx_t_11, __pyx_v_chunk_size); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 202, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-      __pyx_t_11 = __Pyx_PyObject_GetSlice(__pyx_v_data, 0, 0, &__pyx_t_8, &__pyx_t_5, NULL, 0, 0, 1); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 201, __pyx_L1_error)
+      __pyx_t_11 = __Pyx_PyObject_GetSlice(__pyx_v_data, 0, 0, &__pyx_t_8, &__pyx_t_5, NULL, 0, 0, 1); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 202, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_11);
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-      __pyx_t_5 = PyTuple_New(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 201, __pyx_L1_error)
+      __pyx_t_5 = PyTuple_New(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 202, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_INCREF(__pyx_v_x);
       __Pyx_GIVEREF(__pyx_v_x);
       PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_v_x);
-      __pyx_t_8 = __Pyx_PyObject_Call(__pyx_builtin_memoryview, __pyx_t_5, NULL); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 201, __pyx_L1_error)
+      __pyx_t_8 = __Pyx_PyObject_Call(__pyx_builtin_memoryview, __pyx_t_5, NULL); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 202, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_8);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-      __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_8, __pyx_n_s_cast); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 201, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_8, __pyx_n_s_cast); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 202, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-      __pyx_t_8 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__6, NULL); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 201, __pyx_L1_error)
+      __pyx_t_8 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__6, NULL); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 202, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_8);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-      if (__Pyx_PyObject_SetSlice(__pyx_t_8, __pyx_t_11, 0, 0, NULL, NULL, &__pyx_slice__7, 0, 0, 1) < 0) __PYX_ERR(0, 201, __pyx_L1_error)
+      if (__Pyx_PyObject_SetSlice(__pyx_t_8, __pyx_t_11, 0, 0, NULL, NULL, &__pyx_slice__7, 0, 0, 1) < 0) __PYX_ERR(0, 202, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
       __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
     }
     __pyx_L11:;
 
-    /* "nescient/crypto/chacha.pyx":202
+    /* "nescient/crypto/chacha.pyx":203
  *                 x = RawArray(c_ubyte, chunk_size)
  *                 memoryview(x).cast('B')[:] = data[i*chunk_size:(i+1)*chunk_size]
  *             arrays.append(x)             # <<<<<<<<<<<<<<
  *         # Initialize each process with the correct array and count arguments
  *         ps = [Process(target=self._chacha_task, daemon=True,
  */
-    __pyx_t_14 = __Pyx_PyList_Append(__pyx_v_arrays, __pyx_v_x); if (unlikely(__pyx_t_14 == ((int)-1))) __PYX_ERR(0, 202, __pyx_L1_error)
+    __pyx_t_14 = __Pyx_PyList_Append(__pyx_v_arrays, __pyx_v_x); if (unlikely(__pyx_t_14 == ((int)-1))) __PYX_ERR(0, 203, __pyx_L1_error)
 
-    /* "nescient/crypto/chacha.pyx":194
- *         # Build the shared arrays to dispatch to worker
+    /* "nescient/crypto/chacha.pyx":195
+ *         # Build the shared arrays to dispatch to workers
  *         arrays = []
  *         for i in range(n_threads):             # <<<<<<<<<<<<<<
  *             # The last chunk may be slightly longer if the data is not aligned on chunk boundaries
@@ -3958,38 +3966,38 @@ static PyObject *__pyx_pf_8nescient_6crypto_6chacha_13ChaChaCrypter_4chacha_encr
   }
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "nescient/crypto/chacha.pyx":204
+  /* "nescient/crypto/chacha.pyx":205
  *             arrays.append(x)
  *         # Initialize each process with the correct array and count arguments
  *         ps = [Process(target=self._chacha_task, daemon=True,             # <<<<<<<<<<<<<<
  *                       args=(arrays[i], nonce, count+(blocks_per_chunk*i))) for i in range(n_threads)]
  *         # Start each process, then join them in order
  */
-  __pyx_t_3 = PyList_New(0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 204, __pyx_L1_error)
+  __pyx_t_3 = PyList_New(0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 205, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
 
-  /* "nescient/crypto/chacha.pyx":205
+  /* "nescient/crypto/chacha.pyx":206
  *         # Initialize each process with the correct array and count arguments
  *         ps = [Process(target=self._chacha_task, daemon=True,
  *                       args=(arrays[i], nonce, count+(blocks_per_chunk*i))) for i in range(n_threads)]             # <<<<<<<<<<<<<<
  *         # Start each process, then join them in order
  *         # TODO: Check for processes raising exceptions
  */
-  __pyx_t_11 = PyTuple_New(1); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 205, __pyx_L1_error)
+  __pyx_t_11 = PyTuple_New(1); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 206, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_11);
   __Pyx_INCREF(__pyx_v_n_threads);
   __Pyx_GIVEREF(__pyx_v_n_threads);
   PyTuple_SET_ITEM(__pyx_t_11, 0, __pyx_v_n_threads);
-  __pyx_t_8 = __Pyx_PyObject_Call(__pyx_builtin_range, __pyx_t_11, NULL); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 205, __pyx_L1_error)
+  __pyx_t_8 = __Pyx_PyObject_Call(__pyx_builtin_range, __pyx_t_11, NULL); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 206, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
   if (likely(PyList_CheckExact(__pyx_t_8)) || PyTuple_CheckExact(__pyx_t_8)) {
     __pyx_t_11 = __pyx_t_8; __Pyx_INCREF(__pyx_t_11); __pyx_t_6 = 0;
     __pyx_t_9 = NULL;
   } else {
-    __pyx_t_6 = -1; __pyx_t_11 = PyObject_GetIter(__pyx_t_8); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 205, __pyx_L1_error)
+    __pyx_t_6 = -1; __pyx_t_11 = PyObject_GetIter(__pyx_t_8); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 206, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_11);
-    __pyx_t_9 = Py_TYPE(__pyx_t_11)->tp_iternext; if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 205, __pyx_L1_error)
+    __pyx_t_9 = Py_TYPE(__pyx_t_11)->tp_iternext; if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 206, __pyx_L1_error)
   }
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
   for (;;) {
@@ -3997,17 +4005,17 @@ static PyObject *__pyx_pf_8nescient_6crypto_6chacha_13ChaChaCrypter_4chacha_encr
       if (likely(PyList_CheckExact(__pyx_t_11))) {
         if (__pyx_t_6 >= PyList_GET_SIZE(__pyx_t_11)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_8 = PyList_GET_ITEM(__pyx_t_11, __pyx_t_6); __Pyx_INCREF(__pyx_t_8); __pyx_t_6++; if (unlikely(0 < 0)) __PYX_ERR(0, 205, __pyx_L1_error)
+        __pyx_t_8 = PyList_GET_ITEM(__pyx_t_11, __pyx_t_6); __Pyx_INCREF(__pyx_t_8); __pyx_t_6++; if (unlikely(0 < 0)) __PYX_ERR(0, 206, __pyx_L1_error)
         #else
-        __pyx_t_8 = PySequence_ITEM(__pyx_t_11, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 205, __pyx_L1_error)
+        __pyx_t_8 = PySequence_ITEM(__pyx_t_11, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 206, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_8);
         #endif
       } else {
         if (__pyx_t_6 >= PyTuple_GET_SIZE(__pyx_t_11)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_8 = PyTuple_GET_ITEM(__pyx_t_11, __pyx_t_6); __Pyx_INCREF(__pyx_t_8); __pyx_t_6++; if (unlikely(0 < 0)) __PYX_ERR(0, 205, __pyx_L1_error)
+        __pyx_t_8 = PyTuple_GET_ITEM(__pyx_t_11, __pyx_t_6); __Pyx_INCREF(__pyx_t_8); __pyx_t_6++; if (unlikely(0 < 0)) __PYX_ERR(0, 206, __pyx_L1_error)
         #else
-        __pyx_t_8 = PySequence_ITEM(__pyx_t_11, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 205, __pyx_L1_error)
+        __pyx_t_8 = PySequence_ITEM(__pyx_t_11, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 206, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_8);
         #endif
       }
@@ -4017,7 +4025,7 @@ static PyObject *__pyx_pf_8nescient_6crypto_6chacha_13ChaChaCrypter_4chacha_encr
         PyObject* exc_type = PyErr_Occurred();
         if (exc_type) {
           if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-          else __PYX_ERR(0, 205, __pyx_L1_error)
+          else __PYX_ERR(0, 206, __pyx_L1_error)
         }
         break;
       }
@@ -4026,38 +4034,38 @@ static PyObject *__pyx_pf_8nescient_6crypto_6chacha_13ChaChaCrypter_4chacha_encr
     __Pyx_XDECREF_SET(__pyx_v_i, __pyx_t_8);
     __pyx_t_8 = 0;
 
-    /* "nescient/crypto/chacha.pyx":204
+    /* "nescient/crypto/chacha.pyx":205
  *             arrays.append(x)
  *         # Initialize each process with the correct array and count arguments
  *         ps = [Process(target=self._chacha_task, daemon=True,             # <<<<<<<<<<<<<<
  *                       args=(arrays[i], nonce, count+(blocks_per_chunk*i))) for i in range(n_threads)]
  *         # Start each process, then join them in order
  */
-    __pyx_t_8 = __Pyx_GetModuleGlobalName(__pyx_n_s_Process); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 204, __pyx_L1_error)
+    __pyx_t_8 = __Pyx_GetModuleGlobalName(__pyx_n_s_Process); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 205, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
-    __pyx_t_5 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 204, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 205, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_chacha_task); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 204, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_chacha_task); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 205, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_target, __pyx_t_4) < 0) __PYX_ERR(0, 204, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_target, __pyx_t_4) < 0) __PYX_ERR(0, 205, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_daemon, Py_True) < 0) __PYX_ERR(0, 204, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_daemon, Py_True) < 0) __PYX_ERR(0, 205, __pyx_L1_error)
 
-    /* "nescient/crypto/chacha.pyx":205
+    /* "nescient/crypto/chacha.pyx":206
  *         # Initialize each process with the correct array and count arguments
  *         ps = [Process(target=self._chacha_task, daemon=True,
  *                       args=(arrays[i], nonce, count+(blocks_per_chunk*i))) for i in range(n_threads)]             # <<<<<<<<<<<<<<
  *         # Start each process, then join them in order
  *         # TODO: Check for processes raising exceptions
  */
-    __pyx_t_4 = PyObject_GetItem(__pyx_v_arrays, __pyx_v_i); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 205, __pyx_L1_error)
+    __pyx_t_4 = PyObject_GetItem(__pyx_v_arrays, __pyx_v_i); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 206, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_12 = PyNumber_Multiply(__pyx_v_blocks_per_chunk, __pyx_v_i); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 205, __pyx_L1_error)
+    __pyx_t_12 = PyNumber_Multiply(__pyx_v_blocks_per_chunk, __pyx_v_i); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 206, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_12);
-    __pyx_t_13 = PyNumber_Add(__pyx_v_count, __pyx_t_12); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 205, __pyx_L1_error)
+    __pyx_t_13 = PyNumber_Add(__pyx_v_count, __pyx_t_12); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 206, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_13);
     __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-    __pyx_t_12 = PyTuple_New(3); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 205, __pyx_L1_error)
+    __pyx_t_12 = PyTuple_New(3); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 206, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_12);
     __Pyx_GIVEREF(__pyx_t_4);
     PyTuple_SET_ITEM(__pyx_t_12, 0, __pyx_t_4);
@@ -4068,24 +4076,24 @@ static PyObject *__pyx_pf_8nescient_6crypto_6chacha_13ChaChaCrypter_4chacha_encr
     PyTuple_SET_ITEM(__pyx_t_12, 2, __pyx_t_13);
     __pyx_t_4 = 0;
     __pyx_t_13 = 0;
-    if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_args, __pyx_t_12) < 0) __PYX_ERR(0, 204, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_args, __pyx_t_12) < 0) __PYX_ERR(0, 205, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
 
-    /* "nescient/crypto/chacha.pyx":204
+    /* "nescient/crypto/chacha.pyx":205
  *             arrays.append(x)
  *         # Initialize each process with the correct array and count arguments
  *         ps = [Process(target=self._chacha_task, daemon=True,             # <<<<<<<<<<<<<<
  *                       args=(arrays[i], nonce, count+(blocks_per_chunk*i))) for i in range(n_threads)]
  *         # Start each process, then join them in order
  */
-    __pyx_t_12 = __Pyx_PyObject_Call(__pyx_t_8, __pyx_empty_tuple, __pyx_t_5); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 204, __pyx_L1_error)
+    __pyx_t_12 = __Pyx_PyObject_Call(__pyx_t_8, __pyx_empty_tuple, __pyx_t_5); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 205, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_12);
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    if (unlikely(__Pyx_ListComp_Append(__pyx_t_3, (PyObject*)__pyx_t_12))) __PYX_ERR(0, 204, __pyx_L1_error)
+    if (unlikely(__Pyx_ListComp_Append(__pyx_t_3, (PyObject*)__pyx_t_12))) __PYX_ERR(0, 205, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
 
-    /* "nescient/crypto/chacha.pyx":205
+    /* "nescient/crypto/chacha.pyx":206
  *         # Initialize each process with the correct array and count arguments
  *         ps = [Process(target=self._chacha_task, daemon=True,
  *                       args=(arrays[i], nonce, count+(blocks_per_chunk*i))) for i in range(n_threads)]             # <<<<<<<<<<<<<<
@@ -4097,33 +4105,33 @@ static PyObject *__pyx_pf_8nescient_6crypto_6chacha_13ChaChaCrypter_4chacha_encr
   __pyx_v_ps = ((PyObject*)__pyx_t_3);
   __pyx_t_3 = 0;
 
-  /* "nescient/crypto/chacha.pyx":208
+  /* "nescient/crypto/chacha.pyx":209
  *         # Start each process, then join them in order
  *         # TODO: Check for processes raising exceptions
  *         for p in ps:             # <<<<<<<<<<<<<<
  *             p.start()
- *         for p in ps:
+ *         while True:
  */
   __pyx_t_3 = __pyx_v_ps; __Pyx_INCREF(__pyx_t_3); __pyx_t_6 = 0;
   for (;;) {
     if (__pyx_t_6 >= PyList_GET_SIZE(__pyx_t_3)) break;
     #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-    __pyx_t_11 = PyList_GET_ITEM(__pyx_t_3, __pyx_t_6); __Pyx_INCREF(__pyx_t_11); __pyx_t_6++; if (unlikely(0 < 0)) __PYX_ERR(0, 208, __pyx_L1_error)
+    __pyx_t_11 = PyList_GET_ITEM(__pyx_t_3, __pyx_t_6); __Pyx_INCREF(__pyx_t_11); __pyx_t_6++; if (unlikely(0 < 0)) __PYX_ERR(0, 209, __pyx_L1_error)
     #else
-    __pyx_t_11 = PySequence_ITEM(__pyx_t_3, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 208, __pyx_L1_error)
+    __pyx_t_11 = PySequence_ITEM(__pyx_t_3, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 209, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_11);
     #endif
     __Pyx_XDECREF_SET(__pyx_v_p, __pyx_t_11);
     __pyx_t_11 = 0;
 
-    /* "nescient/crypto/chacha.pyx":209
+    /* "nescient/crypto/chacha.pyx":210
  *         # TODO: Check for processes raising exceptions
  *         for p in ps:
  *             p.start()             # <<<<<<<<<<<<<<
- *         for p in ps:
- *             p.join()
+ *         while True:
+ *             sleep(0)
  */
-    __pyx_t_12 = __Pyx_PyObject_GetAttrStr(__pyx_v_p, __pyx_n_s_start); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 209, __pyx_L1_error)
+    __pyx_t_12 = __Pyx_PyObject_GetAttrStr(__pyx_v_p, __pyx_n_s_start); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 210, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_12);
     __pyx_t_5 = NULL;
     if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_12))) {
@@ -4136,202 +4144,228 @@ static PyObject *__pyx_pf_8nescient_6crypto_6chacha_13ChaChaCrypter_4chacha_encr
       }
     }
     if (__pyx_t_5) {
-      __pyx_t_11 = __Pyx_PyObject_CallOneArg(__pyx_t_12, __pyx_t_5); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 209, __pyx_L1_error)
+      __pyx_t_11 = __Pyx_PyObject_CallOneArg(__pyx_t_12, __pyx_t_5); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 210, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     } else {
-      __pyx_t_11 = __Pyx_PyObject_CallNoArg(__pyx_t_12); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 209, __pyx_L1_error)
+      __pyx_t_11 = __Pyx_PyObject_CallNoArg(__pyx_t_12); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 210, __pyx_L1_error)
     }
     __Pyx_GOTREF(__pyx_t_11);
     __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
     __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
 
-    /* "nescient/crypto/chacha.pyx":208
+    /* "nescient/crypto/chacha.pyx":209
  *         # Start each process, then join them in order
  *         # TODO: Check for processes raising exceptions
  *         for p in ps:             # <<<<<<<<<<<<<<
  *             p.start()
- *         for p in ps:
+ *         while True:
  */
   }
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "nescient/crypto/chacha.pyx":210
+  /* "nescient/crypto/chacha.pyx":211
  *         for p in ps:
  *             p.start()
- *         for p in ps:             # <<<<<<<<<<<<<<
- *             p.join()
- *         # Read the shared arrays back into the data bytearray
+ *         while True:             # <<<<<<<<<<<<<<
+ *             sleep(0)
+ *             alive = active_children()
  */
-  __pyx_t_3 = __pyx_v_ps; __Pyx_INCREF(__pyx_t_3); __pyx_t_6 = 0;
-  for (;;) {
-    if (__pyx_t_6 >= PyList_GET_SIZE(__pyx_t_3)) break;
-    #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-    __pyx_t_11 = PyList_GET_ITEM(__pyx_t_3, __pyx_t_6); __Pyx_INCREF(__pyx_t_11); __pyx_t_6++; if (unlikely(0 < 0)) __PYX_ERR(0, 210, __pyx_L1_error)
-    #else
-    __pyx_t_11 = PySequence_ITEM(__pyx_t_3, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 210, __pyx_L1_error)
+  while (1) {
+
+    /* "nescient/crypto/chacha.pyx":212
+ *             p.start()
+ *         while True:
+ *             sleep(0)             # <<<<<<<<<<<<<<
+ *             alive = active_children()
+ *             if not alive:
+ */
+    __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_sleep); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 212, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    __pyx_t_11 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__8, NULL); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 212, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_11);
-    #endif
-    __Pyx_XDECREF_SET(__pyx_v_p, __pyx_t_11);
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
+
+    /* "nescient/crypto/chacha.pyx":213
+ *         while True:
+ *             sleep(0)
+ *             alive = active_children()             # <<<<<<<<<<<<<<
+ *             if not alive:
+ *                 break
+ */
+    __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_active_children); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 213, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    __pyx_t_12 = NULL;
+    if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_3))) {
+      __pyx_t_12 = PyMethod_GET_SELF(__pyx_t_3);
+      if (likely(__pyx_t_12)) {
+        PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_3);
+        __Pyx_INCREF(__pyx_t_12);
+        __Pyx_INCREF(function);
+        __Pyx_DECREF_SET(__pyx_t_3, function);
+      }
+    }
+    if (__pyx_t_12) {
+      __pyx_t_11 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_12); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 213, __pyx_L1_error)
+      __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
+    } else {
+      __pyx_t_11 = __Pyx_PyObject_CallNoArg(__pyx_t_3); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 213, __pyx_L1_error)
+    }
+    __Pyx_GOTREF(__pyx_t_11);
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __Pyx_XDECREF_SET(__pyx_v_alive, __pyx_t_11);
     __pyx_t_11 = 0;
 
-    /* "nescient/crypto/chacha.pyx":211
- *             p.start()
- *         for p in ps:
- *             p.join()             # <<<<<<<<<<<<<<
+    /* "nescient/crypto/chacha.pyx":214
+ *             sleep(0)
+ *             alive = active_children()
+ *             if not alive:             # <<<<<<<<<<<<<<
+ *                 break
+ *         # Read the shared arrays back into the data bytearray
+ */
+    __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_v_alive); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 214, __pyx_L1_error)
+    __pyx_t_1 = ((!__pyx_t_2) != 0);
+    if (__pyx_t_1) {
+
+      /* "nescient/crypto/chacha.pyx":215
+ *             alive = active_children()
+ *             if not alive:
+ *                 break             # <<<<<<<<<<<<<<
  *         # Read the shared arrays back into the data bytearray
  *         for i in range(n_threads):
  */
-    __pyx_t_12 = __Pyx_PyObject_GetAttrStr(__pyx_v_p, __pyx_n_s_join); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 211, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_12);
-    __pyx_t_5 = NULL;
-    if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_12))) {
-      __pyx_t_5 = PyMethod_GET_SELF(__pyx_t_12);
-      if (likely(__pyx_t_5)) {
-        PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_12);
-        __Pyx_INCREF(__pyx_t_5);
-        __Pyx_INCREF(function);
-        __Pyx_DECREF_SET(__pyx_t_12, function);
-      }
-    }
-    if (__pyx_t_5) {
-      __pyx_t_11 = __Pyx_PyObject_CallOneArg(__pyx_t_12, __pyx_t_5); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 211, __pyx_L1_error)
-      __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    } else {
-      __pyx_t_11 = __Pyx_PyObject_CallNoArg(__pyx_t_12); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 211, __pyx_L1_error)
-    }
-    __Pyx_GOTREF(__pyx_t_11);
-    __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-    __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
+      goto __pyx_L17_break;
 
-    /* "nescient/crypto/chacha.pyx":210
- *         for p in ps:
- *             p.start()
- *         for p in ps:             # <<<<<<<<<<<<<<
- *             p.join()
+      /* "nescient/crypto/chacha.pyx":214
+ *             sleep(0)
+ *             alive = active_children()
+ *             if not alive:             # <<<<<<<<<<<<<<
+ *                 break
  *         # Read the shared arrays back into the data bytearray
  */
+    }
   }
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_L17_break:;
 
-  /* "nescient/crypto/chacha.pyx":213
- *             p.join()
+  /* "nescient/crypto/chacha.pyx":217
+ *                 break
  *         # Read the shared arrays back into the data bytearray
  *         for i in range(n_threads):             # <<<<<<<<<<<<<<
  *             if i == n_threads-1:
  *                 data[(n_threads-1)*chunk_size:] = memoryview(arrays[i]).cast('B')[:]
  */
-  __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 213, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_11 = PyTuple_New(1); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 217, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_11);
   __Pyx_INCREF(__pyx_v_n_threads);
   __Pyx_GIVEREF(__pyx_v_n_threads);
-  PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_v_n_threads);
-  __pyx_t_11 = __Pyx_PyObject_Call(__pyx_builtin_range, __pyx_t_3, NULL); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 213, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_11);
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (likely(PyList_CheckExact(__pyx_t_11)) || PyTuple_CheckExact(__pyx_t_11)) {
-    __pyx_t_3 = __pyx_t_11; __Pyx_INCREF(__pyx_t_3); __pyx_t_6 = 0;
+  PyTuple_SET_ITEM(__pyx_t_11, 0, __pyx_v_n_threads);
+  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_range, __pyx_t_11, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 217, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
+  if (likely(PyList_CheckExact(__pyx_t_3)) || PyTuple_CheckExact(__pyx_t_3)) {
+    __pyx_t_11 = __pyx_t_3; __Pyx_INCREF(__pyx_t_11); __pyx_t_6 = 0;
     __pyx_t_9 = NULL;
   } else {
-    __pyx_t_6 = -1; __pyx_t_3 = PyObject_GetIter(__pyx_t_11); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 213, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_9 = Py_TYPE(__pyx_t_3)->tp_iternext; if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 213, __pyx_L1_error)
+    __pyx_t_6 = -1; __pyx_t_11 = PyObject_GetIter(__pyx_t_3); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 217, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_11);
+    __pyx_t_9 = Py_TYPE(__pyx_t_11)->tp_iternext; if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 217, __pyx_L1_error)
   }
-  __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   for (;;) {
     if (likely(!__pyx_t_9)) {
-      if (likely(PyList_CheckExact(__pyx_t_3))) {
-        if (__pyx_t_6 >= PyList_GET_SIZE(__pyx_t_3)) break;
+      if (likely(PyList_CheckExact(__pyx_t_11))) {
+        if (__pyx_t_6 >= PyList_GET_SIZE(__pyx_t_11)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_11 = PyList_GET_ITEM(__pyx_t_3, __pyx_t_6); __Pyx_INCREF(__pyx_t_11); __pyx_t_6++; if (unlikely(0 < 0)) __PYX_ERR(0, 213, __pyx_L1_error)
+        __pyx_t_3 = PyList_GET_ITEM(__pyx_t_11, __pyx_t_6); __Pyx_INCREF(__pyx_t_3); __pyx_t_6++; if (unlikely(0 < 0)) __PYX_ERR(0, 217, __pyx_L1_error)
         #else
-        __pyx_t_11 = PySequence_ITEM(__pyx_t_3, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 213, __pyx_L1_error)
-        __Pyx_GOTREF(__pyx_t_11);
+        __pyx_t_3 = PySequence_ITEM(__pyx_t_11, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 217, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_3);
         #endif
       } else {
-        if (__pyx_t_6 >= PyTuple_GET_SIZE(__pyx_t_3)) break;
+        if (__pyx_t_6 >= PyTuple_GET_SIZE(__pyx_t_11)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_11 = PyTuple_GET_ITEM(__pyx_t_3, __pyx_t_6); __Pyx_INCREF(__pyx_t_11); __pyx_t_6++; if (unlikely(0 < 0)) __PYX_ERR(0, 213, __pyx_L1_error)
+        __pyx_t_3 = PyTuple_GET_ITEM(__pyx_t_11, __pyx_t_6); __Pyx_INCREF(__pyx_t_3); __pyx_t_6++; if (unlikely(0 < 0)) __PYX_ERR(0, 217, __pyx_L1_error)
         #else
-        __pyx_t_11 = PySequence_ITEM(__pyx_t_3, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 213, __pyx_L1_error)
-        __Pyx_GOTREF(__pyx_t_11);
+        __pyx_t_3 = PySequence_ITEM(__pyx_t_11, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 217, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_3);
         #endif
       }
     } else {
-      __pyx_t_11 = __pyx_t_9(__pyx_t_3);
-      if (unlikely(!__pyx_t_11)) {
+      __pyx_t_3 = __pyx_t_9(__pyx_t_11);
+      if (unlikely(!__pyx_t_3)) {
         PyObject* exc_type = PyErr_Occurred();
         if (exc_type) {
           if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-          else __PYX_ERR(0, 213, __pyx_L1_error)
+          else __PYX_ERR(0, 217, __pyx_L1_error)
         }
         break;
       }
-      __Pyx_GOTREF(__pyx_t_11);
+      __Pyx_GOTREF(__pyx_t_3);
     }
-    __Pyx_XDECREF_SET(__pyx_v_i, __pyx_t_11);
-    __pyx_t_11 = 0;
+    __Pyx_XDECREF_SET(__pyx_v_i, __pyx_t_3);
+    __pyx_t_3 = 0;
 
-    /* "nescient/crypto/chacha.pyx":214
+    /* "nescient/crypto/chacha.pyx":218
  *         # Read the shared arrays back into the data bytearray
  *         for i in range(n_threads):
  *             if i == n_threads-1:             # <<<<<<<<<<<<<<
  *                 data[(n_threads-1)*chunk_size:] = memoryview(arrays[i]).cast('B')[:]
  *             else:
  */
-    __pyx_t_11 = __Pyx_PyInt_SubtractObjC(__pyx_v_n_threads, __pyx_int_1, 1, 0); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 214, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_11);
-    __pyx_t_12 = PyObject_RichCompare(__pyx_v_i, __pyx_t_11, Py_EQ); __Pyx_XGOTREF(__pyx_t_12); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 214, __pyx_L1_error)
-    __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-    __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_12); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 214, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyInt_SubtractObjC(__pyx_v_n_threads, __pyx_int_1, 1, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 218, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    __pyx_t_12 = PyObject_RichCompare(__pyx_v_i, __pyx_t_3, Py_EQ); __Pyx_XGOTREF(__pyx_t_12); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 218, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_t_12); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 218, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-    if (__pyx_t_2) {
+    if (__pyx_t_1) {
 
-      /* "nescient/crypto/chacha.pyx":215
+      /* "nescient/crypto/chacha.pyx":219
  *         for i in range(n_threads):
  *             if i == n_threads-1:
  *                 data[(n_threads-1)*chunk_size:] = memoryview(arrays[i]).cast('B')[:]             # <<<<<<<<<<<<<<
  *             else:
  *                 data[i*chunk_size:(i+1)*chunk_size] = memoryview(arrays[i]).cast('B')[:]
  */
-      __pyx_t_12 = PyObject_GetItem(__pyx_v_arrays, __pyx_v_i); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 215, __pyx_L1_error)
+      __pyx_t_12 = PyObject_GetItem(__pyx_v_arrays, __pyx_v_i); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 219, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_12);
-      __pyx_t_11 = PyTuple_New(1); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 215, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_11);
+      __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 219, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_3);
       __Pyx_GIVEREF(__pyx_t_12);
-      PyTuple_SET_ITEM(__pyx_t_11, 0, __pyx_t_12);
+      PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_12);
       __pyx_t_12 = 0;
-      __pyx_t_12 = __Pyx_PyObject_Call(__pyx_builtin_memoryview, __pyx_t_11, NULL); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 215, __pyx_L1_error)
+      __pyx_t_12 = __Pyx_PyObject_Call(__pyx_builtin_memoryview, __pyx_t_3, NULL); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 219, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_12);
-      __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-      __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_12, __pyx_n_s_cast); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 215, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_11);
+      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+      __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_12, __pyx_n_s_cast); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 219, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-      __pyx_t_12 = __Pyx_PyObject_Call(__pyx_t_11, __pyx_tuple__8, NULL); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 215, __pyx_L1_error)
+      __pyx_t_12 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__9, NULL); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 219, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_12);
-      __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-      __pyx_t_11 = __Pyx_PyObject_GetSlice(__pyx_t_12, 0, 0, NULL, NULL, &__pyx_slice__9, 0, 0, 1); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 215, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_11);
+      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+      __pyx_t_3 = __Pyx_PyObject_GetSlice(__pyx_t_12, 0, 0, NULL, NULL, &__pyx_slice__10, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 219, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-      __pyx_t_12 = __Pyx_PyInt_SubtractObjC(__pyx_v_n_threads, __pyx_int_1, 1, 0); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 215, __pyx_L1_error)
+      __pyx_t_12 = __Pyx_PyInt_SubtractObjC(__pyx_v_n_threads, __pyx_int_1, 1, 0); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 219, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_12);
-      __pyx_t_5 = PyNumber_Multiply(__pyx_t_12, __pyx_v_chunk_size); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 215, __pyx_L1_error)
+      __pyx_t_5 = PyNumber_Multiply(__pyx_t_12, __pyx_v_chunk_size); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 219, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-      if (__Pyx_PyObject_SetSlice(__pyx_v_data, __pyx_t_11, 0, 0, &__pyx_t_5, NULL, NULL, 0, 0, 1) < 0) __PYX_ERR(0, 215, __pyx_L1_error)
+      if (__Pyx_PyObject_SetSlice(__pyx_v_data, __pyx_t_3, 0, 0, &__pyx_t_5, NULL, NULL, 0, 0, 1) < 0) __PYX_ERR(0, 219, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-      __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
+      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-      /* "nescient/crypto/chacha.pyx":214
+      /* "nescient/crypto/chacha.pyx":218
  *         # Read the shared arrays back into the data bytearray
  *         for i in range(n_threads):
  *             if i == n_threads-1:             # <<<<<<<<<<<<<<
  *                 data[(n_threads-1)*chunk_size:] = memoryview(arrays[i]).cast('B')[:]
  *             else:
  */
-      goto __pyx_L20;
+      goto __pyx_L21;
     }
 
-    /* "nescient/crypto/chacha.pyx":217
+    /* "nescient/crypto/chacha.pyx":221
  *                 data[(n_threads-1)*chunk_size:] = memoryview(arrays[i]).cast('B')[:]
  *             else:
  *                 data[i*chunk_size:(i+1)*chunk_size] = memoryview(arrays[i]).cast('B')[:]             # <<<<<<<<<<<<<<
@@ -4339,99 +4373,99 @@ static PyObject *__pyx_pf_8nescient_6crypto_6chacha_13ChaChaCrypter_4chacha_encr
  *         for i in range(n_threads):
  */
     /*else*/ {
-      __pyx_t_11 = PyObject_GetItem(__pyx_v_arrays, __pyx_v_i); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 217, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_11);
-      __pyx_t_5 = PyTuple_New(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 217, __pyx_L1_error)
+      __pyx_t_3 = PyObject_GetItem(__pyx_v_arrays, __pyx_v_i); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 221, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_3);
+      __pyx_t_5 = PyTuple_New(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 221, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
-      __Pyx_GIVEREF(__pyx_t_11);
-      PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_11);
-      __pyx_t_11 = 0;
-      __pyx_t_11 = __Pyx_PyObject_Call(__pyx_builtin_memoryview, __pyx_t_5, NULL); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 217, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_11);
+      __Pyx_GIVEREF(__pyx_t_3);
+      PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_3);
+      __pyx_t_3 = 0;
+      __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_memoryview, __pyx_t_5, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 221, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-      __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_11, __pyx_n_s_cast); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 217, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_cast); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 221, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
-      __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-      __pyx_t_11 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__10, NULL); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 217, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_11);
+      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+      __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__11, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 221, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-      __pyx_t_5 = __Pyx_PyObject_GetSlice(__pyx_t_11, 0, 0, NULL, NULL, &__pyx_slice__11, 0, 0, 1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 217, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyObject_GetSlice(__pyx_t_3, 0, 0, NULL, NULL, &__pyx_slice__12, 0, 0, 1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 221, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
-      __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-      __pyx_t_11 = PyNumber_Multiply(__pyx_v_i, __pyx_v_chunk_size); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 217, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_11);
-      __pyx_t_12 = __Pyx_PyInt_AddObjC(__pyx_v_i, __pyx_int_1, 1, 0); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 217, __pyx_L1_error)
+      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+      __pyx_t_3 = PyNumber_Multiply(__pyx_v_i, __pyx_v_chunk_size); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 221, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_3);
+      __pyx_t_12 = __Pyx_PyInt_AddObjC(__pyx_v_i, __pyx_int_1, 1, 0); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 221, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_12);
-      __pyx_t_8 = PyNumber_Multiply(__pyx_t_12, __pyx_v_chunk_size); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 217, __pyx_L1_error)
+      __pyx_t_8 = PyNumber_Multiply(__pyx_t_12, __pyx_v_chunk_size); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 221, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_8);
       __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-      if (__Pyx_PyObject_SetSlice(__pyx_v_data, __pyx_t_5, 0, 0, &__pyx_t_11, &__pyx_t_8, NULL, 0, 0, 1) < 0) __PYX_ERR(0, 217, __pyx_L1_error)
-      __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
+      if (__Pyx_PyObject_SetSlice(__pyx_v_data, __pyx_t_5, 0, 0, &__pyx_t_3, &__pyx_t_8, NULL, 0, 0, 1) < 0) __PYX_ERR(0, 221, __pyx_L1_error)
+      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     }
-    __pyx_L20:;
+    __pyx_L21:;
 
-    /* "nescient/crypto/chacha.pyx":213
- *             p.join()
+    /* "nescient/crypto/chacha.pyx":217
+ *                 break
  *         # Read the shared arrays back into the data bytearray
  *         for i in range(n_threads):             # <<<<<<<<<<<<<<
  *             if i == n_threads-1:
  *                 data[(n_threads-1)*chunk_size:] = memoryview(arrays[i]).cast('B')[:]
  */
   }
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
 
-  /* "nescient/crypto/chacha.pyx":219
+  /* "nescient/crypto/chacha.pyx":223
  *                 data[i*chunk_size:(i+1)*chunk_size] = memoryview(arrays[i]).cast('B')[:]
  *         # Delete each shared array, hopefully allowing them to be garbage collected
  *         for i in range(n_threads):             # <<<<<<<<<<<<<<
  *             del arrays[0]
  *         return nonce
  */
-  __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 219, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_11 = PyTuple_New(1); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 223, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_11);
   __Pyx_INCREF(__pyx_v_n_threads);
   __Pyx_GIVEREF(__pyx_v_n_threads);
-  PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_v_n_threads);
-  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_builtin_range, __pyx_t_3, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 219, __pyx_L1_error)
+  PyTuple_SET_ITEM(__pyx_t_11, 0, __pyx_v_n_threads);
+  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_builtin_range, __pyx_t_11, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 223, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
   if (likely(PyList_CheckExact(__pyx_t_5)) || PyTuple_CheckExact(__pyx_t_5)) {
-    __pyx_t_3 = __pyx_t_5; __Pyx_INCREF(__pyx_t_3); __pyx_t_6 = 0;
+    __pyx_t_11 = __pyx_t_5; __Pyx_INCREF(__pyx_t_11); __pyx_t_6 = 0;
     __pyx_t_9 = NULL;
   } else {
-    __pyx_t_6 = -1; __pyx_t_3 = PyObject_GetIter(__pyx_t_5); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 219, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_9 = Py_TYPE(__pyx_t_3)->tp_iternext; if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 219, __pyx_L1_error)
+    __pyx_t_6 = -1; __pyx_t_11 = PyObject_GetIter(__pyx_t_5); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 223, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_11);
+    __pyx_t_9 = Py_TYPE(__pyx_t_11)->tp_iternext; if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 223, __pyx_L1_error)
   }
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   for (;;) {
     if (likely(!__pyx_t_9)) {
-      if (likely(PyList_CheckExact(__pyx_t_3))) {
-        if (__pyx_t_6 >= PyList_GET_SIZE(__pyx_t_3)) break;
+      if (likely(PyList_CheckExact(__pyx_t_11))) {
+        if (__pyx_t_6 >= PyList_GET_SIZE(__pyx_t_11)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_5 = PyList_GET_ITEM(__pyx_t_3, __pyx_t_6); __Pyx_INCREF(__pyx_t_5); __pyx_t_6++; if (unlikely(0 < 0)) __PYX_ERR(0, 219, __pyx_L1_error)
+        __pyx_t_5 = PyList_GET_ITEM(__pyx_t_11, __pyx_t_6); __Pyx_INCREF(__pyx_t_5); __pyx_t_6++; if (unlikely(0 < 0)) __PYX_ERR(0, 223, __pyx_L1_error)
         #else
-        __pyx_t_5 = PySequence_ITEM(__pyx_t_3, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 219, __pyx_L1_error)
+        __pyx_t_5 = PySequence_ITEM(__pyx_t_11, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 223, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_5);
         #endif
       } else {
-        if (__pyx_t_6 >= PyTuple_GET_SIZE(__pyx_t_3)) break;
+        if (__pyx_t_6 >= PyTuple_GET_SIZE(__pyx_t_11)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_5 = PyTuple_GET_ITEM(__pyx_t_3, __pyx_t_6); __Pyx_INCREF(__pyx_t_5); __pyx_t_6++; if (unlikely(0 < 0)) __PYX_ERR(0, 219, __pyx_L1_error)
+        __pyx_t_5 = PyTuple_GET_ITEM(__pyx_t_11, __pyx_t_6); __Pyx_INCREF(__pyx_t_5); __pyx_t_6++; if (unlikely(0 < 0)) __PYX_ERR(0, 223, __pyx_L1_error)
         #else
-        __pyx_t_5 = PySequence_ITEM(__pyx_t_3, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 219, __pyx_L1_error)
+        __pyx_t_5 = PySequence_ITEM(__pyx_t_11, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 223, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_5);
         #endif
       }
     } else {
-      __pyx_t_5 = __pyx_t_9(__pyx_t_3);
+      __pyx_t_5 = __pyx_t_9(__pyx_t_11);
       if (unlikely(!__pyx_t_5)) {
         PyObject* exc_type = PyErr_Occurred();
         if (exc_type) {
           if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-          else __PYX_ERR(0, 219, __pyx_L1_error)
+          else __PYX_ERR(0, 223, __pyx_L1_error)
         }
         break;
       }
@@ -4440,16 +4474,16 @@ static PyObject *__pyx_pf_8nescient_6crypto_6chacha_13ChaChaCrypter_4chacha_encr
     __Pyx_XDECREF_SET(__pyx_v_i, __pyx_t_5);
     __pyx_t_5 = 0;
 
-    /* "nescient/crypto/chacha.pyx":220
+    /* "nescient/crypto/chacha.pyx":224
  *         # Delete each shared array, hopefully allowing them to be garbage collected
  *         for i in range(n_threads):
  *             del arrays[0]             # <<<<<<<<<<<<<<
  *         return nonce
  * 
  */
-    if (unlikely(__Pyx_DelItemInt(__pyx_v_arrays, 0, long, 1, __Pyx_PyInt_From_long, 1, 0, 1) < 0)) __PYX_ERR(0, 220, __pyx_L1_error)
+    if (unlikely(__Pyx_DelItemInt(__pyx_v_arrays, 0, long, 1, __Pyx_PyInt_From_long, 1, 0, 1) < 0)) __PYX_ERR(0, 224, __pyx_L1_error)
 
-    /* "nescient/crypto/chacha.pyx":219
+    /* "nescient/crypto/chacha.pyx":223
  *                 data[i*chunk_size:(i+1)*chunk_size] = memoryview(arrays[i]).cast('B')[:]
  *         # Delete each shared array, hopefully allowing them to be garbage collected
  *         for i in range(n_threads):             # <<<<<<<<<<<<<<
@@ -4457,9 +4491,9 @@ static PyObject *__pyx_pf_8nescient_6crypto_6chacha_13ChaChaCrypter_4chacha_encr
  *         return nonce
  */
   }
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
 
-  /* "nescient/crypto/chacha.pyx":221
+  /* "nescient/crypto/chacha.pyx":225
  *         for i in range(n_threads):
  *             del arrays[0]
  *         return nonce             # <<<<<<<<<<<<<<
@@ -4471,7 +4505,7 @@ static PyObject *__pyx_pf_8nescient_6crypto_6chacha_13ChaChaCrypter_4chacha_encr
   __pyx_r = __pyx_v_nonce;
   goto __pyx_L0;
 
-  /* "nescient/crypto/chacha.pyx":159
+  /* "nescient/crypto/chacha.pyx":160
  *         return
  * 
  *     def chacha_encrypt(self, data, nonce=None, count=1, force_single_thread=False):             # <<<<<<<<<<<<<<
@@ -4499,6 +4533,7 @@ static PyObject *__pyx_pf_8nescient_6crypto_6chacha_13ChaChaCrypter_4chacha_encr
   __Pyx_XDECREF(__pyx_v_x);
   __Pyx_XDECREF(__pyx_v_ps);
   __Pyx_XDECREF(__pyx_v_p);
+  __Pyx_XDECREF(__pyx_v_alive);
   __Pyx_XDECREF(__pyx_v_nonce);
   __Pyx_XGIVEREF(__pyx_r);
   __Pyx_RefNannyFinishContext();
@@ -4701,7 +4736,7 @@ static int __pyx_array___pyx_pf_15View_dot_MemoryView_5array___cinit__(struct __
  * 
  *         if itemsize <= 0:
  */
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__12, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 131, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__13, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 131, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_Raise(__pyx_t_3, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -4733,7 +4768,7 @@ static int __pyx_array___pyx_pf_15View_dot_MemoryView_5array___cinit__(struct __
  * 
  *         if not isinstance(format, bytes):
  */
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__13, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 134, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__14, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 134, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_Raise(__pyx_t_3, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -4768,7 +4803,7 @@ static int __pyx_array___pyx_pf_15View_dot_MemoryView_5array___cinit__(struct __
  */
     __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_format, __pyx_n_s_encode); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 137, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__14, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(1, 137, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__15, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(1, 137, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF_SET(__pyx_v_format, __pyx_t_5);
@@ -4848,7 +4883,7 @@ static int __pyx_array___pyx_pf_15View_dot_MemoryView_5array___cinit__(struct __
  * 
  * 
  */
-    __pyx_t_5 = __Pyx_PyObject_Call(__pyx_builtin_MemoryError, __pyx_tuple__15, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(1, 146, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_Call(__pyx_builtin_MemoryError, __pyx_tuple__16, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(1, 146, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_Raise(__pyx_t_5, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -5132,7 +5167,7 @@ static int __pyx_array___pyx_pf_15View_dot_MemoryView_5array___cinit__(struct __
  * 
  *             if self.dtype_is_object:
  */
-      __pyx_t_5 = __Pyx_PyObject_Call(__pyx_builtin_MemoryError, __pyx_tuple__16, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(1, 174, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyObject_Call(__pyx_builtin_MemoryError, __pyx_tuple__17, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(1, 174, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_Raise(__pyx_t_5, 0, 0, 0);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -5370,7 +5405,7 @@ static int __pyx_array___pyx_pf_15View_dot_MemoryView_5array_2__getbuffer__(stru
  *         info.buf = self.data
  *         info.len = self.len
  */
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__17, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 190, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__18, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 190, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_Raise(__pyx_t_3, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -6086,7 +6121,7 @@ static PyObject *__pyx_pf___pyx_array___reduce_cython__(CYTHON_UNUSED struct __p
  * def __setstate_cython__(self, __pyx_state):
  *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__18, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 2, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__19, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 2, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_Raise(__pyx_t_1, 0, 0, 0);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -6139,7 +6174,7 @@ static PyObject *__pyx_pf___pyx_array_2__setstate_cython__(CYTHON_UNUSED struct 
  * def __setstate_cython__(self, __pyx_state):
  *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")             # <<<<<<<<<<<<<<
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__19, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 4, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__20, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 4, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_Raise(__pyx_t_1, 0, 0, 0);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -8782,7 +8817,7 @@ static PyObject *__pyx_memoryview_convert_item_to_object(struct __pyx_memoryview
  *         else:
  *             if len(self.view.format) == 1:
  */
-      __pyx_t_6 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__20, NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(1, 486, __pyx_L5_except_error)
+      __pyx_t_6 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__21, NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(1, 486, __pyx_L5_except_error)
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_Raise(__pyx_t_6, 0, 0, 0);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
@@ -9621,7 +9656,7 @@ static PyObject *__pyx_pf_15View_dot_MemoryView_10memoryview_7strides___get__(st
  * 
  *         return tuple([stride for stride in self.view.strides[:self.view.ndim]])
  */
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__21, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 558, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__22, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 558, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_Raise(__pyx_t_2, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -9735,7 +9770,7 @@ static PyObject *__pyx_pf_15View_dot_MemoryView_10memoryview_10suboffsets___get_
     __Pyx_XDECREF(__pyx_r);
     __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_self->view.ndim); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 565, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_3 = PyNumber_Multiply(__pyx_tuple__22, __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 565, __pyx_L1_error)
+    __pyx_t_3 = PyNumber_Multiply(__pyx_tuple__23, __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 565, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __pyx_r = __pyx_t_3;
@@ -10742,7 +10777,7 @@ static PyObject *__pyx_pf___pyx_memoryview___reduce_cython__(CYTHON_UNUSED struc
  * def __setstate_cython__(self, __pyx_state):
  *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__23, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 2, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__24, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 2, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_Raise(__pyx_t_1, 0, 0, 0);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -10795,7 +10830,7 @@ static PyObject *__pyx_pf___pyx_memoryview_2__setstate_cython__(CYTHON_UNUSED st
  * def __setstate_cython__(self, __pyx_state):
  *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")             # <<<<<<<<<<<<<<
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__24, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 4, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__25, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 4, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_Raise(__pyx_t_1, 0, 0, 0);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -11146,9 +11181,9 @@ static PyObject *_unellipsify(PyObject *__pyx_v_index, int __pyx_v_ndim) {
         __Pyx_GOTREF(__pyx_t_7);
         { Py_ssize_t __pyx_temp;
           for (__pyx_temp=0; __pyx_temp < ((__pyx_v_ndim - __pyx_t_8) + 1); __pyx_temp++) {
-            __Pyx_INCREF(__pyx_slice__25);
-            __Pyx_GIVEREF(__pyx_slice__25);
-            PyList_SET_ITEM(__pyx_t_7, __pyx_temp, __pyx_slice__25);
+            __Pyx_INCREF(__pyx_slice__26);
+            __Pyx_GIVEREF(__pyx_slice__26);
+            PyList_SET_ITEM(__pyx_t_7, __pyx_temp, __pyx_slice__26);
           }
         }
         __pyx_t_9 = __Pyx_PyList_Extend(__pyx_v_result, __pyx_t_7); if (unlikely(__pyx_t_9 == ((int)-1))) __PYX_ERR(1, 670, __pyx_L1_error)
@@ -11181,7 +11216,7 @@ static PyObject *_unellipsify(PyObject *__pyx_v_index, int __pyx_v_ndim) {
  *         else:
  */
       /*else*/ {
-        __pyx_t_9 = __Pyx_PyList_Append(__pyx_v_result, __pyx_slice__26); if (unlikely(__pyx_t_9 == ((int)-1))) __PYX_ERR(1, 673, __pyx_L1_error)
+        __pyx_t_9 = __Pyx_PyList_Append(__pyx_v_result, __pyx_slice__27); if (unlikely(__pyx_t_9 == ((int)-1))) __PYX_ERR(1, 673, __pyx_L1_error)
       }
       __pyx_L7:;
 
@@ -11326,9 +11361,9 @@ static PyObject *_unellipsify(PyObject *__pyx_v_index, int __pyx_v_ndim) {
     __Pyx_GOTREF(__pyx_t_3);
     { Py_ssize_t __pyx_temp;
       for (__pyx_temp=0; __pyx_temp < __pyx_v_nslices; __pyx_temp++) {
-        __Pyx_INCREF(__pyx_slice__27);
-        __Pyx_GIVEREF(__pyx_slice__27);
-        PyList_SET_ITEM(__pyx_t_3, __pyx_temp, __pyx_slice__27);
+        __Pyx_INCREF(__pyx_slice__28);
+        __Pyx_GIVEREF(__pyx_slice__28);
+        PyList_SET_ITEM(__pyx_t_3, __pyx_temp, __pyx_slice__28);
       }
     }
     __pyx_t_9 = __Pyx_PyList_Extend(__pyx_v_result, __pyx_t_3); if (unlikely(__pyx_t_9 == ((int)-1))) __PYX_ERR(1, 684, __pyx_L1_error)
@@ -11452,7 +11487,7 @@ static PyObject *assert_direct_dimensions(Py_ssize_t *__pyx_v_suboffsets, int __
  * 
  * 
  */
-      __pyx_t_5 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__28, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(1, 691, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__29, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(1, 691, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_Raise(__pyx_t_5, 0, 0, 0);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -13623,7 +13658,7 @@ static PyObject *__pyx_pf___pyx_memoryviewslice___reduce_cython__(CYTHON_UNUSED 
  * def __setstate_cython__(self, __pyx_state):
  *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__29, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 2, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__30, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 2, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_Raise(__pyx_t_1, 0, 0, 0);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -13676,7 +13711,7 @@ static PyObject *__pyx_pf___pyx_memoryviewslice_2__setstate_cython__(CYTHON_UNUS
  * def __setstate_cython__(self, __pyx_state):
  *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")             # <<<<<<<<<<<<<<
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__30, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 4, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__31, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 4, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_Raise(__pyx_t_1, 0, 0, 0);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -18049,6 +18084,8 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_s_Unable_to_convert_item_to_object, __pyx_k_Unable_to_convert_item_to_object, sizeof(__pyx_k_Unable_to_convert_item_to_object), 0, 0, 1, 0},
   {&__pyx_n_s_ValueError, __pyx_k_ValueError, sizeof(__pyx_k_ValueError), 0, 0, 1, 1},
   {&__pyx_n_s_View_MemoryView, __pyx_k_View_MemoryView, sizeof(__pyx_k_View_MemoryView), 0, 0, 1, 1},
+  {&__pyx_n_s_active_children, __pyx_k_active_children, sizeof(__pyx_k_active_children), 0, 0, 1, 1},
+  {&__pyx_n_s_alive, __pyx_k_alive, sizeof(__pyx_k_alive), 0, 0, 1, 1},
   {&__pyx_n_s_allocate_buffer, __pyx_k_allocate_buffer, sizeof(__pyx_k_allocate_buffer), 0, 0, 1, 1},
   {&__pyx_n_s_args, __pyx_k_args, sizeof(__pyx_k_args), 0, 0, 1, 1},
   {&__pyx_n_s_arrays, __pyx_k_arrays, sizeof(__pyx_k_arrays), 0, 0, 1, 1},
@@ -18095,7 +18132,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_itemsize, __pyx_k_itemsize, sizeof(__pyx_k_itemsize), 0, 0, 1, 1},
   {&__pyx_kp_s_itemsize_0_for_cython_array, __pyx_k_itemsize_0_for_cython_array, sizeof(__pyx_k_itemsize_0_for_cython_array), 0, 0, 1, 0},
   {&__pyx_n_s_j, __pyx_k_j, sizeof(__pyx_k_j), 0, 0, 1, 1},
-  {&__pyx_n_s_join, __pyx_k_join, sizeof(__pyx_k_join), 0, 0, 1, 1},
   {&__pyx_n_s_key, __pyx_k_key, sizeof(__pyx_k_key), 0, 0, 1, 1},
   {&__pyx_n_s_key_stream, __pyx_k_key_stream, sizeof(__pyx_k_key_stream), 0, 0, 1, 1},
   {&__pyx_n_s_key_w, __pyx_k_key_w, sizeof(__pyx_k_key_w), 0, 0, 1, 1},
@@ -18147,6 +18183,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_sha, __pyx_k_sha, sizeof(__pyx_k_sha), 0, 0, 1, 1},
   {&__pyx_n_s_shape, __pyx_k_shape, sizeof(__pyx_k_shape), 0, 0, 1, 1},
   {&__pyx_n_s_size, __pyx_k_size, sizeof(__pyx_k_size), 0, 0, 1, 1},
+  {&__pyx_n_s_sleep, __pyx_k_sleep, sizeof(__pyx_k_sleep), 0, 0, 1, 1},
   {&__pyx_n_s_start, __pyx_k_start, sizeof(__pyx_k_start), 0, 0, 1, 1},
   {&__pyx_n_s_step, __pyx_k_step, sizeof(__pyx_k_step), 0, 0, 1, 1},
   {&__pyx_n_s_stm, __pyx_k_stm, sizeof(__pyx_k_stm), 0, 0, 1, 1},
@@ -18158,6 +18195,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_struct, __pyx_k_struct, sizeof(__pyx_k_struct), 0, 0, 1, 1},
   {&__pyx_n_s_target, __pyx_k_target, sizeof(__pyx_k_target), 0, 0, 1, 1},
   {&__pyx_n_s_test, __pyx_k_test, sizeof(__pyx_k_test), 0, 0, 1, 1},
+  {&__pyx_n_s_time, __pyx_k_time, sizeof(__pyx_k_time), 0, 0, 1, 1},
   {&__pyx_n_s_to_bytes, __pyx_k_to_bytes, sizeof(__pyx_k_to_bytes), 0, 0, 1, 1},
   {&__pyx_kp_s_unable_to_allocate_array_data, __pyx_k_unable_to_allocate_array_data, sizeof(__pyx_k_unable_to_allocate_array_data), 0, 0, 1, 0},
   {&__pyx_kp_s_unable_to_allocate_shape_and_str, __pyx_k_unable_to_allocate_shape_and_str, sizeof(__pyx_k_unable_to_allocate_shape_and_str), 0, 0, 1, 0},
@@ -18168,8 +18206,8 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {0, 0, 0, 0, 0, 0, 0}
 };
 static int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 23, __pyx_L1_error)
-  __pyx_builtin_memoryview = __Pyx_GetBuiltinName(__pyx_n_s_memoryview); if (!__pyx_builtin_memoryview) __PYX_ERR(0, 198, __pyx_L1_error)
+  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 24, __pyx_L1_error)
+  __pyx_builtin_memoryview = __Pyx_GetBuiltinName(__pyx_n_s_memoryview); if (!__pyx_builtin_memoryview) __PYX_ERR(0, 199, __pyx_L1_error)
   __pyx_builtin_ValueError = __Pyx_GetBuiltinName(__pyx_n_s_ValueError); if (!__pyx_builtin_ValueError) __PYX_ERR(1, 131, __pyx_L1_error)
   __pyx_builtin_MemoryError = __Pyx_GetBuiltinName(__pyx_n_s_MemoryError); if (!__pyx_builtin_MemoryError) __PYX_ERR(1, 146, __pyx_L1_error)
   __pyx_builtin_enumerate = __Pyx_GetBuiltinName(__pyx_n_s_enumerate); if (!__pyx_builtin_enumerate) __PYX_ERR(1, 149, __pyx_L1_error)
@@ -18186,94 +18224,105 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "nescient/crypto/chacha.pyx":129
+  /* "nescient/crypto/chacha.pyx":130
  *     def __init__(self, key):
  *         assert len(key) == 32
  *         self.key = key[:]             # <<<<<<<<<<<<<<
  *         # Since this is a stream cipher encryption is the same as decryption
  *         self.chacha_decrypt = self.chacha_encrypt
  */
-  __pyx_slice_ = PySlice_New(Py_None, Py_None, Py_None); if (unlikely(!__pyx_slice_)) __PYX_ERR(0, 129, __pyx_L1_error)
+  __pyx_slice_ = PySlice_New(Py_None, Py_None, Py_None); if (unlikely(!__pyx_slice_)) __PYX_ERR(0, 130, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_slice_);
   __Pyx_GIVEREF(__pyx_slice_);
 
-  /* "nescient/crypto/chacha.pyx":138
+  /* "nescient/crypto/chacha.pyx":139
  *         cdef unsigned int * key_w = bytes_to_words(self.key, 32)
  *         # Convert the nonce into an array of 32-bit words
  *         cdef unsigned int * nonce_w = bytes_to_words(nonce.to_bytes(12, byteorder='little'), 12)             # <<<<<<<<<<<<<<
  *         # Initialize counter and working variables
  *         cdef unsigned int counter = count
  */
-  __pyx_tuple__2 = PyTuple_Pack(1, __pyx_int_12); if (unlikely(!__pyx_tuple__2)) __PYX_ERR(0, 138, __pyx_L1_error)
+  __pyx_tuple__2 = PyTuple_Pack(1, __pyx_int_12); if (unlikely(!__pyx_tuple__2)) __PYX_ERR(0, 139, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__2);
   __Pyx_GIVEREF(__pyx_tuple__2);
 
-  /* "nescient/crypto/chacha.pyx":180
+  /* "nescient/crypto/chacha.pyx":181
  *         # Generate a random 96-bit nonce if unspecified
  *         if nonce is None:
  *             nonce = randbits(96)             # <<<<<<<<<<<<<<
  *         # Determine the number of threads to use based on CPU count
  *         n_threads = cpu_count()
  */
-  __pyx_tuple__3 = PyTuple_Pack(1, __pyx_int_96); if (unlikely(!__pyx_tuple__3)) __PYX_ERR(0, 180, __pyx_L1_error)
+  __pyx_tuple__3 = PyTuple_Pack(1, __pyx_int_96); if (unlikely(!__pyx_tuple__3)) __PYX_ERR(0, 181, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__3);
   __Pyx_GIVEREF(__pyx_tuple__3);
 
-  /* "nescient/crypto/chacha.pyx":198
+  /* "nescient/crypto/chacha.pyx":199
  *             if i == n_threads-1:
  *                 x = RawArray(c_ubyte, len(data)-(n_threads-1)*chunk_size)
  *                 memoryview(x).cast('B')[:] = data[(n_threads-1)*chunk_size:]             # <<<<<<<<<<<<<<
  *             else:
  *                 x = RawArray(c_ubyte, chunk_size)
  */
-  __pyx_tuple__4 = PyTuple_Pack(1, __pyx_n_s_B); if (unlikely(!__pyx_tuple__4)) __PYX_ERR(0, 198, __pyx_L1_error)
+  __pyx_tuple__4 = PyTuple_Pack(1, __pyx_n_s_B); if (unlikely(!__pyx_tuple__4)) __PYX_ERR(0, 199, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__4);
   __Pyx_GIVEREF(__pyx_tuple__4);
-  __pyx_slice__5 = PySlice_New(Py_None, Py_None, Py_None); if (unlikely(!__pyx_slice__5)) __PYX_ERR(0, 198, __pyx_L1_error)
+  __pyx_slice__5 = PySlice_New(Py_None, Py_None, Py_None); if (unlikely(!__pyx_slice__5)) __PYX_ERR(0, 199, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_slice__5);
   __Pyx_GIVEREF(__pyx_slice__5);
 
-  /* "nescient/crypto/chacha.pyx":201
+  /* "nescient/crypto/chacha.pyx":202
  *             else:
  *                 x = RawArray(c_ubyte, chunk_size)
  *                 memoryview(x).cast('B')[:] = data[i*chunk_size:(i+1)*chunk_size]             # <<<<<<<<<<<<<<
  *             arrays.append(x)
  *         # Initialize each process with the correct array and count arguments
  */
-  __pyx_tuple__6 = PyTuple_Pack(1, __pyx_n_s_B); if (unlikely(!__pyx_tuple__6)) __PYX_ERR(0, 201, __pyx_L1_error)
+  __pyx_tuple__6 = PyTuple_Pack(1, __pyx_n_s_B); if (unlikely(!__pyx_tuple__6)) __PYX_ERR(0, 202, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__6);
   __Pyx_GIVEREF(__pyx_tuple__6);
-  __pyx_slice__7 = PySlice_New(Py_None, Py_None, Py_None); if (unlikely(!__pyx_slice__7)) __PYX_ERR(0, 201, __pyx_L1_error)
+  __pyx_slice__7 = PySlice_New(Py_None, Py_None, Py_None); if (unlikely(!__pyx_slice__7)) __PYX_ERR(0, 202, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_slice__7);
   __Pyx_GIVEREF(__pyx_slice__7);
 
-  /* "nescient/crypto/chacha.pyx":215
+  /* "nescient/crypto/chacha.pyx":212
+ *             p.start()
+ *         while True:
+ *             sleep(0)             # <<<<<<<<<<<<<<
+ *             alive = active_children()
+ *             if not alive:
+ */
+  __pyx_tuple__8 = PyTuple_Pack(1, __pyx_int_0); if (unlikely(!__pyx_tuple__8)) __PYX_ERR(0, 212, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__8);
+  __Pyx_GIVEREF(__pyx_tuple__8);
+
+  /* "nescient/crypto/chacha.pyx":219
  *         for i in range(n_threads):
  *             if i == n_threads-1:
  *                 data[(n_threads-1)*chunk_size:] = memoryview(arrays[i]).cast('B')[:]             # <<<<<<<<<<<<<<
  *             else:
  *                 data[i*chunk_size:(i+1)*chunk_size] = memoryview(arrays[i]).cast('B')[:]
  */
-  __pyx_tuple__8 = PyTuple_Pack(1, __pyx_n_s_B); if (unlikely(!__pyx_tuple__8)) __PYX_ERR(0, 215, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__8);
-  __Pyx_GIVEREF(__pyx_tuple__8);
-  __pyx_slice__9 = PySlice_New(Py_None, Py_None, Py_None); if (unlikely(!__pyx_slice__9)) __PYX_ERR(0, 215, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_slice__9);
-  __Pyx_GIVEREF(__pyx_slice__9);
+  __pyx_tuple__9 = PyTuple_Pack(1, __pyx_n_s_B); if (unlikely(!__pyx_tuple__9)) __PYX_ERR(0, 219, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__9);
+  __Pyx_GIVEREF(__pyx_tuple__9);
+  __pyx_slice__10 = PySlice_New(Py_None, Py_None, Py_None); if (unlikely(!__pyx_slice__10)) __PYX_ERR(0, 219, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_slice__10);
+  __Pyx_GIVEREF(__pyx_slice__10);
 
-  /* "nescient/crypto/chacha.pyx":217
+  /* "nescient/crypto/chacha.pyx":221
  *                 data[(n_threads-1)*chunk_size:] = memoryview(arrays[i]).cast('B')[:]
  *             else:
  *                 data[i*chunk_size:(i+1)*chunk_size] = memoryview(arrays[i]).cast('B')[:]             # <<<<<<<<<<<<<<
  *         # Delete each shared array, hopefully allowing them to be garbage collected
  *         for i in range(n_threads):
  */
-  __pyx_tuple__10 = PyTuple_Pack(1, __pyx_n_s_B); if (unlikely(!__pyx_tuple__10)) __PYX_ERR(0, 217, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__10);
-  __Pyx_GIVEREF(__pyx_tuple__10);
-  __pyx_slice__11 = PySlice_New(Py_None, Py_None, Py_None); if (unlikely(!__pyx_slice__11)) __PYX_ERR(0, 217, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_slice__11);
-  __Pyx_GIVEREF(__pyx_slice__11);
+  __pyx_tuple__11 = PyTuple_Pack(1, __pyx_n_s_B); if (unlikely(!__pyx_tuple__11)) __PYX_ERR(0, 221, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__11);
+  __Pyx_GIVEREF(__pyx_tuple__11);
+  __pyx_slice__12 = PySlice_New(Py_None, Py_None, Py_None); if (unlikely(!__pyx_slice__12)) __PYX_ERR(0, 221, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_slice__12);
+  __Pyx_GIVEREF(__pyx_slice__12);
 
   /* "View.MemoryView":131
  * 
@@ -18282,9 +18331,9 @@ static int __Pyx_InitCachedConstants(void) {
  * 
  *         if itemsize <= 0:
  */
-  __pyx_tuple__12 = PyTuple_Pack(1, __pyx_kp_s_Empty_shape_tuple_for_cython_arr); if (unlikely(!__pyx_tuple__12)) __PYX_ERR(1, 131, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__12);
-  __Pyx_GIVEREF(__pyx_tuple__12);
+  __pyx_tuple__13 = PyTuple_Pack(1, __pyx_kp_s_Empty_shape_tuple_for_cython_arr); if (unlikely(!__pyx_tuple__13)) __PYX_ERR(1, 131, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__13);
+  __Pyx_GIVEREF(__pyx_tuple__13);
 
   /* "View.MemoryView":134
  * 
@@ -18293,9 +18342,9 @@ static int __Pyx_InitCachedConstants(void) {
  * 
  *         if not isinstance(format, bytes):
  */
-  __pyx_tuple__13 = PyTuple_Pack(1, __pyx_kp_s_itemsize_0_for_cython_array); if (unlikely(!__pyx_tuple__13)) __PYX_ERR(1, 134, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__13);
-  __Pyx_GIVEREF(__pyx_tuple__13);
+  __pyx_tuple__14 = PyTuple_Pack(1, __pyx_kp_s_itemsize_0_for_cython_array); if (unlikely(!__pyx_tuple__14)) __PYX_ERR(1, 134, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__14);
+  __Pyx_GIVEREF(__pyx_tuple__14);
 
   /* "View.MemoryView":137
  * 
@@ -18304,9 +18353,9 @@ static int __Pyx_InitCachedConstants(void) {
  *         self._format = format  # keep a reference to the byte string
  *         self.format = self._format
  */
-  __pyx_tuple__14 = PyTuple_Pack(1, __pyx_n_s_ASCII); if (unlikely(!__pyx_tuple__14)) __PYX_ERR(1, 137, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__14);
-  __Pyx_GIVEREF(__pyx_tuple__14);
+  __pyx_tuple__15 = PyTuple_Pack(1, __pyx_n_s_ASCII); if (unlikely(!__pyx_tuple__15)) __PYX_ERR(1, 137, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__15);
+  __Pyx_GIVEREF(__pyx_tuple__15);
 
   /* "View.MemoryView":146
  * 
@@ -18315,9 +18364,9 @@ static int __Pyx_InitCachedConstants(void) {
  * 
  * 
  */
-  __pyx_tuple__15 = PyTuple_Pack(1, __pyx_kp_s_unable_to_allocate_shape_and_str); if (unlikely(!__pyx_tuple__15)) __PYX_ERR(1, 146, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__15);
-  __Pyx_GIVEREF(__pyx_tuple__15);
+  __pyx_tuple__16 = PyTuple_Pack(1, __pyx_kp_s_unable_to_allocate_shape_and_str); if (unlikely(!__pyx_tuple__16)) __PYX_ERR(1, 146, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__16);
+  __Pyx_GIVEREF(__pyx_tuple__16);
 
   /* "View.MemoryView":174
  *             self.data = <char *>malloc(self.len)
@@ -18326,9 +18375,9 @@ static int __Pyx_InitCachedConstants(void) {
  * 
  *             if self.dtype_is_object:
  */
-  __pyx_tuple__16 = PyTuple_Pack(1, __pyx_kp_s_unable_to_allocate_array_data); if (unlikely(!__pyx_tuple__16)) __PYX_ERR(1, 174, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__16);
-  __Pyx_GIVEREF(__pyx_tuple__16);
+  __pyx_tuple__17 = PyTuple_Pack(1, __pyx_kp_s_unable_to_allocate_array_data); if (unlikely(!__pyx_tuple__17)) __PYX_ERR(1, 174, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__17);
+  __Pyx_GIVEREF(__pyx_tuple__17);
 
   /* "View.MemoryView":190
  *             bufmode = PyBUF_F_CONTIGUOUS | PyBUF_ANY_CONTIGUOUS
@@ -18337,9 +18386,9 @@ static int __Pyx_InitCachedConstants(void) {
  *         info.buf = self.data
  *         info.len = self.len
  */
-  __pyx_tuple__17 = PyTuple_Pack(1, __pyx_kp_s_Can_only_create_a_buffer_that_is); if (unlikely(!__pyx_tuple__17)) __PYX_ERR(1, 190, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__17);
-  __Pyx_GIVEREF(__pyx_tuple__17);
+  __pyx_tuple__18 = PyTuple_Pack(1, __pyx_kp_s_Can_only_create_a_buffer_that_is); if (unlikely(!__pyx_tuple__18)) __PYX_ERR(1, 190, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__18);
+  __Pyx_GIVEREF(__pyx_tuple__18);
 
   /* "(tree fragment)":2
  * def __reduce_cython__(self):
@@ -18347,18 +18396,18 @@ static int __Pyx_InitCachedConstants(void) {
  * def __setstate_cython__(self, __pyx_state):
  *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
  */
-  __pyx_tuple__18 = PyTuple_Pack(1, __pyx_kp_s_no_default___reduce___due_to_non); if (unlikely(!__pyx_tuple__18)) __PYX_ERR(1, 2, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__18);
-  __Pyx_GIVEREF(__pyx_tuple__18);
+  __pyx_tuple__19 = PyTuple_Pack(1, __pyx_kp_s_no_default___reduce___due_to_non); if (unlikely(!__pyx_tuple__19)) __PYX_ERR(1, 2, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__19);
+  __Pyx_GIVEREF(__pyx_tuple__19);
 
   /* "(tree fragment)":4
  *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
  * def __setstate_cython__(self, __pyx_state):
  *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")             # <<<<<<<<<<<<<<
  */
-  __pyx_tuple__19 = PyTuple_Pack(1, __pyx_kp_s_no_default___reduce___due_to_non); if (unlikely(!__pyx_tuple__19)) __PYX_ERR(1, 4, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__19);
-  __Pyx_GIVEREF(__pyx_tuple__19);
+  __pyx_tuple__20 = PyTuple_Pack(1, __pyx_kp_s_no_default___reduce___due_to_non); if (unlikely(!__pyx_tuple__20)) __PYX_ERR(1, 4, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__20);
+  __Pyx_GIVEREF(__pyx_tuple__20);
 
   /* "View.MemoryView":486
  *             result = struct.unpack(self.view.format, bytesitem)
@@ -18367,9 +18416,9 @@ static int __Pyx_InitCachedConstants(void) {
  *         else:
  *             if len(self.view.format) == 1:
  */
-  __pyx_tuple__20 = PyTuple_Pack(1, __pyx_kp_s_Unable_to_convert_item_to_object); if (unlikely(!__pyx_tuple__20)) __PYX_ERR(1, 486, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__20);
-  __Pyx_GIVEREF(__pyx_tuple__20);
+  __pyx_tuple__21 = PyTuple_Pack(1, __pyx_kp_s_Unable_to_convert_item_to_object); if (unlikely(!__pyx_tuple__21)) __PYX_ERR(1, 486, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__21);
+  __Pyx_GIVEREF(__pyx_tuple__21);
 
   /* "View.MemoryView":558
  *         if self.view.strides == NULL:
@@ -18378,9 +18427,9 @@ static int __Pyx_InitCachedConstants(void) {
  * 
  *         return tuple([stride for stride in self.view.strides[:self.view.ndim]])
  */
-  __pyx_tuple__21 = PyTuple_Pack(1, __pyx_kp_s_Buffer_view_does_not_expose_stri); if (unlikely(!__pyx_tuple__21)) __PYX_ERR(1, 558, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__21);
-  __Pyx_GIVEREF(__pyx_tuple__21);
+  __pyx_tuple__22 = PyTuple_Pack(1, __pyx_kp_s_Buffer_view_does_not_expose_stri); if (unlikely(!__pyx_tuple__22)) __PYX_ERR(1, 558, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__22);
+  __Pyx_GIVEREF(__pyx_tuple__22);
 
   /* "View.MemoryView":565
  *     def suboffsets(self):
@@ -18389,12 +18438,12 @@ static int __Pyx_InitCachedConstants(void) {
  * 
  *         return tuple([suboffset for suboffset in self.view.suboffsets[:self.view.ndim]])
  */
-  __pyx_tuple__22 = PyTuple_New(1); if (unlikely(!__pyx_tuple__22)) __PYX_ERR(1, 565, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__22);
+  __pyx_tuple__23 = PyTuple_New(1); if (unlikely(!__pyx_tuple__23)) __PYX_ERR(1, 565, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__23);
   __Pyx_INCREF(__pyx_int_neg_1);
   __Pyx_GIVEREF(__pyx_int_neg_1);
-  PyTuple_SET_ITEM(__pyx_tuple__22, 0, __pyx_int_neg_1);
-  __Pyx_GIVEREF(__pyx_tuple__22);
+  PyTuple_SET_ITEM(__pyx_tuple__23, 0, __pyx_int_neg_1);
+  __Pyx_GIVEREF(__pyx_tuple__23);
 
   /* "(tree fragment)":2
  * def __reduce_cython__(self):
@@ -18402,18 +18451,18 @@ static int __Pyx_InitCachedConstants(void) {
  * def __setstate_cython__(self, __pyx_state):
  *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
  */
-  __pyx_tuple__23 = PyTuple_Pack(1, __pyx_kp_s_no_default___reduce___due_to_non); if (unlikely(!__pyx_tuple__23)) __PYX_ERR(1, 2, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__23);
-  __Pyx_GIVEREF(__pyx_tuple__23);
+  __pyx_tuple__24 = PyTuple_Pack(1, __pyx_kp_s_no_default___reduce___due_to_non); if (unlikely(!__pyx_tuple__24)) __PYX_ERR(1, 2, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__24);
+  __Pyx_GIVEREF(__pyx_tuple__24);
 
   /* "(tree fragment)":4
  *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
  * def __setstate_cython__(self, __pyx_state):
  *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")             # <<<<<<<<<<<<<<
  */
-  __pyx_tuple__24 = PyTuple_Pack(1, __pyx_kp_s_no_default___reduce___due_to_non); if (unlikely(!__pyx_tuple__24)) __PYX_ERR(1, 4, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__24);
-  __Pyx_GIVEREF(__pyx_tuple__24);
+  __pyx_tuple__25 = PyTuple_Pack(1, __pyx_kp_s_no_default___reduce___due_to_non); if (unlikely(!__pyx_tuple__25)) __PYX_ERR(1, 4, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__25);
+  __Pyx_GIVEREF(__pyx_tuple__25);
 
   /* "View.MemoryView":670
  *         if item is Ellipsis:
@@ -18422,9 +18471,9 @@ static int __Pyx_InitCachedConstants(void) {
  *                 seen_ellipsis = True
  *             else:
  */
-  __pyx_slice__25 = PySlice_New(Py_None, Py_None, Py_None); if (unlikely(!__pyx_slice__25)) __PYX_ERR(1, 670, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_slice__25);
-  __Pyx_GIVEREF(__pyx_slice__25);
+  __pyx_slice__26 = PySlice_New(Py_None, Py_None, Py_None); if (unlikely(!__pyx_slice__26)) __PYX_ERR(1, 670, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_slice__26);
+  __Pyx_GIVEREF(__pyx_slice__26);
 
   /* "View.MemoryView":673
  *                 seen_ellipsis = True
@@ -18433,9 +18482,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             have_slices = True
  *         else:
  */
-  __pyx_slice__26 = PySlice_New(Py_None, Py_None, Py_None); if (unlikely(!__pyx_slice__26)) __PYX_ERR(1, 673, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_slice__26);
-  __Pyx_GIVEREF(__pyx_slice__26);
+  __pyx_slice__27 = PySlice_New(Py_None, Py_None, Py_None); if (unlikely(!__pyx_slice__27)) __PYX_ERR(1, 673, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_slice__27);
+  __Pyx_GIVEREF(__pyx_slice__27);
 
   /* "View.MemoryView":684
  *     nslices = ndim - len(result)
@@ -18444,9 +18493,9 @@ static int __Pyx_InitCachedConstants(void) {
  * 
  *     return have_slices or nslices, tuple(result)
  */
-  __pyx_slice__27 = PySlice_New(Py_None, Py_None, Py_None); if (unlikely(!__pyx_slice__27)) __PYX_ERR(1, 684, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_slice__27);
-  __Pyx_GIVEREF(__pyx_slice__27);
+  __pyx_slice__28 = PySlice_New(Py_None, Py_None, Py_None); if (unlikely(!__pyx_slice__28)) __PYX_ERR(1, 684, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_slice__28);
+  __Pyx_GIVEREF(__pyx_slice__28);
 
   /* "View.MemoryView":691
  *     for suboffset in suboffsets[:ndim]:
@@ -18455,9 +18504,9 @@ static int __Pyx_InitCachedConstants(void) {
  * 
  * 
  */
-  __pyx_tuple__28 = PyTuple_Pack(1, __pyx_kp_s_Indirect_dimensions_not_supporte); if (unlikely(!__pyx_tuple__28)) __PYX_ERR(1, 691, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__28);
-  __Pyx_GIVEREF(__pyx_tuple__28);
+  __pyx_tuple__29 = PyTuple_Pack(1, __pyx_kp_s_Indirect_dimensions_not_supporte); if (unlikely(!__pyx_tuple__29)) __PYX_ERR(1, 691, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__29);
+  __Pyx_GIVEREF(__pyx_tuple__29);
 
   /* "(tree fragment)":2
  * def __reduce_cython__(self):
@@ -18465,60 +18514,60 @@ static int __Pyx_InitCachedConstants(void) {
  * def __setstate_cython__(self, __pyx_state):
  *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
  */
-  __pyx_tuple__29 = PyTuple_Pack(1, __pyx_kp_s_no_default___reduce___due_to_non); if (unlikely(!__pyx_tuple__29)) __PYX_ERR(1, 2, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__29);
-  __Pyx_GIVEREF(__pyx_tuple__29);
+  __pyx_tuple__30 = PyTuple_Pack(1, __pyx_kp_s_no_default___reduce___due_to_non); if (unlikely(!__pyx_tuple__30)) __PYX_ERR(1, 2, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__30);
+  __Pyx_GIVEREF(__pyx_tuple__30);
 
   /* "(tree fragment)":4
  *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
  * def __setstate_cython__(self, __pyx_state):
  *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")             # <<<<<<<<<<<<<<
  */
-  __pyx_tuple__30 = PyTuple_Pack(1, __pyx_kp_s_no_default___reduce___due_to_non); if (unlikely(!__pyx_tuple__30)) __PYX_ERR(1, 4, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__30);
-  __Pyx_GIVEREF(__pyx_tuple__30);
+  __pyx_tuple__31 = PyTuple_Pack(1, __pyx_kp_s_no_default___reduce___due_to_non); if (unlikely(!__pyx_tuple__31)) __PYX_ERR(1, 4, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__31);
+  __Pyx_GIVEREF(__pyx_tuple__31);
 
-  /* "nescient/crypto/chacha.pyx":127
+  /* "nescient/crypto/chacha.pyx":128
  *     auth = ['sha']
  * 
  *     def __init__(self, key):             # <<<<<<<<<<<<<<
  *         assert len(key) == 32
  *         self.key = key[:]
  */
-  __pyx_tuple__31 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_key); if (unlikely(!__pyx_tuple__31)) __PYX_ERR(0, 127, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__31);
-  __Pyx_GIVEREF(__pyx_tuple__31);
-  __pyx_codeobj__32 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__31, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_nescient_crypto_chacha_pyx, __pyx_n_s_init, 127, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__32)) __PYX_ERR(0, 127, __pyx_L1_error)
+  __pyx_tuple__32 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_key); if (unlikely(!__pyx_tuple__32)) __PYX_ERR(0, 128, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__32);
+  __Pyx_GIVEREF(__pyx_tuple__32);
+  __pyx_codeobj__33 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__32, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_nescient_crypto_chacha_pyx, __pyx_n_s_init, 128, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__33)) __PYX_ERR(0, 128, __pyx_L1_error)
 
-  /* "nescient/crypto/chacha.pyx":134
+  /* "nescient/crypto/chacha.pyx":135
  * 
  *     # The function that actually performs ChaCha encryption/decryption
  *     def _chacha_task(self, data, nonce, count=1):             # <<<<<<<<<<<<<<
  *         # Convert key from bytes to little-endian words
  *         cdef unsigned int * key_w = bytes_to_words(self.key, 32)
  */
-  __pyx_tuple__33 = PyTuple_Pack(13, __pyx_n_s_self, __pyx_n_s_data, __pyx_n_s_nonce, __pyx_n_s_count, __pyx_n_s_key_w, __pyx_n_s_nonce_w, __pyx_n_s_counter, __pyx_n_s_n_blocks, __pyx_n_s_key_stream, __pyx_n_s_view, __pyx_n_s_buffer, __pyx_n_s_i, __pyx_n_s_j); if (unlikely(!__pyx_tuple__33)) __PYX_ERR(0, 134, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__33);
-  __Pyx_GIVEREF(__pyx_tuple__33);
-  __pyx_codeobj__34 = (PyObject*)__Pyx_PyCode_New(4, 0, 13, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__33, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_nescient_crypto_chacha_pyx, __pyx_n_s_chacha_task, 134, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__34)) __PYX_ERR(0, 134, __pyx_L1_error)
-  __pyx_tuple__35 = PyTuple_Pack(1, ((PyObject *)__pyx_int_1)); if (unlikely(!__pyx_tuple__35)) __PYX_ERR(0, 134, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__35);
-  __Pyx_GIVEREF(__pyx_tuple__35);
+  __pyx_tuple__34 = PyTuple_Pack(13, __pyx_n_s_self, __pyx_n_s_data, __pyx_n_s_nonce, __pyx_n_s_count, __pyx_n_s_key_w, __pyx_n_s_nonce_w, __pyx_n_s_counter, __pyx_n_s_n_blocks, __pyx_n_s_key_stream, __pyx_n_s_view, __pyx_n_s_buffer, __pyx_n_s_i, __pyx_n_s_j); if (unlikely(!__pyx_tuple__34)) __PYX_ERR(0, 135, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__34);
+  __Pyx_GIVEREF(__pyx_tuple__34);
+  __pyx_codeobj__35 = (PyObject*)__Pyx_PyCode_New(4, 0, 13, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__34, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_nescient_crypto_chacha_pyx, __pyx_n_s_chacha_task, 135, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__35)) __PYX_ERR(0, 135, __pyx_L1_error)
+  __pyx_tuple__36 = PyTuple_Pack(1, ((PyObject *)__pyx_int_1)); if (unlikely(!__pyx_tuple__36)) __PYX_ERR(0, 135, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__36);
+  __Pyx_GIVEREF(__pyx_tuple__36);
 
-  /* "nescient/crypto/chacha.pyx":159
+  /* "nescient/crypto/chacha.pyx":160
  *         return
  * 
  *     def chacha_encrypt(self, data, nonce=None, count=1, force_single_thread=False):             # <<<<<<<<<<<<<<
  *         """ Encrypt (or decrypt) in-memory data using ChaCha20.
  * 
  */
-  __pyx_tuple__36 = PyTuple_Pack(13, __pyx_n_s_self, __pyx_n_s_data, __pyx_n_s_nonce, __pyx_n_s_count, __pyx_n_s_force_single_thread, __pyx_n_s_n_threads, __pyx_n_s_chunk_size, __pyx_n_s_blocks_per_chunk, __pyx_n_s_arrays, __pyx_n_s_i, __pyx_n_s_x, __pyx_n_s_ps, __pyx_n_s_p); if (unlikely(!__pyx_tuple__36)) __PYX_ERR(0, 159, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__36);
-  __Pyx_GIVEREF(__pyx_tuple__36);
-  __pyx_codeobj__37 = (PyObject*)__Pyx_PyCode_New(5, 0, 13, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__36, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_nescient_crypto_chacha_pyx, __pyx_n_s_chacha_encrypt, 159, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__37)) __PYX_ERR(0, 159, __pyx_L1_error)
-  __pyx_tuple__38 = PyTuple_Pack(3, ((PyObject *)Py_None), ((PyObject *)__pyx_int_1), ((PyObject *)Py_False)); if (unlikely(!__pyx_tuple__38)) __PYX_ERR(0, 159, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__38);
-  __Pyx_GIVEREF(__pyx_tuple__38);
+  __pyx_tuple__37 = PyTuple_Pack(14, __pyx_n_s_self, __pyx_n_s_data, __pyx_n_s_nonce, __pyx_n_s_count, __pyx_n_s_force_single_thread, __pyx_n_s_n_threads, __pyx_n_s_chunk_size, __pyx_n_s_blocks_per_chunk, __pyx_n_s_arrays, __pyx_n_s_i, __pyx_n_s_x, __pyx_n_s_ps, __pyx_n_s_p, __pyx_n_s_alive); if (unlikely(!__pyx_tuple__37)) __PYX_ERR(0, 160, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__37);
+  __Pyx_GIVEREF(__pyx_tuple__37);
+  __pyx_codeobj__38 = (PyObject*)__Pyx_PyCode_New(5, 0, 14, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__37, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_nescient_crypto_chacha_pyx, __pyx_n_s_chacha_encrypt, 160, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__38)) __PYX_ERR(0, 160, __pyx_L1_error)
+  __pyx_tuple__39 = PyTuple_Pack(3, ((PyObject *)Py_None), ((PyObject *)__pyx_int_1), ((PyObject *)Py_False)); if (unlikely(!__pyx_tuple__39)) __PYX_ERR(0, 160, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__39);
+  __Pyx_GIVEREF(__pyx_tuple__39);
 
   /* "View.MemoryView":284
  *         return self.name
@@ -18527,9 +18576,9 @@ static int __Pyx_InitCachedConstants(void) {
  * cdef strided = Enum("<strided and direct>") # default
  * cdef indirect = Enum("<strided and indirect>")
  */
-  __pyx_tuple__39 = PyTuple_Pack(1, __pyx_kp_s_strided_and_direct_or_indirect); if (unlikely(!__pyx_tuple__39)) __PYX_ERR(1, 284, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__39);
-  __Pyx_GIVEREF(__pyx_tuple__39);
+  __pyx_tuple__40 = PyTuple_Pack(1, __pyx_kp_s_strided_and_direct_or_indirect); if (unlikely(!__pyx_tuple__40)) __PYX_ERR(1, 284, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__40);
+  __Pyx_GIVEREF(__pyx_tuple__40);
 
   /* "View.MemoryView":285
  * 
@@ -18538,9 +18587,9 @@ static int __Pyx_InitCachedConstants(void) {
  * cdef indirect = Enum("<strided and indirect>")
  * 
  */
-  __pyx_tuple__40 = PyTuple_Pack(1, __pyx_kp_s_strided_and_direct); if (unlikely(!__pyx_tuple__40)) __PYX_ERR(1, 285, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__40);
-  __Pyx_GIVEREF(__pyx_tuple__40);
+  __pyx_tuple__41 = PyTuple_Pack(1, __pyx_kp_s_strided_and_direct); if (unlikely(!__pyx_tuple__41)) __PYX_ERR(1, 285, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__41);
+  __Pyx_GIVEREF(__pyx_tuple__41);
 
   /* "View.MemoryView":286
  * cdef generic = Enum("<strided and direct or indirect>")
@@ -18549,9 +18598,9 @@ static int __Pyx_InitCachedConstants(void) {
  * 
  * 
  */
-  __pyx_tuple__41 = PyTuple_Pack(1, __pyx_kp_s_strided_and_indirect); if (unlikely(!__pyx_tuple__41)) __PYX_ERR(1, 286, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__41);
-  __Pyx_GIVEREF(__pyx_tuple__41);
+  __pyx_tuple__42 = PyTuple_Pack(1, __pyx_kp_s_strided_and_indirect); if (unlikely(!__pyx_tuple__42)) __PYX_ERR(1, 286, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__42);
+  __Pyx_GIVEREF(__pyx_tuple__42);
 
   /* "View.MemoryView":289
  * 
@@ -18560,9 +18609,9 @@ static int __Pyx_InitCachedConstants(void) {
  * cdef indirect_contiguous = Enum("<contiguous and indirect>")
  * 
  */
-  __pyx_tuple__42 = PyTuple_Pack(1, __pyx_kp_s_contiguous_and_direct); if (unlikely(!__pyx_tuple__42)) __PYX_ERR(1, 289, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__42);
-  __Pyx_GIVEREF(__pyx_tuple__42);
+  __pyx_tuple__43 = PyTuple_Pack(1, __pyx_kp_s_contiguous_and_direct); if (unlikely(!__pyx_tuple__43)) __PYX_ERR(1, 289, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__43);
+  __Pyx_GIVEREF(__pyx_tuple__43);
 
   /* "View.MemoryView":290
  * 
@@ -18571,19 +18620,19 @@ static int __Pyx_InitCachedConstants(void) {
  * 
  * 
  */
-  __pyx_tuple__43 = PyTuple_Pack(1, __pyx_kp_s_contiguous_and_indirect); if (unlikely(!__pyx_tuple__43)) __PYX_ERR(1, 290, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__43);
-  __Pyx_GIVEREF(__pyx_tuple__43);
+  __pyx_tuple__44 = PyTuple_Pack(1, __pyx_kp_s_contiguous_and_indirect); if (unlikely(!__pyx_tuple__44)) __PYX_ERR(1, 290, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__44);
+  __Pyx_GIVEREF(__pyx_tuple__44);
 
   /* "(tree fragment)":1
  * def __pyx_unpickle_Enum(__pyx_type, long __pyx_checksum, __pyx_state):             # <<<<<<<<<<<<<<
  *     if __pyx_checksum != 0xb068931:
  *         from pickle import PickleError as __pyx_PickleError
  */
-  __pyx_tuple__44 = PyTuple_Pack(5, __pyx_n_s_pyx_type, __pyx_n_s_pyx_checksum, __pyx_n_s_pyx_state, __pyx_n_s_pyx_PickleError, __pyx_n_s_pyx_result); if (unlikely(!__pyx_tuple__44)) __PYX_ERR(1, 1, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__44);
-  __Pyx_GIVEREF(__pyx_tuple__44);
-  __pyx_codeobj__45 = (PyObject*)__Pyx_PyCode_New(3, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__44, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_stringsource, __pyx_n_s_pyx_unpickle_Enum, 1, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__45)) __PYX_ERR(1, 1, __pyx_L1_error)
+  __pyx_tuple__45 = PyTuple_Pack(5, __pyx_n_s_pyx_type, __pyx_n_s_pyx_checksum, __pyx_n_s_pyx_state, __pyx_n_s_pyx_PickleError, __pyx_n_s_pyx_result); if (unlikely(!__pyx_tuple__45)) __PYX_ERR(1, 1, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__45);
+  __Pyx_GIVEREF(__pyx_tuple__45);
+  __pyx_codeobj__46 = (PyObject*)__Pyx_PyCode_New(3, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__45, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_stringsource, __pyx_n_s_pyx_unpickle_Enum, 1, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__46)) __PYX_ERR(1, 1, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -18794,194 +18843,222 @@ static int __pyx_pymod_exec_chacha(PyObject *__pyx_pyinit_module)
   /* "nescient/crypto/chacha.pyx":12
  * from cpython.mem cimport PyMem_Malloc, PyMem_Free
  * 
- * from multiprocessing import cpu_count, Process             # <<<<<<<<<<<<<<
+ * from time import sleep             # <<<<<<<<<<<<<<
+ * from multiprocessing import cpu_count, Process, active_children
  * from multiprocessing.sharedctypes import RawArray
- * from ctypes import c_ubyte
  */
-  __pyx_t_1 = PyList_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 12, __pyx_L1_error)
+  __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 12, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_INCREF(__pyx_n_s_cpu_count);
-  __Pyx_GIVEREF(__pyx_n_s_cpu_count);
-  PyList_SET_ITEM(__pyx_t_1, 0, __pyx_n_s_cpu_count);
-  __Pyx_INCREF(__pyx_n_s_Process);
-  __Pyx_GIVEREF(__pyx_n_s_Process);
-  PyList_SET_ITEM(__pyx_t_1, 1, __pyx_n_s_Process);
-  __pyx_t_2 = __Pyx_Import(__pyx_n_s_multiprocessing, __pyx_t_1, -1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 12, __pyx_L1_error)
+  __Pyx_INCREF(__pyx_n_s_sleep);
+  __Pyx_GIVEREF(__pyx_n_s_sleep);
+  PyList_SET_ITEM(__pyx_t_1, 0, __pyx_n_s_sleep);
+  __pyx_t_2 = __Pyx_Import(__pyx_n_s_time, __pyx_t_1, -1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 12, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_cpu_count); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 12, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_sleep); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 12, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_cpu_count, __pyx_t_1) < 0) __PYX_ERR(0, 12, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_Process); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 12, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_Process, __pyx_t_1) < 0) __PYX_ERR(0, 12, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_sleep, __pyx_t_1) < 0) __PYX_ERR(0, 12, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "nescient/crypto/chacha.pyx":13
  * 
- * from multiprocessing import cpu_count, Process
- * from multiprocessing.sharedctypes import RawArray             # <<<<<<<<<<<<<<
+ * from time import sleep
+ * from multiprocessing import cpu_count, Process, active_children             # <<<<<<<<<<<<<<
+ * from multiprocessing.sharedctypes import RawArray
  * from ctypes import c_ubyte
- * 
  */
-  __pyx_t_2 = PyList_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 13, __pyx_L1_error)
+  __pyx_t_2 = PyList_New(3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 13, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_INCREF(__pyx_n_s_RawArray);
-  __Pyx_GIVEREF(__pyx_n_s_RawArray);
-  PyList_SET_ITEM(__pyx_t_2, 0, __pyx_n_s_RawArray);
-  __pyx_t_1 = __Pyx_Import(__pyx_n_s_multiprocessing_sharedctypes, __pyx_t_2, -1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 13, __pyx_L1_error)
+  __Pyx_INCREF(__pyx_n_s_cpu_count);
+  __Pyx_GIVEREF(__pyx_n_s_cpu_count);
+  PyList_SET_ITEM(__pyx_t_2, 0, __pyx_n_s_cpu_count);
+  __Pyx_INCREF(__pyx_n_s_Process);
+  __Pyx_GIVEREF(__pyx_n_s_Process);
+  PyList_SET_ITEM(__pyx_t_2, 1, __pyx_n_s_Process);
+  __Pyx_INCREF(__pyx_n_s_active_children);
+  __Pyx_GIVEREF(__pyx_n_s_active_children);
+  PyList_SET_ITEM(__pyx_t_2, 2, __pyx_n_s_active_children);
+  __pyx_t_1 = __Pyx_Import(__pyx_n_s_multiprocessing, __pyx_t_2, -1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 13, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_ImportFrom(__pyx_t_1, __pyx_n_s_RawArray); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 13, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_ImportFrom(__pyx_t_1, __pyx_n_s_cpu_count); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 13, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_RawArray, __pyx_t_2) < 0) __PYX_ERR(0, 13, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_cpu_count, __pyx_t_2) < 0) __PYX_ERR(0, 13, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_2 = __Pyx_ImportFrom(__pyx_t_1, __pyx_n_s_Process); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 13, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_Process, __pyx_t_2) < 0) __PYX_ERR(0, 13, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_2 = __Pyx_ImportFrom(__pyx_t_1, __pyx_n_s_active_children); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 13, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_active_children, __pyx_t_2) < 0) __PYX_ERR(0, 13, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /* "nescient/crypto/chacha.pyx":14
- * from multiprocessing import cpu_count, Process
+ * from time import sleep
+ * from multiprocessing import cpu_count, Process, active_children
+ * from multiprocessing.sharedctypes import RawArray             # <<<<<<<<<<<<<<
+ * from ctypes import c_ubyte
+ * 
+ */
+  __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 14, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_INCREF(__pyx_n_s_RawArray);
+  __Pyx_GIVEREF(__pyx_n_s_RawArray);
+  PyList_SET_ITEM(__pyx_t_1, 0, __pyx_n_s_RawArray);
+  __pyx_t_2 = __Pyx_Import(__pyx_n_s_multiprocessing_sharedctypes, __pyx_t_1, -1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 14, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_1 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_RawArray); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 14, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_RawArray, __pyx_t_1) < 0) __PYX_ERR(0, 14, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+  /* "nescient/crypto/chacha.pyx":15
+ * from multiprocessing import cpu_count, Process, active_children
  * from multiprocessing.sharedctypes import RawArray
  * from ctypes import c_ubyte             # <<<<<<<<<<<<<<
  * 
  * from nescient.crypto.tools import randbits
  */
-  __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 14, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = PyList_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 15, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
   __Pyx_INCREF(__pyx_n_s_c_ubyte);
   __Pyx_GIVEREF(__pyx_n_s_c_ubyte);
-  PyList_SET_ITEM(__pyx_t_1, 0, __pyx_n_s_c_ubyte);
-  __pyx_t_2 = __Pyx_Import(__pyx_n_s_ctypes, __pyx_t_1, -1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 14, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_c_ubyte); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 14, __pyx_L1_error)
+  PyList_SET_ITEM(__pyx_t_2, 0, __pyx_n_s_c_ubyte);
+  __pyx_t_1 = __Pyx_Import(__pyx_n_s_ctypes, __pyx_t_2, -1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 15, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_c_ubyte, __pyx_t_1) < 0) __PYX_ERR(0, 14, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_2 = __Pyx_ImportFrom(__pyx_t_1, __pyx_n_s_c_ubyte); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 15, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_c_ubyte, __pyx_t_2) < 0) __PYX_ERR(0, 15, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "nescient/crypto/chacha.pyx":16
+  /* "nescient/crypto/chacha.pyx":17
  * from ctypes import c_ubyte
  * 
  * from nescient.crypto.tools import randbits             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __pyx_t_2 = PyList_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 16, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 17, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(__pyx_n_s_randbits);
   __Pyx_GIVEREF(__pyx_n_s_randbits);
-  PyList_SET_ITEM(__pyx_t_2, 0, __pyx_n_s_randbits);
-  __pyx_t_1 = __Pyx_Import(__pyx_n_s_nescient_crypto_tools, __pyx_t_2, -1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 16, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_ImportFrom(__pyx_t_1, __pyx_n_s_randbits); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 16, __pyx_L1_error)
+  PyList_SET_ITEM(__pyx_t_1, 0, __pyx_n_s_randbits);
+  __pyx_t_2 = __Pyx_Import(__pyx_n_s_nescient_crypto_tools, __pyx_t_1, -1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 17, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_randbits, __pyx_t_2) < 0) __PYX_ERR(0, 16, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_1 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_randbits); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 17, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_randbits, __pyx_t_1) < 0) __PYX_ERR(0, 17, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "nescient/crypto/chacha.pyx":114
+  /* "nescient/crypto/chacha.pyx":115
  *     return words_to_bytes(state, 16)
  * 
  * class ChaChaCrypter:             # <<<<<<<<<<<<<<
  *     """ A Crypter object used for encrypting or decrypting arbitrary data using the ChaCha stream cipher.
  * 
  */
-  __pyx_t_1 = __Pyx_Py3MetaclassPrepare((PyObject *) NULL, __pyx_empty_tuple, __pyx_n_s_ChaChaCrypter, __pyx_n_s_ChaChaCrypter, (PyObject *) NULL, __pyx_n_s_nescient_crypto_chacha, __pyx_kp_s_A_Crypter_object_used_for_encry); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 114, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = __Pyx_Py3MetaclassPrepare((PyObject *) NULL, __pyx_empty_tuple, __pyx_n_s_ChaChaCrypter, __pyx_n_s_ChaChaCrypter, (PyObject *) NULL, __pyx_n_s_nescient_crypto_chacha, __pyx_kp_s_A_Crypter_object_used_for_encry); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 115, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
 
-  /* "nescient/crypto/chacha.pyx":124
+  /* "nescient/crypto/chacha.pyx":125
  *         key (bytes): The 256 bit key used to encrypt/decrypt data.
  *     """
  *     modes = ['stm']  # Represents stream cipher mode             # <<<<<<<<<<<<<<
  *     auth = ['sha']
  * 
  */
-  __pyx_t_2 = PyList_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 124, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 125, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(__pyx_n_s_stm);
   __Pyx_GIVEREF(__pyx_n_s_stm);
-  PyList_SET_ITEM(__pyx_t_2, 0, __pyx_n_s_stm);
-  if (PyObject_SetItem(__pyx_t_1, __pyx_n_s_modes, __pyx_t_2) < 0) __PYX_ERR(0, 124, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  PyList_SET_ITEM(__pyx_t_1, 0, __pyx_n_s_stm);
+  if (PyObject_SetItem(__pyx_t_2, __pyx_n_s_modes, __pyx_t_1) < 0) __PYX_ERR(0, 125, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "nescient/crypto/chacha.pyx":125
+  /* "nescient/crypto/chacha.pyx":126
  *     """
  *     modes = ['stm']  # Represents stream cipher mode
  *     auth = ['sha']             # <<<<<<<<<<<<<<
  * 
  *     def __init__(self, key):
  */
-  __pyx_t_2 = PyList_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 125, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 126, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(__pyx_n_s_sha);
   __Pyx_GIVEREF(__pyx_n_s_sha);
-  PyList_SET_ITEM(__pyx_t_2, 0, __pyx_n_s_sha);
-  if (PyObject_SetItem(__pyx_t_1, __pyx_n_s_auth, __pyx_t_2) < 0) __PYX_ERR(0, 125, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  PyList_SET_ITEM(__pyx_t_1, 0, __pyx_n_s_sha);
+  if (PyObject_SetItem(__pyx_t_2, __pyx_n_s_auth, __pyx_t_1) < 0) __PYX_ERR(0, 126, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "nescient/crypto/chacha.pyx":127
+  /* "nescient/crypto/chacha.pyx":128
  *     auth = ['sha']
  * 
  *     def __init__(self, key):             # <<<<<<<<<<<<<<
  *         assert len(key) == 32
  *         self.key = key[:]
  */
-  __pyx_t_2 = __Pyx_CyFunction_NewEx(&__pyx_mdef_8nescient_6crypto_6chacha_13ChaChaCrypter_1__init__, 0, __pyx_n_s_ChaChaCrypter___init, NULL, __pyx_n_s_nescient_crypto_chacha, __pyx_d, ((PyObject *)__pyx_codeobj__32)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 127, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  if (PyObject_SetItem(__pyx_t_1, __pyx_n_s_init, __pyx_t_2) < 0) __PYX_ERR(0, 127, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_1 = __Pyx_CyFunction_NewEx(&__pyx_mdef_8nescient_6crypto_6chacha_13ChaChaCrypter_1__init__, 0, __pyx_n_s_ChaChaCrypter___init, NULL, __pyx_n_s_nescient_crypto_chacha, __pyx_d, ((PyObject *)__pyx_codeobj__33)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 128, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  if (PyObject_SetItem(__pyx_t_2, __pyx_n_s_init, __pyx_t_1) < 0) __PYX_ERR(0, 128, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "nescient/crypto/chacha.pyx":134
+  /* "nescient/crypto/chacha.pyx":135
  * 
  *     # The function that actually performs ChaCha encryption/decryption
  *     def _chacha_task(self, data, nonce, count=1):             # <<<<<<<<<<<<<<
  *         # Convert key from bytes to little-endian words
  *         cdef unsigned int * key_w = bytes_to_words(self.key, 32)
  */
-  __pyx_t_2 = __Pyx_CyFunction_NewEx(&__pyx_mdef_8nescient_6crypto_6chacha_13ChaChaCrypter_3_chacha_task, 0, __pyx_n_s_ChaChaCrypter__chacha_task, NULL, __pyx_n_s_nescient_crypto_chacha, __pyx_d, ((PyObject *)__pyx_codeobj__34)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 134, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_2, __pyx_tuple__35);
-  if (PyObject_SetItem(__pyx_t_1, __pyx_n_s_chacha_task, __pyx_t_2) < 0) __PYX_ERR(0, 134, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_1 = __Pyx_CyFunction_NewEx(&__pyx_mdef_8nescient_6crypto_6chacha_13ChaChaCrypter_3_chacha_task, 0, __pyx_n_s_ChaChaCrypter__chacha_task, NULL, __pyx_n_s_nescient_crypto_chacha, __pyx_d, ((PyObject *)__pyx_codeobj__35)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 135, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_1, __pyx_tuple__36);
+  if (PyObject_SetItem(__pyx_t_2, __pyx_n_s_chacha_task, __pyx_t_1) < 0) __PYX_ERR(0, 135, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "nescient/crypto/chacha.pyx":159
+  /* "nescient/crypto/chacha.pyx":160
  *         return
  * 
  *     def chacha_encrypt(self, data, nonce=None, count=1, force_single_thread=False):             # <<<<<<<<<<<<<<
  *         """ Encrypt (or decrypt) in-memory data using ChaCha20.
  * 
  */
-  __pyx_t_2 = __Pyx_CyFunction_NewEx(&__pyx_mdef_8nescient_6crypto_6chacha_13ChaChaCrypter_5chacha_encrypt, 0, __pyx_n_s_ChaChaCrypter_chacha_encrypt, NULL, __pyx_n_s_nescient_crypto_chacha, __pyx_d, ((PyObject *)__pyx_codeobj__37)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 159, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_2, __pyx_tuple__38);
-  if (PyObject_SetItem(__pyx_t_1, __pyx_n_s_chacha_encrypt, __pyx_t_2) < 0) __PYX_ERR(0, 159, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_1 = __Pyx_CyFunction_NewEx(&__pyx_mdef_8nescient_6crypto_6chacha_13ChaChaCrypter_5chacha_encrypt, 0, __pyx_n_s_ChaChaCrypter_chacha_encrypt, NULL, __pyx_n_s_nescient_crypto_chacha, __pyx_d, ((PyObject *)__pyx_codeobj__38)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 160, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_1, __pyx_tuple__39);
+  if (PyObject_SetItem(__pyx_t_2, __pyx_n_s_chacha_encrypt, __pyx_t_1) < 0) __PYX_ERR(0, 160, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "nescient/crypto/chacha.pyx":114
+  /* "nescient/crypto/chacha.pyx":115
  *     return words_to_bytes(state, 16)
  * 
  * class ChaChaCrypter:             # <<<<<<<<<<<<<<
  *     """ A Crypter object used for encrypting or decrypting arbitrary data using the ChaCha stream cipher.
  * 
  */
-  __pyx_t_2 = __Pyx_Py3ClassCreate(((PyObject*)&__Pyx_DefaultClassType), __pyx_n_s_ChaChaCrypter, __pyx_empty_tuple, __pyx_t_1, NULL, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 114, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_ChaChaCrypter, __pyx_t_2) < 0) __PYX_ERR(0, 114, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_1 = __Pyx_Py3ClassCreate(((PyObject*)&__Pyx_DefaultClassType), __pyx_n_s_ChaChaCrypter, __pyx_empty_tuple, __pyx_t_2, NULL, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 115, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_ChaChaCrypter, __pyx_t_1) < 0) __PYX_ERR(0, 115, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "nescient/crypto/chacha.pyx":1
  * # Nescient: A Python program for packing/unpacking encrypted, salted, and authenticated file containers.             # <<<<<<<<<<<<<<
  * # Copyright (C) 2018 Ariel Antonitis. Licensed under the MIT license.
  * #
  */
-  __pyx_t_1 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 1, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_test, __pyx_t_1) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 1, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_test, __pyx_t_2) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "View.MemoryView":207
  *         info.obj = self
@@ -18990,10 +19067,10 @@ static int __pyx_pymod_exec_chacha(PyObject *__pyx_pyinit_module)
  * 
  *     def __dealloc__(array self):
  */
-  __pyx_t_1 = __pyx_capsule_create(((void *)(&__pyx_array_getbuffer)), ((char *)"getbuffer(obj, view, flags)")); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 207, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem((PyObject *)__pyx_array_type->tp_dict, __pyx_n_s_pyx_getbuffer, __pyx_t_1) < 0) __PYX_ERR(1, 207, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_2 = __pyx_capsule_create(((void *)(&__pyx_array_getbuffer)), ((char *)"getbuffer(obj, view, flags)")); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 207, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  if (PyDict_SetItem((PyObject *)__pyx_array_type->tp_dict, __pyx_n_s_pyx_getbuffer, __pyx_t_2) < 0) __PYX_ERR(1, 207, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   PyType_Modified(__pyx_array_type);
 
   /* "View.MemoryView":284
@@ -19003,12 +19080,12 @@ static int __pyx_pymod_exec_chacha(PyObject *__pyx_pyinit_module)
  * cdef strided = Enum("<strided and direct>") # default
  * cdef indirect = Enum("<strided and indirect>")
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)__pyx_MemviewEnum_type), __pyx_tuple__39, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 284, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = __Pyx_PyObject_Call(((PyObject *)__pyx_MemviewEnum_type), __pyx_tuple__40, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 284, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
   __Pyx_XGOTREF(generic);
-  __Pyx_DECREF_SET(generic, __pyx_t_1);
-  __Pyx_GIVEREF(__pyx_t_1);
-  __pyx_t_1 = 0;
+  __Pyx_DECREF_SET(generic, __pyx_t_2);
+  __Pyx_GIVEREF(__pyx_t_2);
+  __pyx_t_2 = 0;
 
   /* "View.MemoryView":285
  * 
@@ -19017,12 +19094,12 @@ static int __pyx_pymod_exec_chacha(PyObject *__pyx_pyinit_module)
  * cdef indirect = Enum("<strided and indirect>")
  * 
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)__pyx_MemviewEnum_type), __pyx_tuple__40, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 285, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = __Pyx_PyObject_Call(((PyObject *)__pyx_MemviewEnum_type), __pyx_tuple__41, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 285, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
   __Pyx_XGOTREF(strided);
-  __Pyx_DECREF_SET(strided, __pyx_t_1);
-  __Pyx_GIVEREF(__pyx_t_1);
-  __pyx_t_1 = 0;
+  __Pyx_DECREF_SET(strided, __pyx_t_2);
+  __Pyx_GIVEREF(__pyx_t_2);
+  __pyx_t_2 = 0;
 
   /* "View.MemoryView":286
  * cdef generic = Enum("<strided and direct or indirect>")
@@ -19031,12 +19108,12 @@ static int __pyx_pymod_exec_chacha(PyObject *__pyx_pyinit_module)
  * 
  * 
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)__pyx_MemviewEnum_type), __pyx_tuple__41, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 286, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = __Pyx_PyObject_Call(((PyObject *)__pyx_MemviewEnum_type), __pyx_tuple__42, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 286, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
   __Pyx_XGOTREF(indirect);
-  __Pyx_DECREF_SET(indirect, __pyx_t_1);
-  __Pyx_GIVEREF(__pyx_t_1);
-  __pyx_t_1 = 0;
+  __Pyx_DECREF_SET(indirect, __pyx_t_2);
+  __Pyx_GIVEREF(__pyx_t_2);
+  __pyx_t_2 = 0;
 
   /* "View.MemoryView":289
  * 
@@ -19045,12 +19122,12 @@ static int __pyx_pymod_exec_chacha(PyObject *__pyx_pyinit_module)
  * cdef indirect_contiguous = Enum("<contiguous and indirect>")
  * 
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)__pyx_MemviewEnum_type), __pyx_tuple__42, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 289, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = __Pyx_PyObject_Call(((PyObject *)__pyx_MemviewEnum_type), __pyx_tuple__43, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 289, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
   __Pyx_XGOTREF(contiguous);
-  __Pyx_DECREF_SET(contiguous, __pyx_t_1);
-  __Pyx_GIVEREF(__pyx_t_1);
-  __pyx_t_1 = 0;
+  __Pyx_DECREF_SET(contiguous, __pyx_t_2);
+  __Pyx_GIVEREF(__pyx_t_2);
+  __pyx_t_2 = 0;
 
   /* "View.MemoryView":290
  * 
@@ -19059,12 +19136,12 @@ static int __pyx_pymod_exec_chacha(PyObject *__pyx_pyinit_module)
  * 
  * 
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)__pyx_MemviewEnum_type), __pyx_tuple__43, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 290, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = __Pyx_PyObject_Call(((PyObject *)__pyx_MemviewEnum_type), __pyx_tuple__44, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 290, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
   __Pyx_XGOTREF(indirect_contiguous);
-  __Pyx_DECREF_SET(indirect_contiguous, __pyx_t_1);
-  __Pyx_GIVEREF(__pyx_t_1);
-  __pyx_t_1 = 0;
+  __Pyx_DECREF_SET(indirect_contiguous, __pyx_t_2);
+  __Pyx_GIVEREF(__pyx_t_2);
+  __pyx_t_2 = 0;
 
   /* "View.MemoryView":314
  * 
@@ -19099,10 +19176,10 @@ static int __pyx_pymod_exec_chacha(PyObject *__pyx_pyinit_module)
  * 
  * 
  */
-  __pyx_t_1 = __pyx_capsule_create(((void *)(&__pyx_memoryview_getbuffer)), ((char *)"getbuffer(obj, view, flags)")); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 537, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem((PyObject *)__pyx_memoryview_type->tp_dict, __pyx_n_s_pyx_getbuffer, __pyx_t_1) < 0) __PYX_ERR(1, 537, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_2 = __pyx_capsule_create(((void *)(&__pyx_memoryview_getbuffer)), ((char *)"getbuffer(obj, view, flags)")); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 537, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  if (PyDict_SetItem((PyObject *)__pyx_memoryview_type->tp_dict, __pyx_n_s_pyx_getbuffer, __pyx_t_2) < 0) __PYX_ERR(1, 537, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   PyType_Modified(__pyx_memoryview_type);
 
   /* "View.MemoryView":983
@@ -19112,10 +19189,10 @@ static int __pyx_pymod_exec_chacha(PyObject *__pyx_pyinit_module)
  * 
  * 
  */
-  __pyx_t_1 = __pyx_capsule_create(((void *)(&__pyx_memoryview_getbuffer)), ((char *)"getbuffer(obj, view, flags)")); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 983, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem((PyObject *)__pyx_memoryviewslice_type->tp_dict, __pyx_n_s_pyx_getbuffer, __pyx_t_1) < 0) __PYX_ERR(1, 983, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_2 = __pyx_capsule_create(((void *)(&__pyx_memoryview_getbuffer)), ((char *)"getbuffer(obj, view, flags)")); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 983, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  if (PyDict_SetItem((PyObject *)__pyx_memoryviewslice_type->tp_dict, __pyx_n_s_pyx_getbuffer, __pyx_t_2) < 0) __PYX_ERR(1, 983, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   PyType_Modified(__pyx_memoryviewslice_type);
 
   /* "(tree fragment)":1
@@ -19123,10 +19200,10 @@ static int __pyx_pymod_exec_chacha(PyObject *__pyx_pyinit_module)
  *     if __pyx_checksum != 0xb068931:
  *         from pickle import PickleError as __pyx_PickleError
  */
-  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_15View_dot_MemoryView_1__pyx_unpickle_Enum, NULL, __pyx_n_s_View_MemoryView); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 1, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_pyx_unpickle_Enum, __pyx_t_1) < 0) __PYX_ERR(1, 1, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_15View_dot_MemoryView_1__pyx_unpickle_Enum, NULL, __pyx_n_s_View_MemoryView); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 1, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_pyx_unpickle_Enum, __pyx_t_2) < 0) __PYX_ERR(1, 1, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "(tree fragment)":9
  *         __pyx_unpickle_Enum__set_state(<Enum> __pyx_result, __pyx_state)

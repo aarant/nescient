@@ -8,11 +8,12 @@ import os
 import sys
 import glob
 import webbrowser
+from time import sleep
 from tkinter import Tk, Label, PhotoImage, OptionMenu, StringVar, Frame, Text, Scrollbar, RIGHT, Y, WORD, DISABLED, \
     Entry, Button, NORMAL, END, Menu, filedialog, Toplevel, messagebox, BooleanVar, Message, LEFT
 from pkg_resources import Requirement, resource_filename
 from threading import Thread, main_thread, current_thread
-from multiprocessing import freeze_support
+from multiprocessing import freeze_support, active_children
 
 from nescient import __version__, url
 from nescient.timing import load_benchmarks, estimate_time, TkTimer, benchmark_mode
@@ -267,6 +268,9 @@ class NescientUI(Tk):
             if messagebox.askyesno('Abort operation?', 'Nescient is currently working, closing it now may result in '
                                                        'lost or corrupted data. Close Nescient anyway?',
                                    icon=messagebox.WARNING):
+                # Try to join child processes
+                while active_children():
+                    sleep(0)
                 self.destroy()
         else:
             self.destroy()

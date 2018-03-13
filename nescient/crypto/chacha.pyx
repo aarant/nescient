@@ -9,7 +9,8 @@ See RFC 7539 for the cipher specification.
 # TODO: Documentation, determine when to multiprocess, implement poly1305 auth tags
 from cpython.mem cimport PyMem_Malloc, PyMem_Free
 
-from multiprocessing import cpu_count, Process
+from time import sleep
+from multiprocessing import cpu_count, Process, active_children
 from multiprocessing.sharedctypes import RawArray
 from ctypes import c_ubyte
 
@@ -207,8 +208,11 @@ class ChaChaCrypter:
         # TODO: Check for processes raising exceptions
         for p in ps:
             p.start()
-        for p in ps:
-            p.join()
+        while True:
+            sleep(0)
+            alive = active_children()
+            if not alive:
+                break
         # Read the shared arrays back into the data bytearray
         for i in range(n_threads):
             if i == n_threads-1:
