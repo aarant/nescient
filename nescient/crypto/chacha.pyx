@@ -9,32 +9,55 @@ See RFC 7539 for the cipher specification.
 # TODO: Documentation, determine when to multiprocess, implement poly1305 auth tags
 from cpython.mem cimport PyMem_Malloc, PyMem_Free
 
+import sys
 from time import sleep
 from multiprocessing import cpu_count, Process, active_children
 from multiprocessing.sharedctypes import RawArray
 from ctypes import c_ubyte
+from cython.parallel import prange
+from libc.stdlib cimport malloc, free
+from libc.stdint cimport uint32_t, uint8_t, uint64_t
 
 from nescient.crypto.tools import randbits
 
 
 # Little endian bytes to 32-bit words conversion
-cdef unsigned int * bytes_to_words(unsigned char * b, unsigned long l):
-    cdef unsigned int * w = <unsigned int *>PyMem_Malloc(l)
-    cdef unsigned long i
+cdef uint32_t * bytes_to_words(uint8_t * b, uint64_t l):
+    cdef uint32_t * w = <uint32_t *>PyMem_Malloc(l)
+    cdef uint64_t i
     for i in range(0, l, 4):
         w[i>>2] = b[i] | (b[i+1] << 8) | (b[i+2] << 16) | (b[i+3] << 24)
     return w
 
-# Little endian 32-bit words to bytes conversion
-cdef unsigned char * words_to_bytes(unsigned int * w, unsigned long l):
-    cdef unsigned char * b = <unsigned char *>PyMem_Malloc(4*l)
-    cdef unsigned long i
-    for i in range(l):
-        b[4*i] = w[i] & 0xff
-        b[4*i+1] = (w[i] >> 8) & 0xff
-        b[4*i+2] = (w[i] >> 16) & 0xff
-        b[4*i+3] = (w[i] >> 24) & 0xff
-    return b
+# # Little endian 32-bit words to bytes conversion
+# cdef unsigned char * words_to_bytes(unsigned int * w, unsigned long l):
+#     cdef unsigned char * b = <unsigned char *>PyMem_Malloc(4*l)
+#     cdef unsigned long i
+#     for i in range(l):
+#         b[4*i] = w[i] & 0xff
+#         b[4*i+1] = (w[i] >> 8) & 0xff
+#         b[4*i+2] = (w[i] >> 16) & 0xff
+#         b[4*i+3] = (w[i] >> 24) & 0xff
+#     return b
+
+
+# Determine the system's endianness
+cdef bint big_endian = sys.byteorder == 'big'
+
+
+# byteswap
+cdef void byte_swap(uint8_t * b, uint64_t l) nogil:
+    cdef uint64_t i
+    cdef uint8_t temp
+    for i in range(0, l, 4):
+        temp = b[i]
+        b[i] = b[i+3]
+        b[i+3] = temp
+        temp = b[i+1]
+        b[i+1] = b[i+2]
+        b[i+2] = temp
+    return
+
 
 # # Display a bytes object as hex
 # def display_hex(data):
@@ -50,20 +73,22 @@ cdef unsigned char * words_to_bytes(unsigned int * w, unsigned long l):
 #     x[k] = x[k] + x[l]; x[j] = x[j] ^ x[k]; x[j] = (x[j] << 7) | (x[j] >> 25)
 
 # Generates 64 keystream bytes from a 256-bit key, a 96-bit nonce, and a 32-bit counter
-cdef unsigned char * chacha20(unsigned int * key, unsigned int * nonce, unsigned int count):
-    cdef unsigned int state[16]
-    cdef unsigned int start_state[16]
-    cdef unsigned char i
+cdef void chacha20(uint8_t * key_stream, uint32_t * key, uint32_t * nonce, uint32_t count) nogil:
+    cdef uint32_t state[16]
+    cdef uint32_t start_state[16]
+    cdef uint8_t i
     # First four words are constants
-    state[:4] = [0x61707865, 0x3320646e, 0x79622d32, 0x6b206574]
+    state[0] = 0x61707865; state[1] = 0x3320646e; state[2] = 0x79622d32; state[3] = 0x6b206574
     # Words 4-11 are the key
-    state[4:12] = key
+    state[4] = key[0]; state[5] = key[1]; state[6] = key[2]; state[7] = key[3]; state[8] = key[4]; state[9] = key[5]
+    state[10] = key[6]; state[11] = key[7]
     # Word 12 is the count
     state[12] = count
     # Words 13-15 are the nonce
-    state[13:16] = nonce
+    state[13] = nonce[0]; state[14] = nonce[1]; state[15] = nonce[2]
     # Copy the state into the start state for later
-    start_state[:] = state
+    for i in range(16):
+        start_state[i] = state[i]
     # Perform the ChaCha20 rounds
     for i in range(10):
         # Quarter round 0, 4, 8, 12
@@ -109,9 +134,37 @@ cdef unsigned char * chacha20(unsigned int * key, unsigned int * nonce, unsigned
     # Add the original state with the result
     for i in range(16):
         state[i] += start_state[i]
-    # Serialize into bytes
-    return words_to_bytes(state, 16)
+    # Cast to bytes, and byteswap if necessary
+    cdef uint8_t * b = <uint8_t *>(state)
+    for i in range(64):
+        key_stream[i] = b[i]
+    if big_endian:
+        byte_swap(key_stream, 64)
+    return
 
+cdef void _chacha_task(uint32_t * key_w, uint8_t * data, uint32_t * nonce_w, uint32_t count,
+                       uint64_t l) nogil:
+    # Initialize counter and working variables
+    cdef uint32_t counter = count
+    cdef uint32_t n_blocks = <uint32_t>(l//64)
+    cdef uint8_t * key_stream = <uint8_t *>malloc(64)
+    cdef uint8_t * buffer = data
+    cdef uint32_t i
+    cdef uint8_t j
+    for i in range(n_blocks):
+        chacha20(key_stream, key_w, nonce_w, counter+i)
+        for j in range(64):
+            buffer[j] ^= key_stream[j]
+        buffer += 64
+    i = n_blocks
+    if l % 64 != 0:
+        chacha20(key_stream, key_w, nonce_w, counter+i)
+        for j in range(l % 64):
+            buffer[j] ^= key_stream[j]
+    free(key_stream)
+    return
+
+#foo
 class ChaChaCrypter:
     """ A Crypter object used for encrypting or decrypting arbitrary data using the ChaCha stream cipher.
 
@@ -134,28 +187,14 @@ class ChaChaCrypter:
     # The function that actually performs ChaCha encryption/decryption
     def _chacha_task(self, data, nonce, count=1):
         # Convert key from bytes to little-endian words
-        cdef unsigned int * key_w = bytes_to_words(self.key, 32)
+        cdef uint32_t * key_w = bytes_to_words(self.key, 32)
         # Convert the nonce into an array of 32-bit words
-        cdef unsigned int * nonce_w = bytes_to_words(nonce.to_bytes(12, byteorder='little'), 12)
-        # Initialize counter and working variables
-        cdef unsigned int counter = count
-        cdef unsigned int n_blocks = <unsigned int>(len(data)//64)
-        cdef unsigned char * key_stream
-        cdef unsigned char[:] view = data
-        cdef unsigned char * buffer = &view[0]
-        cdef unsigned int i
-        cdef unsigned char j
-        for i in range(n_blocks):
-            key_stream = chacha20(key_w, nonce_w, counter+i)
-            for j in range(64):
-                buffer[j] ^= key_stream[j]
-            buffer += 64
-        i = n_blocks
-        if len(data) % 64 != 0:
-            key_stream = chacha20(key_w, nonce_w, counter+i)
-            for j in range(len(data) % 64):
-                buffer[j] ^= key_stream[j]
-        return
+        cdef uint32_t * nonce_w = bytes_to_words(nonce.to_bytes(12, 'little'), 12)
+        # Create a typed memoryview of data and pass its address
+        cdef uint8_t[:] view = data
+        _chacha_task(key_w, &view[0], nonce_w, count, len(data))
+        PyMem_Free(key_w)
+        PyMem_Free(nonce_w)
 
     def chacha_encrypt(self, data, nonce=None, count=1, force_single_thread=False):
         """ Encrypt (or decrypt) in-memory data using ChaCha20.
@@ -180,48 +219,33 @@ class ChaChaCrypter:
         if nonce is None:
             nonce = randbits(96)
         # Determine the number of threads to use based on CPU count
-        n_threads = cpu_count()
+        cdef int n_threads = cpu_count()
         # Determine the size of the chunks to use for each thread, and the number of ChaCha blocks per chunk
-        chunk_size = len(data)//n_threads//64*64
-        blocks_per_chunk = chunk_size//64
+        cdef uint32_t chunk_size = len(data)//n_threads//64*64
+        cdef uint32_t blocks_per_chunk = chunk_size//64
         # If forced to use a single thread, or multiprocessing would be slower than a single process,
         # run in a single process
-        # TODO: 2**29 bytes = 512 MiB is an artificially set breakpoint for performance; change this
-        if force_single_thread or n_threads == 1 or len(data) < 2**29 or blocks_per_chunk == 0:
+        # TODO: 2**20 bytes = 1 MiB is an artificially set breakpoint for performance; change this
+        if force_single_thread or n_threads == 1 or len(data) < 2**20 or blocks_per_chunk == 0:
             self._chacha_task(data, nonce, count)
             return nonce
-        # Build the shared arrays to dispatch to workers
-        arrays = []
-        for i in range(n_threads):
-            # The last chunk may be slightly longer if the data is not aligned on chunk boundaries
+        # Begin Cython multiprocessing using OpenMP
+        cdef int i
+        cdef uint64_t ccount = count
+        # Convert key from bytes to little-endian words
+        cdef uint32_t * key_w = bytes_to_words(self.key, 32)
+        # Convert the nonce into an array of 32-bit words
+        cdef uint32_t * nonce_w = bytes_to_words(nonce.to_bytes(12, 'little'), 12)
+        cdef uint64_t l = len(data)
+        cdef uint8_t * buffer = data
+        for i in prange(n_threads, nogil=True):
             if i == n_threads-1:
-                x = RawArray(c_ubyte, len(data)-(n_threads-1)*chunk_size)
-                memoryview(x).cast('B')[:] = data[(n_threads-1)*chunk_size:]
+                _chacha_task(key_w, buffer+((n_threads-1)*chunk_size), nonce_w, ccount+(blocks_per_chunk*i),
+                             l-(n_threads-1)*chunk_size)
             else:
-                x = RawArray(c_ubyte, chunk_size)
-                memoryview(x).cast('B')[:] = data[i*chunk_size:(i+1)*chunk_size]
-            arrays.append(x)
-        # Initialize each process with the correct array and count arguments
-        ps = [Process(target=self._chacha_task, daemon=True,
-                      args=(arrays[i], nonce, count+(blocks_per_chunk*i))) for i in range(n_threads)]
-        # Start each process, then join them in order
-        # TODO: Check for processes raising exceptions
-        for p in ps:
-            p.start()
-        while True:
-            sleep(0)
-            alive = active_children()
-            if not alive:
-                break
-        # Read the shared arrays back into the data bytearray
-        for i in range(n_threads):
-            if i == n_threads-1:
-                data[(n_threads-1)*chunk_size:] = memoryview(arrays[i]).cast('B')[:]
-            else:
-                data[i*chunk_size:(i+1)*chunk_size] = memoryview(arrays[i]).cast('B')[:]
-        # Delete each shared array, hopefully allowing them to be garbage collected
-        for i in range(n_threads):
-            del arrays[0]
+                _chacha_task(key_w, buffer+(i*chunk_size), nonce_w, ccount+(blocks_per_chunk*i), chunk_size)
+        PyMem_Free(key_w)
+        PyMem_Free(nonce_w)
         return nonce
 
 

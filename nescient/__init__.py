@@ -30,7 +30,7 @@ from string import digits
 
 # Versions will always take the form major.minor.patch[.develop]. The develop increment is optional.
 # A valid version will have the string form *.*.*[.dev*], where any integer may take the place of a *.
-__version__ = '0.8.1'
+__version__ = '0.9.0'
 url = 'https://github.com/arantonitis/nescient'
 
 

@@ -56,7 +56,7 @@ def benchmark_mode(packing_mode):
     alg, mode, auth = packing_mode.split('-', 2)
     packer = NescientPacker(get_random_bytes(16), alg, mode, auth)
     times = {}
-    for size in [2**x for x in range(10, 35, 5)]:
+    for size in [2**x for x in range(10, 31, 2)]:
         times[size] = []
         data = bytearray(size)
         # Calculate key generation rate
@@ -191,4 +191,10 @@ class TkTimer(EstimatedTimer):
         self.elapsed = 0
         self.run_progress()
         
-        
+if __name__ == '__main__':
+    benchmark_mode('chacha-stm-sha')
+    benchmarks = load_benchmarks()
+    for mode, times in benchmarks.items():
+        print(mode)
+        for size in times:
+            print('{:>10}'.format(size), ' '.join('{:>8} MiB/s'.format(round((size/2**20)/t, 2)) for t in times[size]))

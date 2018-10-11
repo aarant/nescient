@@ -6,8 +6,7 @@ git:
   depth: 5
 env:
   global:
-  - PY34: cp34-cp34m
-    PY35: cp35-cp35m
+  - PY35: cp35-cp35m
     PY36: cp36-cp36m
   - secure: RHvX8qdwhhiRHwCFe1TPNglZ3Z0IWi6DjXVw6JgNuRKBPmglNXIG44abZrIGpsFijnQ2ymvFBFKyeotsKJ1bMQQPQx2B2YfsoZmyRniR0981qzp+QKNPhkNALY1mR5kXrhI4/wwy2TB5l0RY4bCEnR3bXPi95t5B/HMKGOW37FgekbjwSP/fPnUEAC/T4RowxCnwJDLaJnB2kS/813c8DBcpeMvYYs8JcUijvMOwqdUYPkkYzcvP7324W+HWvIf0ul0TfLPCCZVGZSmmcRvifYHu5wpQnTEIyKiILBqIbgiISm829/6dnGdR7thpsv3vbtkcGJ7I9UShvINJQrdoJfGrbisAa8NwxfgzamuCy72kH7NU50D3ahFGJkK4Z2/7hY33/jeky6NF6DUnu2kYlmM2agrOCpdKYclEoN5Us4QQ88+r7m8oms/K+VDPgz8tHXxH5rdIDEVqderElUVDNK6AyZQBq5yfgGkAr5McarH97nQYg7aFdVOkVV20JObchfCUhyzzrHAp1QfkwCvGqMYsYtX8DLo0hNikT9yv/OR6kab5HyvzppdVuw+xSaSqMYKIIVGNuhbwSWrFjB+Of8Umm+1RmledPJXVLijQT1R09WyI6ZXTeI0ovr/P0InY0d7PK6IBs3Uz/AIlCPsdmduQs/fP4aJ+xZDOSRgjZSM=
 # Build on 32 & 64-bit Linux systems
