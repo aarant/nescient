@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Service
+Icon=/home/andrew/Desktop/Programs/Python/Nescient/nescient/nessie.png
+X-KDE-ServiceTypes=KonqPopupMenu/Plugin,application/nescient-container
+Actions=nescientView;
+[Desktop Action nescientView]
+Name=Open Nescient container
+Icon=/home/andrew/Desktop/Programs/Python/Nescient/nescient/nessie.png
+Exec=python3 /home/andrew/Desktop/navi.py %u

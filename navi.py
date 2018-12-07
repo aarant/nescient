@@ -163,13 +163,16 @@ class Ui_MainWindow():
 
     def export_files(self, files):
         for filename in files:
-            with self.archive.open(filename) as f:
-                im = Image.open(f)
-                if self.temp_dir is None:
-                    self.temp_dir = mkdtemp()
+            if self.temp_dir is None:
+                self.temp_dir = mkdtemp()
+                try:
                     subprocess.Popen('explorer ' + '"' + self.temp_dir + '"')
+                except Exception:
+                    pass
+            with self.archive.open(filename) as f:
+                with open(os.path.join(self.temp_dir, os.path.split(filename)[1]), 'wb') as f_out:
+                    f_out.write(f.read())
                 print(os.path.join(self.temp_dir, os.path.split(filename)[1]))
-                im.save(os.path.join(self.temp_dir, os.path.split(filename)[1]))
         cb = app.clipboard()
         cb.setText(self.temp_dir)
 

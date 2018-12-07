@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Service
+Icon=/home/andrew/Desktop/Programs/Python/Nescient/nescient/nessie.png
+X-KDE-ServiceTypes=KonqPopupMenu/Plugin,application/octet-stream
+Actions=nescientEncrypt;
+[Desktop Action nescientEncrypt]
+Name=Encrypt with Nescient
+Icon=/home/andrew/Desktop/Programs/Python/Nescient/nescient/nessie.png
+Exec=nescient-ui %U
