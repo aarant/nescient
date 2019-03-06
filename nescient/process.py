@@ -18,7 +18,7 @@ def _target_func(func, queue, *args, **kwargs):
         sys.exit(0)
 
 
-def process_sync_execute(func, *args, **kwargs):
+def process_sync_execute(func, *args, **kwargs):  # Synchronously execute a function in a new process
     queue = Queue()
     p = Process(target=_target_func, args=(func, queue) + args, kwargs=kwargs)
     p.start()

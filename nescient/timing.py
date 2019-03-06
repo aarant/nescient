@@ -6,50 +6,53 @@
 # TODO: Documentation, better timer
 import os
 import gc
-import pickle
+import json
+import math
 from time import sleep
 from threading import Thread
 from timeit import default_timer as timer
-from pkg_resources import Requirement, resource_filename
 
-from nescient.packer import NescientPacker
+from nescient.packer import NescientPacker, PACKING_MODES
 from nescient.crypto.tools import get_random_bytes
 
 
-# The path to the pickled benchmark file
-BENCHMARK_PATH = os.path.join(os.path.expanduser('~'), 'nescient-benchmarks')
-#BENCHMARK_PATH = resource_filename(Requirement.parse('Nescient'), os.path.join('nescient', 'benchmark'))
+# The path to the json benchmarks file
+BENCHMARK_PATH = os.path.join(os.path.expanduser('~'), 'nescient_benchmarks.json')
+DEFAULT_RATE = 100*2**20  # 100 MiB/s
+# Benchmarks: mode->size->average_time
+try:
+    with open(BENCHMARK_PATH, 'r') as f:
+        raw = json.load(f)
+        # Rewrite sizes to be integers, not strings
+        benchmarks = {mode: {int(size): delta for size, delta in times.items()} for mode, times in raw.items()}
+except Exception:  # Default benchmark data is an empty dict
+    benchmarks = {}
 
 
-def load_benchmarks():
+def estimate_time(size, packing_mode):  # Estimate the time to process a file with the given mode
+    global benchmarks
+    times = benchmarks.get(packing_mode, {})
+    closest = 2**int(math.log2(size))
+    close_est = times.get(closest, closest/DEFAULT_RATE)
+    estimated = size/closest*close_est
+    return estimated
+
+
+def update_time(size, packing_mode, delta):  # Update the estimated time
+    global benchmarks
+    times = benchmarks.get(packing_mode, {})
+    closest = 2**int(math.log2(size))
+    close_est = times.get(closest, closest/DEFAULT_RATE)
+    scaled_delta = closest/size*delta
+    new_est = close_est*0.6+scaled_delta*0.4
+    times[closest] = new_est
+    if packing_mode not in benchmarks:
+        benchmarks[packing_mode] = times
     try:
-        with open(BENCHMARK_PATH, 'rb') as f_in:
-            benchmarks = pickle.load(f_in)
-            return benchmarks
+        with open(BENCHMARK_PATH, 'w') as f:
+            json.dump(benchmarks, f)
     except Exception:
-        return {}
-
-
-def write_benchmarks(mode, times):
-    benchmarks = load_benchmarks()
-    benchmarks[mode] = times
-    with open(BENCHMARK_PATH, 'wb') as f_out:
-        pickle.dump(benchmarks, f_out)
-
-
-def estimate_time(size, packing_mode):
-    benchmarks = load_benchmarks()
-    if benchmarks is None or benchmarks.get(packing_mode) is None:
-        return None
-    times = benchmarks[packing_mode]
-    # Find the benchmarked size that is closest to the requested size
-    diff = [(abs(size-benchmarked_size), benchmarked_size) for benchmarked_size in times]
-    _, closest = min(diff, key=lambda t: t[0])
-    # Compute an estimated time
-    estimated = size/closest*times[closest][-1]
-    min_time = min(times.values(), key=lambda l: l[-1])[-1]
-    # It is extremely unlikely that the estimated time can be less than the minimum benchmarked time, so take the max
-    return max(estimated, min_time)
+        pass
 
 
 def benchmark_mode(packing_mode):
@@ -77,7 +80,6 @@ def benchmark_mode(packing_mode):
         times[size].append(timer() - start)
         del data
         gc.collect()
-    write_benchmarks(packing_mode, times)
 
 
 class EstimatedProgressBar:
@@ -190,11 +192,3 @@ class TkTimer(EstimatedTimer):
         self.start_time = timer()
         self.elapsed = 0
         self.run_progress()
-        
-if __name__ == '__main__':
-    benchmark_mode('chacha-stm-sha')
-    benchmarks = load_benchmarks()
-    for mode, times in benchmarks.items():
-        print(mode)
-        for size in times:
-            print('{:>10}'.format(size), ' '.join('{:>8} MiB/s'.format(round((size/2**20)/t, 2)) for t in times[size]))
