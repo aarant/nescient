@@ -12,7 +12,7 @@ from time import sleep
 from threading import Thread
 from timeit import default_timer as timer
 
-from nescient.packer import NescientPacker, PACKING_MODES
+from nescient.packer import NescientPacker
 from nescient.crypto.tools import get_random_bytes
 
 
@@ -56,6 +56,7 @@ def update_time(size, packing_mode, delta):  # Update the estimated time
 
 
 def benchmark_mode(packing_mode):
+    global benchmarks
     alg, mode, auth = packing_mode.split('-', 2)
     packer = NescientPacker(get_random_bytes(16), alg, mode, auth)
     times = {}
@@ -78,8 +79,16 @@ def benchmark_mode(packing_mode):
         times[size].append(timer() - checkpoint)
         # Calculate total rate
         times[size].append(timer() - start)
+        if packing_mode not in benchmarks:
+            benchmarks[packing_mode] = {}
+        benchmarks[packing_mode][size] = times[-1]
         del data
         gc.collect()
+    try:
+        with open(BENCHMARK_PATH, 'w') as f:
+            json.dump(benchmarks, f)
+    except Exception:
+        pass
 
 
 class EstimatedProgressBar:

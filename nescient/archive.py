@@ -4,13 +4,13 @@ import locale
 import codecs
 from zipfile import ZipFile, BadZipFile
 
-from nescient.packer import NescientPacker, AuthError
+from nescient.packer import NescientPacker, AuthError, ParamError
 from nescient.crypto.chacha import ChaChaCrypter
 
 # TODO: AES encryption
 
 
-class SingleFileArchive:
+class SingleFileArchive:  # Dummy class for single file archives
     def __init__(self, outer, filename):
         self.outer = outer
         if filename[-5:] == '.nesc':
@@ -40,7 +40,7 @@ class SingleFileArchive:
         return self.outer.read(*args, **kwargs)
 
 
-class NescientArchive:
+class NescientArchive:  # Represents a Nescient archive as a file-like object
     def _gen_auth_tag(self, key, auth_data, fp, chunk_size=2**29):
         hmac_obj = hmac.new(key, auth_data, digestmod='sha256')
         self.fp.seek(72, 0)
@@ -53,14 +53,16 @@ class NescientArchive:
             hmac_obj.update(chunk)
         return hmac_obj.digest()
         
-    def __init__(self, filename, password, mode='rb', encoding=None):  # Attempt to open the archive
+    def __init__(self, filename, password, mode='rb', encoding=None):
         self.file_mode = mode
-        self.name = os.path.basename(filename)
+        self.filename = filename
         self.encoding = locale.getpreferredencoding(False) if encoding is None else encoding
         parsed = NescientPacker.parse_nescient_header(filename)
         header, self.alg, self.mode, self.auth, salt, auth_tag = \
             [parsed[name] for name in ('header', 'alg', 'mode', 'auth', 'salt', 'auth_tag')]
-        self.packing_mode = self.alg + '-' + self.mode + '-' + self.auth
+        self.packing_mode = self.alg + '-' + self.mode + '-' + self.auth  # Full hyphenated packing mode
+        if self.packing_mode != 'chacha-stm-sha':  # TODO: Other packing modes
+            raise ParamError('Mode {} is not yet supported.'.format(self.packing_mode))
         self.fp = open(filename, 'rb')
         self.fp.seek(0, 2)
         self.needle = 0
@@ -77,10 +79,10 @@ class NescientArchive:
         except BadZipFile:
             self.inner = SingleFileArchive(self, filename)
 
-    def __enter__(self):
-        return self
+    def open(self, *args, **kwargs):
+        return self.inner.open(*args, **kwargs)
 
-    def __exit__(self, type, value, traceback):
+    def close(self):
         self.fp.close()
 
     def seek(self, offset, whence=0):
@@ -93,9 +95,6 @@ class NescientArchive:
 
     def tell(self):
         return self.needle
-
-    def close(self):
-        self.fp.close()
 
     def read(self, size=-1):
         # Determine what block the needle is in

@@ -76,6 +76,9 @@
           </property>
           <item>
            <widget class="QTreeWidget" name="treeWidget">
+            <property name="selectionMode">
+             <enum>QAbstractItemView::ExtendedSelection</enum>
+            </property>
             <column>
              <property name="text">
               <string>File</string>
@@ -260,7 +263,7 @@
               </widget>
              </item>
              <item row="2" column="1">
-              <widget class="QLabel" name="packingMode">
+              <widget class="QLabel" name="packingAlg">
                <property name="text">
                 <string notr="true">N/A</string>
                </property>
@@ -358,15 +361,15 @@
     <property name="title">
      <string>Optio&amp;ns</string>
     </property>
-   </widget>
-   <widget class="QMenu" name="menu_About">
-    <property name="title">
-     <string>Abo&amp;ut</string>
-    </property>
+    <widget class="QMenu" name="menu_Default_Packing_Mode">
+     <property name="title">
+      <string>Default Packing Mode</string>
+     </property>
+    </widget>
+    <addaction name="menu_Default_Packing_Mode"/>
    </widget>
    <addaction name="menu_File"/>
    <addaction name="menu_Options"/>
-   <addaction name="menu_About"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionOpen">
@@ -376,7 +379,7 @@
   </action>
   <action name="actionNew">
    <property name="text">
-    <string>New</string>
+    <string>&amp;New</string>
    </property>
   </action>
  </widget>

@@ -1,7 +1,0 @@
-<RCC>
-  <qresource>
-    <file>resources/nessie_lock.gif</file>
-    <file>resources/banner.gif</file>
-    <file>resources/nessie.gif</file>
-  </qresource>
-</RCC>
