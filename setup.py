@@ -48,5 +48,6 @@ setup(name='Nescient',
                    'Topic :: Security :: Cryptography',
                    'Programming Language :: Python :: 3.5',
                    'Programming Language :: Python :: 3.6'],
+      install_requires=['pillow>=6.0.0,<7.0.0'],
       python_requires='>=3.5'
       )

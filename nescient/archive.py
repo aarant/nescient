@@ -39,6 +39,9 @@ class SingleFileArchive:  # Dummy class for single file archives
     def read(self, *args, **kwargs):
         return self.outer.read(*args, **kwargs)
 
+    def seekable(self):  # TODO: Better attribute access?
+        return self.outer.seekable()
+
 
 class NescientArchive:  # Represents a Nescient archive as a file-like object
     def _gen_auth_tag(self, key, auth_data, fp, chunk_size=2**29):
@@ -52,7 +55,7 @@ class NescientArchive:  # Represents a Nescient archive as a file-like object
                 break
             hmac_obj.update(chunk)
         return hmac_obj.digest()
-        
+
     def __init__(self, filename, password, mode='rb', encoding=None):
         self.file_mode = mode
         self.filename = filename
@@ -64,6 +67,7 @@ class NescientArchive:  # Represents a Nescient archive as a file-like object
         if self.packing_mode != 'chacha-stm-sha':  # TODO: Other packing modes
             raise ParamError('Mode {} is not yet supported.'.format(self.packing_mode))
         self.fp = open(filename, 'rb')
+        self.seekable = self.fp.seekable
         self.fp.seek(0, 2)
         self.needle = 0
         self.file_size = self.fp.tell()-72
@@ -117,4 +121,3 @@ class NescientArchive:  # Represents a Nescient archive as a file-like object
             if not chunk:
                 break
             f.write(chunk)
-
