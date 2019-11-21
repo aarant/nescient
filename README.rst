@@ -16,7 +16,7 @@
 *****************
 |pypi|_ |license|_ |travis|_ |appveyor|_
 
-*nescient, n. (nesh-int) - from Latin 'unknowing', 'hidden'*  
+*nescient, n. (nesh-int) - from Latin 'unknowing', 'hidden'*
 
 Store, encrypt and decrypt files to and from encrypted, authenticated containers.
 
@@ -34,7 +34,7 @@ Several use cases include:
 
 Nescient is:
 
-* **open source**: It is licensed under the permissive MIT license.
+* **open source**: Licensed under the permissive MIT license.
 
 * **multiplatform**: As a Python project, Nescient works on all the major operating systems (Windows, macOS, and Linux)
 
@@ -66,9 +66,9 @@ Install Nescient from the Python Package Index (PyPI) by running ``pip install n
 .. note::
 
    * On most Linux systems, installation may require running pip with root permissions, or running ``pip install nescient --user`` instead.
-   
+
    * On most Linux systems, there may be two versions of pip available: The Python 3 version is typically called ``pip3``.
-   
+
 From Releases
 -------------
 An arbitrary stable (not development) release can be installed from the `github releases`_ by downloading the zip archive and running ``pip install <path-to-zip``.
@@ -80,7 +80,7 @@ Clone or download the `git repo`_, navigate to the directory, then run::
    python3 setup.py sdist
    cd dist
    pip install Nescient-<version>.tar.gz
-   
+
 Installing from source may require installing compilation tools.
 
 .. _github releases: https://github.com/arantonitis/nescient/releases

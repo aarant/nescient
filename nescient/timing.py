@@ -33,7 +33,7 @@ def estimate_time(size, packing_mode):  # Estimate the time to process a file wi
     global benchmarks
     times = benchmarks.get(packing_mode, {})
     closest = 2**int(math.log2(size))
-    close_est = times.get(closest, closest/DEFAULT_RATE)
+    close_est = times.get(closest, closest/DEFAULT_RATE)  # TODO Make sure this is a number!
     estimated = size/closest*close_est
     return estimated
 
