@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string notr="true">About Nescient</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="resource.qrc">
+    <normaloff>:/resources/nessie.gif</normaloff>:/resources/nessie.gif</iconset>
+  </property>
   <layout class="QHBoxLayout" name="horizontalLayout">
    <item>
     <widget class="QLabel" name="label">
@@ -32,7 +36,7 @@
       <string notr="true"/>
      </property>
      <property name="pixmap">
-      <pixmap resource="../../../../../../andrew/Desktop/Programs/Python/Nescient/nescient/resource.qrc">:/resources/nessie.gif</pixmap>
+      <pixmap resource="resource.qrc">:/resources/nessie.gif</pixmap>
      </property>
     </widget>
    </item>
@@ -78,6 +82,7 @@
   </layout>
  </widget>
  <resources>
+  <include location="resource.qrc"/>
   <include location="../../../../../../andrew/Desktop/Programs/Python/Nescient/nescient/resource.qrc"/>
  </resources>
  <connections/>

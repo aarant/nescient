@@ -155,7 +155,7 @@ class GuiWindow(Ui_MainWindow, QtWidgets.QMainWindow):
 
     def setupUi(self, MainWindow):
         Ui_MainWindow.setupUi(self, MainWindow)
-        modeGroup = QtWidgets.QActionGroup(self, exclusive=True)
+        modeGroup = QtWidgets.QActionGroup(self)
         for mode in PACKING_MODES:
             ag = QtWidgets.QAction(mode, self, checkable=True)
             ag.packing_mode = mode
