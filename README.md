@@ -13,7 +13,7 @@ Nescient provides an easy-to-use, secure, and efficient means of file or memory 
 
 Use cases include:
 
-* Backing up multiple files to a reliable yet insecure location.
+* Backing up multiple files to a reliable yet insecure location, like some cloud storage providers.
 
 * Providing additional, file-level encryption to supplement full disk encryption, securing packed files even while the machine is on with the disk-level encryption key loaded in memory.
 
@@ -44,13 +44,42 @@ Standalone Windows executables can be downloaded from the [releases](https://git
 ### From PyPI
 Nescient requires Python 3.5 or later.
 
-Run `<python> -m pip install nescient`, where `<python>` is your Python executable, typically `python`, `python3`, or `py`.
+```
+$ python -m pip install nescient --user
+```
 
-> **Windows:** If installing on a 32-bit machine, the [Microsoft C++ Visual Build Tools][1] are required to compile Nescient's C extensions.
+> **Windows:** You may need to install the [Microsoft C++ Visual Build Tools][1] to compile Nescient's C extensions.
 
-> **Linux:** Installation may require root permissions, or running `python3 -m pip install nescient --user` instead. The latter may require export `~/.local/bin` to `PATH` to run Nescient from the command line.
-
-### From GitHub Releases
+### From Releases
 Run `<python> -m pip install git+git://github.com/arantonitis/nescient.git@<tag>`, where `<tag>` is like `v0.9.0`, etc.
+
+## Usage
+Nescient has a GUI mode, which can be run by running `nescient-ui`, or `nescient` with no arguments.
+
+Nescient packs/unpacks file patterns into `.nesc` containers:
+```
+$ nescient pack file1 file2
+$ nescient pack *.png
+$ nescient unpack file1.nesc
+```
+
+Command line help can be viewed with `nescient -h`.
+
+## Development
+Nescient versioning functions on a `MAJOR.MINOR.PATCH.[DEVELOP]` model.
+Only stable, non development releases will be published to PyPI.
+Because Nescient is still a beta project, the `MAJOR` increment will be 0.
+Minor increments represent new features. 
+Patch increments represent problems fixed with existing features.
+
+Planned features include:
+
+* New cipher modes for existing algorithms, like the GCM authenticated mode, and additional encryption algorithms.
+
+* Integrated compression when packing files.
+
+* GUI mode enhancements.
+
+* Documentation.
 
 [1]: <https://visualstudio.microsoft.com/visual-cpp-build-tools/>

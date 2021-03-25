@@ -1,4 +1,5 @@
 .*
+!.github
 !/.gitignore
 !*.yml
 __pycache__/

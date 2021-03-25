@@ -8,7 +8,7 @@ from setuptools.extension import Extension
 
 from nescient import __version__, url
 
-with open('README.rst', 'r') as f:
+with open('README.md', 'r') as f:
     long_description = f.read()
 
 # Compiler arguments are different for Windows and Linux,
@@ -33,12 +33,14 @@ setup(name='Nescient',
       version=__version__,
       description='Store, encrypt and decrypt files to and from encrypted, authenticated containers.',
       long_description=long_description,
+      long_description_content_type='text/markdown',
       author='Ariel Antonitis',
       author_email='arant@mit.edu',
       url=url,
       packages=['nescient', 'nescient.crypto', 'nescient.resources', 'nescient.gui'],
       package_data={'nescient': ['*.png', '*.ico'], 'nescient.crypto': ['*.pyx', '*.pxd'],
                     'nescient.resources': ['*gif']},
+      include_package_data=True,
       ext_modules=extensions,
       entry_points={'console_scripts': ['nescient = nescient.__main__:main'],
                     'gui_scripts': ['nescient-ui = nescient.__main__:start_gui']},
@@ -47,7 +49,9 @@ setup(name='Nescient',
                    'Development Status :: 4 - Beta',
                    'Topic :: Security :: Cryptography',
                    'Programming Language :: Python :: 3.5',
-                   'Programming Language :: Python :: 3.6'],
-      install_requires=['pillow>=6.0.0,<7.0.0'],
+                   'Programming Language :: Python :: 3.6',
+                   'Programming Language :: Python :: 3.7',
+                   'Programming Language :: Python :: 3.8',],
+      install_requires=['PyQt5>=5.13'],
       python_requires='>=3.5'
       )

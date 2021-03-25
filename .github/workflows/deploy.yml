@@ -1,0 +1,81 @@
+name: Test, build, publish
+
+on: push
+
+jobs:
+  test:
+    name: Test package
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        python-version: [3.6, 3.7]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install dependencies
+        run: python -m pip install wheel nose
+      - name: Build & install wheel
+        run: |
+          python setup.py build_ext --inplace
+          python setup.py bdist_wheel
+          cd dist
+          python -m pip install $(find . -type f -name "*.whl")
+      - name: Test wheel
+        run: python -m nose nescient -v
+  build:
+    needs: test
+    name: Build Linux wheels
+    runs-on: ubuntu-latest
+    # if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
+    env:
+      DOCKER_IMAGE: quay.io/pypa/manylinux1_x86_64
+      PLAT: manylinux1_x86_64
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build & test wheels
+        run: |
+          docker run --rm -e PLAT=$PLAT -v `pwd`:/io $DOCKER_IMAGE /io/travis/build_wheels.sh cp36-cp36m cp37-cp37m
+          ls wheelhouse/
+      - name: Store wheel artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: linux-wheels
+          path: wheelhouse/*.whl
+          retention-days: 1
+  pyinstall:
+    needs: build
+    name: Build Windows executable
+    runs-on: windows-latest
+    # if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v1
+        with:
+          python-version: '3.7'
+      - name: Get version
+        id: tag_name
+        uses: olegtarasov/get-tag@v2.1
+        with:
+          tagRegex: "v(.*)"
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyinstaller PyQt5
+      - name: Build executable
+        run: |
+          python setup.py build_ext --inplace
+          python pyinst_build.py
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: Nescient-${{ steps.tag_name.outputs.tag }}.exe
+          path: dist/Nescient-${{ steps.tag_name.outputs.tag }}.exe
+          retention-days: 1

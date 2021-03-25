@@ -20,7 +20,7 @@
 # SOFTWARE.
 #
 # nescient/__init__.py
-"""Nescient v0.10.1
+"""Nescient v__version__
 
 A Python program for packing/unpacking encrypted, salted, and authenticated file containers.
 
@@ -31,7 +31,8 @@ from string import digits
 # Versions will always take the form major.minor.patch[.develop]. The develop increment is optional.
 # A valid version will have the string form *.*.*[.dev*], where any integer may take the place of a *.
 __version__ = '0.10.1'
-url = 'https://github.com/arantonitis/nescient'
+__doc__ = __doc__.replace('__version__', __version__)
+url = __url__ = 'https://github.com/arantonitis/nescient'
 
 
 def version_to_tuple(version):
